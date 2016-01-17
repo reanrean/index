@@ -1,0 +1,192 @@
+<title>Miracle Nikki - 冰雪女王的舞会</title>
+
+<head>
+<script type="text/javascript"> 
+function calculate(){ 
+	var current = parseInt(document.getElementById('current').value);
+	var current_consume = parseInt(document.getElementById('current_consume').value);
+	var plan_consume = parseInt(document.getElementById('plan_consume').value);
+	
+	var snow1=Math.min(Math.floor(parseInt(document.getElementById("score1").value) / 5000),20);
+	var snow2=Math.min(Math.floor(parseInt(document.getElementById("score2").value) / 5000),20);
+	var snow3=Math.min(Math.floor(parseInt(document.getElementById("score3").value) / 5000),20);
+	var snow4=Math.min(Math.floor(parseInt(document.getElementById("score4").value) / 5000),20);
+	var snow5=Math.min(Math.floor(parseInt(document.getElementById("score5").value) / 5000),20);
+	var highest=Math.max(snow1,snow2,snow3,snow4,snow5);
+	document.getElementById('highest').value = highest;
+	
+	if(current_consume>=88 || plan_consume<88){var to_get_bonus1=0}else{var to_get_bonus1=25};
+	if(current_consume>=388 || plan_consume<388){var to_get_bonus2=0}else{var to_get_bonus2=95};
+	if(current_consume>=888 || plan_consume<888){var to_get_bonus3=0}else{var to_get_bonus3=190};
+	if(current_consume>=1588 || plan_consume<1588){var to_get_bonus4=0}else{var to_get_bonus4=300};
+	if(current_consume>=2488 || plan_consume<2488){var to_get_bonus5=0}else{var to_get_bonus5=420};
+	//88 388 888 1588 2488;
+	//25 95 190 300 420;
+	var to_get_bonus_tot=to_get_bonus1+to_get_bonus2+to_get_bonus3+to_get_bonus4+to_get_bonus5;
+	document.getElementById('to_get_bonus_tot').value=to_get_bonus_tot;
+	
+	var to_get_rem_days=(snow1+snow2+snow3+snow4+snow5)*5*parseInt(document.getElementById('remain_days').value);
+	document.getElementById('to_get_rem_days').value = to_get_rem_days;
+	
+	var remaining=Math.max(parseInt(document.getElementById('aim').value)-parseInt(document.getElementById('current').value)-to_get_rem_days-to_get_bonus_tot);
+	document.getElementById('remaining').value = remaining;
+	
+	var to_consume=Math.max(0,parseInt(document.getElementById('plan_consume').value)-current_consume);
+	document.getElementById('to_consume').value =to_consume;
+	
+	var to_buy_time=Math.ceil(remaining/highest/5);
+	var to_buy_diamond=to_buy_time*30;
+	var to_buy_stamina=Math.ceil(remaining/highest)*4;
+	document.getElementById('to_buy_time').value = to_buy_time;
+	document.getElementById('to_buy_diamond').value = to_buy_diamond;
+	document.getElementById('to_buy_stamina').value = to_buy_stamina;
+	
+	var to_consume_shop=Math.max(0,to_consume-to_buy_diamond);
+	document.getElementById('to_consume_shop').value = to_consume_shop;
+	
+	//show score - snow ratio
+	    if(!isNaN(document.getElementById("score1").value) && document.getElementById("score1").value != ""){ 
+            document.getElementById("snow1").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score1").value) / 5000),20) + "个雪晶片"; 
+        }else{ 
+            document.getElementById("snow1").innerHTML = ""; 
+        } 
+		
+        if(!isNaN(document.getElementById("score2").value) && document.getElementById("score2").value != ""){ 
+            document.getElementById("snow2").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score2").value) / 5000),20) + "个雪晶片"; 
+        }else{ 
+            document.getElementById("snow2").innerHTML = ""; 
+        } 
+		
+        if(!isNaN(document.getElementById("score3").value) && document.getElementById("score3").value != ""){ 
+            document.getElementById("snow3").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score3").value) / 5000),20) + "个雪晶片"; 
+        }else{ 
+            document.getElementById("snow3").innerHTML = ""; 
+        } 
+		
+        if(!isNaN(document.getElementById("score4").value) && document.getElementById("score4").value != ""){ 
+            document.getElementById("snow4").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score4").value) / 5000),20) + "个雪晶片"; 
+        }else{ 
+            document.getElementById("snow4").innerHTML = ""; 
+        } 
+		
+        if(!isNaN(document.getElementById("score5").value) && document.getElementById("score5").value != ""){ 
+            document.getElementById("snow5").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score5").value) / 5000),20) + "个雪晶片"; 
+        }else{ 
+            document.getElementById("snow5").innerHTML = ""; 
+        } 
+	
+	//price: 47 65 60 44 36 40 41 46
+	//need: 1-5=29-B20-D20*5-F20*20+1 6=30-B25-D25*5-F25*20+1 7-8=9-B26
+
+}; 
+
+window.onload = function(){ 
+
+	var date = new Date();
+	var d = 23-date.getDate();
+	document.getElementById('remain_days').value=d;
+	document.getElementById('current').value=0;
+	document.getElementById('current_consume').value=0;
+	document.getElementById('score1').value=75000;
+	document.getElementById('score2').value=95000;
+	document.getElementById('score3').value=90000;
+	document.getElementById('score4').value=85000;
+	document.getElementById('score5').value=80000;
+	document.getElementById('aim').value=9583;
+	
+	document.getElementById('item1').value=0;
+	document.getElementById('item1_2').value=0;
+	document.getElementById('item1_3').value=0;
+	document.getElementById('item2').value=0;
+	document.getElementById('item2_2').value=0;
+	document.getElementById('item2_3').value=0;
+	document.getElementById('item3').value=0;
+	document.getElementById('item3_2').value=0;
+	document.getElementById('item3_3').value=0;
+	document.getElementById('item4').value=0;
+	document.getElementById('item4_2').value=0;
+	document.getElementById('item4_3').value=0;
+	document.getElementById('item5').value=0;
+	document.getElementById('item5_2').value=0;
+	document.getElementById('item5_3').value=0;
+	document.getElementById('item6').value=0;
+	document.getElementById('item6_2').value=0;
+	document.getElementById('item6_3').value=0;
+	document.getElementById('item7').value=0;
+	document.getElementById('item8').value=0;
+	
+	calculate();
+}; 
+
+</script> 
+</head>
+
+<body>
+
+<p>
+！！！未完成</br>
+奇迹暖暖计算器——冰雪女王的舞会　2016.1.17（<a href="http://pan.baidu.com/s/1ba11Ae">xls版点此</a>）</br>
+如有错误请微博<a href="http://weibo.com/reanrean">@Rean_翎</a>报告，谢谢>3<
+</p>
+
+<p>
+当前雪晶片：<input type="text" id="current" onkeyup=calculate() /></br>
+现已累计消费：<input type="text" id="current_consume" onkeyup=calculate() /></br>
+计划参与累计消费：
+<select id="plan_consume" onchange=calculate()>
+  <option value ="2488">2488</option>
+  <option value ="1588">1588</option>
+  <option value="888">888</option>
+  <option value="388">388</option>
+  <option value="88">88</option>
+  <option value="0">0</option>
+</select></br>
+剩余天数：<input type="text" id="remain_days" onkeyup=calculate() /></br>
+各关卡分数：</br>
+　关卡1<input type="text" id="score1" onkeyup=calculate() /><span id="snow1"></span> </br>
+　关卡2<input type="text" id="score2" onkeyup=calculate() /><span id="snow2"></span> </br>
+　关卡3<input type="text" id="score3" onkeyup=calculate() /><span id="snow3"></span> </br>
+　关卡4<input type="text" id="score4" onkeyup=calculate() /><span id="snow4"></span> </br>
+　关卡5<input type="text" id="score5" onkeyup=calculate() /><span id="snow5"></span> </br>
+</p>
+<p>
+已有服装：</br>
+春之华<input type="text" id="item1" onkeyup=calculate() />个，还需　<output id="rem_item1"></output>个</br>
+　春之华·华丽<input type="text" id="item1_2" onkeyup=calculate() />个，还需　<output id="rem_item1_2"></output>个</br>
+　　春之华·珍稀<input type="text" id="item1_3" onkeyup=calculate() />个，还需　<output id="rem_item1_3"></output>个</br>
+春之少女<input type="text" id="item2" onkeyup=calculate() />个，还需　<output id="rem_item2"></output>个</br>
+　春之少女·华丽<input type="text" id="item2_2" onkeyup=calculate() />个，还需　<output id="rem_item2_2"></output>个</br>
+　　春之少女·珍稀<input type="text" id="item2_3" onkeyup=calculate() />个，还需　<output id="rem_item2_3"></output>个</br>
+云春暖<input type="text" id="item3" onkeyup=calculate() />个，还需　<output id="rem_item3"></output>个</br>
+　云春暖·华丽<input type="text" id="item3_2" onkeyup=calculate() />个，还需　<output id="rem_item3_2"></output>个</br>
+　　云春暖·珍稀<input type="text" id="item3_3" onkeyup=calculate() />个，还需　<output id="rem_item3_3"></output>个</br>
+踏春<input type="text" id="item4" onkeyup=calculate() />个，还需　<output id="rem_item4"></output>个</br>
+　踏春·华丽<input type="text" id="item4_2" onkeyup=calculate() />个，还需　<output id="rem_item4_2"></output>个</br>
+　　踏春·珍稀<input type="text" id="item4_3" onkeyup=calculate() />个，还需　<output id="rem_item4_3"></output>个</br>
+春之呢喃<input type="text" id="item5" onkeyup=calculate() />个，还需　<output id="rem_item5"></output>个</br>
+　春之呢喃·华丽<input type="text" id="item5_2" onkeyup=calculate() />个，还需　<output id="rem_item5_2"></output>个</br>
+　　春之呢喃·珍稀<input type="text" id="item5_3" onkeyup=calculate() />个，还需　<output id="rem_item5_3"></output>个</br>
+春回<input type="text" id="item6" onkeyup=calculate() />个，还需　<output id="rem_item6"></output>个</br>
+　春回·华丽<input type="text" id="item6_2" onkeyup=calculate() />个，还需　<output id="rem_item6_2"></output>个</br>
+　　春回·珍稀<input type="text" id="item6_3" onkeyup=calculate() />个，还需　<output id="rem_item6_3"></output>个</br>
+二月歌<input type="text" id="item7" onkeyup=calculate() />个，还需　<output id="rem_item7"></output>个</br>
+春之精灵<input type="text" id="item8" onkeyup=calculate() />个，还需　<output id="rem_item8"></output>个</br>
+总计剩余需雪晶片：<output id="aim"></output>个
+</p>
+<p>
+<style display:none><button onclick="save()">Save</button></br></style>
+<b>※※※※※计算结果※※※※※</b>
+</p>
+<p>
+最高可获雪晶片　<output id="highest"></output>个</br>
+自然回体可得雪晶片　<output id="to_get_rem_days"></output>个</br>
+剩余消费可得雪晶片　<output id="to_get_bonus_tot"></output>个（根据“计划参与累计消费”计算）</br>
+</br>
+<b>
+还需雪晶片　<output id="remaining"></output>个</br>
+还需消费　<output id="to_consume"></output>钻</br>
+还需买次数　<output id="to_buy_time"></output>次，花费　<output id="to_buy_diamond"></output>钻，　<output id="to_buy_stamina"></output>体力</br>
+还需另消费　<output id="to_consume_shop"></output>钻</br>
+</b>
+</p>
+</body>
