@@ -1,8 +1,74 @@
-<title>Miracle Nikki - 冰雪女王的舞会</title>
-
+<!DOCTYPE HTML>
+<html lang="zh">
 <head>
+<title>Miracle Nikki - 冰雪女王的舞会</title>
 <script type="text/javascript"> 
 function calculate(){ 
+
+	//price: 47 65 60 44 36 40 41 46;
+	//need: 1-5=29-B20-D20*5-F20*20+1 6=30-B25-D25*5-F25*20+1 7-8=9-B26;
+	var item1=parseInt(document.getElementById('item1').value);
+	var item1_2=parseInt(document.getElementById('item1_2').value);
+	var item1_3=parseInt(document.getElementById('item1_3').value);
+	var rem_item1=Math.max(0,29-item1-item1_2*5-item1_3*20+1);
+	var rem_snow1=rem_item1*47;
+	document.getElementById('rem_item1').value = rem_item1;
+	document.getElementById('rem_snow1').value = rem_snow1;
+	
+	var item2=parseInt(document.getElementById('item2').value);
+	var item2_2=parseInt(document.getElementById('item2_2').value);
+	var item2_3=parseInt(document.getElementById('item2_3').value);
+	var rem_item2=Math.max(0,29-item2-item2_2*5-item2_3*20+1);
+	var rem_snow2=rem_item2*65;
+	document.getElementById('rem_item2').value = rem_item2;
+	document.getElementById('rem_snow2').value = rem_snow2;
+
+	var item3=parseInt(document.getElementById('item3').value);
+	var item3_2=parseInt(document.getElementById('item3_2').value);
+	var item3_3=parseInt(document.getElementById('item3_3').value);
+	var rem_item3=Math.max(0,29-item3-item3_2*5-item3_3*20+1);
+	var rem_snow3=rem_item3*60;
+	document.getElementById('rem_item3').value = rem_item3;
+	document.getElementById('rem_snow3').value = rem_snow3;
+
+	var item4=parseInt(document.getElementById('item4').value);
+	var item4_2=parseInt(document.getElementById('item4_2').value);
+	var item4_3=parseInt(document.getElementById('item4_3').value);
+	var rem_item4=Math.max(0,29-item4-item4_2*5-item4_3*20+1);
+	var rem_snow4=rem_item4*44;
+	document.getElementById('rem_item4').value = rem_item4;
+	document.getElementById('rem_snow4').value = rem_snow4;
+	
+	var item5=parseInt(document.getElementById('item5').value);
+	var item5_2=parseInt(document.getElementById('item5_2').value);
+	var item5_3=parseInt(document.getElementById('item5_3').value);
+	var rem_item5=Math.max(0,29-item5-item5_2*5-item5_3*20+1);
+	var rem_snow5=rem_item5*36;
+	document.getElementById('rem_item5').value = rem_item5;
+	document.getElementById('rem_snow5').value = rem_snow5;
+
+	var item6=parseInt(document.getElementById('item6').value);
+	var item6_2=parseInt(document.getElementById('item6_2').value);
+	var item6_3=parseInt(document.getElementById('item6_3').value);
+	var rem_item6=Math.max(0,30-item6-item6_2*5-item6_3*20+1);
+	var rem_snow6=rem_item6*40;
+	document.getElementById('rem_item6').value = rem_item6;
+	document.getElementById('rem_snow6').value = rem_snow6;
+	
+	var item7=parseInt(document.getElementById('item7').value);
+	var rem_item7=Math.max(0,9-item7);
+	var rem_snow7=rem_item7*41;
+	document.getElementById('rem_item7').value = rem_item7;
+	document.getElementById('rem_snow7').value = rem_snow7;
+
+	var item8=parseInt(document.getElementById('item8').value);
+	var rem_item8=Math.max(0,9-item8);
+	var rem_snow8=rem_item8*46;
+	document.getElementById('rem_item8').value = rem_item8;
+	document.getElementById('rem_snow8').value = rem_snow8;
+	
+	document.getElementById('aim').value = rem_snow1+rem_snow2+rem_snow3+rem_snow4+rem_snow5+rem_snow6+rem_snow7+rem_snow8;
+
 	var current = parseInt(document.getElementById('current').value);
 	var current_consume = parseInt(document.getElementById('current_consume').value);
 	var plan_consume = parseInt(document.getElementById('plan_consume').value);
@@ -28,7 +94,7 @@ function calculate(){
 	var to_get_rem_days=(snow1+snow2+snow3+snow4+snow5)*5*parseInt(document.getElementById('remain_days').value);
 	document.getElementById('to_get_rem_days').value = to_get_rem_days;
 	
-	var remaining=Math.max(parseInt(document.getElementById('aim').value)-parseInt(document.getElementById('current').value)-to_get_rem_days-to_get_bonus_tot);
+	var remaining=Math.max(0,parseInt(document.getElementById('aim').value)-parseInt(document.getElementById('current').value)-to_get_rem_days-to_get_bonus_tot);
 	document.getElementById('remaining').value = remaining;
 	
 	var to_consume=Math.max(0,parseInt(document.getElementById('plan_consume').value)-current_consume);
@@ -44,9 +110,11 @@ function calculate(){
 	var to_consume_shop=Math.max(0,to_consume-to_buy_diamond);
 	document.getElementById('to_consume_shop').value = to_consume_shop;
 	
-	//show score - snow ratio
+	if(to_buy_diamond>to_consume){document.getElementById('to_consume').value =to_buy_diamond;}
+	
+	//show score - snow ratio;
 	    if(!isNaN(document.getElementById("score1").value) && document.getElementById("score1").value != ""){ 
-            document.getElementById("snow1").innerHTML = Math.min(Math.floor(parseInt(document.getElementById("score1").value) / 5000),20) + "个雪晶片"; 
+            document.getElementById("snow1").innerHTML = snow1 + "个雪晶片"; 
         }else{ 
             document.getElementById("snow1").innerHTML = ""; 
         } 
@@ -74,14 +142,9 @@ function calculate(){
         }else{ 
             document.getElementById("snow5").innerHTML = ""; 
         } 
-	
-	//price: 47 65 60 44 36 40 41 46
-	//need: 1-5=29-B20-D20*5-F20*20+1 6=30-B25-D25*5-F25*20+1 7-8=9-B26
 
 }; 
-
 window.onload = function(){ 
-
 	var date = new Date();
 	var d = 23-date.getDate();
 	document.getElementById('remain_days').value=d;
@@ -117,15 +180,13 @@ window.onload = function(){
 	
 	calculate();
 }; 
-
 </script> 
 </head>
 
 <body>
 
 <p>
-！！！未完成</br>
-奇迹暖暖计算器——冰雪女王的舞会　2016.1.17（<a href="http://pan.baidu.com/s/1ba11Ae">xls版点此</a>）</br>
+<b>奇迹暖暖计算器——冰雪女王的舞会　2016.1.17-2016.1.23</b>（<a href="http://pan.baidu.com/s/1ba11Ae">xls版点此</a>）</br>
 如有错误请微博<a href="http://weibo.com/reanrean">@Rean_翎</a>报告，谢谢>3<
 </p>
 
@@ -151,26 +212,26 @@ window.onload = function(){
 </p>
 <p>
 已有服装：</br>
-春之华<input type="text" id="item1" onkeyup=calculate() />个，还需　<output id="rem_item1"></output>个</br>
-　春之华·华丽<input type="text" id="item1_2" onkeyup=calculate() />个，还需　<output id="rem_item1_2"></output>个</br>
-　　春之华·珍稀<input type="text" id="item1_3" onkeyup=calculate() />个，还需　<output id="rem_item1_3"></output>个</br>
-春之少女<input type="text" id="item2" onkeyup=calculate() />个，还需　<output id="rem_item2"></output>个</br>
-　春之少女·华丽<input type="text" id="item2_2" onkeyup=calculate() />个，还需　<output id="rem_item2_2"></output>个</br>
-　　春之少女·珍稀<input type="text" id="item2_3" onkeyup=calculate() />个，还需　<output id="rem_item2_3"></output>个</br>
-云春暖<input type="text" id="item3" onkeyup=calculate() />个，还需　<output id="rem_item3"></output>个</br>
-　云春暖·华丽<input type="text" id="item3_2" onkeyup=calculate() />个，还需　<output id="rem_item3_2"></output>个</br>
-　　云春暖·珍稀<input type="text" id="item3_3" onkeyup=calculate() />个，还需　<output id="rem_item3_3"></output>个</br>
-踏春<input type="text" id="item4" onkeyup=calculate() />个，还需　<output id="rem_item4"></output>个</br>
-　踏春·华丽<input type="text" id="item4_2" onkeyup=calculate() />个，还需　<output id="rem_item4_2"></output>个</br>
-　　踏春·珍稀<input type="text" id="item4_3" onkeyup=calculate() />个，还需　<output id="rem_item4_3"></output>个</br>
-春之呢喃<input type="text" id="item5" onkeyup=calculate() />个，还需　<output id="rem_item5"></output>个</br>
-　春之呢喃·华丽<input type="text" id="item5_2" onkeyup=calculate() />个，还需　<output id="rem_item5_2"></output>个</br>
-　　春之呢喃·珍稀<input type="text" id="item5_3" onkeyup=calculate() />个，还需　<output id="rem_item5_3"></output>个</br>
-春回<input type="text" id="item6" onkeyup=calculate() />个，还需　<output id="rem_item6"></output>个</br>
-　春回·华丽<input type="text" id="item6_2" onkeyup=calculate() />个，还需　<output id="rem_item6_2"></output>个</br>
-　　春回·珍稀<input type="text" id="item6_3" onkeyup=calculate() />个，还需　<output id="rem_item6_3"></output>个</br>
-二月歌<input type="text" id="item7" onkeyup=calculate() />个，还需　<output id="rem_item7"></output>个</br>
-春之精灵<input type="text" id="item8" onkeyup=calculate() />个，还需　<output id="rem_item8"></output>个</br>
+春之华<input type="text" id="item1" onkeyup=calculate() />个，还需　<output id="rem_item1"></output>个，还需雪晶片　<output id="rem_snow1"></output>个</br>
+　春之华·华丽<input type="text" id="item1_2" onkeyup=calculate() />个</br>
+　　春之华·珍稀<input type="text" id="item1_3" onkeyup=calculate() />个</br>
+春之少女<input type="text" id="item2" onkeyup=calculate() />个，还需　<output id="rem_item2"></output>个，还需雪晶片　<output id="rem_snow2"></output>个</br>
+　春之少女·华丽<input type="text" id="item2_2" onkeyup=calculate() />个</br>
+　　春之少女·珍稀<input type="text" id="item2_3" onkeyup=calculate() />个</br>
+云春暖<input type="text" id="item3" onkeyup=calculate() />个，还需　<output id="rem_item3"></output>个，还需雪晶片　<output id="rem_snow3"></output>个</br>
+　云春暖·华丽<input type="text" id="item3_2" onkeyup=calculate() />个</br>
+　　云春暖·珍稀<input type="text" id="item3_3" onkeyup=calculate() />个</br>
+踏春<input type="text" id="item4" onkeyup=calculate() />个，还需　<output id="rem_item4"></output>个，还需雪晶片　<output id="rem_snow4"></output>个</br>
+　踏春·华丽<input type="text" id="item4_2" onkeyup=calculate() />个</br>
+　　踏春·珍稀<input type="text" id="item4_3" onkeyup=calculate() />个</br>
+春之呢喃<input type="text" id="item5" onkeyup=calculate() />个，还需　<output id="rem_item5"></output>个，还需雪晶片　<output id="rem_snow5"></output>个</br>
+　春之呢喃·华丽<input type="text" id="item5_2" onkeyup=calculate() />个</br>
+　　春之呢喃·珍稀<input type="text" id="item5_3" onkeyup=calculate() />个</br>
+春回<input type="text" id="item6" onkeyup=calculate() />个，还需　<output id="rem_item6"></output>个，还需雪晶片　<output id="rem_snow6"></output>个</br>
+　春回·华丽<input type="text" id="item6_2" onkeyup=calculate() />个</br>
+　　春回·珍稀<input type="text" id="item6_3" onkeyup=calculate() />个</br>
+二月歌<input type="text" id="item7" onkeyup=calculate() />个，还需　<output id="rem_item7"></output>个，还需雪晶片　<output id="rem_snow7"></output>个</br>
+春之精灵<input type="text" id="item8" onkeyup=calculate() />个，还需　<output id="rem_item8"></output>个，还需雪晶片　<output id="rem_snow8"></output>个</br>
 总计剩余需雪晶片：<output id="aim"></output>个
 </p>
 <p>
@@ -183,7 +244,7 @@ window.onload = function(){
 剩余消费可得雪晶片　<output id="to_get_bonus_tot"></output>个（根据“计划参与累计消费”计算）</br>
 </br>
 <b>
-还需雪晶片　<output id="remaining"></output>个</br>
+还需刷雪晶片　<output id="remaining"></output>个</br>
 还需消费　<output id="to_consume"></output>钻</br>
 还需买次数　<output id="to_buy_time"></output>次，花费　<output id="to_buy_diamond"></output>钻，　<output id="to_buy_stamina"></output>体力</br>
 还需另消费　<output id="to_consume_shop"></output>钻</br>
