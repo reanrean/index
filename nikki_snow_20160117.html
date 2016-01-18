@@ -6,63 +6,114 @@
 function noNaN( n ) { return isNaN( n ) ? 0 : n; }
 function calculate(){ 
 	//price: 47 65 60 44 36 40 41 46;
-	//need: 1-5=29-B20-D20*5-F20*20+1 6=30-B25-D25*5-F25*20+1 7-8=9-B26;
+	//need: 1-5=29-B20-D20*5-F20*15+1 6=30-B25-D25*5-F25*15+1 7-8=9-B26;
+	var need1=29;
+	var need2=29;
+	var need3=29;
+	var need4=29;
+	var need5=29;
+	var need6=30;
+	var need7=8;
+	var need8=8;
+	
+	var itemq1=noNaN(parseInt(document.getElementById('itemq1').value));
+	var itemq2=noNaN(parseInt(document.getElementById('itemq2').value));
+	var itemq3=noNaN(parseInt(document.getElementById('itemq3').value));
+	var itemq4=noNaN(parseInt(document.getElementById('itemq4').value));
+	var itemq5=noNaN(parseInt(document.getElementById('itemq5').value));
+	var itemq6=noNaN(parseInt(document.getElementById('itemq6').value));
+	var itemq7=noNaN(parseInt(document.getElementById('itemq7').value));
+	var itemq8=noNaN(parseInt(document.getElementById('itemq8').value));
+	
+	if(itemq1>=1 && noNaN(parseInt(document.getElementById('item1_3').value))<1){document.getElementById('item1_3').value="1";}
+	if(itemq1>=1){need1=need1-9;}
+	if(itemq2>=1 && noNaN(parseInt(document.getElementById('item2_3').value))<1){document.getElementById('item2_3').value="1";}
+	if(itemq2>=1){need2=need2-9;}
+	if(itemq3>=1 && noNaN(parseInt(document.getElementById('item3_3').value))<1){document.getElementById('item3_3').value="1";}
+	if(itemq3>=1){need3=need3-5;}
+	if(itemq4>=1 && noNaN(parseInt(document.getElementById('item4_3').value))<1){document.getElementById('item4_3').value="1";}
+	if(itemq4>=1){need4=need4-9;}
+	if(itemq5>=1 && noNaN(parseInt(document.getElementById('item5_3').value))<1){document.getElementById('item5_3').value="1";}
+	if(itemq5>=1){need5=need5-9;}
+	if(itemq6>=1 && noNaN(parseInt(document.getElementById('item6').value))<1){document.getElementById('item6').value="1";}
+	if(itemq6>=1 && noNaN(parseInt(document.getElementById('item7').value))<1){document.getElementById('item7').value="1";}
+	if(itemq6>=1){need6=need6-5;}
+	if(itemq6>=1){need7=need7-8;}
+	if(itemq7>=1 && noNaN(parseInt(document.getElementById('item3').value))<1){document.getElementById('item3').value="1";}
+	if(itemq7>=1){need3=need3-4;}
+	if(itemq8>=1 && noNaN(parseInt(document.getElementById('item6_3').value))<1){document.getElementById('item6_3').value="1";}
+	if(itemq8>=1 && noNaN(parseInt(document.getElementById('item8').value))<1){document.getElementById('item8').value="1";}
+	if(itemq8>=1){need6=need6-5;}
+	if(itemq8>=1){need8=need8-8;}
+	
+	if(noNaN(parseInt(document.getElementById('item1_3').value))>=1 && noNaN(parseInt(document.getElementById('item1_2').value))<1){document.getElementById('item1_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item1_2').value))>=1 && noNaN(parseInt(document.getElementById('item1').value))<1){document.getElementById('item1').value="1";}
 	var item1=noNaN(parseInt(document.getElementById('item1').value));
 	var item1_2=noNaN(parseInt(document.getElementById('item1_2').value));
 	var item1_3=noNaN(parseInt(document.getElementById('item1_3').value));
-	var rem_item1=Math.max(0,29-item1-item1_2*5-item1_3*20+1);
+	var rem_item1=Math.max(0,need1-item1-Math.min(20,item1_2*5+item1_3*15)+1);
 	var rem_snow1=rem_item1*47;
 	document.getElementById('rem_item1').value = rem_item1;
 	document.getElementById('rem_snow1').value = rem_snow1;
 	
+	if(noNaN(parseInt(document.getElementById('item2_3').value))>=1 && noNaN(parseInt(document.getElementById('item2_2').value))<1){document.getElementById('item2_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item2_2').value))>=1 && noNaN(parseInt(document.getElementById('item2').value))<1){document.getElementById('item2').value="1";}
 	var item2=noNaN(parseInt(document.getElementById('item2').value));
 	var item2_2=noNaN(parseInt(document.getElementById('item2_2').value));
 	var item2_3=noNaN(parseInt(document.getElementById('item2_3').value));
-	var rem_item2=Math.max(0,29-item2-item2_2*5-item2_3*20+1);
+	var rem_item2=Math.max(0,need2-item2-Math.min(20,item2_2*5+item2_3*15)+1);
 	var rem_snow2=rem_item2*65;
 	document.getElementById('rem_item2').value = rem_item2;
 	document.getElementById('rem_snow2').value = rem_snow2;
 
+	if(noNaN(parseInt(document.getElementById('item3_3').value))>=1 && noNaN(parseInt(document.getElementById('item3_2').value))<1){document.getElementById('item3_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item3_2').value))>=1 && noNaN(parseInt(document.getElementById('item3').value))<1){document.getElementById('item3').value="1";}
 	var item3=noNaN(parseInt(document.getElementById('item3').value));
 	var item3_2=noNaN(parseInt(document.getElementById('item3_2').value));
 	var item3_3=noNaN(parseInt(document.getElementById('item3_3').value));
-	var rem_item3=Math.max(0,29-item3-item3_2*5-item3_3*20+1);
+	var rem_item3=Math.max(0,need3-item3-Math.min(20,item3_2*5+item3_3*15)+1);
 	var rem_snow3=rem_item3*60;
 	document.getElementById('rem_item3').value = rem_item3;
 	document.getElementById('rem_snow3').value = rem_snow3;
 
+	if(noNaN(parseInt(document.getElementById('item4_3').value))>=1 && noNaN(parseInt(document.getElementById('item4_2').value))<1){document.getElementById('item4_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item4_2').value))>=1 && noNaN(parseInt(document.getElementById('item4').value))<1){document.getElementById('item4').value="1";}
 	var item4=noNaN(parseInt(document.getElementById('item4').value));
 	var item4_2=noNaN(parseInt(document.getElementById('item4_2').value));
 	var item4_3=noNaN(parseInt(document.getElementById('item4_3').value));
-	var rem_item4=Math.max(0,29-item4-item4_2*5-item4_3*20+1);
+	var rem_item4=Math.max(0,need4-item4-Math.min(20,item4_2*5+item4_3*15)+1);
 	var rem_snow4=rem_item4*44;
 	document.getElementById('rem_item4').value = rem_item4;
 	document.getElementById('rem_snow4').value = rem_snow4;
 	
+	if(noNaN(parseInt(document.getElementById('item5_3').value))>=1 && noNaN(parseInt(document.getElementById('item5_2').value))<1){document.getElementById('item5_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item5_2').value))>=1 && noNaN(parseInt(document.getElementById('item5').value))<1){document.getElementById('item5').value="1";}
 	var item5=noNaN(parseInt(document.getElementById('item5').value));
 	var item5_2=noNaN(parseInt(document.getElementById('item5_2').value));
 	var item5_3=noNaN(parseInt(document.getElementById('item5_3').value));
-	var rem_item5=Math.max(0,29-item5-item5_2*5-item5_3*20+1);
+	var rem_item5=Math.max(0,need5-item5-Math.min(20,item5_2*5+item5_3*15)+1);
 	var rem_snow5=rem_item5*36;
 	document.getElementById('rem_item5').value = rem_item5;
 	document.getElementById('rem_snow5').value = rem_snow5;
-
+	
+	if(noNaN(parseInt(document.getElementById('item6_3').value))>=1 && noNaN(parseInt(document.getElementById('item6_2').value))<1){document.getElementById('item6_2').value="1";}
+	if(noNaN(parseInt(document.getElementById('item6_2').value))>=1 && noNaN(parseInt(document.getElementById('item6').value))<1){document.getElementById('item6').value="1";}
 	var item6=noNaN(parseInt(document.getElementById('item6').value));
 	var item6_2=noNaN(parseInt(document.getElementById('item6_2').value));
 	var item6_3=noNaN(parseInt(document.getElementById('item6_3').value));
-	var rem_item6=Math.max(0,30-item6-item6_2*5-item6_3*20+1);
+	var rem_item6=Math.max(0,need6-item6-Math.min(20,item6_2*5+item6_3*15)+1);
 	var rem_snow6=rem_item6*40;
 	document.getElementById('rem_item6').value = rem_item6;
 	document.getElementById('rem_snow6').value = rem_snow6;
 	
 	var item7=noNaN(parseInt(document.getElementById('item7').value));
-	var rem_item7=Math.max(0,9-item7);
+	var rem_item7=Math.max(0,need7-item7+1);
 	var rem_snow7=rem_item7*41;
 	document.getElementById('rem_item7').value = rem_item7;
 	document.getElementById('rem_snow7').value = rem_snow7;
 
 	var item8=noNaN(parseInt(document.getElementById('item8').value));
-	var rem_item8=Math.max(0,9-item8);
+	var rem_item8=Math.max(0,need8-item8+1);
 	var rem_snow8=rem_item8*46;
 	document.getElementById('rem_item8').value = rem_item8;
 	document.getElementById('rem_snow8').value = rem_snow8;
@@ -153,6 +204,14 @@ window.onload = function(){
 	document.getElementById('item6_3').value=0;
 	document.getElementById('item7').value=0;
 	document.getElementById('item8').value=0;
+	document.getElementById('itemq1').value=0;
+	document.getElementById('itemq2').value=0;
+	document.getElementById('itemq3').value=0;
+	document.getElementById('itemq4').value=0;
+	document.getElementById('itemq5').value=0;
+	document.getElementById('itemq6').value=0;
+	document.getElementById('itemq7').value=0;
+	document.getElementById('itemq8').value=0;
 	
 	calculate();
 }; 
@@ -162,7 +221,7 @@ window.onload = function(){
 <body>
 
 <p>
-<b>奇迹暖暖计算器——冰雪女王的舞会　2016.1.17-2016.1.23</b>（<a href="http://pan.baidu.com/s/1ba11Ae">xls版点此</a>）</br>
+<b>奇迹暖暖计算器——冰雪女王的舞会　2016.1.17-2016.1.23</b>（<a href="http://pan.baidu.com/s/1c1hPoiO">xls版点此</a>）</br>
 如有错误请微博<a href="http://weibo.com/reanrean">@Rean_翎</a>或<a href="http://tieba.baidu.com/p/4308849843">贴吧</a>报告，谢谢>3<
 </p>
 
@@ -185,29 +244,46 @@ window.onload = function(){
 　关卡3<input type="text" id="score3" onkeyup=calculate() /><span id="snow3"></span> </br>
 　关卡4<input type="text" id="score4" onkeyup=calculate() /><span id="snow4"></span> </br>
 　关卡5<input type="text" id="score5" onkeyup=calculate() /><span id="snow5"></span> </br>
+<style display:none>目标：
+<input type="checkbox" id="queen1" checked onclick=calculate() >纯白之风
+<input type="checkbox" id="queen2" checked onclick=calculate() >雪之女王
+<input type="checkbox" id="queen3" checked onclick=calculate() >寒冬之覆
+<input type="checkbox" id="queen4" checked onclick=calculate() >极冰之主
+<input type="checkbox" id="queen5" checked onclick=calculate() >冰晶王冠
+<input type="checkbox" id="queen6" checked onclick=calculate() >辉耀
+<input type="checkbox" id="queen7" checked onclick=calculate() >冬耀
+<input type="checkbox" id="queen8" checked onclick=calculate() >雪眸清颜</br></style>
 </p>
 <p>
 已有服装：</br>
 春之华<input type="text" id="item1" onkeyup=calculate() />个，还需　<output id="rem_item1"></output>个，还需雪晶片　<output id="rem_snow1"></output>个</br>
 　春之华·华丽<input type="text" id="item1_2" onkeyup=calculate() />个</br>
 　　春之华·珍稀<input type="text" id="item1_3" onkeyup=calculate() />个</br>
+　　　<span style="color:blue">纯白之风<input type="text" id="itemq1" onkeyup=calculate() />个</br></span>
 春之少女<input type="text" id="item2" onkeyup=calculate() />个，还需　<output id="rem_item2"></output>个，还需雪晶片　<output id="rem_snow2"></output>个</br>
 　春之少女·华丽<input type="text" id="item2_2" onkeyup=calculate() />个</br>
 　　春之少女·珍稀<input type="text" id="item2_3" onkeyup=calculate() />个</br>
+　　　<span style="color:blue">雪之女王<input type="text" id="itemq2" onkeyup=calculate() />个</br></span>
 云春暖<input type="text" id="item3" onkeyup=calculate() />个，还需　<output id="rem_item3"></output>个，还需雪晶片　<output id="rem_snow3"></output>个</br>
 　云春暖·华丽<input type="text" id="item3_2" onkeyup=calculate() />个</br>
 　　云春暖·珍稀<input type="text" id="item3_3" onkeyup=calculate() />个</br>
+　　　<span style="color:blue">寒冬之覆<input type="text" id="itemq3" onkeyup=calculate() />个</br></span>
+　　　<span style="color:blue">冬耀<input type="text" id="itemq7" onkeyup=calculate() />个</br></span>
 踏春<input type="text" id="item4" onkeyup=calculate() />个，还需　<output id="rem_item4"></output>个，还需雪晶片　<output id="rem_snow4"></output>个</br>
 　踏春·华丽<input type="text" id="item4_2" onkeyup=calculate() />个</br>
 　　踏春·珍稀<input type="text" id="item4_3" onkeyup=calculate() />个</br>
+　　　<span style="color:blue">极冰之主<input type="text" id="itemq4" onkeyup=calculate() />个</br></span>
 春之呢喃<input type="text" id="item5" onkeyup=calculate() />个，还需　<output id="rem_item5"></output>个，还需雪晶片　<output id="rem_snow5"></output>个</br>
 　春之呢喃·华丽<input type="text" id="item5_2" onkeyup=calculate() />个</br>
 　　春之呢喃·珍稀<input type="text" id="item5_3" onkeyup=calculate() />个</br>
+　　　<span style="color:blue">冰晶王冠<input type="text" id="itemq5" onkeyup=calculate() />个</br></span>
 春回<input type="text" id="item6" onkeyup=calculate() />个，还需　<output id="rem_item6"></output>个，还需雪晶片　<output id="rem_snow6"></output>个</br>
 　春回·华丽<input type="text" id="item6_2" onkeyup=calculate() />个</br>
 　　春回·珍稀<input type="text" id="item6_3" onkeyup=calculate() />个</br>
 二月歌<input type="text" id="item7" onkeyup=calculate() />个，还需　<output id="rem_item7"></output>个，还需雪晶片　<output id="rem_snow7"></output>个</br>
+　<span style="color:blue">辉耀<input type="text" id="itemq6" onkeyup=calculate() />个</br></span>
 春之精灵<input type="text" id="item8" onkeyup=calculate() />个，还需　<output id="rem_item8"></output>个，还需雪晶片　<output id="rem_snow8"></output>个</br>
+　<span style="color:blue">雪眸清颜<input type="text" id="itemq8" onkeyup=calculate() />个</br></span>
 总计剩余需雪晶片：<output id="aim"></output>个
 </p>
 <p>
