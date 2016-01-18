@@ -3,7 +3,7 @@
 <head>
 <title>Miracle Nikki - 冰雪女王的舞会</title>
 <script type="text/javascript"> 
-function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function noNaN( n ) { return isNaN( n ) ? 0 : n; };
 function settime(){
 	var date = new Date();
 	var time_d = Math.max(0,23-date.getDate());
@@ -11,8 +11,8 @@ function settime(){
 	var time_m = Math.max(59-date.getMinutes());
 	var time_s = Math.max(59-date.getSeconds());
 	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
-}
-function calculate(){ 
+};
+function calculate(id){ 
 	//price: 47 65 60 44 36 40 41 46;
 	//need: 1-5=29-B20-D20*5-F20*15+1 6=30-B25-D25*5-F25*15+1 7-8=9-B26;
 	var need1=29;
@@ -177,7 +177,97 @@ function calculate(){
 	document.getElementById("snow3").innerHTML = snow3 + "个雪晶片";
 	document.getElementById("snow4").innerHTML = snow4 + "个雪晶片";
 	document.getElementById("snow5").innerHTML = snow5 + "个雪晶片";
-
+	
+	//show missing_q queen parts for coins
+	if(itemq1<1) {missing_q1.style.display = 'inline';}else{missing_q1.style.display = 'none';}
+	if(itemq2<1) {missing_q2.style.display = 'inline';}else{missing_q2.style.display = 'none';}
+	if(itemq3<1) {missing_q3.style.display = 'inline';}else{missing_q3.style.display = 'none';}
+	if(itemq4<1) {missing_q4.style.display = 'inline';}else{missing_q4.style.display = 'none';}
+	if(itemq5<1) {missing_q5.style.display = 'inline';}else{missing_q5.style.display = 'none';}
+	if(itemq6<1) {missing_q6.style.display = 'inline';}else{missing_q6.style.display = 'none';}
+	if(itemq7<1) {missing_q7.style.display = 'inline';}else{missing_q7.style.display = 'none';}
+	if(itemq8<1) {missing_q8.style.display = 'inline';}else{missing_q8.style.display = 'none';}
+	if (itemq1>=1&&itemq2>=1&&itemq3>=1&&itemq4>=1&&itemq5>=1&&itemq6>=1&&itemq7>=1&&itemq8>=1){missing_q.style.display = 'inline';}
+	else{missing_q.style.display = 'none';}
+	
+	//coin calculation
+	var to_coin=0;
+	var tmp_cnt1=1;//电视机
+	var tmp_cnt2=1;//记者的衣橱·蓝
+	var tmp_cnt3=1;//自然馈赠
+	var tmp_cnt4=1;//黑色条纹
+	if(itemq2<1){tmp_cnt1=tmp_cnt1+14;}
+	if(itemq3<1){tmp_cnt2=tmp_cnt2+14;}
+	if(itemq5<1){tmp_cnt3=tmp_cnt3+5;tmp_cnt4=tmp_cnt4+24;}
+	if(itemq6<1){tmp_cnt4=tmp_cnt4+24;}
+	if(itemq7<1){tmp_cnt3=tmp_cnt3+4;tmp_cnt2=tmp_cnt2+14;tmp_cnt1=tmp_cnt1+14;}
+	//小鹿5,11904
+	//冰雪战士25
+	var coin_cnt_1_1=noNaN(parseInt(document.getElementById('coin1_1').value));
+	var to_coin_1=Math.max(0,(5-coin_cnt_1_1))*11904+8000;
+	document.getElementById('to_coin_1').value = to_coin_1;
+	if(itemq1<1){to_coin=to_coin+to_coin_1;}
+	//女神领域7,7148
+	//电视机15(29),2961
+	var coin_cnt_2_1=noNaN(parseInt(document.getElementById('coin2_1').value));
+	var coin_cnt_2_2=noNaN(parseInt(document.getElementById('coin2_2').value));
+	var to_coin_2=Math.max(0,(7-coin_cnt_2_1))*7148+Math.max(0,(15-coin_cnt_2_2))*2961+8000;
+	document.getElementById('to_coin_2').value = to_coin_2;
+	if(id=="coin2_2"){document.getElementById('coin7_3').value=coin_cnt_2_2;}
+	if(itemq2<1){to_coin=to_coin+Math.max(0,(7-coin_cnt_2_1))*7148+8000;}
+	//雪山上的礼物6,12550
+	//记者的衣橱·蓝15(29),3100
+	var coin_cnt_3_1=noNaN(parseInt(document.getElementById('coin3_1').value));
+	var coin_cnt_3_2=noNaN(parseInt(document.getElementById('coin3_2').value));
+	var to_coin_3=Math.max(0,(6-coin_cnt_3_1))*12550+Math.max(0,(15-coin_cnt_3_2))*3100+8000;
+	document.getElementById('to_coin_3').value = to_coin_3;
+	if(id=="coin3_2"){document.getElementById('coin7_2').value=coin_cnt_3_2;}
+	if(itemq3<1){to_coin=to_coin+Math.max(0,(6-coin_cnt_3_1))*12550+8000;}
+	//深蓝秘密7,7437
+	//居家拖鞋·白25,3003
+	var coin_cnt_4_1=noNaN(parseInt(document.getElementById('coin4_1').value));
+	var coin_cnt_4_2=noNaN(parseInt(document.getElementById('coin4_2').value));
+	var to_coin_4=Math.max(0,(7-coin_cnt_4_1))*7437+Math.max(0,(25-coin_cnt_4_2))*3003+8000;
+	document.getElementById('to_coin_4').value = to_coin_4;
+	if(itemq4<1){to_coin=to_coin+to_coin_4;}
+	//自然馈赠6(10),5521
+	//黑色条纹25(49),3292
+	var coin_cnt_5_1=noNaN(parseInt(document.getElementById('coin5_1').value));
+	var coin_cnt_5_2=noNaN(parseInt(document.getElementById('coin5_2').value));
+	var to_coin_5=Math.max(0,(6-coin_cnt_5_1))*5521+Math.max(0,(25-coin_cnt_5_2))*3292+8000;
+	document.getElementById('to_coin_5').value = to_coin_5;
+	if(id=="coin5_1"){document.getElementById('coin7_1').value=coin_cnt_5_1;}
+	if(id=="coin5_2"){document.getElementById('coin6_2').value=coin_cnt_5_2;}
+	if(itemq5<1){to_coin=to_coin+8000;}
+	//蝴蝶结手链·红5,10364
+	//黑色条纹25(49)
+	var coin_cnt_6_1=noNaN(parseInt(document.getElementById('coin6_1').value));
+	var coin_cnt_6_2=noNaN(parseInt(document.getElementById('coin6_2').value));
+	var to_coin_6=Math.max(0,(5-coin_cnt_6_1))*10364+Math.max(0,(25-coin_cnt_6_2))*3292+8000;
+	document.getElementById('to_coin_6').value = to_coin_6;
+	if(id=="coin6_2"){document.getElementById('coin5_2').value=coin_cnt_6_2;}
+	if(itemq6<1){to_coin=to_coin+Math.max(0,(5-coin_cnt_6_1))*10364+8000;}
+	//自然馈赠5(10)
+	//记者的衣橱·蓝15(29)
+	//电视机15(29),
+	var coin_cnt_7_1=noNaN(parseInt(document.getElementById('coin7_1').value));
+	var coin_cnt_7_2=noNaN(parseInt(document.getElementById('coin7_2').value));
+	var coin_cnt_7_3=noNaN(parseInt(document.getElementById('coin7_3').value));
+	var to_coin_7=Math.max(0,(5-coin_cnt_7_1))*5521+Math.max(0,(15-coin_cnt_7_2))*3100+Math.max(0,(15-coin_cnt_7_3))*2961+8000;
+	document.getElementById('to_coin_7').value = to_coin_7;
+	if(id=="coin7_1"){document.getElementById('coin5_1').value=coin_cnt_7_1;}
+	if(id=="coin7_2"){document.getElementById('coin3_2').value=coin_cnt_7_2;}
+	if(id=="coin7_3"){document.getElementById('coin2_2').value=coin_cnt_7_3;}
+	if(itemq7<1){to_coin=to_coin+8000;}
+	//北地英姿10,5120
+	var coin_cnt_8_1=noNaN(parseInt(document.getElementById('coin8_1').value));
+	var to_coin_8=Math.max(0,(10-coin_cnt_8_1))*5521+8000;
+	document.getElementById('to_coin_8').value = to_coin_8;
+	if(itemq8<1){to_coin=to_coin+to_coin_8;}
+	//end
+	to_coin=to_coin+Math.max(0,(tmp_cnt1-coin_cnt_2_2))*2961+Math.max(0,(tmp_cnt2-coin_cnt_3_2))*3100+Math.max(0,(tmp_cnt3-coin_cnt_7_1))*5521+Math.max(0,(tmp_cnt4-coin_cnt_5_2))*3292;
+	document.getElementById('to_coin').value = to_coin;
+	document.getElementById('to_coin_stamina').value = Math.ceil(to_coin/800,1)*4;
 }; 
 window.onload = function(){ 
 	
@@ -221,11 +311,33 @@ window.onload = function(){
 	document.getElementById('itemq6').value=0;
 	document.getElementById('itemq7').value=0;
 	document.getElementById('itemq8').value=0;
+	document.getElementById('coin1_1').value=1;
+	document.getElementById('coin1_2').value=25;
+	document.getElementById('coin2_1').value=1;
+	document.getElementById('coin2_2').value=29;
+	document.getElementById('coin3_1').value=1;
+	document.getElementById('coin3_2').value=29;
+	document.getElementById('coin4_1').value=1;
+	document.getElementById('coin4_2').value=25;
+	document.getElementById('coin5_1').value=1;
+	document.getElementById('coin5_2').value=49;
+	document.getElementById('coin6_1').value=1;
+	document.getElementById('coin6_2').value=49;
+	document.getElementById('coin7_1').value=1;
+	document.getElementById('coin7_2').value=29;
+	document.getElementById('coin7_3').value=29;
+	document.getElementById('coin8_1').value=1;
+	coinshow.style.display = 'none';
 	
 	setInterval(settime, 1000);
 	
 	calculate();
 }; 
+
+function coinview(){
+  var oo=document.getElementById('coincheck'); 
+  if(oo.checked) {coinshow.style.display = 'inline';}else{coinshow.style.display = 'none';}
+};
 </script> 
 </head>
 
@@ -299,7 +411,7 @@ window.onload = function(){
 </p>
 <p>
 <style display:none><button onclick="save()">Save</button></br></style>
-<b>※※※※※计算结果※※※※※</b>
+<b>※※※※※ ↓ 计算结果 ↓ ※※※※※</b>
 </p>
 <p>
 最高可获雪晶片　<output id="highest"></output>个</br>
@@ -313,4 +425,58 @@ window.onload = function(){
 还需另消费　<output id="to_consume_shop"></output>钻</br>
 </b>
 </p>
+<p><b>※※※※※ ↑ 计算结果 ↑ ※※※※※</b>
+<p><input type="checkbox" id="coincheck" onchange=coinview() >给长年缺金币的苦逼</p>
+<p><div id="coinshow">
+<div id="missing_q1">
+纯白之风：
+小鹿<input type="text" id="coin1_1" size="2" onkeyup=calculate('coin1_1') />/5个，
+冰雪战士<input type="text" id="coin1_2" size="2" onkeyup=calculate('coin1_2') />/25个
+　=>缺<output id="to_coin_1"></output>金币（冰雪战士少女2-3掉落）
+</br></div>
+<div id="missing_q2">
+雪之女王：
+女神领域<input type="text" id="coin2_1" size="2" onkeyup=calculate('coin2_1') />/7个，
+电视机<input type="text" id="coin2_2" size="2" onkeyup=calculate('coin2_2') />/15个
+　=>缺<output id="to_coin_2"></output>金币
+</br></div>
+<div id="missing_q3">
+寒冬之覆：
+雪山上的礼物<input type="text" id="coin3_1" size="2" onkeyup=calculate('coin3_1') />/6个，
+记者的衣橱·蓝<input type="text" id="coin3_2" size="2" onkeyup=calculate('coin3_2') />/15个
+　=>缺<output id="to_coin_3"></output>金币
+</br></div>
+<div id="missing_q4">
+极冰之主：
+深蓝秘密<input type="text" id="coin4_1" size="2" onkeyup=calculate('coin4_1') />/7个，
+居家拖鞋·白<input type="text" id="coin4_2" size="2" onkeyup=calculate('coin4_2') />/25个
+　=>缺<output id="to_coin_4"></output>金币
+</br></div>
+<div id="missing_q5">
+冰晶王冠：
+自然馈赠<input type="text" id="coin5_1" size="2" onkeyup=calculate('coin5_1') />/6个，
+黑色条纹<input type="text" id="coin5_2" size="2" onkeyup=calculate('coin5_2') />/25个
+　=>缺<output id="to_coin_5"></output>金币
+</br></div>
+<div id="missing_q6">
+辉耀：
+蝴蝶结手链·红<input type="text" id="coin6_1" size="2" onkeyup=calculate('coin6_1') />/5个，
+黑色条纹<input type="text" id="coin6_2" size="2" onkeyup=calculate('coin6_2') />/25个
+　=>缺<output id="to_coin_6"></output>金币
+</br></div>
+<div id="missing_q7">
+冬耀：
+自然馈赠<input type="text" id="coin7_1" size="2" onkeyup=calculate('coin7_1') />/5个，
+记者的衣橱·蓝<input type="text" id="coin7_2" size="2" onkeyup=calculate('coin7_2') />/15个，
+电视机<input type="text" id="coin7_3" size="2" onkeyup=calculate('coin7_3') />/15个
+　=>缺<output id="to_coin_7"></output>金币
+</br></div>
+<div id="missing_q8">
+雪眸清颜：
+北地英姿<input type="text" id="coin8_1" size="2" onkeyup=calculate('coin8_1') />/10个
+　=>缺<output id="to_coin_8"></output>金币
+</br></div>
+<div id="missing_q">好腻害，你已经全部完成了T_T</br></div>
+</br>共缺<output id="to_coin"></output>金币，约<output id="to_coin_stamina"></output>体力
+</div></p>
 </body>
