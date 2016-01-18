@@ -4,6 +4,14 @@
 <title>Miracle Nikki - 冰雪女王的舞会</title>
 <script type="text/javascript"> 
 function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function settime(){
+	var date = new Date();
+	var time_d = Math.max(0,23-date.getDate());
+	var time_h = Math.max(23-date.getHours());
+	var time_m = Math.max(59-date.getMinutes());
+	var time_s = Math.max(59-date.getSeconds());
+	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
+}
 function calculate(){ 
 	//price: 47 65 60 44 36 40 41 46;
 	//need: 1-5=29-B20-D20*5-F20*15+1 6=30-B25-D25*5-F25*15+1 7-8=9-B26;
@@ -172,9 +180,10 @@ function calculate(){
 
 }; 
 window.onload = function(){ 
+	
 	var date = new Date();
 	var d = 23-date.getDate();
-	document.getElementById('remain_days').value=d;
+	document.getElementById('remain_days').value=Math.max(0,d);
 	document.getElementById('current').value=0;
 	document.getElementById('current_consume').value=0;
 	document.getElementById('score1').value=75000;
@@ -213,6 +222,8 @@ window.onload = function(){
 	document.getElementById('itemq7').value=0;
 	document.getElementById('itemq8').value=0;
 	
+	setInterval(settime, 1000);
+	
 	calculate();
 }; 
 </script> 
@@ -222,9 +233,9 @@ window.onload = function(){
 
 <p>
 <b>奇迹暖暖计算器——冰雪女王的舞会　2016.1.17-2016.1.23</b>（<a href="http://pan.baidu.com/s/1c1hPoiO">xls版点此</a>）</br>
-如有错误请微博<a href="http://weibo.com/reanrean">@Rean_翎</a>或<a href="http://tieba.baidu.com/p/4308849843">贴吧</a>报告，谢谢>3<
+如有错误请<a href="http://www.weibo.com/1752065624/DdFPS3Skf">微博</a>或<a href="http://tieba.baidu.com/p/4308849843">贴吧</a>报告，谢谢>3<
 </p>
-
+<p>距离活动结束还有　<span id="showTime"></span></p>
 <p>
 当前雪晶片：<input type="text" id="current" onkeyup=calculate() /></br>
 现已累计消费：<input type="text" id="current_consume" onkeyup=calculate() /></br>
