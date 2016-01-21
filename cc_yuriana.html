@@ -23,7 +23,7 @@ function calculate(){
 	else {var yuriana1=3;}
 	
 	var lily=parseInt(document.getElementById('lily').value);
-	if(lily==0){var lily1=0;document.getElementById("lily_weapon").value="0";}
+	if(lily==0){var lily1=0;}
 	else if(lily==1){var lily1=0.1;}
 	else if(lily==2){var lily1=0.3;}
 	else if(lily==3){var lily1=0.5;}
@@ -31,18 +31,21 @@ function calculate(){
 	else {var lily1=1;}
 	//=IF(B5=0,0,IF(B5=1,0.1,IF(B5=2,0.3,IF(B5=3,0.5,IF(B5=4,0.7,1)))))
 	
-	var lily_weapon=parseInt(document.getElementById('lily_weapon').value);
-	var lily_weapon1=0.5*lily_weapon;
-	
 	var friend=parseInt(document.getElementById('friend').value);
 	var friend1=2.1*friend;
+	
+	if(friend==1&&document.getElementById("lily_weapon").value=="7")
+	{document.getElementById("lily_weapon").value="6";}
+	
+	var lily_weapon=parseInt(document.getElementById('lily_weapon').value);
+	var lily_weapon1=0.5*lily_weapon;
 	
 	var final1=1+yuriana1+himawari1+lily_weapon1+lily1+friend1;
 	document.getElementById('final').value = final1.toFixed(2);
 	
 	var nolily1=1+yuriana1+himawari1+friend1+0.1;
 	
-	var ring=Math.max(0,lily-1)*20+lily_weapon*40;
+	var ring=Math.max(0,lily-1)*20+Math.min(240,lily_weapon*40);
 	document.getElementById('ring').value = ring;
 	
 	//var comp1=final1/(1+yuriana1+himawari1+friend1);
@@ -114,9 +117,15 @@ window.onload = function(){
   <option value="4">3破</option>
   <option value="5">滿破</option>
   </select></br>
-白百合武器<select id="lily_weapon" onchange=calculate()>
-  <option value="1">有</option>
+倍武<select id="lily_weapon" onchange=calculate()>
   <option value="0">沒有</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7(朋友)</option>
   </select></br>
 </p>
 <p>
