@@ -63,24 +63,16 @@ function calculate(){
 	var need_fruit1=Math.ceil(needap1/maxap,1);
 	
 	var comp_critr=parseInt(document.getElementById('comp_critr').value);
-	if(comp_critr=="1"){
-	var nolily1=1+yuriana1+himawari1+friend1+0.1;
+	if(comp_critr=="1"){var nolily1=1+yuriana1+himawari1+friend1+0.1;}
+	else{var nolily1=1+yuriana1+himawari1+friend1;}
+	
 	var comp2=final1/nolily1;
 	var senkou2=per*nolily1;
 	var times2=Math.ceil(aim*10000/senkou2,1);
 	var needap2=times2*ap;
 	var need_fruit2=Math.ceil(needap2/maxap,1);
 	var fruit=need_fruit2-need_fruit1;
-	}
-	else{
-	var nolily1=1+yuriana1+himawari1+friend1;
-	var comp2=final1/nolily1;
-	var senkou2=per*nolily1;
-	var times2=Math.ceil(aim*10000/senkou2,1);
-	var needap2=times2*ap;
-	var need_fruit2=Math.ceil(needap2/maxap,1);
-	var fruit=need_fruit2-need_fruit1;
-	}
+	
 	
 	document.getElementById('comp2').value = comp2.toFixed(4);
 	document.getElementById('times1').value = times1;
