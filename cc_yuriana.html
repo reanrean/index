@@ -34,8 +34,14 @@ function calculate(){
 	var friend=parseInt(document.getElementById('friend').value);
 	var friend1=2*friend;
 	
-	if(friend==1&&document.getElementById("lily_weapon").value=="7")
-	{document.getElementById("lily_weapon").value="6";}
+	var ownssr=0;
+	if(friend>0){ownssr=ownssr+1;}
+	if(yuriana>0){ownssr=ownssr+1;}
+	if(himawari>0){ownssr=ownssr+1;}
+	
+	if(document.getElementById("lily_weapon").value>7-ownssr){
+		document.getElementById("lily_weapon").value=7-ownssr;
+	}
 	
 	var lily_weapon=parseInt(document.getElementById('lily_weapon').value);
 	var lily_weapon1=0.5*lily_weapon;
@@ -133,7 +139,7 @@ window.onload = function(){
 </p>
 <p>
 倍率：<output id="final"></output>　消耗戒指：<output id="ring"></output></br>
-與0破白百合無倍武比較效率：<output id="comp2"></output></br>
+與0破白百合無倍武效率比較：<output id="comp2"></output></br>
 </p>
 <p>
 假設：</br>
