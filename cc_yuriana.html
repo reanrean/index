@@ -49,15 +49,8 @@ function calculate(){
 	var final1=1+yuriana1+himawari1+lily_weapon1+lily1+friend1;
 	document.getElementById('final').value = final1.toFixed(2);
 	
-	var nolily1=1+yuriana1+himawari1+friend1+0.1;
-	
 	var ring=Math.max(0,lily-1)*20+Math.min(240,lily_weapon*40);
 	document.getElementById('ring').value = ring;
-	
-	//var comp1=final1/(1+yuriana1+himawari1+friend1);
-	//document.getElementById('comp1').value = comp1.toFixed(4);
-	var comp2=final1/nolily1;
-	document.getElementById('comp2').value = comp2.toFixed(4);
 	
 	var aim=noNaN(parseInt(document.getElementById('aim').value));
 	var per=noNaN(parseInt(document.getElementById('per').value));
@@ -65,15 +58,31 @@ function calculate(){
 	var maxap=noNaN(parseInt(document.getElementById('maxap').value));
 	
 	var senkou1=per*final1;
-	var senkou2=per*nolily1;
 	var times1=Math.ceil(aim*10000/senkou1,1);
-	var times2=Math.ceil(aim*10000/senkou2,1);
 	var needap1=times1*ap;
-	var needap2=times2*ap;
 	var need_fruit1=Math.ceil(needap1/maxap,1);
+	
+	var comp_critr=parseInt(document.getElementById('comp_critr').value);
+	if(comp_critr=="1"){
+	var nolily1=1+yuriana1+himawari1+friend1+0.1;
+	var comp2=final1/nolily1;
+	var senkou2=per*nolily1;
+	var times2=Math.ceil(aim*10000/senkou2,1);
+	var needap2=times2*ap;
 	var need_fruit2=Math.ceil(needap2/maxap,1);
 	var fruit=need_fruit2-need_fruit1;
+	}
+	else{
+	var nolily1=1+yuriana1+himawari1+friend1;
+	var comp2=final1/nolily1;
+	var senkou2=per*nolily1;
+	var times2=Math.ceil(aim*10000/senkou2,1);
+	var needap2=times2*ap;
+	var need_fruit2=Math.ceil(needap2/maxap,1);
+	var fruit=need_fruit2-need_fruit1;
+	}
 	
+	document.getElementById('comp2').value = comp2.toFixed(4);
 	document.getElementById('times1').value = times1;
 	document.getElementById('times2').value = times2;
 	document.getElementById('needap1').value = needap1;
@@ -139,7 +148,6 @@ window.onload = function(){
 </p>
 <p>
 倍率：<output id="final"></output>　消耗戒指：<output id="ring"></output></br>
-與0破白百合無倍武效率比較：<output id="comp2"></output></br>
 </p>
 <p>
 假設：</br>
@@ -148,7 +156,13 @@ window.onload = function(){
 每場ap<input type="text" id="ap" onkeyup=calculate() /></br>
 最大ap<input type="text" id="maxap" onkeyup=calculate() /></br>
 打<output id="times1"></output>場可畢業，需要ap：<output id="needap1"></output>，果：<output id="need_fruit1"></output></br>
-</br>與0破白百合無倍武比較：</br>
+</p>
+<p>
+<select id="comp_critr" onchange=calculate()>
+  <option value="1">與「 0破白百合」&「無倍武」比較：</option>
+  <option value="0">與「沒有白百合」&「無倍武」比較：</option>
+  </select></br>
+倍率：<output id="comp2"></output>倍</br>
 打<output id="times2"></output>場可畢業，需要ap：<output id="needap2"></output>，果：<output id="need_fruit2"></output></br>
 節省<output id="fruit"></output>果</br>
 </p>
