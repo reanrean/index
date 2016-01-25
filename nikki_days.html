@@ -76,14 +76,18 @@ function calc1(){
 	document.getElementById("times3").value=diff;
 	document.getElementById("times4").value=diff;
 	var tmp_times5=Math.floor(diff/7);
-	var tmp_times5_rem=diff%7 - (7-nDate.getDay())%7;//days to mon
-	if(tmp_times5_rem>=1){tmp_times5+=1;}
+	if(n_invalid==0&&t_invalid==0){
+		var tmp_times5_rem=diff%7 - (7-nDate.getDay())%7;//days to mon
+		if(tmp_times5_rem>=1){tmp_times5+=1;}
+	}
 	document.getElementById("times5").value=tmp_times5;
 	var tmp_times6=Math.floor(diff/7)*2;
-	var tmp_times6_rem1=diff%7 - (8-nDate.getDay())%7;//days to tue
-	var tmp_times6_rem2=diff%7 - (12-nDate.getDay())%7;//days to sat
-	if(tmp_times6_rem1>=1){tmp_times6+=1;}
-	if(tmp_times6_rem2>=1){tmp_times6+=1;}
+	if(n_invalid==0&&t_invalid==0){
+		var tmp_times6_rem1=diff%7 - (8-nDate.getDay())%7;//days to tue
+		var tmp_times6_rem2=diff%7 - (12-nDate.getDay())%7;//days to sat
+		if(tmp_times6_rem1>=1){tmp_times6+=1;}
+		if(tmp_times6_rem2>=1){tmp_times6+=1;}
+	}
 	document.getElementById("times6").value=tmp_times6;
 	document.getElementById("times7").value=diff;
 	document.getElementById("times8").value=Math.floor(diff/30);
