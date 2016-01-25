@@ -100,6 +100,7 @@ function calc2(){//for diamond numbers modified
 	var gain6=noNaN(parseInt(document.getElementById('gain6').value));
 	var gain7=noNaN(parseInt(document.getElementById('gain7').value));
 	var gain8=noNaN(parseInt(document.getElementById('gain8').value));
+	var gain8=noNaN(parseInt(document.getElementById('gain9').value));
 	var times2=noNaN(parseInt(document.getElementById('times2').value));
 	var times3=noNaN(parseInt(document.getElementById('times3').value));
 	var times4=noNaN(parseInt(document.getElementById('times4').value));
@@ -118,6 +119,7 @@ function calc2(){//for diamond numbers modified
 	total+=gain6*times6;
 	total+=gain7*times7;
 	total+=gain8*times8;
+	total+=gain9;
 	
 	document.getElementById("total").value=total;
 	document.getElementById("total2").value=total+ownnow;
@@ -161,6 +163,7 @@ window.onload = function(){
 	document.getElementById("gain6").value=25;
 	document.getElementById("gain7").value=20;
 	document.getElementById("gain8").value=50;
+	document.getElementById("gain9").value=0;
 	document.getElementById("ownnow").value=0;
 	calc1();
 }; 
@@ -196,6 +199,8 @@ window.onload = function(){
 </br>
 微信签到：<input type="text" id="gain8" size="2" onkeyup=calc2() />×<input type="text" id="times8" size="2" onkeyup=calc2() />次
 <span class="note">※每30天50</span></br>
+活动奖励：<input type="text" id="gain9" size="2" onkeyup=calc2() />
+<span class="note">※活动期间的福利，请手动填写</span></br>
 </p>
 
 <p>
