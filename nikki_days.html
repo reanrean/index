@@ -100,7 +100,7 @@ function calc2(){//for diamond numbers modified
 	var gain6=noNaN(parseInt(document.getElementById('gain6').value));
 	var gain7=noNaN(parseInt(document.getElementById('gain7').value));
 	var gain8=noNaN(parseInt(document.getElementById('gain8').value));
-	var gain8=noNaN(parseInt(document.getElementById('gain9').value));
+	var gain9=noNaN(parseInt(document.getElementById('gain9').value));
 	var times2=noNaN(parseInt(document.getElementById('times2').value));
 	var times3=noNaN(parseInt(document.getElementById('times3').value));
 	var times4=noNaN(parseInt(document.getElementById('times4').value));
@@ -176,8 +176,8 @@ window.onload = function(){
 <p><b>奇迹暖暖之一起攒钻吧！</b></p>
 
 <p>
-从<input type="text" id="ny" size="2" onkeyup=calc1() />年<input type="text" id="nm" size="2" onkeyup=calc1() />月<input type="text" id="nd" size="2" onkeyup=calc1() />日<span style="color:red" id="n_invalid"></span></br>
-到<input type="text" id="ty" size="2" onkeyup=calc1() />年<input type="text" id="tm" size="2" onkeyup=calc1() />月<input type="text" id="td" size="2" onkeyup=calc1() />日<span style="color:red" id="t_invalid"></span></br>
+从<input type="text" id="ny" size="4" onkeyup=calc1() />年<input type="text" id="nm" size="2" onkeyup=calc1() />月<input type="text" id="nd" size="2" onkeyup=calc1() />日<span style="color:red" id="n_invalid"></span></br>
+到<input type="text" id="ty" size="4" onkeyup=calc1() />年<input type="text" id="tm" size="2" onkeyup=calc1() />月<input type="text" id="td" size="2" onkeyup=calc1() />日<span style="color:red" id="t_invalid"></span></br>
 共<output id="diff"></output>天（不计今天）</br>
 </p>
 
@@ -187,7 +187,7 @@ window.onload = function(){
 </br>
 每日任务：<input type="text" id="gain2" size="2" onkeyup=calc2() />×<input type="text" id="times2" size="2" onkeyup=calc2() />天
 </br>
-签到：<input type="text" id="gain1" size="2" onkeyup=calc2() />
+签到：<input type="text" id="gain1" size="4" onkeyup=calc2() />
 <span class="note">※每5天50/100/50/100/50/150</span></br>
 竞技场：<input type="text" id="gain5" size="2" onkeyup=calc2() />×<input type="text" id="times5" size="2" onkeyup=calc2() />次
 <span class="note">※每周一50</span></br>
@@ -205,7 +205,7 @@ window.onload = function(){
 
 <p>
 共可获得<output id="total"></output>钻</br>
-若现在有<input type="text" id="ownnow" size="2" onkeyup=calc2() />钻，则<span id="target_day"></span>可得<output id="total2"></output>钻</br>
+若现在有<input type="text" id="ownnow" size="5" onkeyup=calc2() />钻，则<span id="target_day"></span>可得<output id="total2"></output>钻</br>
 </p>
 
 <p style="display:none">
