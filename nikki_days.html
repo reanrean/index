@@ -4,7 +4,6 @@
 <title>Miracle Nikki - 攒钻计算器</title>
 <style>
 .note {font-size:80%;display:none;}
-.noteshow {font-size:80%;}
 </style>
 <script type="text/javascript"> 
 function noNaN( n ) { return isNaN( n ) ? 0 : n; }
@@ -126,16 +125,18 @@ function calc2(){//for diamond numbers modified
 function noteview(){
 	var oo=document.getElementById('notecheck'); 
 	if(oo.checked) {
-		while (document.contains(document.getElementsByClassName("note")[0])) {
-			element=document.getElementsByClassName("note")[0];
-			element.className="noteshow";
-		};
+		var elements = document.getElementsByClassName('note');
+		for(var i=0,length=elements.length;i<length;i++)
+		{elements[i].style.display = 'inline';}
+		//while (document.contains(document.getElementsByClassName("note")[0])) {
+		//	element=document.getElementsByClassName("note")[0];
+		//	element.className="noteshow";
+		//};
 	}
 	else{
-		while (document.contains(document.getElementsByClassName("noteshow")[0])) {
-			element=document.getElementsByClassName("noteshow")[0];
-			element.className="note";
-		};
+		var elements = document.getElementsByClassName('note');
+		for(var i=0,length=elements.length;i<length;i++)
+		{elements[i].style.display = 'none';}
 	}
 };
 window.onload = function(){ 
