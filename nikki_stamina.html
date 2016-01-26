@@ -39,6 +39,7 @@ function calc2(){
 		document.getElementById('error2').innerHTML="&#x2718;";
 	}else{
 		var date_fut2=new Date(year_now2+"/"+month_now2+"/"+day_fut2+" "+until_hr2+":"+until_min2);
+		document.getElementById('error2').innerHTML="";
 	}
 	var time_now2=date_now2.getTime();
 	var time_fut2=date_fut2.getTime();
