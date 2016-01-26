@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<title>Miracle Nikki - Stamina Calc</title>
+<script type="text/javascript"> 
+function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function twoDigit(number) {
+	var twodigit = number >= 10 ? number : "0"+number.toString();
+	return twodigit;
+}
+function calc1(){
+	var nowap1=noNaN(parseInt(document.getElementById('nowap1').value));
+	var maxap1=noNaN(parseInt(document.getElementById('maxap1').value));
+
+	var time1=(maxap1-nowap1)*5;
+	var usehr1=Math.floor(time1/60);
+	var usemin1=time1%60;
+	var end1=new Date(new Date().getTime()+time1*60*1000);
+	var end1_mon=twoDigit(end1.getMonth()+1);
+	var end1_day=twoDigit(end1.getDate());
+	var end1_h=twoDigit(end1.getHours());
+	var end1_m=twoDigit(end1.getMinutes());
+
+	document.getElementById('res1').innerHTML=end1_mon+"/"+end1_day+" "+end1_h+":"+end1_m;
+	document.getElementById('res1_time').innerHTML=usehr1+"时"+usemin1+"分";
+}
+function calc2(){
+	var maxap2=noNaN(parseInt(document.getElementById('maxap2').value));
+	var until_hr2=noNaN(parseInt(document.getElementById('until_hr2').value));
+	var until_min2=noNaN(parseInt(document.getElementById('until_min2').value));
+	var day2=noNaN(parseInt(document.getElementById('day2').value));
+
+	var date_now2=new Date(Math.floor(new Date()/1000/60)*1000*60);//ignore seconds
+	var year_now2 = date_now2.getFullYear();
+	var month_now2 = date_now2.getMonth()+1;
+	var day_fut2=date_now2.getDate()+day2;
+	if(until_hr2<0||until_hr2>23||until_min2<0||until_min2>59){
+		var date_fut2=date_now2;
+		document.getElementById('error2').innerHTML="&#x2718;";
+	}else{
+		var date_fut2=new Date(year_now2+"/"+month_now2+"/"+day_fut2+" "+until_hr2+":"+until_min2);
+	}
+	var time_now2=date_now2.getTime();
+	var time_fut2=date_fut2.getTime();
+	var min_diff2=Math.max(0,(time_fut2-time_now2)/1000/60);
+	var ap_recov2=Math.floor(maxap2-min_diff2/5);
+
+	document.getElementById('nowap2').innerHTML=ap_recov2;
+
+}
+window.onload = function(){ 
+	document.getElementById('nowap1').value=0;
+	document.getElementById('maxap1').value=103;
+	document.getElementById('maxap2').value=103;
+	document.getElementById('until_hr2').value=08;
+	document.getElementById('until_min2').value=30;
+	
+	calc1();
+	calc2();
+};
+</script> 
+</head>
+
+<body>
+<p><b>奇迹暖暖之啥时候回满体力？</b></p>
+<table border="1" ><col width="200px" />
+<tr><td>
+</br>
+现有体力：<input type="text" id="nowap1" size="3" onkeyup=calc1() />/<input type="text" id="maxap1" size="3" onkeyup=calc1() /></br>
+</br>
+体力将在<span id="res1"></span>回满</br>
+（<span id="res1_time"></span>后）</br>
+</br>
+</td></tr>
+<tr><td>
+</br>
+体力上限：<input type="text" id="maxap2" size="3" onkeyup=calc2() /></br>
+休息到<select id="day2" onchange=calc2()>
+  <option value="0">今天</option>
+  <option value="1">明天</option>
+  </select><input type="text" id="until_hr2" size="3" onkeyup=calc2() />:<input type="text" id="until_min2" size="3" onkeyup=calc2() /><span id="error2" style="color:red"></span></br>
+</br>
+体力在<span id="nowap2"></span>以下即不会溢出</br>
+</br>
+</td></tr>
+</table>
+</body>
