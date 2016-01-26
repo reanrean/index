@@ -52,7 +52,7 @@ function calculate(){
 	var ring=Math.max(0,lily-1)*20+Math.min(240,lily_weapon*40);
 	document.getElementById('ring').value = ring;
 	
-	var aim=noNaN(parseInt(document.getElementById('aim').value));
+	var aim=noNaN(parseInt(document.getElementById('aim').value))-noNaN(parseInt(document.getElementById('hasnow').value));
 	var mawari=noNaN(parseInt(document.getElementById('mawari').value));
 	var maxap=noNaN(parseInt(document.getElementById('maxap').value));
 	var restap=noNaN(parseInt(document.getElementById('restap').value));
@@ -73,9 +73,26 @@ function calculate(){
 	var needapmrest1=needap1-restap;
 	var need_fruit1=Math.ceil(needapmrest1/maxap,1);
 	
-	var comp_critr=parseInt(document.getElementById('comp_critr').value);
-	if(comp_critr=="1"){var nolily1=1+yuriana1+himawari1+friend1+0.1;}
-	else{var nolily1=1+yuriana1+himawari1+friend1;}
+	//var comp_critr=parseInt(document.getElementById('comp_critr').value);
+	//if(comp_critr=="1"){var nolily1=1+yuriana1+himawari1+friend1+0.1;}
+	//else{var nolily1=1+yuriana1+himawari1+friend1;}
+
+	var comp_lily=parseInt(document.getElementById('comp_lily').value);
+	if(comp_lily==0){var comp_lily1=0;}
+	else if(comp_lily==1){var comp_lily1=0.1;}
+	else if(comp_lily==2){var comp_lily1=0.3;}
+	else if(comp_lily==3){var comp_lily1=0.5;}
+	else if(comp_lily==4){var comp_lily1=0.7;}
+	else {var comp_lily1=1;}
+
+	if(document.getElementById("comp_weapon").value>7-ownssr){
+		document.getElementById("comp_weapon").value=7-ownssr;
+	}
+
+	var comp_weapon=parseInt(document.getElementById('comp_weapon').value);
+	var comp_weapon1=0.5*comp_weapon;
+
+	var nolily1=1+yuriana1+himawari1+comp_weapon1+comp_lily1+friend1;
 	
 	var comp2=final1/nolily1;
 	var senkou2=per*nolily1;
@@ -84,7 +101,8 @@ function calculate(){
 	var needapmrest2=needap2-restap;
 	var need_fruit2=Math.ceil(needapmrest2/maxap,1);
 	var fruit=need_fruit2-need_fruit1;
-	
+	var ring2=Math.max(0,comp_lily-1)*20+Math.min(240,comp_weapon*40);
+	var ringdiff=ring2-ring;
 	
 	document.getElementById('comp2').value = comp2.toFixed(4);
 	document.getElementById('times1').value = times1;
@@ -95,11 +113,14 @@ function calculate(){
 	document.getElementById('needapmrest2').value = needapmrest2;
 	document.getElementById('need_fruit1').value = need_fruit1;
 	document.getElementById('need_fruit2').value = need_fruit2;
-	document.getElementById('fruit').value = fruit;
+	if (fruit>=0){document.getElementById('fruit_diff').innerHTML = "+" + fruit;}
+	else{document.getElementById('fruit_diff').innerHTML = fruit;}
+	if (ringdiff>=0){document.getElementById('ring_diff').innerHTML = "+" + ringdiff;}
+	else{document.getElementById('ring_diff').innerHTML = ringdiff;}
 }; 
 function settime(){
 	var time_now=new Date().getTime();
-	var time_end=new Date("2/2/2016 13:59:59").getTime();
+	var time_end=new Date("2/2/2016 13:59:59 GMT+0800").getTime();
 	var date=new Date();
 	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
 	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
@@ -109,12 +130,13 @@ function settime(){
 };
 window.onload = function(){ 
 	document.getElementById('aim').value=2000;
+	document.getElementById('hasnow').value=0;
 	document.getElementById('per').value=25000;
 	document.getElementById('ap').value=30;
 	document.getElementById('maxap').value=90;
 	
 	var date=new Date().getTime();
-	var date_end=new Date("2/2/2016 13:59:59").getTime();
+	var date_end=new Date("2/2/2016 13:59:59 GMT+0800").getTime();
 	var restap=Math.floor((date_end-date)/1000/60/8);
 	document.getElementById('restap').value=restap;
 	
@@ -175,7 +197,8 @@ window.onload = function(){
 </p>
 <p>
 <b>通關後</b>：</br>
-再刷戰功<input type="text" id="aim" onkeyup=calculate() />萬</br>
+目標戰功<input type="text" id="aim" onkeyup=calculate() />萬</br>
+已有戰功<input type="text" id="hasnow" onkeyup=calculate() />萬</br>
 周回<select id="mawari" onchange=calculate()>
   <option value="1">王城の護り手</option>
   <option value="0">手動輸入</option>
@@ -188,13 +211,29 @@ window.onload = function(){
 扣減自然回體後需要ap：<output id="needapmrest1"></output>，果：<output id="need_fruit1"></output></br>
 </p>
 <p>
-<select id="comp_critr" onchange=calculate()>
+與白百合<select id="comp_lily" onchange=calculate()>
+  <option value="0">沒有</option>
+  <option value="1">0破</option>
+  <option value="2">1破</option>
+  <option value="3">2破</option>
+  <option value="4">3破</option>
+  <option value="5">滿破</option>
+  </select>倍武<select id="comp_weapon" onchange=calculate()>
+  <option value="0">沒有</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  </select>比較，倍率為<output id="comp2"></output>倍</br>
+<span style="display:none"><select id="comp_critr" onchange=calculate()>
   <option value="1">與「 0破白百合」&「無倍武」比較：</option>
   <option value="0">與「沒有白百合」&「無倍武」比較：</option>
-  </select></br>
-倍率：<output id="comp2"></output>倍</br>
+  </select></br></span>
 打<output id="times2"></output>場可畢業，需要ap：<output id="needap2"></output></br>
 扣減自然回體後需要ap：<output id="needapmrest2"></output>，果：<output id="need_fruit2"></output></br>
-節省<output id="fruit"></output>果</br>
+戒指消耗<span id="ring_diff"></span>，ap果消耗<span id="fruit_diff"></output></br>
 </p>
 </body>
