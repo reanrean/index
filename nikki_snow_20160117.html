@@ -5,11 +5,18 @@
 <script type="text/javascript"> 
 function noNaN( n ) { return isNaN( n ) ? 0 : n; };
 function settime(){
-	var date = new Date();
-	var time_d = Math.max(0,23-date.getDate());
-	var time_h = Math.max(23-date.getHours());
-	var time_m = Math.max(59-date.getMinutes());
-	var time_s = Math.max(59-date.getSeconds());
+	var time_now=new Date().getTime();
+	var time_end=new Date("1/23/2016 23:59:59").getTime();
+	var date=new Date();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
+	var time_m = Math.max(0,Math.floor((time_end-time_now)/1000/60)%60);
+	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
+	//var date = new Date();
+	//var time_d = Math.max(0,23-date.getDate());
+	//var time_h = Math.max(23-date.getHours());
+	//var time_m = Math.max(59-date.getMinutes());
+	//var time_s = Math.max(59-date.getSeconds());
 	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
 };
 function calculate(id){ 
