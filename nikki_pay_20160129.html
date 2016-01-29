@@ -45,6 +45,21 @@ function calc(){
 }
 window.onload = function(){ 
 	paym = [1,6,18,30,68,128,258,648];
+	
+	var autogen='<table>';
+	for (var a=0;a<=7;a++){
+		autogen+='<tr>';
+		if(a>0){
+			autogen+='<td>'+diam[a]+'=<input type="text" id="paym'+a+'" size="3" onkeyup=calc() /></td>';
+		}else{autogen+='<td>一元购</td>'};
+		autogen+='<td>买<output id="quan_'+a+'"></output>次</td>';
+		autogen+='<td><button onclick="add('+a+')">+</button><button onclick="min('+a+')">-</button></td>';
+		autogen+='</tr>';
+	}
+	autogen+='</table>';
+	
+	document.getElementById('autogen').innerHTML=autogen;
+	
 	for (var i=0;i<=7;i++){
 		quan[i]=0;
 		document.getElementById('quan_'+i).value=quan[i];
@@ -57,43 +72,7 @@ window.onload = function(){
 
 <body>
 <p><b>奇迹暖暖新春双倍约不约？</b></p>
-<p>
-<table>
-<tr>
-<td>一元购</td>
-<td>买<output id="quan_0"></output>次</td>
-<td><button onclick="add(0)">+</button><button onclick="min(0)">-</button></td>
-</tr>
-<tr>
-<td>60=<input type="text" id="paym1" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_1"></output>次</td>
-<td><button onclick="add(1)">+</button><button onclick="min(1)">-</button></td>
-</tr><tr>
-<td>190=<input type="text" id="paym2" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_2"></output>次</td>
-<td><button onclick="add(2)">+</button><button onclick="min(2)">-</button></td>
-</tr><tr>
-<td>310=<input type="text" id="paym3" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_3"></output>次</td>
-<td><button onclick="add(3)">+</button><button onclick="min(3)">-</button></td>
-</tr><tr>
-<td>760=<input type="text" id="paym4" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_4"></output>次</td>
-<td><button onclick="add(4)">+</button><button onclick="min(4)">-</button></td>
-</tr><tr>
-<td>1460=<input type="text" id="paym5" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_5"></output>次</td>
-<td><button onclick="add(5)">+</button><button onclick="min(5)">-</button></td>
-</tr><tr>
-<td>2990=<input type="text" id="paym6" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_6"></output>次</td>
-<td><button onclick="add(6)">+</button><button onclick="min(6)">-</button></td>
-</tr><tr>
-<td>7800=<input type="text" id="paym7" size="3" onkeyup=calc() /></td>
-<td>买<output id="quan_7"></output>次</td>
-<td><button onclick="add(7)">+</button><button onclick="min(7)">-</button></td>
-</tr></table>
-</p>
+<p><span id="autogen"></span></p>
 <p>
 累计<output id="sum"></output>钻，共<output id="pay"></output>元</br>
 可得<output id="sum_real"></output>钻，转换比例：<output id="ratio"></output>/元</br>
