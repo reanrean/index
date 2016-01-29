@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<title>Miracle Nikki - 新春福袋</title>
+<script type="text/javascript"> 
+var quan = [];
+var diam = [88,60,190,310,760,1460,2990,7800];
+//var paym = [0,6,18,30,68,128,258,648];
+var paym = [];
+var bonus = [0,308,1288,2588,3888,5188];
+function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function add(n) {
+	quan[n]+=1;
+	if(n==0){quan[n]=1;}
+	document.getElementById('quan_'+n).value=quan[n];
+	calc();
+}
+function min(n) {
+	quan[n]=Math.max(0,quan[n]-1);
+	document.getElementById('quan_'+n).value=quan[n];
+	calc();
+}
+function calc(){
+	var sum=0;
+	var pay=0;
+	var sum_real=0;
+	var bonus_amt=0;
+	var ratio=0;
+	for (var i=0;i<=7;i++){
+		if(i>0){paym[i]=noNaN(parseInt(document.getElementById('paym'+i).value));}
+		sum+=quan[i]*diam[i];
+		pay+=quan[i]*paym[i];
+		sum_real+=quan[i]*diam[i];
+		if (quan[i]>0&&i>0) {sum_real+=diam[i]};
+	}
+	for (var i=1;i<=5;i++){
+		if (sum>=bonus[i]){bonus_amt+=1;}
+	}
+	if(pay>0){ratio=(sum_real/pay).toFixed(2);}
+	document.getElementById('sum').value=sum;
+	document.getElementById('pay').value=pay;
+	document.getElementById('sum_real').value=sum_real;
+	document.getElementById('ratio').value=ratio;
+	document.getElementById('bonus_amt').value=bonus_amt;
+}
+window.onload = function(){ 
+	paym = [1,6,18,30,68,128,258,648];
+	for (var i=0;i<=7;i++){
+		quan[i]=0;
+		document.getElementById('quan_'+i).value=quan[i];
+		if(i>0){document.getElementById('paym'+i).value=paym[i];}
+	}
+	calc();
+};
+</script> 
+</head>
+
+<body>
+<p><b>奇迹暖暖新春双倍约不约？</b></p>
+<p>
+<table>
+<tr>
+<td>一元购</td>
+<td>买<output id="quan_0"></output>次</td>
+<td><button onclick="add(0)">+</button><button onclick="min(0)">-</button></td>
+</tr>
+<tr>
+<td>60=<input type="text" id="paym1" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_1"></output>次</td>
+<td><button onclick="add(1)">+</button><button onclick="min(1)">-</button></td>
+</tr><tr>
+<td>190=<input type="text" id="paym2" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_2"></output>次</td>
+<td><button onclick="add(2)">+</button><button onclick="min(2)">-</button></td>
+</tr><tr>
+<td>310=<input type="text" id="paym3" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_3"></output>次</td>
+<td><button onclick="add(3)">+</button><button onclick="min(3)">-</button></td>
+</tr><tr>
+<td>760=<input type="text" id="paym4" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_4"></output>次</td>
+<td><button onclick="add(4)">+</button><button onclick="min(4)">-</button></td>
+</tr><tr>
+<td>1460=<input type="text" id="paym5" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_5"></output>次</td>
+<td><button onclick="add(5)">+</button><button onclick="min(5)">-</button></td>
+</tr><tr>
+<td>2990=<input type="text" id="paym6" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_6"></output>次</td>
+<td><button onclick="add(6)">+</button><button onclick="min(6)">-</button></td>
+</tr><tr>
+<td>7800=<input type="text" id="paym7" size="3" onkeyup=calc() /></td>
+<td>买<output id="quan_7"></output>次</td>
+<td><button onclick="add(7)">+</button><button onclick="min(7)">-</button></td>
+</tr></table>
+</p>
+<p>
+累计<output id="sum"></output>钻，共<output id="pay"></output>元</br>
+可得<output id="sum_real"></output>钻，转换比例：<output id="ratio"></output>/元</br>
+可拿<output id="bonus_amt"></output>个福袋
+</p>
+<p style="font-size:80%;">
+注：</br>
+不计入月卡返钻</br>
+1元购按88钻计算</br>
+若有充值折扣请手动更改价格</br>
+</p>
+</body>
