@@ -1,18 +1,37 @@
+
 <!DOCTYPE HTML>
 <html lang="zh">
 <head>
 <title>Miracle Nikki - Stamina Timer</title>
+<style>
+a {color:black;text-decoration:none;}
+</style>
 <script type="text/javascript"> 
 function noNaN( n ) { return isNaN( n ) ? 0 : n; }
 function twoDigit(number) {
 	var twodigit = number >= 10 ? number : "0"+number.toString();
 	return twodigit;
 }
+function add(n) {
+	var a=noNaN(parseInt(document.getElementById(n).value));
+	a+=1;
+	document.getElementById(n).value=a;
+	calc1();
+	calc2();
+}
+function min(n) {
+	var a=noNaN(parseInt(document.getElementById(n).value));
+	a=Math.max(0,a-1);
+	document.getElementById(n).value=a;
+	calc1();
+	calc2();
+}
 function calc1(){
 	var nowap1=noNaN(parseInt(document.getElementById('nowap1').value));
 	var maxap1=noNaN(parseInt(document.getElementById('maxap1').value));
+	var aptime=noNaN(parseInt(document.getElementById('aptime').value));
 
-	var time1=(maxap1-nowap1)*5;
+	var time1=(maxap1-nowap1)*aptime;
 	var usehr1=Math.floor(time1/60);
 	var usemin1=time1%60;
 	var end1=new Date(new Date().getTime()+time1*60*1000);
@@ -28,6 +47,7 @@ function calc2(){
 	var maxap2=noNaN(parseInt(document.getElementById('maxap2').value));
 	var until_hr2=noNaN(parseInt(document.getElementById('until_hr2').value));
 	var until_min2=noNaN(parseInt(document.getElementById('until_min2').value));
+	var aptime=noNaN(parseInt(document.getElementById('aptime').value));
 
 	var date_now2=new Date(Math.floor(new Date().getTime()/1000/60)*1000*60);//ignore seconds
 	var year2 = date_now2.getFullYear();
@@ -43,7 +63,7 @@ function calc2(){
 		document.getElementById('tmr').innerHTML="今天";
 	}
 	var min_diff2=(time_fut2-time_now2)/1000/60;
-	var ap_recov2=Math.floor(maxap2-min_diff2/5);
+	var ap_recov2=Math.floor(maxap2-min_diff2/aptime);
 	
 	if(ap_recov2>=0){
 		document.getElementById('nowap2').innerHTML="体力在"+ap_recov2+"以下即不会溢出";
@@ -51,10 +71,8 @@ function calc2(){
 	else{
 		document.getElementById('nowap2').innerHTML="会溢出"+Math.abs(ap_recov2)+"体力&#x1F623;";
 	}
-
 }
 window.onload = function(){ 
-
 	var select_hr2='<select id="until_hr2" onchange=calc2()>';
 	for(var i=0;i<=23;i++){
 		select_hr2=select_hr2+'<option value="'+i+'">'+twoDigit(i)+'</option>';
@@ -68,21 +86,29 @@ window.onload = function(){
 	}
 	select_min2=select_min2+'</select>';
 	document.getElementById('select_min2').innerHTML=select_min2;
-
+	
 	document.getElementById('nowap1').value=0;
 	document.getElementById('maxap1').value=103;
 	document.getElementById('maxap2').value=103;
 	document.getElementById('until_hr2').value=8;
 	document.getElementById('until_min2').value=30;
+	document.getElementById('aptime').value=5;
 	
 	calc1();
 	calc2();
 };
+function advopts(){
+	document.getElementById('advanced_options').style.display="none";
+	document.getElementById('advanced_options_span').style.display="inline";
+}
 </script> 
 </head>
 
 <body>
-<p><b>奇迹暖暖之啥时候回满体力？</b></p>
+<p>
+<b>奇迹暖暖之啥时候回满体力？</b><span><a href="#" id="advanced_options" onclick=advopts() >&#128572;</a></span></br>
+<span id="advanced_options_span" style="display:none">体力回复间隔：<output id="aptime"></output>分钟<button onclick="add('aptime')">+</button><button onclick="min('aptime')">-</button></span></br>
+</p>
 <table border="1" ><col width="200px" />
 <tr><td>
 </br>
