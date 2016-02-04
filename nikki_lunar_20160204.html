@@ -37,9 +37,11 @@ window.onload = function(){
 	document.getElementById("name2").innerHTML = name2;
 	document.getElementById("type2").innerHTML = type2;
 	
+	var date_now=new Date();
 	var time_end=new Date("2/10/2016 23:59:59 GMT+0800").getTime();
-	var time_now=new Date().getTime();
+	var time_now=date_now.getTime();
 	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	if(date_now.getHours()<5&&time_end-time_now>0){time_d+=1;}
 	document.getElementById("remain_days").value = time_d;
 	document.getElementById("remain_today").value = 0;
 	document.getElementById('current').value = 0;
@@ -109,7 +111,7 @@ function calc(ind){
 	var cur_pct=Math.max(0,Math.min(100,noNaN(parseInt(document.getElementById('cur_pct').value))));
 	if(cur_right&&cur_pct){
 		var cur_times=cur_right/cur_pct*100;
-		var cur_act_times=Math.max(0,cur_times-Math.max(0,(7-remain_days))*25-remain_today);
+		var cur_act_times=Math.max(0,cur_times-Math.max(0,(7-remain_days))*25+remain_today);
 		var cur_bought=Math.round(cur_act_times/5);
 		var cur_pay=cur_bought*30;
 		var total_pay=cur_pay+to_pay;
