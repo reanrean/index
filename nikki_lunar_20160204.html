@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<title>Miracle Nikki - 新春梦幻抉择计算器</title>
+<style>
+.remark{font-size:80%;}
+</style>
+<script type="text/javascript"> 
+var need=[56,148,98,38,56,58,68,78,
+	98,208,128,88,118,78,58,128];
+var own=[];
+function noNaN( n ) { return isNaN( n ) ? 0 : n; };
+window.onload = function(){ 
+	var name=new Array('小桃红','鸿运春桃','卧桃春晓','桃枝暖风','桃之夭夭','桃灼春融','压岁钱','年货拼盘',
+		'泼墨邂倾心','踏雪寻梅夜','锦瑟暖风裘','梅林邀共饮','飘雪沁人心','暗香傲骨寒','提灯染华裳','流盼化清涟');
+	for (i=0;i<need.length;i++){
+		own[i]=0;
+	}
+
+	var name1=""; var name2="";
+	for(i=0;i<8;i++){
+		name1+='<input type="checkbox" id="own'+i+'" onclick=calc() >'
+		name1+=name[i]+'<br/>';
+	}
+	for(i=8;i<16;i++){
+		name2+='<input type="checkbox" id="own'+i+'" onclick=calc() >'
+		name2+=name[i]+'<br/>';
+	}
+	document.getElementById("name1").innerHTML = name1;
+	document.getElementById("name2").innerHTML = name2;
+	
+	var time_end=new Date("2/10/2016 23:59:59 GMT+0800").getTime();
+	var time_now=new Date().getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	document.getElementById("remain_days").value = time_d;
+	document.getElementById("remain_today").value = 0;
+	document.getElementById('current').value = 0;
+	document.getElementById('pct_exp').value = 100;
+	document.getElementById('wrong_exp').value = 0;
+	
+	setInterval(settime, 1000);
+	calc();
+}
+function checkall(n){
+	if (n==1){var start=0;}
+	else{var start=8;}
+	var oo=document.getElementById('all'+n).checked;
+	if (oo){
+		for(i=start;i<start+8;i++){
+			document.getElementById('own'+i).checked=true;
+		}
+	}
+	else{
+		for(i=start;i<start+8;i++){
+			document.getElementById('own'+i).checked=false;
+		}
+	}
+	calc();
+}
+function calc(ind){
+	var remain_days=Math.max(0,noNaN(parseInt(document.getElementById('remain_days').value)));
+	var remain_today=Math.max(0,noNaN(parseInt(document.getElementById('remain_today').value)));
+	var current=Math.max(0,noNaN(parseInt(document.getElementById('current').value)));
+	
+	for (n=0;n<need.length;n++){
+		var oo=document.getElementById('own'+n).checked;
+		if (oo){own[n]=1;}
+		else{own[n]=0;}
+	}
+	
+	var aim=0;
+	for(i=0;i<need.length;i++){aim+=need[i]*(1-own[i]);}
+	
+	var rem=aim-current;
+	var to_get_times=remain_days*25+remain_today;
+	
+	if(ind&&ind==2){
+		var wrong_exp=Math.max(0,noNaN(parseInt(document.getElementById('wrong_exp').value)));
+		var times=Math.ceil((rem-wrong_exp*3)/5+wrong_exp);
+		document.getElementById('pct_exp').value=Math.round((1-wrong_exp/times)*100);
+	}else{
+		var pct_exp=Math.max(0,Math.min(100,noNaN(parseInt(document.getElementById('pct_exp').value))));
+		var exp=5*pct_exp/100+3*(1-pct_exp/100);
+		var times=Math.ceil(rem/exp);
+		document.getElementById('wrong_exp').value=Math.round(times*(1-pct_exp/100));
+	}
+	
+	var diff_times=times-to_get_times;
+	var to_buy=Math.max(0,Math.ceil(diff_times/5));
+	var to_pay=to_buy*30;
+	
+	document.getElementById('rem').value=rem;
+	document.getElementById('to_get_times').value=to_get_times;
+	document.getElementById('times').value=times;
+	document.getElementById('to_buy').value=to_buy;
+	document.getElementById('to_pay').value=to_pay;
+}
+function settime(){
+	var time_now=new Date().getTime();
+	var time_end=new Date("2/10/2016 23:59:59 GMT+0800").getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
+	var time_m = Math.max(0,Math.floor((time_end-time_now)/1000/60)%60);
+	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
+	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
+};
+</script> 
+</head>
+<body>
+<p>
+<b>奇迹暖暖新春梦幻抉择　2016.2.4-2016.2.10</b><br/>
+数据引用自<a href="http://weibo.com/5389135148/DgessENnR">@amy_翡翠</a>，非常感谢m(_ _)m<br/>
+实用工具：<a href="http://ivangift.github.io/nikkirec">ip君版</a>/<a href="http://seal100x.github.io/nikkiup2u3/biguse.html">小黑版</a>
+</p>
+<p>距离活动结束还有　<span id="showTime"></span></p>
+<p><table border="1" width="300px" >
+<tr style="text-align:center">
+<td><input type="checkbox" id="all1" onclick=checkall(1) >鸿运春桃</td>
+<td><input type="checkbox" id="all2" onclick=checkall(2) >踏雪寻梅</td>
+</tr>
+<tr>
+<td><span id="name1"></span></td>
+<td><span id="name2"></span></td>
+</tr>
+</table>
+<span class="remark">*勾选代表已有/不需要部件</span></p>
+<p>
+<table border="0">
+<tr><td>
+剩余天数：<input type="text" id="remain_days" onkeyup=calc() />
+</td></tr><tr><td>
+今天剩余次数：<input type="text" id="remain_today" onkeyup=calc() />
+</td></tr><tr><td>
+当前灵犀之星：<input type="text" id="current" onkeyup=calc() />
+<span style="display:none">
+累计选对：<input type="text" id="right" onkeyup=calc() /><br/>
+正确率：<input type="text" id="pct" onkeyup=calc() />%<br/>
+</span>
+</td></tr>
+<tr>
+<td>
+预计正确率(%)：<input type="text" id="pct_exp" onkeyup=calc(1) />
+</td>
+<td rowspan="2">
+<span class="remark">*请只选择一项填写，会自动计算另一项</span>
+</td>
+<tr>
+<td>预计错题数：<input type="text" id="wrong_exp" onkeyup=calc(2) /></td>
+</tr>
+</table>
+</p><hr><p>
+<table border="0">
+<tr><td>
+还需<output id="rem"></output>个灵犀之星
+</td></tr><tr><td>
+还需选择<output id="times"></output>次（免费<output id="to_get_times"></output>次）
+</td></tr><tr><td>
+还需购买<output id="to_buy"></output>次，花钻<output id="to_pay"></output>个
+</td></tr>
+</table>
+</p>
+</body>
+</html>
