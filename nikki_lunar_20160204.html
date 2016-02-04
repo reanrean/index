@@ -4,6 +4,7 @@
 <title>Miracle Nikki - 新春梦幻抉择计算器</title>
 <style>
 .remark{font-size:80%;}
+.grey{color:#999999;}
 </style>
 <script type="text/javascript"> 
 var need=[56,148,98,38,56,58,68,78,
@@ -102,6 +103,20 @@ function calc(ind){
 	document.getElementById('times').value=times;
 	document.getElementById('to_buy').value=to_buy;
 	document.getElementById('to_pay').value=to_pay;
+	
+	//calc already spend
+	var cur_right=Math.max(0,noNaN(parseInt(document.getElementById('cur_right').value)));
+	var cur_pct=Math.max(0,Math.min(100,noNaN(parseInt(document.getElementById('cur_pct').value))));
+	if(cur_right&&cur_pct){
+		var cur_times=cur_right/cur_pct*100;
+		var cur_act_times=Math.max(0,cur_times-Math.max(0,(7-remain_days))*25-remain_today);
+		var cur_bought=Math.round(cur_act_times/5);
+		var cur_pay=cur_bought*30;
+		var total_pay=cur_pay+to_pay;
+		document.getElementById('cur_result').innerHTML="已经购买"+cur_bought+"次，花钻"+cur_pay+"个</br>总共需花费钻石"+total_pay+"个";
+	}else{
+		document.getElementById('cur_result').innerHTML="";
+	}
 }
 function settime(){
 	var time_now=new Date().getTime();
@@ -116,7 +131,7 @@ function settime(){
 </head>
 <body>
 <p>
-<b>奇迹暖暖新春梦幻抉择　2016.2.4-2016.2.10</b><br/>
+<b>奇迹暖暖新春梦幻抉择　2016.2.4-2016.2.10</b>　<a href="http://weibo.com/1752065624/DghZjE9RL">[报错]</a><br/>
 数据引用自<a href="http://weibo.com/5389135148/DgessENnR">@amy_翡翠</a>，非常感谢m(_ _)m<br/>
 实用工具：<a href="http://ivangift.github.io/nikkirec">ip君版</a>/<a href="http://seal100x.github.io/nikkiup2u3/biguse.html">小黑版</a>
 </p>
@@ -142,21 +157,26 @@ function settime(){
 今天剩余次数：<input type="text" id="remain_today" onkeyup=calc() />
 </td></tr><tr><td>
 当前灵犀之星：<input type="text" id="current" onkeyup=calc() />
-<span style="display:none">
-累计选对：<input type="text" id="right" onkeyup=calc() /><br/>
-正确率：<input type="text" id="pct" onkeyup=calc() />%<br/>
-</span>
 </td></tr>
-<tr>
-<td>
+<tr><td>
 预计正确率(%)：<input type="text" id="pct_exp" onkeyup=calc(1) />
 </td>
 <td rowspan="2">
 <span class="remark">*请只选择一项填写，会自动计算另一项</span>
+</td></tr>
+<tr><td>
+预计错题数：<input type="text" id="wrong_exp" onkeyup=calc(2) />
+</td></tr>
+<tr><td><hr></td></tr>
+<tr class="grey"><td>
+累计选对题数：<input type="text" id="cur_right" onkeyup=calc() />
 </td>
-<tr>
-<td>预计错题数：<input type="text" id="wrong_exp" onkeyup=calc(2) /></td>
-</tr>
+<td rowspan="2">
+<span class="remark">*此两项用于计算已花钻数，如不计算可留空</span>
+</td></tr>
+<tr class="grey"><td>
+当前正确率(%)：<input type="text" id="cur_pct" onkeyup=calc() />
+</td></tr>
 </table>
 </p><hr><p>
 <table border="0">
@@ -166,6 +186,8 @@ function settime(){
 还需选择<output id="times"></output>次（免费<output id="to_get_times"></output>次）
 </td></tr><tr><td>
 还需购买<output id="to_buy"></output>次，花钻<output id="to_pay"></output>个
+</td></tr><tr><td>
+<span id="cur_result" class="grey"></span>
 </td></tr>
 </table>
 </p>
