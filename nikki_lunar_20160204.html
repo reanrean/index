@@ -89,6 +89,7 @@ function calc(ind){
 	var to_buy=Math.max(0,Math.ceil(diff_times/5));
 	var to_pay=to_buy*30;
 	
+	document.getElementById('aim').value=aim;
 	document.getElementById('rem').value=rem;
 	document.getElementById('to_get_times').value=to_get_times;
 	document.getElementById('times').value=times;
@@ -151,7 +152,7 @@ function settime(){
 </p><hr><p>
 <table border="0">
 <tr><td>
-还需<output id="rem"></output>个灵犀之星
+还需刷<output id="rem"></output>个灵犀之星（共需<output id="aim"></output>个）
 </td></tr><tr><td>
 还需选择<output id="times"></output>次（免费<output id="to_get_times"></output>次）
 </td></tr><tr><td>
