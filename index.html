@@ -23,10 +23,10 @@ var duoshuoQuery = {short_name:"reanrean"};
 	})();
 function dsThread(){
     var container='ds-thread';
-    if(document.getElementsByClassName(container)[0].style.display=='inline'){
-        document.getElementsByClassName(container)[0].style.display='none';
-    }else{
+    if(document.getElementsByClassName(container)[0].style.display=='none'){
         document.getElementsByClassName(container)[0].style.display='inline';
+    }else{
+        document.getElementsByClassName(container)[0].style.display='none';
     }
 	document.getElementsByClassName('ds-comments')[0].style.display='none';
 	document.getElementsByClassName('ds-powered-by')[0].style.display='none';
@@ -66,7 +66,9 @@ function dsThread(){
 <p>
 <a href="" class="cmlink" onclick="dsThread();return false;">
 <img src="https://avatars1.githubusercontent.com/u/16536710" height="25" width="25">Leave a Message</a></br>
+<table style="width:100%;max-width:400px;"><tr><td>
 <div class="ds-thread" style="display:none" data-thread-key="rean_rean_ds" data-title="Rean's place" data-url="http://reanrean.github.io/"></div>
+</tr></td></table>
 </p>
 
 </body>
