@@ -8,8 +8,30 @@
 <link rel="icon" href="https://avatars1.githubusercontent.com/u/16536710" type="image/x-icon" />
 <style>
 a {color:black;}
+a.cmlink {text-decoration:none;}
 .past {color:#AAAAAA;}
 </style>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"reanrean"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+function dsThread(){
+    var container='ds-thread';
+    if(document.getElementsByClassName(container)[0].style.display=='inline'){
+        document.getElementsByClassName(container)[0].style.display='none';
+    }else{
+        document.getElementsByClassName(container)[0].style.display='inline';
+    }
+	document.getElementsByClassName('ds-comments')[0].style.display='none';
+	document.getElementsByClassName('ds-powered-by')[0].style.display='none';
+}
+</script>
 </head>
 
 <body>
@@ -39,6 +61,12 @@ a {color:black;}
 <p style="display:none">
 <img src="http://i.imgur.com/GAXInjI.png" height="25" width="25">Tokimeki Restaurant</br>
 <a href="tokires_event.html">活動結束倒計時</a></br>
+</p>
+
+<p>
+<a href="" class="cmlink" onclick="dsThread();return false;">
+<img src="https://avatars1.githubusercontent.com/u/16536710" height="25" width="25">Leave a Message</a></br>
+<div class="ds-thread" style="display:none" data-thread-key="rean_rean_ds" data-title="Rean's place" data-url="http://reanrean.github.io/"></div>
 </p>
 
 </body>
