@@ -150,10 +150,10 @@ function calc(ind){
 	var stamina_today=remain_today*perstamina
 	var stamina_total=diff_stamina+stamina_daily*remain_days+stamina_today;
 	
-	var diff_times_daily=(diff_times/remain_days+free_1day).toFixed(2);
-	var to_buy_daily=(to_buy/remain_days).toFixed(2);
-	var to_pay_daily=(to_pay/remain_days).toFixed(2);
-	var stamina_daily_tot=(stamina_total/remain_days).toFixed(2);
+	var diff_times_daily=(diff_times/remain_days+free_1day).toFixed(1);
+	var to_buy_daily=(to_buy/remain_days).toFixed(1);
+	var to_pay_daily=(to_pay/remain_days).toFixed(1);
+	var stamina_daily_tot=(stamina_total/remain_days).toFixed(1);
 	
 	var calcres='<table>';
 	calcres+=tr(td('还需刷'+rem+'个誓言戒指（共需'+aim+'个）'));
