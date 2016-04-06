@@ -196,7 +196,7 @@ function saveSettings(){
 	document.getElementById('storage').innerHTML=saveString;
 }
 function resetSettings(){
-	localStorage.clear();
+	localStorage.removeItem(nikki_fool);
 	init();
 }
 function settime(){
