@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Miracle Nikki - 镇魂曲活动</title>
+<style>
+.remark{font-size:80%;}
+</style>
+<script type="text/javascript">
+//相关衣柜
+var wardrobe = [
+  ['清黛梦魇·珍稀','发型','673','5','','','','','','','','','','','','进672','安灵镇魂曲'],
+  ['清黛梦魇·华丽','发型','672','5','','','','','','','','','','','','进671',''],
+  ['清黛梦魇','发型','671','5','','','','','','','','','','','','4-1公',''],
+  ['安灵镇魂曲·珍稀','连衣裙','567','5','','','','','','','','','','','','进566','安灵镇魂曲'],
+  ['安灵镇魂曲·华丽','连衣裙','566','5','','','','','','','','','','','','进565',''],
+  ['安灵镇魂曲','连衣裙','565','5','','','','','','','','','','','','5-4公',''],
+  ['午夜徘徊·珍稀','鞋子','613','5','','','','','','','','','','','','进612','安灵镇魂曲'],
+  ['午夜徘徊·华丽','鞋子','612','5','','','','','','','','','','','','进611',''],
+  ['午夜徘徊','鞋子','611','5','','','','','','','','','','','','5-10公',''],
+  ['暗黑荆棘·华丽','饰品-头饰','862','5','','','','','','','','','','','','进859','安灵镇魂曲'],
+  ['暗黑荆棘','饰品-头饰','859','5','','','','','','','','','','','','6-4少',''],
+  ['荆棘之链·珍稀','饰品-颈饰·项链','863','5','','','','','','','','','','','','进860','安灵镇魂曲'],
+  ['荆棘之链·华丽','饰品-颈饰·项链','860','5','','','','','','','','','','','','进857',''],
+  ['荆棘之链','饰品-颈饰·项链','857','5','','','','','','','','','','','','3-6少',''],
+  ['荆棘之环·珍稀','饰品-手饰·双','864','5','','','','','','','','','','','','进861','安灵镇魂曲'],
+  ['荆棘之环·华丽','饰品-手饰·双','861','5','','','','','','','','','','','','进858',''],
+  ['荆棘之环','饰品-手饰·双','858','5','','','','','','','','','','','','4-5公',''],
+  ['镇魂冥灯','饰品-手持·左','865','5','','','','','','','','','','','','设计图','安灵镇魂曲'],
+  ['幽魂魅影','饰品-特殊·前景','866','5','','','','','','','','','','','','设计图','安灵镇魂曲'],
+  ['梦回夜曲','妆容','028','5','','','','','','','','','','','','6-7少','安灵镇魂曲'],
+  ['清醇雪夜','发型','674','5','','','','','','','','','','','','定673','圣和咏叹调'],
+  ['圣和咏叹调','连衣裙','568','5','','','','','','','','','','','','定567','圣和咏叹调'],
+  ['静谧轻喃','鞋子','614','5','','','','','','','','','','','','定613','圣和咏叹调'],
+  ['圣和旋律','饰品-头饰','867','5','','','','','','','','','','','','定862','圣和咏叹调'],
+  ['圣和之链','饰品-颈饰·项链','869','5','','','','','','','','','','','','定863','圣和咏叹调'],
+  ['圣和之环','饰品-手饰·双','868','5','','','','','','','','','','','','定864','圣和咏叹调'],
+  ['圣和灵灯','饰品-手持·左','870','5','','','','','','','','','','','','定865','圣和咏叹调'],
+  ['幽光浮影','饰品-特殊·前景','871','5','','','','','','','','','','','','定866','圣和咏叹调'],
+  ['暖风温煦','妆容','029','5','','','','','','','','','','','','定028','圣和咏叹调'],
+  ['纪念日','饰品-特殊·背景','958','5','A','','','S','','S','','A','A','','','店·金币','生日贺礼'],
+  ['红色头巾','饰品-头饰','409','3','','B','S','','S','','','B','','S','','店·金币',''],
+];
+//活动结束时间
+var time_end=new Date("4/12/2016 23:59:59 GMT+0800").getTime();
+//设计图数据
+var pattern=[
+/*  ['发型','673','发型','672','x','进'],
+  ['发型','672','发型','671','x','进'],
+  ['发型','674','发型','673','1','染'],
+  ['连衣裙','567','连衣裙','566','x','进'],
+  ['连衣裙','566','连衣裙','565','x','进'],
+  ['连衣裙','568','连衣裙','567','1','染'],
+  ['鞋子','613','鞋子','612','x','进'],
+  ['鞋子','612','鞋子','611','x','进'],
+  ['鞋子','614','鞋子','613','1','染'],
+  ['饰品-头饰','612','饰品-头饰','611','x','进'],
+  ['饰品-头饰','614','饰品-头饰','613','1','染'],
+  ['饰品-头饰','613','饰品-头饰','612','x','进'],
+  ['饰品-头饰','612','饰品-头饰','611','x','进'],
+  ['饰品-头饰','614','饰品-头饰','613','1','染'],*/
+  ['饰品','865','饰品','857','2','设'],
+  ['饰品','865','发型','671','2','设'],
+  ['饰品','865','鞋子','611','2','设'],
+  ['饰品','865','饰品','958','5','设'],
+  ['饰品','866','饰品','858','2','设'],
+  ['饰品','866','连衣裙','565','2','设'],
+  ['饰品','866','妆容','028','5','设'],
+  ['饰品','866','饰品','409','10','设'],
+];
+//套装数据
+var set=['安灵镇魂曲','圣和咏叹调'];
+//***end of data***
+
+var setCnt=[]; var types=[]; var names=[]; var own=[];
+
+var clothesId = function() {
+  var ret = {};
+  for (var i in wardrobe) {
+	if(wardrobe[i]){
+		ret[wardrobe[i][2]]=wardrobe[i];
+	}
+  }
+  return ret;
+}();
+
+var reqCnt=function(){
+	var ret=[];
+	for (var i in wardrobe){
+		ret[i]=0;
+	}
+	return ret;
+}();
+
+window.onload = function(){
+	setInterval(settime, 1000);
+	init();
+	//alert(clothesId[613]);
+};
+
+function init(ind){
+	for (var i in set){
+		setCnt[i]=0;
+		for (var j in wardrobe){
+			if(wardrobe[j][16]==set[i]){
+				names.push(wardrobe[j][0]);
+				types.push(wardrobe[j][1]);
+				setCnt[i]++;
+			}
+		}
+	}
+	var table='<form action=""><table border="1">';
+	table+=tr(td('套装')+td('部位')+td('名称'));
+	table+=tr(td(remark('*勾选代表已有/不需要部件'),'colspan="3"'));
+	var pos=0;
+	for (var s in set){
+		var line=td('<input type="checkbox" id="all'+s+'" onclick=checkall('+s+') >'+set[s]);
+		var cell1=''; var cell2='';
+		for (i=pos;i<pos+setCnt[s];i++){
+			cell2+='<input type="checkbox" id="own'+i+'" onclick=calc() >'+names[i]+'<br>';
+			cell1+=types[i]+'<br>';
+		}
+		pos+=setCnt[s];
+		line+=td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0"');
+		table+=tr(line);
+	}
+	table+='</table></form>';
+	document.getElementById("table").innerHTML = table;
+	//load localStorage, set own
+	
+	var evo='<table border="0">';
+	var evo_tmp='';
+	for (var i in wardrobe){
+		if(wardrobe[i][15].indexOf('进')>-1){
+			evo_tmp+=td(wardrobe[i][0]+inputBox('e'+wardrobe[i][2],'calc()',1)+'进');
+			if(wardrobe[i][0].indexOf('华丽')>-1) {evo+=tr(evo_tmp); evo_tmp='';}
+		}
+	}
+	evo+='</table>';
+	document.getElementById("evo").innerHTML = evo;
+	calc();
+}
+function calc(){
+	var input='<table border="1">';
+	for (var i in wardrobe){
+		input+=tr(td(wardrobe[i][0]));
+	}
+	input+='</table>';
+	document.getElementById("input").innerHTML = input;
+}
+function saveSettings(){
+	localStorage.setItem("nikki_requiem", [1,0]);
+}
+function noNaN( n ) { return isNaN( n ) ? 0 : n; };
+function td(text,attr){
+	return '<td'+(attr?' '+attr:'')+'>'+text+'</td>';
+}
+function tr(text,attr){
+	return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>';
+}
+function remark(text){
+	return '<span class="remark">'+text+'</span>';
+}
+function inputBox(id,onchange,size){
+	return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>';
+}
+function settime(){
+	var time_now=new Date().getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
+	var time_m = Math.max(0,Math.floor((time_end-time_now)/1000/60)%60);
+	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
+	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
+};
+</script> 
+</head>
+<body>
+<p>
+<b>奇迹暖暖镇魂曲活动　2016.4.8-2016.4.12</b><br/>
+</p>
+<p>
+距离活动结束还有　<span id="showTime"></span><br>
+<button onclick="saveSettings()">保存</button><button onclick="init(1)">读取</button>
+</p>
+<p id="table"></p>
+<p id="evo"></p>
+<p id="calcres"></p>
+<p id="input"></p>
+<p id="storage" style="display:none"></span>
+</body>
+</html>
