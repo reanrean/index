@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="zh">
 <head>
@@ -165,7 +164,7 @@ function init(ind){
 		}
 	}else{
 		if(isNaN(parseInt(document.getElementById("drops").value))) {document.getElementById("drops").value = 20;}
-		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = 50;}
+		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = 30;}
 		var es = document.getElementById('table').getElementsByTagName('input');
 		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
 			if(isNaN(parseInt(es[z].value))) {es[z].value=3;}
@@ -263,9 +262,9 @@ function calc2(){//diamond calc
 	}
 	for (var i in wardrobe){
 		reqDif[i]=Math.max(0,reqDif[i]);
-		if(!parentInd[i]) {document.getElementById('reqDif'+i).innerHTML=reqDif[i];}
+		if(!parentInd[i]&&document.getElementById('reqDif'+i)) {document.getElementById('reqDif'+i).innerHTML=reqDif[i];}
 	}
-		
+	
 	calc3();
 }
 function calc3(){
@@ -284,22 +283,23 @@ function calc3(){
 				if(wardrobe[i][15].indexOf(kList[k])>0&&j==wardrobe[i][15].substr(0,1)) {
 					var times=Math.ceil(reqDif[i]*100/dropk[k]);
 					var buy_times=Math.max(0,(times-free_1day*remain_days));
-					var buy_times_perday=(buy_times/remain_days).toFixed(1);
+					var buy=Math.ceil(buy_times/3);
+					var buy_perday=(buy/remain_days).toFixed(1);
 					var diam=Math.ceil(buy_times/free_1day)*buy_per;
 					var stam=stamina_per[k]*times;
 					var Vreq=0;
 					for(v=0;v<Vtimes.length;v++){
 						Vreq=v;
-						if(Vtimes[v]>=buy_times_perday){break;}
+						if(Vtimes[v]>=buy_perday){break;}
 					}
-					if(k==1) {dropList.push([wardrobe[i][15],times,buy_times+'&emsp;/'+buy_times_perday,'V'+Vreq,diam,stam]);}
-					else {dropList.push([wardrobe[i][15],times,'-','-','-',stam]);}
+					if(k==1) {dropList.push([wardrobe[i][15],wardrobe[i][0],times,buy_times,buy+'&emsp;/'+buy_perday,'V'+Vreq,diam,stam]);}
+					else {dropList.push([wardrobe[i][15],wardrobe[i][0],times,'-','-','-','-',stam]);}
 				}
 			}
 		}
 	}
 	var calcres='<table border="1">';
-	calcres+=tr(td('关卡')+td('次数')+td('购买次数/每天')+td('V要求')+td('钻石')+td('体力'));
+	calcres+=tr(td('关卡')+td('名称')+td('次数')+td('额外次数')+td('购买次数/每天')+td('V要求')+td('钻石')+td('体力'));
 	var sum_diam=0; var sum_stam=0; var sum_Vreq=0;
 	for(var i in dropList){
 		var line='';
@@ -307,11 +307,11 @@ function calc3(){
 			line+=td(dropList[i][j]);
 		}
 		calcres+=tr(line);
-		sum_diam+=(dropList[i][4]=='-'?0:dropList[i][4]);
-		sum_stam+=(dropList[i][5]);
-		if(parseInt(dropList[i][3].substr(1))>sum_Vreq){sum_Vreq=parseInt(dropList[i][3].substr(1));}
+		sum_diam+=(dropList[i][6]=='-'?0:dropList[i][6]);
+		sum_stam+=(dropList[i][7]);
+		if(parseInt(dropList[i][5].substr(1))>sum_Vreq){sum_Vreq=parseInt(dropList[i][5].substr(1));}
 	}
-	calcres+=tr(td('总计')+td('')+td('')+td('V'+sum_Vreq)+td(sum_diam)+td(sum_stam));
+	calcres+=tr(td('总计')+td('')+td('')+td('')+td('')+td('V'+sum_Vreq)+td(sum_diam)+td(sum_stam));
 	calcres+='</table>';
 	document.getElementById("calcres").innerHTML = calcres;
 }
@@ -408,6 +408,17 @@ function genEvoAmt(name,string){
 	}else{a=string+'1';}
 	return a;
 }
+/*function updreqown(i){
+	if(reqown[i]>0){
+		for(var p in pattern){
+			if (wardrobe[i][2]==pattern[p][1]){
+				for(1==1){
+					a=clothesId[pattern[p][3]]
+				}
+			}
+		}
+	}
+}*/
 function checkall(n){
 	var pos=0;
 	for (i=0;i<n;i++){
