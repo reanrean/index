@@ -8,6 +8,10 @@
 .remark{font-size:80%;}
 </style>
 <script type="text/javascript">
+//默认进化数量-按顺序
+var def_evo=[4,3,4,3,4,3,4,4,3,4,3];
+//默认掉率-少女/公主
+var def_drop=[20,30];
 //相关衣柜
 var wardrobe = [
   ['清黛梦魇·珍稀','发型','673','5','','','','','','','','','','','','进672','安灵镇魂曲'],
@@ -46,15 +50,15 @@ var wardrobe = [
 var time_end=new Date("4/12/2016 23:59:59 GMT+0800").getTime();
 //设计图数据
 var pattern=[
-  ['发型','674','发型','673','1','染'],
-  ['连衣裙','568','连衣裙','567','1','染'],
-  ['鞋子','614','鞋子','613','1','染'],
-  ['饰品','867','饰品','862','1','染'],
-  ['饰品','869','饰品','863','1','染'],
-  ['饰品','868','饰品','864','1','染'],
-  ['饰品','870','饰品','865','1','染'],
-  ['饰品','871','饰品','866','1','染'],
-  ['妆容','029','妆容','028','1','染'],
+  ['发型','674','发型','673',1,'染'],
+  ['连衣裙','568','连衣裙','567',1,'染'],
+  ['鞋子','614','鞋子','613',1,'染'],
+  ['饰品','867','饰品','862',1,'染'],
+  ['饰品','869','饰品','863',1,'染'],
+  ['饰品','868','饰品','864',1,'染'],
+  ['饰品','870','饰品','865',1,'染'],
+  ['饰品','871','饰品','866',1,'染'],
+  ['妆容','029','妆容','028',1,'染'],
   ['饰品','865','饰品','857',2,'设'],
   ['饰品','865','发型','671',2,'设'],
   ['饰品','865','鞋子','611',2,'设'],
@@ -163,11 +167,13 @@ function init(ind){
 			}}
 		}
 	}else{
-		if(isNaN(parseInt(document.getElementById("drops").value))) {document.getElementById("drops").value = 20;}
-		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = 30;}
+		if(isNaN(parseInt(document.getElementById("drops").value))) {document.getElementById("drops").value = def_drop[0];}
+		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = def_drop[1];}
 		var es = document.getElementById('table').getElementsByTagName('input');
+		var es_i=0;
 		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
-			if(isNaN(parseInt(es[z].value))) {es[z].value=3;}
+			if(isNaN(parseInt(es[z].value))) {es[z].value=def_evo[es_i];}
+			es_i++;
 		}}
 		for (var i in wardrobe){
 			reqown[i]=0;
@@ -247,6 +253,9 @@ function calc2(){//diamond calc
 	reqDif=[];
 	for(var i in reqCnt){
 		reqDif.push(reqCnt[i]);
+	}
+	for(var i in wardrobe){
+		updreqown(i);
 	}
 	for (var i in wardrobe){
 		if(document.getElementById('reqown'+i)){reqown[i]=Math.min(reqCnt[i],noNaN(parseInt(document.getElementById('reqown'+i).value)));}
@@ -408,17 +417,20 @@ function genEvoAmt(name,string){
 	}else{a=string+'1';}
 	return a;
 }
-/*function updreqown(i){
-	if(reqown[i]>0){
+function updreqown(i){
+	if(document.getElementById('reqown'+i)&&noNaN(parseInt(document.getElementById('reqown'+i).value))>0){
 		for(var p in pattern){
 			if (wardrobe[i][2]==pattern[p][1]){
-				for(1==1){
-					a=clothesId[pattern[p][3]]
+				for(var j in wardrobe){
+					if (wardrobe[j][2]==pattern[p][3]&&!(noNaN(parseInt(document.getElementById('reqown'+j).value))>0)) {
+						document.getElementById('reqown'+j).value=1;
+						updreqown(j);
+					}
 				}
 			}
 		}
 	}
-}*/
+}
 function checkall(n){
 	var pos=0;
 	for (i=0;i<n;i++){
@@ -459,9 +471,8 @@ function settime(){
 </script> 
 </head>
 <body>
-<p>
-<b>奇迹暖暖镇魂曲活动　2016.4.8-2016.4.12</b><br/>
-</p>
+<p><b>奇迹暖暖镇魂曲活动　2016.4.8-2016.4.12</b><br>
+-睡觉去了，早起的宝宝手动设一下进化数量和掉率吧</p>
 <p>
 距离活动结束还有　<span id="showTime"></span><br>
 <button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button><!--<button onclick="resetSettings()">清除缓存</button>-->
