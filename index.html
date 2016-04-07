@@ -31,6 +31,15 @@ function dsThread(){
 	document.getElementsByClassName('ds-comments')[0].style.display='none';
 	document.getElementsByClassName('ds-powered-by')[0].style.display='none';
 }
+function showNikkiPast(it){
+	if(document.getElementById('NikkiPast').style.display=='none'){
+        document.getElementById('NikkiPast').style.display='inline';
+		it.innerHTML='往期活动（收起）';
+    }else{
+        document.getElementById('NikkiPast').style.display='none';
+		it.innerHTML='往期活动';
+    }
+}
 </script>
 </head>
 
@@ -44,22 +53,28 @@ function dsThread(){
 
 <p>
 <img src="img/nikki.jpg" height="25" width="25">Miracle Nikki</br>
-<a href="nikki_fool_20160401.html">愚人节计算器</a></br>
+<a href="nikki_requiem_20160408.html">安眠镇魂曲</a></br>
 <a href="nikki_days.html">攒钻计算器</a></br>
 <a href="nikki_stamina.html">体力小工具</a></br>
 <a href="../nikkis_choice/material.html">材料需求数量查询表</a></br>
 <a href="../nikkis_choice/top.html">顶配查询器</a></br>
 <a href="../nikkis_choice/top_ajglz.html">顶配页面生成器 for 傲娇攻略组(≥o≤)</a></br>
-<span class="past"><a href="nikki_wedding_20160311.html">梦恋奇迹2计算器</a>（已結束）</span></br>
-<span class="past"><a href="nikki_pay_20160129.html">新春福袋充值计算</a>（已結束）</span></br>
-<span class="past"><a href="nikki_lunar_20160204.html">新春梦幻抉择计算器</a>（已結束）</span></br>
-<span class="past"><a href="nikki_snow_20160117.html">冰雪女王的舞会</a>（已結束）</span></br>
+<span class="past"><a href="#" onclick="showNikkiPast(this);return false;">往期活动</a></br></span>
+<span class="past" id="NikkiPast" style="display:none">
+<a href="nikki_fool_20160401.html">愚人节计算器</a></br>
+<a href="nikki_wedding_20160311.html">梦恋奇迹2</a></br>
+<a href="nikki_pay_20160129.html">新春福袋充值</a></br>
+<a href="nikki_lunar_20160204.html">新春梦幻抉择</a></br>
+<a href="nikki_snow_20160117.html">冰雪女王的舞会</a></br>
+</span>
 <span class="past"><a href="../nikkis_choice/choice.html">UNDER CONSTRUCTION</a></span></br>
 </p>
 
 <p>
 <img src="img/cc.png" height="25" width="25">Chain Chronicle</br>
-<span class="past"><a href="cc_yuriana.html">王都綻放的白百合</a>（已結束）</span></br>
+<span class="past">
+<a href="cc_yuriana.html">王都綻放的白百合</a></br>
+</span>
 </p>
 
 <p>
