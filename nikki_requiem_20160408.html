@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="zh">
 <head>
@@ -66,11 +67,14 @@ var pattern=[
 ];
 //套装数据
 var set=['安灵镇魂曲','圣和咏叹调'];
+//V等级次数
+var Vtimes=[1,1,2,2,3,3,5,10,15,20,25];
 //***end of data***
 
 var setCnt=[]; var types=[]; var names=[];
-
 var reqCnt=[]; var parentInd=[]; var childInd=[]; var extraInd=[]; var extraAdded=[]; var linkP={};
+var reqown=[]; var reqDif=[]; 
+var savedInfo={};
 
 var clothesId = function() {
   var ret = {};
@@ -98,6 +102,7 @@ window.onload = function(){
 };
 
 function init(ind){
+	types=[]; names=[];
 	for (var i in set){
 		setCnt[i]=0;
 		for (var j in wardrobe){
@@ -125,7 +130,51 @@ function init(ind){
 	table+='</table></form>';
 	document.getElementById("table").innerHTML = table;
 	
-	//load localStorage, set own
+	var drop='<table border="1">';
+	drop+=tr(td('少女级掉率')+td(inputBox('drops','calc3()',3)+'%'));
+	drop+=tr(td('公主级掉率')+td(inputBox('dropg','calc3()',3)+'%'));
+	drop+=tr(td('剩余天数')+td(inputBox('remain_days','calc3()',3)+'<input type="checkbox" id="used_today" onclick="calc3()">今天已刷'));
+	drop+='</table>';
+	document.getElementById("drop").innerHTML = drop;
+	
+	var date_now=new Date();
+	var time_now=date_now.getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	if(date_now.getHours()<5&&time_end-time_now>0){time_d+=1;}
+	document.getElementById("remain_days").value = time_d;
+	
+	//fill in values
+	if(ind){
+		for (var i in savedInfo['own']){
+			if(savedInfo['own'][i]>0){document.getElementById("own"+i).checked=true;}
+		}
+		for (var i in savedInfo['reqown']){
+			reqown[i]=savedInfo['reqown'][i];
+		}
+		if(savedInfo['drops']){
+			document.getElementById("drops").value = savedInfo['drops'][0];
+			document.getElementById("dropg").value = savedInfo['drops'][1];
+		}
+		if(savedInfo['es']){
+			var es = document.getElementById('table').getElementsByTagName('input');
+			var es_i=0;
+			for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
+				es[z].value=savedInfo['es'][es_i];
+				es_i++;
+			}}
+		}
+	}else{
+		if(isNaN(parseInt(document.getElementById("drops").value))) {document.getElementById("drops").value = 20;}
+		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = 50;}
+		var es = document.getElementById('table').getElementsByTagName('input');
+		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
+			if(isNaN(parseInt(es[z].value))) {es[z].value=3;}
+		}}
+		for (var i in wardrobe){
+			reqown[i]=0;
+		}
+	}
+	
 	calc();
 }
 function calc(){//reqCnt calc
@@ -145,13 +194,7 @@ function calc(){//reqCnt calc
 	  var ret = {};
 	  for (var i in wardrobe) {
 		ret[i]=[];
-		//clear count in previous run
-		for (var j in wardrobe){
-			reqCnt[j]=0;
-			parentInd[j]=0;
-			childInd[j]=0;
-			extraInd[j]=0;
-		}
+		clearCnt();
 		genFactor2(wardrobe[i][2],1);
 		for (var j in wardrobe){
 			if(reqCnt[j]>0&&!parentInd[j]) {ret[i].push([j,reqCnt[j]]);}
@@ -159,15 +202,8 @@ function calc(){//reqCnt calc
 	  }
 	  return ret;
 	}();
-	//clear count in previous run
-	for (var i in wardrobe){
-		reqCnt[i]=0;
-		parentInd[i]=0;
-		childInd[i]=0;
-		extraInd[i]=0;
-		extraAdded[i]=0;
-	}
-	//own cnt
+	//gen factor for all
+	clearCnt();
 	for (i=0;i<names.length;i++){
 		if (!document.getElementById('own'+i).checked){
 			for (var j in wardrobe){//mark sub as extra count needed
@@ -177,8 +213,17 @@ function calc(){//reqCnt calc
 			}
 		}
 	}
-	//reqCnt
-	genFactor();
+	do{
+		var total=0;
+		for (var i in wardrobe){//add extra count once only
+			if(extraInd[i]&&(!extraAdded[i])){
+				reqCnt[i]++; 
+				genFactor2(wardrobe[i][2],1); 
+				extraAdded[i]=1; 
+				total++;
+			}
+		}
+	}while(total>0);
 	
 	var input='<table border="1">';
 	input+=tr(td('名称')+td('拥有数量')+td('还缺数量')+td('来源'));
@@ -194,12 +239,11 @@ function calc(){//reqCnt calc
 	document.getElementById("input").innerHTML = input;
 	
 	for (var i in wardrobe){
-		if(document.getElementById('reqown'+i)){document.getElementById('reqown'+i).value=0;}
+		if(document.getElementById('reqown'+i)) {document.getElementById('reqown'+i).value=reqown[i];}
 	}
 	
 	calc2();
 }
-var reqown=[]; var reqDif=[]; 
 function calc2(){//diamond calc
 	reqDif=[];
 	for(var i in reqCnt){
@@ -218,24 +262,108 @@ function calc2(){//diamond calc
 		}
 	}
 	for (var i in wardrobe){
-		if(!parentInd[i]) {document.getElementById('reqDif'+i).innerHTML=Math.max(0,reqDif[i]);}
+		reqDif[i]=Math.max(0,reqDif[i]);
+		if(!parentInd[i]) {document.getElementById('reqDif'+i).innerHTML=reqDif[i];}
 	}
+		
+	calc3();
 }
-function saveSettings(){
-	localStorage.setItem("nikki_requiem", [1,0]);
-}
-function genFactor(){
-	do{
-		var total=0;
-		for (var i in wardrobe){//add extra count once only
-			if(extraInd[i]&&(!extraAdded[i])){
-				reqCnt[i]++; 
-				genFactor2(wardrobe[i][2],1); 
-				extraAdded[i]=1; 
-				total++;
+function calc3(){
+	var dropk=[noNaN(parseInt(document.getElementById('drops').value)),noNaN(parseInt(document.getElementById('dropg').value))];
+	var remain_days=noNaN(parseInt(document.getElementById('remain_days').value));
+	if (!document.getElementById('used_today').checked){remain_days++};
+	var free_1day=3;
+	var buy_per=30;
+	var stamina_per=[4,6];
+	
+	var dropList=[];
+	var kList=['少','公'];
+	for (var k in kList){//sort by levels
+		for(j=1;j<10;j++){//sort by chapters
+			for (var i in wardrobe){
+				if(wardrobe[i][15].indexOf(kList[k])>0&&j==wardrobe[i][15].substr(0,1)) {
+					var times=Math.ceil(reqDif[i]*100/dropk[k]);
+					var buy_times=Math.max(0,(times-free_1day*remain_days));
+					var buy_times_perday=(buy_times/remain_days).toFixed(1);
+					var diam=Math.ceil(buy_times/free_1day)*buy_per;
+					var stam=stamina_per[k]*times;
+					var Vreq=0;
+					for(v=0;v<Vtimes.length;v++){
+						Vreq=v;
+						if(Vtimes[v]>=buy_times_perday){break;}
+					}
+					if(k==1) {dropList.push([wardrobe[i][15],times,buy_times+'&emsp;/'+buy_times_perday,'V'+Vreq,diam,stam]);}
+					else {dropList.push([wardrobe[i][15],times,'-','-','-',stam]);}
+				}
 			}
 		}
-	}while(total>0);
+	}
+	var calcres='<table border="1">';
+	calcres+=tr(td('关卡')+td('次数')+td('购买次数/每天')+td('V要求')+td('钻石')+td('体力'));
+	var sum_diam=0; var sum_stam=0; var sum_Vreq=0;
+	for(var i in dropList){
+		var line='';
+		for(var j in dropList[i]){
+			line+=td(dropList[i][j]);
+		}
+		calcres+=tr(line);
+		sum_diam+=(dropList[i][4]=='-'?0:dropList[i][4]);
+		sum_stam+=(dropList[i][5]);
+		if(parseInt(dropList[i][3].substr(1))>sum_Vreq){sum_Vreq=parseInt(dropList[i][3].substr(1));}
+	}
+	calcres+=tr(td('总计')+td('')+td('')+td('V'+sum_Vreq)+td(sum_diam)+td(sum_stam));
+	calcres+='</table>';
+	document.getElementById("calcres").innerHTML = calcres;
+}
+function saveSettings(){
+	var ret=[];
+	for(var i in names){ret.push(document.getElementById('own'+i).checked?'1':'0');}
+	ret.push(noNaN(parseInt(document.getElementById('drops').value)));
+	ret.push(noNaN(parseInt(document.getElementById('dropg').value)));
+	var es = document.getElementById('table').getElementsByTagName('input');
+    for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
+		ret.push(noNaN(parseInt(es[z].value)));
+    }}
+	for(var i in reqown){ret.push(reqown[i]);}
+	ret=ret.toString();
+	if (typeof(Storage) !== "undefined") {
+		localStorage.setItem("nikki_requiem", ret);
+	}
+	document.getElementById("storage").innerHTML = ret;
+}
+function loadSettings(){
+	savedInfo={};
+	savedInfo['own']=[];
+	savedInfo['drops']=[];
+	savedInfo['es']=[];
+	savedInfo['reqown']=[];
+	if (typeof(Storage) !== "undefined"&&localStorage.getItem("nikki_requiem")){
+		var ret=localStorage.getItem("nikki_requiem").split(',');
+		for (i=0;i<names.length;i++){savedInfo['own'].push(ret[i]);}
+		savedInfo['drops']=[ret[names.length],ret[names.length+1]];
+		var es = document.getElementById('table').getElementsByTagName('input');
+		var es_i=0;
+		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
+			savedInfo['es'].push(ret[es_i*1+names.length*1+2]);
+			es_i++;
+		}}
+		for (var i in wardrobe){savedInfo['reqown'].push(ret[i*1+names.length*1+es_i*1+2]);}
+	}
+	init(1);
+}
+
+function resetSettings(){
+	localStorage.clear();
+	init();
+}
+function clearCnt(){
+	for (var i in wardrobe){
+		reqCnt[i]=0;
+		parentInd[i]=0;
+		childInd[i]=0;
+		extraInd[i]=0;
+		extraAdded[i]=0;
+	}
 }
 function genFactor2(id,num){
 	for (var i in pattern) {
@@ -260,6 +388,9 @@ function genFactor2(id,num){
 				}
 			}
 		}
+	}
+	for (var j in wardrobe){//not found
+		if(wardrobe[j]==clothesId[id]&&!parentInd[j]){childInd[j]=1;break;}
 	}
 }
 function resetPattern(){
@@ -322,9 +453,10 @@ function settime(){
 </p>
 <p>
 距离活动结束还有　<span id="showTime"></span><br>
-<button onclick="saveSettings()">保存设置</button><button onclick="init(1)">读取设置</button>
+<button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button><!--<button onclick="resetSettings()">清除缓存</button>-->
 </p>
 <p id="table"></p>
+<p id="drop"></p>
 <p id="calcres"></p>
 <p id="input"></p>
 <p id="storage" style="display:none"></span>
