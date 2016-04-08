@@ -11,7 +11,19 @@ tr.no td, tr.no td input {text-decoration:line-through;}
 </style>
 <script type="text/javascript"> 
 var today=new Date(); var future; var interval=1;
-var data=[];
+var data=[
+//0-fixed,1-select(text,value),2-input
+	['自然回复',2,288],
+	['每日·S评价',0,20],
+	['每日·送体力',0,12],
+	['午餐',1,['周日','周一','周二','周三','周四','周五','周六'],[60,30,30,30,30,30,60]],
+	['晚餐',0,60],
+	['好友送',2,50],
+	['联盟',1,['5星','4星','3星','2星','1星'],[35,30,25,22,20]],
+	['V礼包',1,['V0','V1','V2','V3','V4','V5','V6','V7','V8','V9','V10'],[0,10,10,15,20,25,25,30,35,40,50]],
+	['暖心加油站',0,5],
+	['签到/活动',2,0]
+];
 
 window.onload = function(){ 
 	init();
@@ -57,20 +69,6 @@ function chgDate(ind,chg){
 	calc();
 }
 function calc(){
-	data=[
-	//0-fixed,1-select(text,value),2-input
-	['自然回复',2,288],
-	['每日·S评价',0,20],
-	['每日·送体力',0,12],
-	['午餐',1,['周日','周一','周二','周三','周四','周五','周六'],[60,30,30,30,30,30,60]],
-	['晚餐',0,60],
-	['好友送',2,50],
-	['联盟',1,['5星','4星','3星','2星','1星'],[35,30,25,22,20]],
-	['V礼包',1,['V0','V1','V2','V3','V4','V5','V6','V7','V8','V9','V10'],[0,10,10,15,20,25,25,30,35,40,50]],
-	['暖心加油站',0,5],
-	['签到/活动',2,0]
-	]
-	
 	var dateShow=function() {
 		var ret='';
 		for(var j=0;j<interval;j++){
@@ -84,13 +82,15 @@ function calc(){
 		for(var i in data) {if(data[i][0]=='午餐') {return i;}}
 	}();
 	
+	var dayMode=(docu('dayMode').value==1);
+	
 	var out='<table border="1">';
-	out+=tr(td('有')+td('来源')+(interval>1?dateShow:td('体力')),'style="font-weight:bold;"');
+	out+=tr(td('有')+td('来源')+(dayMode?td('体力'):dateShow),'style="font-weight:bold;"');
 	for(var i in data){
 		var line=td('<input type="checkbox" id="check'+i+'" onclick="calc2()" checked>');
 		
-		//handle for lunch when interval>1
-		if(i==lunch&&interval>1) {line+=td(data[i][0]);}
+		//handle for lunch without selectBox
+		if(i==lunch&&!dayMode) {line+=td(data[i][0]);}
 		else {line+=td(data[i][0]+(data[i][1]==1?'&ensp;'+selectBox('sel'+i,'calc2()',data[i][2]):''));}
 		
 		for(var j=1;j<=interval;j++){
@@ -109,13 +109,13 @@ function calc(){
 		line+=td('','id="dat_t'+j+'"');
 	}
 	out+=tr(line,'style="font-weight:bold;"')
-	if(interval>1) out+=tr(td('')+td(interval+'天体力总计')+td('','colspan="'+interval+'" id="sum_all"'),'style="font-weight:bold;"')
+	if(interval>1) {out+=tr(td('')+td(interval+'天体力总计')+td('','colspan="'+interval+'" id="sum_all"'),'style="font-weight:bold;"')}
 	out+='</table>';
 	docu('result').innerHTML=out;
 	
 	//handle for lunch
 	var getDay=today.getDay();
-	if(interval==1){
+	if(dayMode){
 		docu('sel'+lunch).value=data[lunch][2][getDay];
 	}else{
 		for (var j=1;j<=interval;j++){
