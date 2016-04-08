@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" href="img/favicon.jpg" type="image/x-icon" />
+<title>奇迹暖暖每日获得体力计算</title>
+<style>
+a {color:inherit;text-decoration:none;}
+</style>
+<script type="text/javascript"> 
+var today=new Date(); var future; var interval=1;
+var data=[];
+
+window.onload = function(){ 
+	init();
+}
+function init(){
+	setHTML('interval','模式：'+selectBox('dayMode','chgDayMode(this.value)',[1,0],['一天','多天']));
+	calc();
+}
+function chgDayMode(val){
+	if(val==1) {
+		interval=1;
+		today=new Date();
+		setHTML('days','');
+	}else{
+		interval=5;
+		today=new Date();
+		future=new Date(today.getTime()+(interval-1)*1000*60*60*24);
+		var out='&emsp;从：<button onclick="chgDate(0,-1)">-</button>';
+		out+='<span id="today">'+dateToStr(today)+'</span>';
+		out+='<button onclick="chgDate(0,1)">+</button>';
+		out+='&emsp;到：<button onclick="chgDate(1,-1)">-</button>';
+		out+='<span id="future">'+dateToStr(future)+'</span>';
+		out+='<button onclick="chgDate(1,1)">+</button>';
+		out+='&emsp;共<span id="days_interval">'+interval+'</span>天'
+		setHTML('days',out);
+	}
+	calc();
+}
+function chgDate(ind,chg){
+	if (ind==0) {
+		if(chg<0||today.getTime()!=future.getTime()) {
+			today=new Date(today.getTime()+chg*1000*60*60*24);
+			setHTML('today',dateToStr(today));
+		}
+	}else{
+		if(chg>0||today.getTime()!=future.getTime()) {
+			future=new Date(future.getTime()+chg*1000*60*60*24);
+			setHTML('future',dateToStr(future));
+		}
+	}
+	interval=(future.getTime()-today.getTime())/1000/60/60/24+1;
+	setHTML('days_interval',interval);
+	calc();
+}
+function calc(){
+	data=[
+	//0-fixed,1-floating
+	['自然回复',0,288],
+	['每日-刷关卡',0,20],
+	['每日-送体力',0,12],
+	['午餐',1,['周日','周一','周二','周三','周四','周五','周六'],[60,30,30,30,30,30,60]],
+	['晚餐',0,60],
+	['好友送',0,50],
+	['联盟',1,['1星','2星','3星','4星','5星'],[1,2,3,4,5]],
+	['V礼包',1,['V0','V1','V2','V3','V4','V5','V6','V7','V8','V9','V10'],[1,2,3,4,5,6,7,8,9,10]],
+	['暖心加油站',0,5],
+	]
+
+	var out='<table border="1">';
+	out+=tr(td('有')+td('来源')+td('体力','colspan="'+interval+'"'));
+	for(var i in data){
+		var line=td('<input type="checkbox" id="check'+i+'" onclick="calc2()" checked>');
+		
+		//handle for multiple days, daily lunch
+		if(i==3&&interval>1) {line+=td(data[i][0]);}
+		else {line+=td(data[i][0]+(data[i][1]==0?'':selectBox('sel'+i,'calc2()',data[i][2])));}
+		for(var j=1;j<=interval;j++){
+			if(data[i][1]==0){
+				line+=td(data[i][2],'id="dat'+i+'-'+j+'"');
+			}else{
+				line+=td('','id="dat'+i+'-'+j+'"');
+			}
+		}
+		out+=tr(line);
+	}
+	out+=tr(td('')+td('总计')+td('','id="dat_t"'),'style="font-weight:bold;"')
+	out+='</table>';
+	setHTML('result',out);
+	calc2();
+}
+function calc2(){
+	for (var i in data){
+		if(data[i][1]==1) setHTML('dat'+i+'-1',0);
+	}
+}
+function dateToStr(date){
+	return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+}
+function setHTML(id,val){
+	document.getElementById(id).innerHTML = val;
+}
+function setVal(id,val){
+	document.getElementById(id).value = val;
+}
+function getVal(id){
+	return noNaN(parseInt(document.getElementById(id).value));
+}
+function td(text,attr){
+	return '<td'+(attr?' '+attr:'')+'>'+text+'</td>';
+}
+function tr(text,attr){
+	return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>';
+}
+function inputBox(id,onchange,size){
+	return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>';
+}
+function selectBox(id,onchange,valArr,textArr){
+	var ret='<select id="'+id+'" onchange='+onchange+'>';
+	if(!textArr){textArr=valArr;}
+	for (var i in valArr){
+		ret+='<option value="'+valArr[i]+'">'+textArr[i]+'</option>';
+	}
+	ret+='</select>';;
+	return ret;
+}
+function noNaN( n ) {
+	return isNaN( n ) ? 0 : n; 
+}
+</script> 
+</head>
+
+<body>
+<p><b>奇迹暖暖每日获得体力计算</b></p>
+
+<p>
+<span id="interval"></span><span id="days"></span>
+</p>
+
+<p id="result"></p>
+<p id="total"></p>
+</body>
+</html>
