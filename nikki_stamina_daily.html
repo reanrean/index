@@ -16,14 +16,16 @@ var data=[
 	['自然回复',2,288],
 	['每日·S评价',0,20],
 	['每日·送体力',0,12],
-	['午餐',1,['周日','周一','周二','周三','周四','周五','周六'],[60,30,30,30,30,30,60]],
-	['晚餐',0,60],
-	['好友送',2,50],
-	['联盟',1,['5星','4星','3星','2星','1星'],[35,30,25,22,20]],
+	['分享获得物品',0,6],
+	['上线·午餐',1,['周日','周一','周二','周三','周四','周五','周六'],[60,30,30,30,30,30,60]],
+	['上线·晚餐',0,60],
+	['好友赠送',2,50],
+	['联盟奖励',1,['5星','4星','3星','2星','1星'],[35,30,25,22,20]],
 	['V礼包',1,['V0','V1','V2','V3','V4','V5','V6','V7','V8','V9','V10'],[0,10,10,15,20,25,25,30,35,40,50]],
 	['暖心加油站',0,5],
 	['签到/活动',2,0]
 ];
+var lunch_str='上线·午餐';
 
 window.onload = function(){ 
 	init();
@@ -79,7 +81,7 @@ function calc(){
 	}();
 	
 	var lunch=function() {
-		for(var i in data) {if(data[i][0]=='午餐') {return i;}}
+		for(var i in data) {if(data[i][0]==lunch_str) {return i;}}
 	}();
 	
 	var dayMode=(docu('dayMode').value==1);
@@ -91,7 +93,7 @@ function calc(){
 		
 		//handle for lunch without selectBox
 		if(i==lunch&&!dayMode) {line+=td(data[i][0]);}
-		else {line+=td(data[i][0]+(data[i][1]==1?'&ensp;'+selectBox('sel'+i,'calc2()',data[i][2]):''));}
+		else {line+=td(data[i][0]+(data[i][1]==1?selectBox('sel'+i,'calc2()',data[i][2]):''));}
 		
 		for(var j=1;j<=interval;j++){
 			if(data[i][1]==0){
@@ -135,8 +137,8 @@ function calc2(it,max){
 	for (var i in data){
 		sum[i]=[0];
 		for(var j=1;j<=interval;j++){
-			if(data[i][1]==1) { for(var k in data[i][2]){
-				if (docu('sel'+i)&&docu('sel'+i).value==data[i][2][k]) {docu('dat'+i+'-'+j).innerHTML=data[i][3][k]; break;}
+			if(data[i][1]==1&&docu('sel'+i)) { for(var k in data[i][2]){
+				if(docu('sel'+i).value==data[i][2][k]) {docu('dat'+i+'-'+j).innerHTML=data[i][3][k]; break;}
 			}}
 			var tmp=docu('dat'+i+'-'+j).value?getVal(docu('dat'+i+'-'+j).value):getVal(docu('dat'+i+'-'+j).innerHTML);
 			sum[i].push(tmp);
