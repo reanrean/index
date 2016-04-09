@@ -43,13 +43,13 @@ function chgDayMode(val){
 		interval=5;
 		today=new Date();
 		future=new Date(today.getTime()+(interval-1)*1000*60*60*24);
-		var out='<br>&emsp;从：<button onclick="chgDate(0,-1)">-</button>';
+		var out='&emsp;共<span id="days_interval">'+interval+'</span>天';
+		out+='<br>&emsp;从：<button onclick="chgDate(0,-1)">-</button>';
 		out+='<span id="today">'+dateToStr(today)+'</span>';
 		out+='<button onclick="chgDate(0,1)">+</button>';
 		out+='<br>&emsp;到：<button onclick="chgDate(1,-1)">-</button>';
 		out+='<span id="future">'+dateToStr(future)+'</span>';
 		out+='<button onclick="chgDate(1,1)">+</button>';
-		out+='<br>&emsp;共<span id="days_interval">'+interval+'</span>天'
 		docu('days').innerHTML=out;
 	}
 	calc();
@@ -101,7 +101,7 @@ function calc(){
 			}else if(data[i][1]==1){
 				line+=td('','id="dat'+i+'-'+j+'"');
 			}else{
-				line+=td(inputBox('dat'+i+'-'+j,'calc2(this,'+data[i][2]+')',2,data[i][2]));
+				line+=td(inputBox('dat'+i+'-'+j,'calc2(this,'+data[i][2]+')',3,data[i][2]));
 			}
 		}
 		out+=tr(line,'id="line'+i+'"');
