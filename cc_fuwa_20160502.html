@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>不和の魔神トルウァトス踏破 - 義勇軍相擊</title>
+<style></style>
+<script type="text/javascript" charset="UTF-8">
+var time_start=new Date("5/2/2016 14:00:00 GMT+0800").getTime();
+var time_end=new Date("5/10/2016 14:00:00 GMT+0800").getTime();
+var SSR=[0,2,2.3,2.5,2.7,3];
+var SR=[0,0.5,0.6,0.7,0.8,1];
+var weap=0.2; var weapPrice=40;
+var num=['没有','0破','1破','2破','3破','突滿'];
+var SSRName=['戰士SSR','弓手SSR'];
+var SRName=['SR1','SR2','SR3'];
+var aptime=8;//min
+var pts=[ [25000,30] ];
+
+function showSelect(){
+	var select='<table>';
+	for (var i in SSRName){
+		select+=tr(td(SSRName[i])+td(selectBox('ampSSRName'+i,'calc()',SSR,num)));
+	}
+	for (var i in SRName){
+		select+=tr(td(SRName[i])+td(selectBox('ampSRName'+i,'calc()',SR,num)));
+	}
+	select+=tr(td('朋友')+td(selectBox('ampFd','calc()',[SSR[1],SR[1],weap,0],['SSR','SR','倍武','沒有'])));
+	select+=tr(td('倍武')+td(selectBox('amWeapon','calc()',[0,1,2,3,4,5,6])));
+	select+='</table>';
+	document.getElementById("select").innerHTML = select;
+	for (var i in SRName){document.getElementById("ampSRName"+i).value=0.5;}
+}
+
+function showInput(){
+	var input='<b>通關後</b>：</br>';
+	input+='目標戰功'+inputBox('aim','calc()','2000')+'萬<br>';
+	input+='已有戰功'+inputBox('now','calc()','0')+'萬<br>';
+	input+='周回'+selectBox('mawari','chgMawari(this.value)',[0,-1],['tmp','手動輸入'])+'<br>';
+	input+='<span id="manual" style="display:none">';
+	input+='&emsp;每場基本戰功'+inputBox('per','calc()','25000')+'<br>&emsp;每場ap'+inputBox('ap','calc()','30')+'<br>';
+	input+='</span>';
+	input+='最大ap'+inputBox('maxap','calc()','90')+'<br>';
+	input+='剩餘自然回體'+inputBox('restap','calc()','0')+'<br>';
+	document.getElementById("input").innerHTML = input;
+	
+	//calc restap
+	var time_now=new Date().getTime();
+	if(time_now < time_start) {time_now=time_start;}
+	var rest_m = Math.max(0,(time_end-time_now)/1000/60);
+	var restap = Math.floor(rest_m/aptime);
+	document.getElementById("restap").value = restap;
+}
+
+function chgMawari(v){
+	if(v==-1) {document.getElementById("manual").style.display="inline";}
+	else {document.getElementById("manual").style.display="none";}
+	calc();
+}
+
+function calc(){
+	var amp=document.getElementsByTagName("select");
+	var ampVal=1; var ampCnt=0; var consumeRings=0;
+	for (var i = 0; i< amp.length; i++) {
+		if(amp[i].id.indexOf('amp')==0){
+			ampVal+=parseFloat(amp[i].value);
+			if(amp[i].value!=0) {ampCnt+=1;}
+			if(amp[i].id.indexOf('ampSRName')==0) {
+				for(var j=2;j<SR.length;j++) {if (amp[i].value==SR[j]) {consumeRings+=(j-1)*20;}}
+			}
+		}
+	}
+	var amWeapon=document.getElementById("amWeapon");
+	if(amWeapon.value>7-ampCnt) {amWeapon.value=7-ampCnt;}
+	ampVal+=weap*parseInt(amWeapon.value);
+	consumeRings+=weapPrice*parseInt(amWeapon.value);
+	
+	ampVal=Math.floor(ampVal*10)/10;
+	document.getElementById("calcres1").innerHTML='倍率：'+ampVal+'&emsp;消耗戒指：'+consumeRings+'（不計SSR）';
+	
+	//start calculation
+	var restap=getVal('restap');
+	var aim=getVal('aim')-getVal('now');
+	if(getVal('mawari')==-1) {var per=getVal('per'); var ap=getVal('ap');}
+	else {var per=pts[getVal('mawari')][0]; var ap=pts[getVal('mawari')][1];}
+	var maxap=getVal('maxap');
+	var restap=getVal('restap');
+	
+	var senkou=per*ampVal;
+	var times=Math.ceil(aim*10000/senkou,1);
+	var needap=times*ap;
+	var needapmrest=needap-restap;
+	var need_fruit=Math.ceil(needapmrest/maxap,1);
+	
+	var calcres2='打'+times+'場可畢業，需要ap：'+needap+'<br>';
+	calcres2+='扣減自然回體後需要ap：'+needapmrest+'，果：'+need_fruit+'</br>';
+	document.getElementById("calcres2").innerHTML = calcres2;
+}
+
+function getVal(id){
+	return noNaN(parseInt(document.getElementById(id).value));
+}
+
+function inputBox(id,onchange,defaultText){
+	return '<input type="text" id="'+id+'" onkeyup="'+onchange+'" '+(defaultText?'value="'+defaultText+'"':'')+' />';
+}
+function selectBox(id,onchange,valArr,textArr){
+	var ret='<select id="'+id+'" onchange='+onchange+'>';
+	if(!textArr){textArr=valArr;}
+	for (var i in valArr){
+		ret+='<option value="'+valArr[i]+'">'+textArr[i]+'</option>';
+	}
+	ret+='</select>';;
+	return ret;
+}
+function td(text,attr){
+	return '<td'+(attr? ' '+attr : '')+'>'+text+'</td>';
+}
+function tr(text,attr){
+	return '<tr'+(attr? ' '+attr : '')+'>'+text+'</tr>';
+}
+function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function settime(){
+	var time_now=new Date().getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
+	var time_m = Math.max(0,Math.floor((time_end-time_now)/1000/60)%60);
+	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
+	document.getElementById("showTime").innerHTML = "距離活動結束還有"+ time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
+};
+window.onload = function(){
+	setInterval(settime, 1000);
+	showSelect();
+	showInput();
+	//tmp
+	document.getElementById("mawari").value=-1; chgMawari(-1); 
+	calc();
+};
+</script>
+</head>
+<body>
+<p><b>不和の魔神トルウァトス踏破 - 義勇軍相擊　2016.5.2-2016.5.10</b></p>
+<p>
+<span id="showTime"></span><br>
+<!--<button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button>-->
+</p>
+<p id="select"></p>
+<p id="calcres1"></p>
+<p id="input"></p>
+<p id="calcres2"></p>
+</body>
+</html>
