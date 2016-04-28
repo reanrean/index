@@ -6,7 +6,6 @@
 <title>Miracle Nikki - 音乐会活动</title>
 <style>
 	.remark{font-size:80%;}
-	.consume{display:none;}
 </style>
 <script type="text/javascript" charset="UTF-8">
 //结束时间
@@ -18,18 +17,18 @@ var type=['发型','上装','下装','袜子','鞋子','特殊·背景','特殊�
 var cname=['(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)',
 	'(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)','(dummy)'];
 //套装名称
-var set=['马戏团奇妙夜','小丑与钻石面具','套裝3'];
+var set=['请等待更新','请等待更新','请等待更新'];
 //单价
 var need=[168,280,253,167,191,169,176,173,187,244,
 	168,280,253,191,169,173,176,167,187,244];
 //每套部件数量
 var setCnt=[5,10,5];
 //消费档位
-var consume=[0,199,599,999,1499,1999];
+//var consume=[0,199,599,999,1499,1999];
 //消费赠送
-var consume_gain=[0,0,0,0,0,0];
+//var consume_gain=[0,0,0,0,0,0];
 //道具名称
-var item_name='门票';
+var item_name='票根';
 //关卡数量
 var level_cnt=5;
 //买一次花费钻石
@@ -75,8 +74,10 @@ function init(){
 		cell2+=inputBox('remain_today'+i,'calc()',2);
 	}
 	var input='<table border="0">'+tr(td(''),'style="display:none"');
+	/*
 	input+=tr(td('已领消费档次：')+td(selectBox('already_consume','calc()',consume)),'class="consume"');
 	input+=tr(td('預計消费档次：')+td(selectBox('plan_consume','calc()',consume)),'class="consume"');
+	*/
 	input+=tr(td('当前'+item_name+'：')+td(inputBox('current','calc()')));
 	input+=tr(td('每关'+item_name+'：')+td(cell1));
 	input+=tr(td('剩余天数：')+td(inputBox('remain_days','calc()')));
@@ -89,12 +90,12 @@ function init(){
 	var time_now=date_now.getTime();
 	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
 	if(date_now.getHours()<5&&time_end-time_now>0){time_d+=1;}
-	document.getElementById("remain_days").value = time_d;
+	setVal("remain_days", time_d);
 	for (i=0;i<level_cnt;i++){
-		document.getElementById("remain_today"+i).value = 0;
-		document.getElementById("each_gain"+i).value = default_gain[i]?default_gain[i]:default_gain[0];
+		setVal("remain_today"+i, 0);
+		setVal("each_gain"+i, default_gain[i]?default_gain[i]:default_gain[default_gain.length-1]);
 	}
-	document.getElementById('current').value = 0;
+	setVal('current', 0);
 	setInterval(settime, 1000);
 	calc();
 }
@@ -115,26 +116,26 @@ function checkall(n){
 	calc();
 }
 function calc(){
-	var remain_days=Math.max(0,noNaN(parseInt(document.getElementById('remain_days').value)));
+	var remain_days=Math.max(0,getVal('remain_days'));
 	var max_item=[0,1]; var remain_today=[]; var each_gain=[]; var rem_cnt_today=0; var freegain_1day=0;
 	for (i=0;i<level_cnt;i++){
-		remain_today[i]=Math.max(0,noNaN(parseInt(document.getElementById('remain_today'+i).value)));
-		each_gain[i]=Math.max(0,noNaN(parseInt(document.getElementById('each_gain'+i).value)));
+		remain_today[i]=Math.max(0,getVal('remain_today'+i));
+		each_gain[i]=Math.max(0,getVal('each_gain'+i));
 		if(i>=(reset_level-1)&&each_gain[i]>max_item[0]) {max_item[0]=each_gain[i]; max_item[1]=i+1;}
 		rem_cnt_today+=remain_today[i]*each_gain[i];
 		freegain_1day+=each_gain[i]*free_1day;
 	}
-	var remain_today=Math.max(0,noNaN(parseInt(document.getElementById('remain_today1').value)));
-	var current=Math.max(0,noNaN(parseInt(document.getElementById('current').value)));
-	var already_consume=Math.max(0,noNaN(parseInt(document.getElementById('already_consume').value)));
-	var plan_consume=Math.max(0,noNaN(parseInt(document.getElementById('plan_consume').value)));
+	var current=Math.max(0,getVal('current'));
+	/*
+	var already_consume=Math.max(0,getVal('already_consume'));
+	var plan_consume=Math.max(0,getVal('plan_consume'));
 	
 	for (i=0;i<consume.length;i++){
 		if(consume[i]>already_consume&&consume[i]<=plan_consume){
 			current+=consume_gain[i];
 		}
 	}
-	
+	*/
 	for (i=0;i<need.length;i++){
 		if (document.getElementById('own'+i).checked){own[i]=1;}
 		else{own[i]=0;}
@@ -163,26 +164,32 @@ function calc(){
 	/*
 	if(to_pay>plan_consume){
 		for(i=0;i<consume.length;i++){
-			if(to_pay<consume[i]) {document.getElementById("plan_consume").value=consume[i-1]; break;}
+			if(to_pay<consume[i]) {setVal("plan_consume",consume[i-1]); break;}
 		}
-		if(to_pay>consume[consume.length-1]){document.getElementById("plan_consume").value=consume[consume.length-1];}
+		if(to_pay>consume[consume.length-1]){setVal("plan_consume",consume[consume.length-1]);}
 		calc();
 	}*/
 }
 function loadSettings(){
 	if (typeof(Storage) !== "undefined" && localStorage.getItem("nikki_concert")) {
-		var loadSettings=localStorage.getItem("nikki_concert").split(',');
-		if(loadSettings[1]>0) {document.getElementById('current').value=loadSettings[1];}
-		for (pos=2;pos<2+level_cnt;pos++){document.getElementById("each_gain"+(pos-2)).value=loadSettings[pos];}
-		for (pos2=pos;pos2<pos+need.length;pos2++){if(loadSettings[pos2]>0){document.getElementById("own"+(pos2-pos)).checked=true;}}
+		var loadString=localStorage.getItem("nikki_concert");
+		
+		var own_str=getStoredStr(loadString, 'own').split(',');
+		for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
+		
+		var each_gain=getStoredStr(loadString, 'each_gain').split(',');
+		for (i=0;i<level_cnt;i++){setVal("each_gain"+i,each_gain[i]);}
 	}
 }
+function getStoredStr(string, id){
+	var start=string.indexOf(id+':[')+(id+':[').length;
+	return string.substr(start,string.substr(start).indexOf('];'));
+}
 function saveSettings(){
-	var saveSettings=[];
-	saveSettings.push(document.getElementById('current').value);
-	for (i=0;i<level_cnt;i++){saveSettings.push(document.getElementById("each_gain"+i).value);}
-	for (i=0;i<need.length;i++){saveSettings.push(own[i]);}
-	saveString=saveSettings.toString();
+	var each_gain=[];
+	for (i=0;i<level_cnt;i++){each_gain.push(getVal("each_gain"+i));}
+	var saveString='own:['+own.join(',')+'];each_gain:['+each_gain.join(',')+'];';
+	//own:[1,1,0,0,0];each_gain:[3,3,5,5,5];
 	if (typeof(Storage) !== "undefined") {
 		localStorage.setItem("nikki_concert", saveString);
 	}
@@ -196,7 +203,15 @@ function settime(){
 	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
 	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
 };
-function noNaN( n ) { return isNaN( n ) ? 0 : n; };
+function getVal(id){
+	return noNaN(parseInt(document.getElementById(id).value));
+}
+function setVal(id,val){
+	document.getElementById(id).value=val;
+}
+function noNaN( n ) {
+	return isNaN( n ) ? 0 : n;
+}
 function td(text,attr){
 	return '<td'+(attr?' '+attr:'')+'>'+text+'</td>';
 }
