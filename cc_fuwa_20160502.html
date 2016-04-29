@@ -75,7 +75,7 @@ function calc(){
 	ampVal+=weap*parseInt(amWeapon.value);
 	consumeRings+=weapPrice*parseInt(amWeapon.value);
 	
-	ampVal=Math.floor(ampVal*10)/10;
+	ampVal=Math.round(ampVal*10)/10;
 	document.getElementById("calcres1").innerHTML='倍率：'+ampVal+'&emsp;消耗戒指：'+consumeRings+'（不計SSR）';
 	
 	//start calculation
