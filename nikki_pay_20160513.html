@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" href="img/favicon.jpg" type="image/x-icon" />
+<title>Miracle Nikki - 周年庆充值</title>
+<style>.remark {font-size:80%;}</style>
+<script type="text/javascript" charset="UTF-8"> 
+var quan = [];
+var diam = [10,60,190,310,760,1460,2990,7800];
+//var paym = [0,6,18,30,68,128,258,648];
+var paym = [];
+var bonus = [0,300,1000,2000];
+function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function add(n) {
+	if(!(n==0&&quan[n]>=17)){quan[n]+=1;}
+	document.getElementById('quan_'+n).value=quan[n];
+	calc();
+}
+function min(n) {
+	quan[n]=Math.max(0,quan[n]-1);
+	document.getElementById('quan_'+n).value=quan[n];
+	calc();
+}
+function max(){
+	quan[0]=17;
+	document.getElementById('quan_0').value=quan[0];
+	calc();
+}
+function calc(){
+	var sum=0;
+	var pay=0;
+	var sum_real=0;
+	var bonus_amt=0;
+	var ratio=0;
+	for (var i=0;i<=7;i++){
+		if(i>0){paym[i]=noNaN(parseInt(document.getElementById('paym'+i).value));}
+		sum+=quan[i]*diam[i];
+		pay+=quan[i]*paym[i];
+		sum_real+=quan[i]*diam[i];
+		if (quan[i]>0&&i>0) {sum_real+=diam[i]};
+	}
+	for (var i=1;i<=5;i++){
+		if (sum>=bonus[i]){bonus_amt+=1;}
+	}
+	if(pay>0){ratio=(sum_real/pay).toFixed(2);}
+	document.getElementById('sum').value=sum;
+	document.getElementById('pay').value=pay;
+	document.getElementById('sum_real').value=sum_real;
+	document.getElementById('ratio').value=ratio;
+	document.getElementById('bonus_amt').value=bonus_amt;
+}
+window.onload = function(){ 
+	paym = [1,6,18,30,68,128,258,648];
+	
+	var autogen='<table>';
+	for (var a=0;a<=7;a++){
+		autogen+='<tr>';
+		if(a>0){
+			autogen+='<td>'+diam[a]+'=<input type="text" id="paym'+a+'" size="3" onkeyup=calc() /></td>';
+		}else{autogen+='<td>一元翻倍</td>'};
+		autogen+='<td>买<output id="quan_'+a+'"></output>次</td>';
+		autogen+='<td><button onclick="add('+a+')">+</button><button onclick="min('+a+')">-</button>';
+		if(a==0){autogen+='<button onclick="max()">max</button>';}
+		autogen+='</td>';
+		autogen+='</tr>';
+	}
+	autogen+='</table>';
+	
+	document.getElementById('autogen').innerHTML=autogen;
+	
+	for (var i=0;i<=7;i++){
+		quan[i]=0;
+		document.getElementById('quan_'+i).value=quan[i];
+		if(i>0){document.getElementById('paym'+i).value=paym[i];}
+	}
+	calc();
+};
+</script> 
+</head>
+
+<body>
+<p><b>奇迹暖暖周年庆充值怎么约？</b></p>
+<p><span id="autogen"></span></p>
+<p>
+累计<output id="sum"></output>钻，共<output id="pay"></output>元</br>
+可得<output id="sum_real"></output>钻，转换比例：<output id="ratio"></output>/元</br>
+可拿<output id="bonus_amt"></output>个套装
+</p>
+<p class="remark">
+注：</br>
+不计入月卡返钻</br>
+1元翻倍按10钻计算</br>
+若有充值折扣请手动更改价格</br>
+</p>
+<table border="1" style="border-collapse:collapse;">
+<tr><td colspan="2">附：各档奖励</td></tr>
+<tr><td>300钻</td><td>【红舞鞋】</td></tr>
+<tr><td>600钻</td><td>50星光币+120体力</td></tr>
+<tr><td>1000钻</td><td>【凤鸾鸣】</td></tr>
+<tr><td>1300钻</td><td>100星光币+260体力</td></tr>
+<tr><td>1700钻</td><td>150星光币+520体力</td></tr>
+<tr><td>2000钻</td><td>【NR-001】</td></tr>
+</table>
+</body>
