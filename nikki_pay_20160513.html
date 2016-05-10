@@ -38,7 +38,8 @@ function calc(){
 		if(i>0){paym[i]=noNaN(parseInt(document.getElementById('paym'+i).value));}
 		sum+=quan[i]*diam[i];
 		pay+=quan[i]*paym[i];
-		sum_real+=quan[i]*diam[i];
+		if (i==0) {sum_real+=quan[i]*69;}
+		else {sum_real+=quan[i]*diam[i];}
 		if (quan[i]>0&&i>0) {sum_real+=diam[i]};
 	}
 	for (var i=1;i<=5;i++){
@@ -91,7 +92,7 @@ window.onload = function(){
 <p class="remark">
 注：</br>
 不计入月卡返钻</br>
-1元翻倍按10钻计算</br>
+1元翻倍按10钻计算，转换比例取期望值69</br>
 若有充值折扣请手动更改价格</br>
 </p>
 <table border="1" style="border-collapse:collapse;">
