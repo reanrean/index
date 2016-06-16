@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Miracle Nikki - 黑蔷薇之舞</title>
+<style>
+.remark{font-size:80%;}
+tr.dead{color:#0050FF;}
+</style>
+<script type="text/javascript">
+//写在前面：这次写死的数据较多，理论上翠翠只要写兑换价格就行了，但万一我搞错了……可能要手动调整的地方较多，实在不行等我起来吧
+//活动结束时间
+var time_end=new Date("6/21/2016 23:59:59 GMT+0800").getTime();
+//兑换价格
+var price={
+	'聆听风语':1,
+	'鹰颂':1,
+	'鹰鸣':1,
+	'蟒野':1,
+	'灵羽':1,
+	'金石镯':1,
+	'金卜带':1,
+	'先知权杖':1,
+	'原野低吟':1,
+	'灵魂占卜':1,
+};
+//名称
+var item_name='黑蔷薇';
+
+//***数据设置完毕***
+
+
+window.onload = function(){
+	init();
+};
+
+function init(){
+	setInterval(settime, 1000);
+	inputTable();
+}
+
+function inputTable(){
+	var out='<table border="1">';
+	out+=tr(td('名称')+td('拥有数量')+td('还缺数量')+td(item_name));
+	out+=tr(td('聆听风语')+td(inputBox('base1','calc()',3))+td('','id="to1"')+td('','id="rose1"'));
+	out+=tr(td('　聆听风语·华丽')+td(inputBox('base1_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　聆听风语·珍稀')+td(inputBox('base1_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　泛黄书页')+td(inputBox('base1_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('鹰颂')+td(inputBox('base2','calc()',3))+td('','id="to2"')+td('','id="rose2"'));
+	out+=tr(td('　鹰颂·华丽')+td(inputBox('base2_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　鹰颂·珍稀')+td(inputBox('base2_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　殷红序曲')+td(inputBox('base2_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('鹰鸣')+td(inputBox('base3','calc()',3))+td('','id="to3"')+td('','id="rose3"'));
+	out+=tr(td('　鹰鸣·华丽')+td(inputBox('base3_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　鹰鸣·珍稀')+td(inputBox('base3_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　殷红终舞')+td(inputBox('base3_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('蟒野')+td(inputBox('base4','calc()',3))+td('','id="to4"')+td('','id="rose4"'));
+	out+=tr(td('　蟒野·华丽')+td(inputBox('base4_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　蟒野·珍稀')+td(inputBox('base4_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　瞬间永恒')+td(inputBox('base4_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('灵羽')+td(inputBox('base5','calc()',3))+td('','id="to5"')+td('','id="rose5"'));
+	out+=tr(td('　灵羽·华丽')+td(inputBox('base5_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　灵羽·珍稀')+td(inputBox('base5_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　细嗅蔷薇')+td(inputBox('base5_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('金石镯')+td(inputBox('base6','calc()',3))+td('','id="to6"')+td('','id="rose6"'));
+	out+=tr(td('　金石镯·华丽')+td(inputBox('base6_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　金石镯·珍稀')+td(inputBox('base6_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　血色花冠')+td(inputBox('base6_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('金卜带')+td(inputBox('base7','calc()',3))+td('','id="to7"')+td('','id="rose7"'));
+	out+=tr(td('　金卜带·华丽')+td(inputBox('base7_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　金卜带·珍稀')+td(inputBox('base7_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　黑梦无边')+td(inputBox('base7_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('先知权杖')+td(inputBox('base8','calc()',3))+td('','id="to8"')+td('','id="rose8"'));
+	out+=tr(td('　先知权杖·华丽')+td(inputBox('base8_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　真实之灯')+td(inputBox('base8_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('原野低吟')+td(inputBox('base9','calc()',3))+td('','id="to9"')+td('','id="rose9"'));
+	out+=tr(td('　原野低吟·华丽')+td(inputBox('base9_1','calc()',3))+td('')+td(''));
+	out+=tr(td('　　原野低吟·珍稀')+td(inputBox('base9_2','calc()',3))+td('')+td(''));
+	out+=tr(td('　　　魂牵梦萦')+td(inputBox('base9_3','calc()',3))+td('')+td(''),'class="dead"');
+	out+=tr(td('灵魂占卜')+td(inputBox('base10','calc()',3))+td('','id="to10"')+td('','id="rose10"'));
+	out+='</table>'
+	document.getElementById("input").innerHTML = out;
+}
+
+function noNaN( n ) { return isNaN( n ) ? 0 : n; }
+function td(text,attr){ return '<td'+(attr?' '+attr:'')+'>'+text+'</td>'; }
+function tr(text,attr){ return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>'; }
+function remark(text){ return '<span class="remark">'+text+'</span>'; }
+function inputBox(id,onchange,size){ return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>'; }
+function settime(){
+	var time_now=new Date().getTime();
+	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
+	var time_h = Math.max(0,Math.floor((time_end-time_now)/1000/60/60)%24);
+	var time_m = Math.max(0,Math.floor((time_end-time_now)/1000/60)%60);
+	var time_s = Math.max(0,Math.floor((time_end-time_now)/1000)%60);
+	document.getElementById("showTime").innerHTML = time_d + "天" + time_h + "时" + time_m + "分" + time_s + "秒";
+};
+</script> 
+</head>
+<body>
+<p><b>奇迹暖暖黑蔷薇之舞　2016.6.17-2016.6.21</b><br>
+-未更新兑换价格前请勿使用
+</p>
+<p>
+距离活动结束还有　<span id="showTime"></span><br>
+<button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button>
+</p>
+<p id="table"></p>
+<p id="drop"></p>
+<p id="calcres"></p>
+<p id="input"></p>
+<p id="storage" style="display:none"></span>
+</body>
+</html>
