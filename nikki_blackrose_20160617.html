@@ -9,7 +9,6 @@
 tr.dead{color:#0050FF;}
 </style>
 <script type="text/javascript">
-//写在前面：这次写死的数据较多，理论上翠翠只要写兑换价格就行了，但万一我搞错了……可能要手动调整的地方较多，实在不行等我起来吧
 //活动结束时间
 var time_end=new Date("6/21/2016 23:59:59 GMT+0800").getTime();
 //兑换价格
@@ -27,17 +26,25 @@ var price={
 };
 //名称
 var item_name='黑蔷薇';
+//充值档次
+var 
+//充值送蔷薇数
 
-//***数据设置完毕***
+//***数据设置完毕？***
 
 
 window.onload = function(){
+	setInterval(settime, 1000);
 	init();
+	inputTable();
 };
 
 function init(){
-	setInterval(settime, 1000);
-	inputTable();
+	var out='<table>';
+	out+=tr(td('当前'+item_name)+td(inputBox('current','calc()')));
+	out+='</table>';
+	
+	document.getElementById("table").innerHTML = out;
 }
 
 function inputTable(){
@@ -88,6 +95,8 @@ function td(text,attr){ return '<td'+(attr?' '+attr:'')+'>'+text+'</td>'; }
 function tr(text,attr){ return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>'; }
 function remark(text){ return '<span class="remark">'+text+'</span>'; }
 function inputBox(id,onchange,size){ return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>'; }
+function getVal(id){ return document.getElementById(id).value;}
+function getHtml(id){ return document.getElementById(id).innerHTML;}
 function settime(){
 	var time_now=new Date().getTime();
 	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
@@ -107,9 +116,8 @@ function settime(){
 <button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button>
 </p>
 <p id="table"></p>
-<p id="drop"></p>
-<p id="calcres"></p>
 <p id="input"></p>
+<p id="calcres"></p>
 <p id="storage" style="display:none"></span>
 </body>
 </html>
