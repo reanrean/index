@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="zh">
 <head>
@@ -11,10 +10,10 @@
 <script type="text/javascript">
 //活动结束时间
 var time_end=new Date("8/29/2016 23:59:59 GMT+0800").getTime();
-//默认进化数量-按顺序
-var def_evo=[5,2,5,2,5,2,5,5,2,5,2];
 //默认掉率-少女/公主
 var def_drop=[34,34];
+//套装数据
+var set=['梦鹦鹉之歌','血鹦鹉之火'];
 //相关衣柜
 var wardrobe = [
   ['雪之聆歌·珍稀','发型','728','5','','','','','','','','','','','','进727','梦鹦鹉之歌'],
@@ -33,7 +32,7 @@ var wardrobe = [
   ['纯真羽冠','饰品-头饰','1011','5','','','','','','','','','','','','4-7少',''],
   ['纯白信羽·华丽','饰品-耳饰','1016','5','','','','','','','','','','','','进1012','梦鹦鹉之歌'],
   ['纯白信羽','饰品-耳饰','1012','5','','','','','','','','','','','','5-6公',''],
-  ['红颊','饰品-特殊·脸部','1017','5','','','','','','','','','','','','设计图','梦鹦鹉之歌'],
+  ['红颊','饰品-特殊·脸部？','1017','5','','','','','','','','','','','','设计图','梦鹦鹉之歌'],
   ['空灵信仰','妆容','034','5','','','','','','','','','','','','6-1少','梦鹦鹉之歌'],
   ['血之夜歌','发型','729','5','','','','','','','','','','','','定728','血鹦鹉之火'],
   ['血鹦鹉之火','连衣裙','612','5','','','','','','','','','','','','定611','血鹦鹉之火'],
@@ -69,8 +68,6 @@ var pattern=[
   ['饰品','1015','饰品','1011',8,'进'],
   ['饰品','1016','饰品','1012',8,'进'],
 ];
-//套装数据
-var set=['梦鹦鹉之歌','血鹦鹉之火'];
 //V等级次数
 var Vtimes=[1,1,2,2,3,3,5,10,15,20,25,25,28,28,30,35];
 //***end of data***
@@ -122,11 +119,10 @@ function init(ind){
 	table+=tr(td(remark('*勾选代表已有/不需要部件'),'colspan="3"'));
 	var pos=0;
 	for (var s in set){
-		table+=tr(td('<input type="checkbox" id="all'+s+'" onclick=checkall('+s+') >'+set[s],'colspan="3"'));
+		table+=tr(td('<label><input type="checkbox" id="all'+s+'" onclick=checkall('+s+') >'+set[s]+'</label>','colspan="3"'));
 		var cell1=''; var cell2='';
 		for (i=pos;i<pos+setCnt[s];i++){
-			var line=td(types[i])+td('<input type="checkbox" id="own'+i+'" onclick=calc() >'+names[i]);
-			//line+=td(clothesName[names[i]][15].indexOf('进')>-1?genEvoAmt(names[i]):clothesName[names[i]][15].replace(/[0-9]/g,'').replace('-',''));
+			var line=td(types[i])+td('<label><input type="checkbox" id="own'+i+'" onclick=calc() >'+names[i]+'</label>');
 			line+=td(names[i].indexOf('珍稀')>-1 ? pattern_srare : (names[i].indexOf('华丽')>-1 ? pattern_rare : clothesName[names[i]][15].replace(/[0-9]/g,'').replace('-','')) );
 			table+=tr(line);
 		}
@@ -146,37 +142,23 @@ function init(ind){
 	var time_now=date_now.getTime();
 	var time_d = Math.max(0,Math.floor((time_end-time_now)/1000/60/60/24));
 	if(date_now.getHours()<5&&time_end-time_now>0){time_d+=1;}
-	document.getElementById("remain_days").value = time_d;
+	setVal("remain_days",time_d);
 	
 	//fill in values
 	if(ind){
 		for (var i in savedInfo['own']){
-			if(savedInfo['own'][i]>0){document.getElementById("own"+i).checked=true;}
+			if(parseInt(savedInfo['own'][i])>0){document.getElementById("own"+i).checked=true;}
 		}
 		for (var i in savedInfo['reqown']){
 			reqown[i]=savedInfo['reqown'][i];
 		}
 		if(savedInfo['drops']){
-			document.getElementById("drops").value = savedInfo['drops'][0];
-			document.getElementById("dropg").value = savedInfo['drops'][1];
+			setVal("drops", savedInfo['drops'][0]);
+			setVal("dropg", savedInfo['drops'][1]);
 		}
-		/*if(savedInfo['es']){
-			var es = document.getElementById('table').getElementsByTagName('input');
-			var es_i=0;
-			for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
-				es[z].value=savedInfo['es'][es_i];
-				es_i++;
-			}}
-		}*/
 	}else{
-		if(isNaN(parseInt(document.getElementById("drops").value))) {document.getElementById("drops").value = def_drop[0];}
-		if(isNaN(parseInt(document.getElementById("dropg").value))) {document.getElementById("dropg").value = def_drop[1];}
-		/*var es = document.getElementById('table').getElementsByTagName('input');
-		var es_i=0;
-		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
-			if(isNaN(parseInt(es[z].value))) {es[z].value=def_evo[es_i];}
-			es_i++;
-		}}*/
+		if(getVal("drops")==0) {setVal("drops", def_drop[0]);}
+		if(getVal("dropg")==0) {setVal("dropg", def_drop[1]);}
 		for (var i in wardrobe){
 			reqown[i]=0;
 		}
@@ -236,7 +218,7 @@ function calc(){//reqCnt calc
 	document.getElementById("input").innerHTML = input;
 	
 	for (var i in wardrobe){
-		if(document.getElementById('reqown'+i)) {document.getElementById('reqown'+i).value=reqown[i];}
+		if(document.getElementById('reqown'+i)) {setVal('reqown'+i, reqown[i]);}
 	}
 	
 	calc2();
@@ -250,7 +232,7 @@ function calc2(){//diamond calc
 		updreqown(i);
 	}*/
 	for (var i in wardrobe){
-		if(document.getElementById('reqown'+i)){reqown[i]=Math.min(reqCnt[i],noNaN(parseInt(document.getElementById('reqown'+i).value)));}
+		if(document.getElementById('reqown'+i)){reqown[i]=Math.min(reqCnt[i],getVal('reqown'+i));}
 		else{reqown[i]=0;}
 		if(reqown[i]){
 			if(linkP[i]){
@@ -269,8 +251,8 @@ function calc2(){//diamond calc
 	calc3();
 }
 function calc3(){
-	var dropk=[noNaN(parseInt(document.getElementById('drops').value)),noNaN(parseInt(document.getElementById('dropg').value))];
-	var remain_days=noNaN(parseInt(document.getElementById('remain_days').value));
+	var dropk=[getVal('drops'),getVal('dropg')];
+	var remain_days=getVal('remain_days');
 	if (!document.getElementById('used_today').checked){remain_days++};
 	var free_1day=3;
 	var buy_per=30;
@@ -316,60 +298,17 @@ function calc3(){
 	calcres+='</table>';
 	document.getElementById("calcres").innerHTML = calcres;
 }
-/*function saveSettings(){
-	var ret=[];
-	for(var i in names){ret.push(document.getElementById('own'+i).checked?'1':'0');}
-	ret.push(noNaN(parseInt(document.getElementById('drops').value)));
-	ret.push(noNaN(parseInt(document.getElementById('dropg').value)));
-	var es = document.getElementById('table').getElementsByTagName('input');
-    for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
-		ret.push(noNaN(parseInt(es[z].value)));
-    }}
-	for(var i in reqown){ret.push(reqown[i]);}
-	ret=ret.toString();
-	if (typeof(Storage) !== "undefined") {
-		localStorage.setItem("nikki_parrot", ret);
-	}
-	document.getElementById("storage").innerHTML = ret;
-}
 function loadSettings(){
-	savedInfo={};
-	savedInfo['own']=[];
-	savedInfo['drops']=[];
-	savedInfo['es']=[];
-	savedInfo['reqown']=[];
-	if (typeof(Storage) !== "undefined"&&localStorage.getItem("nikki_parrot")){
-		var ret=localStorage.getItem("nikki_parrot").split(',');
-		for (i=0;i<names.length;i++){savedInfo['own'].push(ret[i]);}
-		savedInfo['drops']=[ret[names.length],ret[names.length+1]];
-		var es = document.getElementById('table').getElementsByTagName('input');
-		var es_i=0;
-		for (var z=0;z<es.length;z++) { if(es[z].id&&es[z].id.substr(0,1)=='e'){
-			savedInfo['es'].push(ret[es_i*1+names.length*1+2]);
-			es_i++;
-		}}
-		for (var i in wardrobe){savedInfo['reqown'].push(ret[i*1+names.length*1+es_i*1+2]);}
-	}
-	init(1);
-}*/
-/*function loadSettings(){
 	savedInfo={};
 	savedInfo['own']=[];
 	savedInfo['drops']=[];
 	savedInfo['reqown']=[];
 	if (typeof(Storage) !== "undefined" && localStorage.getItem("nikki_parrot")) {
 		var loadString=localStorage.getItem("nikki_parrot");
-		
-		var own_str=getStoredStr(loadString, 'own').split(',');
-		for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
-		
-		var radio_str=getStoredStr(loadString, 'radio').split(',');
-		for (i=0;i<setCnt.length;i++) {if(radio_str[i]>0) {document.getElementById("radio"+i).checked=true;}}
-		
-		var level_str=getStoredStr(loadString, 'level').split(',');
-		for (i=0;i<level_cnt;i++) {setVal("each_gain"+i,level_str[i]); }
-		
-		calc();
+		savedInfo['own']=getStoredStr(loadString, 'checkown').split(',');
+		savedInfo['drops']=getStoredStr(loadString, 'drops').split(',');
+		savedInfo['reqown']=getStoredStr(loadString, 'reqown').split(',');
+		init(1);
 	}
 }
 function getStoredStr(string, id){
@@ -377,34 +316,29 @@ function getStoredStr(string, id){
 	return string.substr(start,string.substr(start).indexOf('];'));
 }
 function saveSettings(){
-	var saveString='own:['+own.join(',')+'];';
-	//own:[1,1,0,0,0];
+	var saveString='reqown:['+reqown.join(',')+'];';
+	//reqown:[1,1,0,0,0];
 	
-	var tmpstr=[];
-	for (var s in setCnt){
-		if(document.getElementById('radio'+s).checked) tmpstr.push(1);
-		else tmpstr.push(0);
-	}
-	saveString+='radio:['+tmpstr.join(',')+'];';
-	//radio:[1,0];
+	var tmpstr_drop=[];
+	tmpstr_drop.push(getVal('drops'));
+	tmpstr_drop.push(getVal('dropg'));
+	saveString+='drops:['+tmpstr_drop.join(',')+'];';
+	//drops:[34,34];
 	
-	var tmplevel=[];
-	for (i=0;i<level_cnt;i++){
-		tmplevel.push(getVal("each_gain"+i));
-	}
-	saveString+='level:['+tmplevel.join(',')+'];';
-	//level:[5,5,5,5,5];
+	var tmpstr_own=[];
+	for(var i in names){tmpstr_own.push(document.getElementById('own'+i).checked ? '1':'0');}
+	saveString+='checkown:['+tmpstr_own.join(',')+'];';
+	//checkown:[1,1,0,0,0];
 	
 	if (typeof(Storage) !== "undefined") {
 		localStorage.setItem("nikki_parrot", saveString);
 	}
 	document.getElementById('storage').innerHTML=saveString;
 }
-
 function resetSettings(){
 	localStorage.clear();
 	init();
-}*/
+}
 function clearCnt(){
 	for (var i in wardrobe){
 		reqCnt[i]=0;
@@ -442,28 +376,13 @@ function genFactor2(id,num){
 		if(wardrobe[j]==clothesId[id]&&!parentInd[j]){childInd[j]=1;break;}
 	}
 }
-/*function resetPattern(){
-	var ret=[];
-	for (var i in pattern){
-		if(pattern[i][5]!='进') {ret.push(pattern[i]);}
-	}
-	return ret;
-}
-function genEvoAmt(name,string){
-	var a='';
-	if(clothesName[name][15].indexOf('进')>-1){
-		var sub_id=clothesName[name][15].substr(1);
-		a=genEvoAmt(clothesId[sub_id][0],inputBox('e'+clothesName[name][2]+'-'+sub_id,'calc()',2)+'-'+(string?string:''));
-	}else{a=string+'1';}
-	return a;
-}*/
 /*function updreqown(i){
-	if(document.getElementById('reqown'+i)&&noNaN(parseInt(document.getElementById('reqown'+i).value))>0){
+	if(document.getElementById('reqown'+i)&&getVal('reqown'+i)>0){
 		for(var p in pattern){
 			if (wardrobe[i][2]==pattern[p][1]){
 				for(var j in wardrobe){
-					if (wardrobe[j][2]==pattern[p][3]&&!(noNaN(parseInt(document.getElementById('reqown'+j).value))>0)) {
-						document.getElementById('reqown'+j).value=1;
+					if (wardrobe[j][2]==pattern[p][3]&&!(getVal('reqown'+j)>0)) {
+						setVal('reqown'+j, 1);
 						updreqown(j);
 					}
 				}
