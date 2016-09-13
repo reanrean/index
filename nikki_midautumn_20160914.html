@@ -13,22 +13,22 @@ var time_end=new Date("9/20/2016 23:59:59 GMT+0800").getTime();
 //部件类别
 var type=[
 '发型','连衣裙','鞋子','颈饰·项链','耳饰','头饰','特殊·背景',
-'发型','连衣裙','鞋子','特殊·前景','特殊·背景','头饰','颈饰·项链','特殊·脚部'
+'发型','连衣裙','鞋子','特殊·前景','特殊·背景','头饰','颈饰·项链'
 ];
 //部件名称
 var cname=[
-'钢琴艺术','黑白交响乐','金色舞台','星月交辉','悦动音符','音乐之城','黑白交错',
-'提琴诗人','天空随想曲','音律回旋','梦之翼','音乐之阶','蝶之幻想','月夜琴音','提琴幽语'
+'！请等待更新！','黑白交响乐','金色舞台','星月交辉','悦动音符','音乐之城','黑白交错',
+'！请等待更新！','天空随想曲','音律回旋','梦之翼','音乐之阶','蝶之幻想','月夜琴音'
 ];
 //套装名称
 var set=['月舞霓裳','桂香谣'];
 //单价
 var need=[
-50,88,53,45,42,42,80,
-152,198,63,98,98,62,60,82
+0,0,0,0,0,0,500,
+0,0,0,0,0,0,500
 ];
 //每套部件数量
-var setCnt=[7,8];
+var setCnt=[7,7];
 //消费档位
 var consume=[0,199,599,999,1499,1999];
 //消费赠送(每档)
@@ -56,18 +56,21 @@ window.onload = function(){
 
 function init(){
 	var table='<table border="1">';
-	table+=tr(td('套装')+td('部位')+td('名称'));
-	table+=tr(td(remark('*勾选代表已有/不需要部件'),'colspan="3"'));
+	table+=tr(td('套装')+td('部位')+td('名称')+td('所需'));
+	table+=tr(td(remark('*勾选代表已有/不需要部件'),'colspan="4"'));
 	var pos=0;
 	for (var s in set){
 		var line=td('<input type="checkbox" id="all'+s+'" onclick=checkall('+s+') >'+set[s]);
-		var cell1=''; var cell2='';
+		var cell1=''; var cell2=''; var cell3='';
 		for (i=pos;i<pos+setCnt[s];i++){
 			cell2+='<input type="checkbox" id="own'+i+'" onclick=calc() >'+cname[i]+'<br>';
 			cell1+=type[i]+'<br>';
+			cell3+='&emsp;'+need[i]+'<br>';
 		}
 		pos+=setCnt[s];
-		line+=td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0"');
+		line+=td(cell1,'style="border-right-width:0"');
+		line+=td(cell2,'style="border-left-width:0;border-right-width:0"');
+		line+=td(cell3,'style="border-left-width:0"');
 		table+=tr(line);
 	}
 	table+='</table>';
@@ -238,7 +241,7 @@ function selectBox(id,onchange,valArr,textArr){
 	for (var i in valArr){
 		ret+='<option value="'+valArr[i]+'">'+textArr[i]+'</option>';
 	}
-	ret+='</select>';;
+	ret+='</select>';
 	return ret;
 }
 </script>
