@@ -12,13 +12,13 @@
 var time_end=new Date("9/20/2016 23:59:59 GMT+0800").getTime();
 //部件类别
 var type=[
-'发型','连衣裙','鞋子','颈饰·项链','耳饰','头饰','特殊·背景',
-'发型','连衣裙','鞋子','特殊·前景','特殊·背景','头饰','颈饰·项链'
+'发型','连衣裙','外套','特殊·背景','头饰','颈饰·项链','妆容',
+'发型','连衣裙','鞋子','头饰','手饰·双','手持·左','手持·右'
 ];
 //部件名称
 var cname=[
-'！请等待更新！','黑白交响乐','金色舞台','星月交辉','悦动音符','音乐之城','黑白交错',
-'！请等待更新！','天空随想曲','音律回旋','梦之翼','音乐之阶','蝶之幻想','月夜琴音'
+'雾鬓风鬟','霓裳羽衣','月娥翩跹','月明千里','斗婵娟','碧海青天','敛烟蛾',
+'秋夕月','赏月延桂','玲珑踏月履','金粟簪','寻桂子','桂花酒','桂枝香'
 ];
 //套装名称
 var set=['月舞霓裳','桂香谣'];
@@ -99,7 +99,8 @@ function init(){
 	if(date_now.getHours()<5&&time_end-time_now>0){time_d+=1;}
 	setVal("remain_days", time_d);
 	for (i=0;i<level_cnt;i++){
-		setVal("remain_today"+i, 0);
+		if(date_now.getDate()==14) setVal("remain_today"+i, free_1day);
+		else setVal("remain_today"+i, 0);
 		setVal("each_gain"+i, default_gain[i]?default_gain[i]:default_gain[default_gain.length-1]);
 	}
 	setVal('current', 0);
