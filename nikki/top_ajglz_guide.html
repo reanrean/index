@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+	<link rel="icon" href="../img/favicon.jpg" type="image/x-icon" />
+	<title>更新顶配指南 for 傲娇攻略组(≥ω≤)</title>
+</head>
+<body>
+<p><b>更新顶配指南</b> by rean</p>
+
+<p>靠你啦！傲娇的宝宝！</p>
+
+<p>
+<b>1.</b>点这里下载rean最新的文件夹并解压：<a href="https://github.com/reanrean/nikkis_choice/archive/gh-pages.zip" target="_blank">https://github.com/reanrean/nikkis_choice/archive/gh-pages.zip</a>
+</p>
+<p>
+<b>2.</b>录入衣柜到data/wardrobe.js（如有自己方法可略过不看，直接自己录入）<br>
+&emsp;打開一個excel，把以下栏目复制进工作表：</p>
+<table style="padding-left:1em;width:100%"><tr>
+<td>名字</td><td>分类</td><td>编号</td><td>心级</td>
+<td>华丽</td><td>简约</td><td>优雅</td><td>活泼</td><td>成熟</td><td>可爱</td><td>性感</td><td>清纯</td><td>清凉</td><td>保暖</td>
+<td>tag1</td><td>tag2</td><td>来源</td><td>套装</td><td>版本</td>
+</tr></table>
+<p>
+&emsp;Alt+F11把宏窗口弄出来，随便点一个ThisWorkBook，把下面的这段代码贴上去,鼠标移到Sub aa()附近，点▶运行Sub<br>
+&emsp;<textarea id="ajglz_out" rows="10" style="width:80%;">
+Sub aa()
+'separate tag in 2 cols
+Dim last As Integer
+last = getlastrow(2, 1)
+Dim c As String
+For j = 2 To last
+Cells(j, 20).Formula = "=if(P" & j & "="""",O" & j & "&"""",O" & j & "&"",""&P" & j & ")"
+c = "  ['" & Cells(j, 1).Value
+For i = 2 To 19
+If i <> 16 And i <> 15 Then c = c & "','" & Cells(j, i).Value
+If i = 15 Then c = c & "','" & Cells(j, 20).Value
+Next i
+c = c & "'],"
+Cells(j, 21).Value = c
+Next j
+End Sub
+
+Function getlastrow(irow As Integer, icol As Integer)
+Dim Not_Null As Boolean
+Not_Null = True
+Do While (Not_Null)
+If (Cells(irow, icol).Value = "") And (Cells(irow + 1, icol).Value = "") Then
+Not_Null = False
+End If
+irow = irow + 1
+Loop
+If irow > 2 Then
+getlastrow = irow - 2
+Else
+getlastrow = 1
+End If
+End Function
+</textarea>
+<br>
+&emsp;回到工作表，把T列粘贴进wardrobe.js（你知道哪个位置的！）<br>
+&emsp;录入后打开choice.html看看衣服能不能正常显示，不能则有些地方有问题（通常是分类名写错了）<br>
+</p>
+<b>3.</b>更新极限权重<br>
+&emsp;打开hs-rean.html，点击&lt;All at once&gt;，等。。。因为要生全关卡极限权重，会卡比较久。<br>
+&emsp;把得到的那一串粘贴进data/levels-hs.js的var tasksAdd={}中间（别贴错了！下面还有个tasksAdd_old，不要动哈）<br>
+</p>
+<p>
+<b>4.</b>生成頂配html<br>
+&emsp;打开top_ajglz.html，左上角把来源点成名称，输入标题（一般是"最新活动"），更新人员填你名字<br>
+&emsp;可以按 + - 调整分类数量，分别填入分类名称（套装名），然后可以回车按套装名搜索服装->添加整个列表<br>
+&emsp;如果有散件，就在最上面的输入框输入名字搜索吧，然后点击相应分类的添加单品到此，再点衣服名字就可以添加到分类<br>
+&emsp;神秘代码填入iki，点击上方的计算（不是生成）<br>
+&emsp;之后可以把代码直接贴到对应的github页面下（一般是<a href="https://github.com/aojiaogongluezu/nikkiup2u3/blob/gh-pages/html/3-DingPei/HD-ZuiXinHuoDong.html" target="_blank">html/3-DingPei/HD-ZuiXinHuoDong.html</a>）<br>
+</p>
+<p>
+<b>5.</b>恭喜你！完成了！
+</p>
+</body>
+</html>
