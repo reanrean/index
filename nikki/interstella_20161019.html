@@ -67,7 +67,7 @@ function init(){
 		var line=td('<input type="checkbox" id="all'+s+'" onclick=checkall('+s+') >'+set[s]);
 		var cell1=''; var cell2=''; var cell3='';
 		for (i=pos;i<pos+setCnt[s];i++){
-			cell2+='<input type="checkbox" id="own'+i+'" onclick=calc() >'+cname[i]+'<br>';
+			cell2+='<label><input type="checkbox" id="own'+i+'" onclick=calc() >'+cname[i]+'</label><br>';
 			cell1+=type[i]+'<br>';
 cell3+='&emsp;'+need[i]+'<br>';
 		}
