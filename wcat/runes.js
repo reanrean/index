@@ -19,7 +19,7 @@ function outputMain(){
 		var cnt = eventList_reorg[i].length;
 		var eventEnds = (new Date(todayYear+'-'+eventList_reorg[i][0][2]+'-'+eventList_reorg[i][0][3]));//red the dates in 7 days
 		if (eventEnds<today0) {skipEvent.push(i); continue;}
-		var line  = td(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],(eventEnds<future?'class="red"':''));
+		var line  = td(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],(eventEnds<future?'class="expring"':''));
 		line += td(i);
 		var sum = sumRunes(i);
 		var checkid = 'main-'+i;
