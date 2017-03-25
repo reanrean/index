@@ -20,7 +20,7 @@ function outputMain(){
 		var eventEnds = (new Date(todayYear+'-'+eventList_reorg[i][0][2]+'-'+eventList_reorg[i][0][3]));//red the dates in 7 days
 		if (eventEnds<today0) {skipEvent.push(i); continue;}
 		var line  = td(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],(eventEnds<future?'class="today"':''));
-		line += td(i);
+		line += td(eventEnds+'/'+future);
 		var sum = sumRunes(i);
 		var checkid = 'main-'+i;
 		line += td('<label for="'+checkid+'">'+sumRunesOutput(sum,i)+'</label>');
