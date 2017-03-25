@@ -1,0 +1,5 @@
+var eventList = [
+];
+
+var runeUrl = {
+};
