@@ -17,7 +17,7 @@ function outputMain(){
 	for (var i in eventList_reorg){
 		if (skipEvent.indexOf(i)>=0) continue;
 		var cnt = eventList_reorg[i].length;
-		var eventEnds = (new Date(todayYear,eventList_reorg[i][0][2]-1,eventList_reorg[i][0][3],0,0,0,0));//red the dates in 7 days
+		var eventEnds = new Date(todayYear,eventList_reorg[i][0][2]-1,eventList_reorg[i][0][3],0,0,0,0);//red the dates in 7 days
 		if (eventEnds<today0) {skipEvent.push(i); continue;}
 		var line  = td(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],(eventEnds<future?'class="expiring"':''));
 		line += td(i);
@@ -120,7 +120,7 @@ function showDate(){
 	todayYear = today.getFullYear();
 	el('today').innerHTML = '<span class="today">Today: ' + todayDate+'/'+(todayMonth+1)+'/'+todayYear+'</span>';
 	
-	today0 = new Date(todayYear+'-'+(todayMonth+1)+'-'+todayDate);
+	today0 = new Date(todayYear,todayMonth,todayDate,0,0,0,0);
 	future = new Date(today.getTime() + (alertDays * 24 * 60 * 60 * 1000));
 }
 
