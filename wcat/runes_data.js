@@ -2,6 +2,10 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [14,4,'25th協力','BGM',{'ninja25':200}],
+  [14,4,'25th協力','建築',{'ninja25':500}],
+  [14,4,'25th協力','交換',{'space25':425}],
+  [14,4,'25th協力','石板',{'space25':580}],
   [14,4,'宇宙組活動','BGM',{'rocket':200}],
   [14,4,'宇宙組活動','建築',{'rocket':540}],
   [3,4,'熊貓','角色',{'panda1':1200,'panda2':400}],
@@ -25,6 +29,8 @@ var runeUrl = {
 	'panda3': 'https://gamewith.akamaized.net/img/59a1e4747520902d1c1d68216fcbc44f.jpg',
 	'godforce1': 'https://gamewith.akamaized.net/img/5a70e15062c6b73a0d2ca1b318f09fa0.jpg',
 	'godforce2': 'https://gamewith.akamaized.net/img/6ad5844561e113a48162bb7d4fede923.jpg',
+	'ninja25': 'https://gamewith.akamaized.net/img/fd151b5a6e6a159335e31a6d71ff57ae.jpg',
+	'space25': 'https://gamewith.akamaized.net/img/3fab803bb14396a5e81540cc0480beff.jpg',
 	
 };
 
