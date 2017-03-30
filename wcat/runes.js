@@ -12,33 +12,36 @@ function init(){
 function outputMain(){
 	var skipEvent = [];
 	var out = '<table>';
-	out += tr(td('期限')+td('活動')+td('符石', 'colspan="2"'),'class="title"');
+	out += tr(td('期限')+td('活動', 'id="colEvent"')+td('符石', 'colspan="2"'),'class="title"');
 	
 	for (var i in eventList_reorg){
 		if (skipEvent.indexOf(i)>=0) continue;
 		var cnt = eventList_reorg[i].length;
 		var eventEnds = new Date(todayYear,eventList_reorg[i][0][2]-1,eventList_reorg[i][0][3],0,0,0,0);//red the dates in 7 days
 		if (eventEnds<today0) {skipEvent.push(i); continue;}
-		var line  = td(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],(eventEnds<future?'class="expiring"':''));
-		line += td(i);
-		var sum = sumRunes(i);
 		var checkid = 'main-'+i;
-		line += td('<label for="'+checkid+'">'+sumRunesOutput(sum,i)+'</label>');
+		var line  = td(labelfor(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],checkid),(eventEnds<future?'class="expiring"':''));
+		line += td(labelfor(i,checkid));
+		var sum = sumRunes(i);
+		line += td(labelfor(sumRunesOutput(sum,i),checkid));
 		line += td('<input type="checkbox" id="'+checkid+'" onclick="check(this.id);saveSettings();" >');
-		out += tr(line,'id="trmain-'+i+'"');
+		out += tr(line,'id="tr'+checkid+'"');
 		if (cnt>1) {
 			for (var j in eventList_reorg[i]) {
+				var checkid_sub = 'sub-'+i+'-'+eventList_reorg[i][j][0];
 				line = td('');
-				line += td('- '+eventList_reorg[i][j][0]);
-				line += td(singleRunesOutput(eventList_reorg[i][j][1],sum));
-				line += td('<input type="checkbox" id="sub-'+i+'-'+eventList_reorg[i][j][0]+'" onclick="check(this.id);saveSettings();" >');
-				out += tr(line,'id="trsub-'+i+'-'+eventList_reorg[i][j][0]+'"');
+				line += td(labelfor('- '+eventList_reorg[i][j][0],checkid_sub));
+				line += td(labelfor(singleRunesOutput(eventList_reorg[i][j][1],sum),checkid_sub));
+				line += td('<input type="checkbox" id="'+checkid_sub+'" onclick="check(this.id);saveSettings();" >');
+				out += tr(line,'id="tr'+checkid_sub+'"');
 			}
 		}
 	}
 	
 	out += '</table>';
 	el('table').innerHTML = out;
+	
+	initWidth = document.getElementsByTagName('table')[0].rows[0].cells[1].offsetWidth;
 }
 
 function check(id){
@@ -64,6 +67,7 @@ function check(id){
 			}
 		}
 	}
+	el('colEvent').style.width = initWidth+'px';
 }
 
 function reorgEvent(){
@@ -161,4 +165,7 @@ function tr(text,attr){
 function icon(runeName){
 	if (runeUrl[runeName]) return '<img src="'+runeUrl[runeName]+'" width="100%">';
 	else return '?';
+}
+function labelfor(txt,id){
+	return '<label for="'+id+'">'+txt+'</label>'
 }
