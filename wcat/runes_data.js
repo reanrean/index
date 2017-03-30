@@ -2,12 +2,11 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [14,4,'25th協力','BGM',{'ninja25':200}],
-  [14,4,'25th協力','建築',{'ninja25':500}],
-  [14,4,'25th協力','交換',{'space25':425}],
-  [14,4,'25th協力','石板',{'space25':580}],
-  [14,4,'宇宙組活動','BGM',{'rocket':200}],
-  [14,4,'宇宙組活動','建築',{'rocket':540}],
+  [14,4,'25th活動','建築(忍者訓練所)',{'ninja25':500}],
+  [14,4,'25th活動','交換(宇宙研究所)',{'space25':425}],
+  [14,4,'25th活動','石板',{'space25':580}],
+  [14,4,'25th活動','BGM',{'rocket':200,'ninja25':200}],
+  [14,4,'25th活動','建築(宇宙研究所)',{'rocket':540}],
   [3,4,'熊貓','角色',{'panda1':1200,'panda2':400}],
   [3,4,'熊貓','武器',{'panda1':600,'panda2':200,'panda3':300}],
   [3,4,'熊貓','BGM',{'panda2':100}],
