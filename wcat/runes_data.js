@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [20,4,'流星雙限','建築',{'ryuusei':750}],
+  [20,4,'流星雙限','BGM',{'ryuusei':60}],
   [14,4,'25th活動','建築(忍者訓練所)',{'ninja25':500}],
   [14,4,'25th活動','交換(宇宙研究所)',{'space25':425}],
   [14,4,'25th活動','石板',{'space25':580}],
@@ -30,7 +32,7 @@ var runeUrl = {
 	'godforce2': 'https://gamewith.akamaized.net/img/6ad5844561e113a48162bb7d4fede923.jpg',
 	'ninja25': 'https://gamewith.akamaized.net/img/fd151b5a6e6a159335e31a6d71ff57ae.jpg',
 	'space25': 'https://gamewith.akamaized.net/img/3fab803bb14396a5e81540cc0480beff.jpg',
-	
+	'ryuusei': 'https://gamewith.akamaized.net/img/be413c882fa495c9d29b20567cb62695.jpg',
 };
 
 var alertDays = 7;
