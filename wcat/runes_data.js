@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [20,4,'流星雙限','交換',{'ryuusei2':925}],
+  [20,4,'流星雙限','石板',{'ryuusei2':600}],
   [20,4,'流星雙限','建築',{'ryuusei':750}],
   [20,4,'流星雙限','BGM',{'ryuusei':60}],
   [14,4,'25th活動','建築(忍者訓練所)',{'ninja25':500}],
@@ -33,6 +35,7 @@ var runeUrl = {
 	'ninja25': 'https://gamewith.akamaized.net/img/fd151b5a6e6a159335e31a6d71ff57ae.jpg',
 	'space25': 'https://gamewith.akamaized.net/img/3fab803bb14396a5e81540cc0480beff.jpg',
 	'ryuusei': 'https://gamewith.akamaized.net/img/be413c882fa495c9d29b20567cb62695.jpg',
+	'ryuusei2': 'https://gamewith.akamaized.net/img/b12be92d1557246a9c739949a48ce8d3.jpg',
 };
 
 var alertDays = 7;
