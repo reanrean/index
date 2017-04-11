@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [24,4,'塔(復刻)','龍騎武',{'adt31':300,'adt32':30,'adt33':1}],
+  [24,4,'塔(復刻)','石板',{'adt2':300}],
   [20,4,'流星雙限','交換',{'ryuusei2':925}],
   [20,4,'流星雙限','石板',{'ryuusei2':600}],
   [20,4,'流星雙限','建築',{'ryuusei':750}],
@@ -36,6 +38,10 @@ var runeUrl = {
 	'space25': 'https://gamewith.akamaized.net/img/3fab803bb14396a5e81540cc0480beff.jpg',
 	'ryuusei': 'https://gamewith.akamaized.net/img/be413c882fa495c9d29b20567cb62695.jpg',
 	'ryuusei2': 'https://gamewith.akamaized.net/img/b12be92d1557246a9c739949a48ce8d3.jpg',
+	'adt2': 'https://gamewith.akamaized.net/img/093c13b88238f3ea3d8b8017561b50a2.jpg',
+	'adt31': 'https://gamewith.akamaized.net/img/1767ca1f2ad58ac967093336574de37c.jpg',
+	'adt32': 'https://gamewith.akamaized.net/img/fe9bf6bc74691c149e83381fb8fd19d2.jpg',
+	'adt33': 'https://gamewith.akamaized.net/img/9bd12cd6d7d902593e50c7aa7bd5b90c.jpg',
 };
 
 var alertDays = 7;
