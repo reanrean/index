@@ -126,6 +126,11 @@ function showDate(){
 	
 	today0 = new Date(todayYear,todayMonth,todayDate,0,0,0,0);
 	future = new Date(today.getTime() + (alertDays * 24 * 60 * 60 * 1000));
+	
+	//check month_end
+	var month_end = new Date(todayYear,todayMonth+1,0,0,0,0,0);
+	if (future>month_end)
+		el('today').innerHTML += '<span class="expiring">　※記得檢查突破石！</span>';
 }
 
 function loadSettings(){
