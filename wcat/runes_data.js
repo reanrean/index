@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [28,4,'深淵雙限','石板',{'tsuigeki2':600}],
+  [28,4,'深淵雙限','BGM',{'tsuigeki2':100}],
   [28,4,'深淵雙限','建築',{'tsuigeki':550}],
   [28,4,'深淵雙限','交換',{'tsuigeki':240}],
   [28,4,'絕海飾品交換','飾品交換',{'jelly':200}],
@@ -47,6 +49,7 @@ var runeUrl = {
 	'adt33': 'https://gamewith.akamaized.net/img/9bd12cd6d7d902593e50c7aa7bd5b90c.jpg',
 	'jelly': 'https://gamewith.akamaized.net/img/0cb0b433df4d969c44e5a685c3d4ea01.jpg',
 	'tsuigeki': 'https://gamewith.akamaized.net/img/6e65cdc856281b21b40f609833b15889.jpg',
+	'tsuigeki2': 'https://gamewith.akamaized.net/img/2dacd8094021a4930d73c60712fb761c.jpg',
 };
 
 var alertDays = 7;
