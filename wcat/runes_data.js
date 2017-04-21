@@ -2,6 +2,9 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [12,5,'變身士','建築(復刻)',{'variant1':1755,'variant2':1010,'variant3':130}],
+  [12,5,'變身士','交換',{'variant3':2200}],
+  [12,5,'變身士','BGM',{'variant1':300,'variant2':300}],
   [28,4,'深淵雙限','武器強化',{'abyss3':300}],
   [28,4,'深淵雙限','石板',{'abyss2':600}],
   [28,4,'深淵雙限','BGM',{'abyss2':100}],
@@ -52,6 +55,9 @@ var runeUrl = {
 	'abyss': 'https://gamewith.akamaized.net/img/6e65cdc856281b21b40f609833b15889.jpg',
 	'abyss2': 'https://gamewith.akamaized.net/img/2dacd8094021a4930d73c60712fb761c.jpg',
 	'abyss3': 'https://gamewith.akamaized.net/img/41b40451b56881b25ba0007da2ae5484.jpg',
+	'variant1': 'https://gamewith.akamaized.net/img/0ead1faa7944a14fb14cb6adeafbdb46.jpg',
+	'variant2': 'https://gamewith.akamaized.net/img/639ca00f9275adbffe49bba2a2bb5d5a.jpg',
+	'variant3': 'https://gamewith.akamaized.net/img/9e33bd0cf7096ef25d76e8fdf9611ddd.jpg',
 };
 
 var alertDays = 7;
