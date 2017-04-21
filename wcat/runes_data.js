@@ -2,10 +2,11 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [28,4,'深淵雙限','石板',{'tsuigeki2':600}],
-  [28,4,'深淵雙限','BGM',{'tsuigeki2':100}],
-  [28,4,'深淵雙限','建築',{'tsuigeki':550}],
-  [28,4,'深淵雙限','交換',{'tsuigeki':240}],
+  [28,4,'深淵雙限','武器強化',{'abyss3':300}],
+  [28,4,'深淵雙限','石板',{'abyss2':600}],
+  [28,4,'深淵雙限','BGM',{'abyss2':100}],
+  [28,4,'深淵雙限','建築',{'abyss':550}],
+  [28,4,'深淵雙限','交換',{'abyss':240}],
   [28,4,'絕海飾品交換','飾品交換',{'jelly':200}],
   [24,4,'塔(復刻)','龍騎武',{'adt31':300,'adt32':30,'adt33':1}],
   [24,4,'塔(復刻)','石板',{'adt2':300}],
@@ -48,8 +49,9 @@ var runeUrl = {
 	'adt32': 'https://gamewith.akamaized.net/img/fe9bf6bc74691c149e83381fb8fd19d2.jpg',
 	'adt33': 'https://gamewith.akamaized.net/img/9bd12cd6d7d902593e50c7aa7bd5b90c.jpg',
 	'jelly': 'https://gamewith.akamaized.net/img/0cb0b433df4d969c44e5a685c3d4ea01.jpg',
-	'tsuigeki': 'https://gamewith.akamaized.net/img/6e65cdc856281b21b40f609833b15889.jpg',
-	'tsuigeki2': 'https://gamewith.akamaized.net/img/2dacd8094021a4930d73c60712fb761c.jpg',
+	'abyss': 'https://gamewith.akamaized.net/img/6e65cdc856281b21b40f609833b15889.jpg',
+	'abyss2': 'https://gamewith.akamaized.net/img/2dacd8094021a4930d73c60712fb761c.jpg',
+	'abyss3': 'https://gamewith.akamaized.net/img/41b40451b56881b25ba0007da2ae5484.jpg',
 };
 
 var alertDays = 7;
