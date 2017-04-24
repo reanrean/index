@@ -2,6 +2,7 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [15,5,'小夏活動(復刻)','建築',{'kouen':1104,'kouen':608,'kouen':300}],
   [12,5,'變身士','建築(復刻)',{'variant1':1755,'variant2':1010,'variant3':130}],
   [12,5,'變身士','交換',{'variant3':2200}],
   [12,5,'變身士','BGM',{'variant1':300,'variant2':300}],
