@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [16,5,'天魔','BGM',{'tenma1':300}],
+  [16,5,'天魔','飾品交換',{'tenma2':500}],
   [15,5,'小夏活動(復刻)','建築',{'kouen1':1104,'kouen2':608,'kouen3':300}],
   [12,5,'變身士','建築(復刻)',{'variant1':1755,'variant2':1010,'variant3':130}],
   [12,5,'變身士','交換',{'variant3':2200}],
@@ -62,6 +64,8 @@ var runeUrl = {
 	'variant1': 'https://gamewith.akamaized.net/img/0ead1faa7944a14fb14cb6adeafbdb46.jpg',
 	'variant2': 'https://gamewith.akamaized.net/img/639ca00f9275adbffe49bba2a2bb5d5a.jpg',
 	'variant3': 'https://gamewith.akamaized.net/img/9e33bd0cf7096ef25d76e8fdf9611ddd.jpg',
+	'tenma1': 'https://gamewith.akamaized.net/img/ac95890dfb3d308f92de9e479c6ef80b.jpg',
+	'tenma2': 'https://gamewith.akamaized.net/img/0181a2eeb3b1ce89391c0020ae6e61bb.jpg',
 };
 
 var alertDays = 7;
