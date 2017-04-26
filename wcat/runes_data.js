@@ -10,7 +10,7 @@ var eventList = [
   [12,5,'Variant Story','建築(復刻)',{'variant1':1755,'variant2':1010,'variant3':130}],
   [12,5,'Variant Story','交換',{'variant3':2200}],
   [12,5,'Variant Story','BGM',{'variant1':300,'variant2':300}],
-  [28,4,'深海遺產','武器強化',{'abyss3':300}],
+  [2,5,'深海遺產','武器強化',{'abyss3':300}],
   [28,4,'深淵','石板',{'abyss2':600}],
   [28,4,'深淵','BGM',{'abyss2':100}],
   [28,4,'深淵','建築',{'abyss':550}],
