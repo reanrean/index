@@ -2,8 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [7,5,'紅蓮','飾品交換',{'guren2':500}],
-  [7,5,'紅蓮','BGM',{'guren1':450}],
+  [17,5,'紅蓮','飾品交換',{'guren2':500}],
+  [17,5,'紅蓮','BGM',{'guren1':450}],
   [16,5,'天魔','BGM',{'tenma1':300}],
   [16,5,'天魔','飾品交換',{'tenma2':500}],
   [15,5,'小夏活動(復刻)','建築',{'kouen1':1104,'kouen2':608,'kouen3':300}],
