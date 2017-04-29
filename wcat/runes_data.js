@@ -2,6 +2,9 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [19,5,'共同生活','升級建築',{'sharenwei':586000}],
+  [19,5,'共同生活','交換',{'sharenwei':850000}],
+  [19,5,'共同生活','升級弓角',{'sharenyan1':200,'sharenyan2':200,'sharenyan3':200,'sharenyan4':200}],
   [17,5,'紅蓮','飾品交換',{'guren2':500}],
   [17,5,'紅蓮','BGM',{'guren1':450}],
   [16,5,'天使惡魔','BGM',{'tenma1':300}],
@@ -70,6 +73,11 @@ var runeUrl = {
 	'tenma2': 'https://gamewith.akamaized.net/img/0181a2eeb3b1ce89391c0020ae6e61bb.jpg',
 	'guren1': 'https://gamewith.akamaized.net/img/afef90fce0999c8a45cada00811723c6.jpg',
 	'guren2': 'https://gamewith.akamaized.net/img/bbe2a63c32a87a417189509c05d5d699.jpg',
+	'sharenyan1': 'https://gamewith.akamaized.net/img/e1ed237ab3da0cf5727d47ed20f2df12.jpg',
+	'sharenyan2': 'https://gamewith.akamaized.net/img/95b1e78a763ad381ddfad7b79bc6b56b.jpg',
+	'sharenyan3': 'https://gamewith.akamaized.net/img/1b45973bef1755797ed84d700f1ab79e.jpg',
+	'sharenyan4': 'https://gamewith.akamaized.net/img/9fc47f641c315bf90b1f72a048fb3586.jpg',
+	'sharenwei': 'https://cdn.wiki.famitsu.com/files/attachment/000/229/103/thumb_upload.jpg',
 };
 
 var alertDays = 7;
