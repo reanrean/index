@@ -168,8 +168,7 @@ function tr(text,attr){
 	return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>';
 }
 function icon(runeName){
-	if (runeUrl[runeName]) return '<img src="'+runeUrl[runeName]+'" width="100%">';
-	else return '?';
+	return runeUrl[runeName] ? '<img src="'+runeUrl[runeName]+'" width="100%">' + (runeExtraText[runeName]?'<br>'+runeExtraText[runeName]:'') : '?';
 }
 function labelfor(txt,id){
 	return '<label for="'+id+'">'+txt+'</label>'
