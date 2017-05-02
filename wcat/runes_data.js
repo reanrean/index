@@ -2,7 +2,10 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [19,5,'共同生活','提升能力(外出)',{'sharenwei':105,'sharerelax':900}],
+  [29,5,'咒拳','(復刻)',{'noroware_box':225}],
+  [29,5,'咒拳','再進化',{'noroware_box2':225}],
+  [19,5,'共同生活','石板',{'shareburger':600}],
+  [19,5,'共同生活','提升能力(外出)',{'sharenwei':105,'shareact':900}],
   [19,5,'共同生活','升級建築',{'sharenwei':58.6}],
   [19,5,'共同生活','交換',{'sharenwei':85}],
   [19,5,'共同生活','升級弓角(打工)',{'sharenyan':200}],
@@ -74,14 +77,17 @@ var runeUrl = {
 	'tenma2': 'https://gamewith.akamaized.net/img/0181a2eeb3b1ce89391c0020ae6e61bb.jpg',
 	'guren1': 'https://gamewith.akamaized.net/img/afef90fce0999c8a45cada00811723c6.jpg',
 	'guren2': 'https://gamewith.akamaized.net/img/bbe2a63c32a87a417189509c05d5d699.jpg',
-	'sharenyan': 'http://imgur.com/uJX7wNN.jpg',
-	'sharenwei': 'http://imgur.com/skO7cr7.jpg',
-	'sharerelax': 'http://imgur.com/cDSfpsy.jpg',
+	'sharenyan': 'https://gamewith.akamaized.net/img/bc1cdb893e41003ff80afbfcf3b804b3.jpg',
+	'sharenwei': 'https://gamewith.akamaized.net/img/bc496028db3dc137d728e7d2fcfc3f00.jpg',
+	'shareburger': 'https://gamewith.akamaized.net/img/f05c382e5900718fa5182766469a35d5.jpg',
+	'shareact': 'http://imgur.com/cDSfpsy.jpg',
+	'noroware_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
+	'noroware_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
 };
 
 var runeExtraText = {
 	'sharenyan': '(4種)',
-	'sharerelax': '(5種)',
+	'shareact': '(5種)',
 	'sharenwei': '(萬)',
 }
 
