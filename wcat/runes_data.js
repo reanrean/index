@@ -5,9 +5,9 @@ var eventList = [
   [29,5,'咒拳','(復刻)',{'noroware_box':225}],
   [29,5,'咒拳','再進化',{'noroware_box2':225}],
   [19,5,'共同生活','石板',{'shareburger':600}],
-  [19,5,'共同生活','提升能力(外出)',{'sharenwei':105,'shareact':900}],
-  [19,5,'共同生活','升級建築',{'sharenwei':58.6}],
-  [19,5,'共同生活','交換',{'sharenwei':85}],
+  [19,5,'共同生活','提升能力(外出)',{'sharenwei':1050,'shareact':900}],
+  [19,5,'共同生活','升級建築',{'sharenwei':586}],
+  [19,5,'共同生活','交換',{'sharenwei':850}],
   [19,5,'共同生活','升級弓角(打工)',{'sharenyan':200}],
   [17,5,'紅蓮','飾品交換',{'guren2':500}],
   [17,5,'紅蓮','BGM',{'guren1':450}],
@@ -88,7 +88,7 @@ var runeUrl = {
 var runeExtraText = {
 	'sharenyan': '(4種)',
 	'shareact': '(5種)',
-	'sharenwei': '(萬)',
+	'sharenwei': '(千)',
 }
 
 var alertDays = 7;
