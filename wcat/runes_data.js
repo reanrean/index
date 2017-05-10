@@ -3,7 +3,7 @@
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
   [5,7,'溫泉','神解龍角',{'onsen2':215}],
-  [5,7,'溫泉','升級龍角(復刻)',{'onsen':500}],
+  [5,7,'溫泉','武器強化(復刻)',{'onsen':500}],
   [29,5,'咒拳','(復刻)',{'noroware_box':225}],
   [29,5,'咒拳','再進化',{'noroware_box2':225}],
   [19,5,'共同生活','石板',{'shareburger':600}],
