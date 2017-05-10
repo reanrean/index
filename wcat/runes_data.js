@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [5,7,'溫泉','神解龍角',{'onsen2':215}],
+  [5,7,'溫泉','升級龍角(復刻)',{'onsen':500}],
   [29,5,'咒拳','(復刻)',{'noroware_box':225}],
   [29,5,'咒拳','再進化',{'noroware_box2':225}],
   [19,5,'共同生活','石板',{'shareburger':600}],
@@ -83,6 +85,8 @@ var runeUrl = {
 	'shareact': 'http://imgur.com/cDSfpsy.jpg',
 	'noroware_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
 	'noroware_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
+	'onsen': 'https://gamewith.akamaized.net/img/7e1279905ae22dd1cdbcbefb01da57b3.jpg',
+	'onsen2': 'https://gamewith.akamaized.net/img/1b487f41063c9213d4ea8a43923379d9.jpg',
 };
 
 var runeExtraText = {
