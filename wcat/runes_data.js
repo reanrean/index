@@ -2,10 +2,12 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [5,6,'咒弓','(復刻)',{'noroi_yumi':225}],
+  [5,6,'咒弓','再進化',{'noroi_yumi2':225}],
   [5,7,'溫泉','神解龍角',{'onsen2':215}],
   [5,7,'溫泉','武器強化(復刻)',{'onsen':500}],
-  [29,5,'咒拳','(復刻)',{'noroware_box':225}],
-  [29,5,'咒拳','再進化',{'noroware_box2':225}],
+  [29,5,'咒拳','(復刻)',{'noroi_box':225}],
+  [29,5,'咒拳','再進化',{'noroi_box2':225}],
   [19,5,'共同生活','石板',{'shareburger':600}],
   [19,5,'共同生活','提升能力(外出)',{'sharenwei':1050,'shareact':900}],
   [19,5,'共同生活','升級建築',{'sharenwei':586}],
@@ -83,10 +85,12 @@ var runeUrl = {
 	'sharenwei': 'https://gamewith.akamaized.net/img/bc496028db3dc137d728e7d2fcfc3f00.jpg',
 	'shareburger': 'https://gamewith.akamaized.net/img/f05c382e5900718fa5182766469a35d5.jpg',
 	'shareact': 'http://imgur.com/cDSfpsy.jpg',
-	'noroware_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
-	'noroware_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
+	'noroi_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
+	'noroi_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
 	'onsen': 'https://gamewith.akamaized.net/img/7e1279905ae22dd1cdbcbefb01da57b3.jpg',
 	'onsen2': 'https://gamewith.akamaized.net/img/1b487f41063c9213d4ea8a43923379d9.jpg',
+	'noroi_yumi': 'https://gamewith.akamaized.net/img/9edbbce5cdd940e120c5e435b5eba057.jpg',
+	'noroi_yumi2': 'https://gamewith.akamaized.net/img/5951c53696eef097187f651d27f43ed7.jpg',
 };
 
 var runeExtraText = {
