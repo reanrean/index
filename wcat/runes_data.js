@@ -92,7 +92,7 @@ var runeUrl = {
 	'onsen': 'https://gamewith.akamaized.net/img/7e1279905ae22dd1cdbcbefb01da57b3.jpg',
 	'onsen2': 'https://gamewith.akamaized.net/img/1b487f41063c9213d4ea8a43923379d9.jpg',
 	'noroi_yumi': 'https://gamewith.akamaized.net/img/9edbbce5cdd940e120c5e435b5eba057.jpg',
-	'noroi_yumi2': 'https://gamewith.akamaized.net/img/5951c53696eef097187f651d27f43ed7.jpg',
+	'noroi_yumi2': 'https://gamewith.akamaized.net/img/29fa8fe0e87cd9759e9be4a8b84b19ea.jpg',
 	'zekkai3_1': 'https://gamewith.akamaized.net/img/e663422f03128bb87d31a498ac174fbf.jpg',
 };
 
