@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [12,6,'混沌X','突破石交換',{'zekkai3_2':900}],
+  [12,6,'混沌X','石板',{'zekkai3_2':600}],
   [12,6,'混沌X','升級建築',{'zekkai3_1':590}],
   [12,6,'混沌X','飾品交換',{'zekkai3_1':500}],
   [5,6,'咒弓','(復刻)',{'noroi_yumi':225}],
@@ -94,6 +96,7 @@ var runeUrl = {
 	'noroi_yumi': 'https://gamewith.akamaized.net/img/9edbbce5cdd940e120c5e435b5eba057.jpg',
 	'noroi_yumi2': 'https://gamewith.akamaized.net/img/29fa8fe0e87cd9759e9be4a8b84b19ea.jpg',
 	'zekkai3_1': 'https://gamewith.akamaized.net/img/e663422f03128bb87d31a498ac174fbf.jpg',
+	'zekkai3_2': 'https://gamewith.akamaized.net/img/316150c7d2466421516490af4c499695.jpg',
 };
 
 var runeExtraText = {
