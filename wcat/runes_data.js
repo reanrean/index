@@ -2,6 +2,11 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [19,5,'網球(復刻)','建築',{'tennis':310}],
+  [19,6,'咒杖','(復刻)',{'noroi_mag':225}],
+  [19,6,'咒杖','再進化',{'noroi_mag2':225}],
+  [12,6,'咒劍','(復刻)',{'noroi_sword':225}],
+  [12,6,'咒劍','再進化',{'noroi_sword2':225}],
   [12,6,'混沌X','積分',{'zekkai3_4':150}],
   [12,6,'混沌X','石板2',{'zekkai3_3':100}],
   [12,6,'混沌X','BGM',{'zekkai3_3':200}],
@@ -102,6 +107,11 @@ var runeUrl = {
 	'zekkai3_2': 'https://gamewith.akamaized.net/img/316150c7d2466421516490af4c499695.jpg',
 	'zekkai3_3': 'https://gamewith.akamaized.net/img/d5e9472eaf043f981a40d9745daba57a.jpg',
 	'zekkai3_4': 'http://i.imgur.com/SBhKxMB.jpg',
+	'noroi_mag': 'https://gamewith.akamaized.net/img/0ffb9ee1b7315dc04f6aa71ab9762394.jpg',
+	'noroi_mag2': 'https://imgur.com/LBVRiqe.jpg',
+	'noroi_sword': 'https://gamewith.akamaized.net/img/a4ee6ac7b23ffe7a8ff533b7005aa2f5.jpg',
+	'noroi_sword2': 'https://imgur.com/WCnRCoz.jpg',
+	'tennis': 'https://gamewith.akamaized.net/img/e281ac3c8de2de0ee78c13b3ada45f62.jpg',
 };
 
 var runeExtraText = {
