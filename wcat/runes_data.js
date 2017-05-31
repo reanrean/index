@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [30,6,'偶像','積分',{'zekkai3_4':100}],
+  [30,6,'偶像','升級建築',{'idol1':780}],
   [19,5,'網球(復刻)','建築',{'tennis':310}],
   [19,6,'咒杖','(復刻)',{'noroi_mag':225}],
   [19,6,'咒杖','再進化',{'noroi_mag2':225}],
@@ -112,6 +114,7 @@ var runeUrl = {
 	'noroi_sword': 'https://gamewith.akamaized.net/img/a4ee6ac7b23ffe7a8ff533b7005aa2f5.jpg',
 	'noroi_sword2': 'https://imgur.com/WCnRCoz.jpg',
 	'tennis': 'https://gamewith.akamaized.net/img/e281ac3c8de2de0ee78c13b3ada45f62.jpg',
+	'idol1': 'https://gamewith.akamaized.net/img/e2ea3e6a6fffe2f2eee5684db831aeb1.jpg',
 };
 
 var runeExtraText = {
