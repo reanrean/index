@@ -2,8 +2,12 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [30,6,'偶像','錘仔交換',{'idol2':600}],
+  [30,6,'偶像','BGM',{'idol2':600}],
   [30,6,'偶像','積分',{'zekkai3_4':100}],
   [30,6,'偶像','升級建築',{'idol1':780}],
+  [26,6,'咒槍','(復刻)',{'noroi_lancer':225}],
+  [26,6,'咒槍','再進化',{'noroi_lancer2':225}],
   [19,6,'網球(復刻)','建築',{'tennis':310}],
   [19,6,'咒杖','(復刻)',{'noroi_mag':225}],
   [19,6,'咒杖','再進化',{'noroi_mag2':225}],
@@ -64,6 +68,16 @@ var eventList = [
 ];
 
 var runeUrl = {
+	'noroi_yumi': 'https://gamewith.akamaized.net/img/9edbbce5cdd940e120c5e435b5eba057.jpg',
+	'noroi_yumi2': 'https://gamewith.akamaized.net/img/29fa8fe0e87cd9759e9be4a8b84b19ea.jpg',
+	'noroi_mag': 'https://gamewith.akamaized.net/img/0ffb9ee1b7315dc04f6aa71ab9762394.jpg',
+	'noroi_mag2': 'https://imgur.com/LBVRiqe.jpg',
+	'noroi_sword': 'https://gamewith.akamaized.net/img/a4ee6ac7b23ffe7a8ff533b7005aa2f5.jpg',
+	'noroi_sword2': 'https://imgur.com/WCnRCoz.jpg',
+	'noroi_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
+	'noroi_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
+	'noroi_lancer': 'https://gamewith.akamaized.net/img/f9b2f95a34e3b82febba6b9b8116028d.jpg',
+	'noroi_lancer2': 'http://i.imgur.com/yAVWTvR.png',
 	'ka1': 'https://gamewith.akamaized.net/img/922f02538d1af23b86bdc8fbb5bb8a71.jpg',
 	'ka2': 'https://gamewith.akamaized.net/img/7cb9aabcd01fcdfbf1fe83593f2be202.jpg',
 	'ka3': 'https://gamewith.akamaized.net/img/8e8cb2542a222298c3f0058a0a9911b9.jpg',
@@ -99,22 +113,15 @@ var runeUrl = {
 	'sharenwei': 'https://gamewith.akamaized.net/img/bc496028db3dc137d728e7d2fcfc3f00.jpg',
 	'shareburger': 'https://gamewith.akamaized.net/img/f05c382e5900718fa5182766469a35d5.jpg',
 	'shareact': 'http://imgur.com/cDSfpsy.jpg',
-	'noroi_box': 'https://gamewith.akamaized.net/img/5b7dfe9ed93334370b54372524057831.jpg',
-	'noroi_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
 	'onsen': 'https://gamewith.akamaized.net/img/7e1279905ae22dd1cdbcbefb01da57b3.jpg',
 	'onsen2': 'https://gamewith.akamaized.net/img/1b487f41063c9213d4ea8a43923379d9.jpg',
-	'noroi_yumi': 'https://gamewith.akamaized.net/img/9edbbce5cdd940e120c5e435b5eba057.jpg',
-	'noroi_yumi2': 'https://gamewith.akamaized.net/img/29fa8fe0e87cd9759e9be4a8b84b19ea.jpg',
 	'zekkai3_1': 'https://gamewith.akamaized.net/img/e663422f03128bb87d31a498ac174fbf.jpg',
 	'zekkai3_2': 'https://gamewith.akamaized.net/img/316150c7d2466421516490af4c499695.jpg',
 	'zekkai3_3': 'https://gamewith.akamaized.net/img/d5e9472eaf043f981a40d9745daba57a.jpg',
 	'zekkai3_4': 'http://i.imgur.com/SBhKxMB.jpg',
-	'noroi_mag': 'https://gamewith.akamaized.net/img/0ffb9ee1b7315dc04f6aa71ab9762394.jpg',
-	'noroi_mag2': 'https://imgur.com/LBVRiqe.jpg',
-	'noroi_sword': 'https://gamewith.akamaized.net/img/a4ee6ac7b23ffe7a8ff533b7005aa2f5.jpg',
-	'noroi_sword2': 'https://imgur.com/WCnRCoz.jpg',
 	'tennis': 'https://gamewith.akamaized.net/img/e281ac3c8de2de0ee78c13b3ada45f62.jpg',
 	'idol1': 'https://gamewith.akamaized.net/img/e2ea3e6a6fffe2f2eee5684db831aeb1.jpg',
+	'idol2': 'https://gamewith.akamaized.net/img/4dfae88c67ef63ee1bfb8c1511718f83.jpg',
 };
 
 var runeExtraText = {
