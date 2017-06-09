@@ -2,7 +2,10 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [31,7,'固力果(復刻)','建築交換',{'glico1':1650,'glico2':930,'glico3':930}],
+  [3,7,'咒斧','(復刻)',{'noroi_axe':225}],
+  [3,7,'咒斧','再進化',{'noroi_axe2':225}],
+  [31,7,'固力果','建築(復刻)',{'glico1':1000,'glico2':930,'glico3':930}],
+  [31,7,'固力果','飾品交換',{'glico1':950}],
   [30,6,'黑貓維茲(復刻)','升級維茲',{'with1':1141,'with2':794,'with3':174}],
   [30,6,'偶像','錘仔交換',{'idol2':600}],
   [30,6,'偶像','BGM',{'idol2':600}],
@@ -80,6 +83,8 @@ var runeUrl = {
 	'noroi_box2': 'https://gamewith.akamaized.net/img/cd4791044b81716407803b2bc6946a35.jpg',
 	'noroi_lancer': 'https://gamewith.akamaized.net/img/f9b2f95a34e3b82febba6b9b8116028d.jpg',
 	'noroi_lancer2': 'http://i.imgur.com/yAVWTvR.png',
+	'noroi_axe': 'https://gamewith.akamaized.net/img/aefb08992d3958d10324b1d5488e6f74.jpg',
+	'noroi_axe2': 'http://i.imgur.com/auLQCCr.png',
 	'ka1': 'https://gamewith.akamaized.net/img/922f02538d1af23b86bdc8fbb5bb8a71.jpg',
 	'ka2': 'https://gamewith.akamaized.net/img/7cb9aabcd01fcdfbf1fe83593f2be202.jpg',
 	'ka3': 'https://gamewith.akamaized.net/img/8e8cb2542a222298c3f0058a0a9911b9.jpg',
