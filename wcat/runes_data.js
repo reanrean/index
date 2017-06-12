@@ -97,7 +97,7 @@ var runeUrl = {
 	'with3': 'https://gamewith.akamaized.net/img/097ba24e89f2a2ebfb386f866a9c63fb.jpg',
 	'glico1': 'http://i.imgur.com/tyMOprE.jpg',
 	'glico2': 'http://i.imgur.com/xYNLD2g.jpg',
-	'glico3': 'http:/i.imgur.com/MOUOwR9.jpg',
+	'glico3': 'http://i.imgur.com/MOUOwR9.jpg',
 	'mumu1': 'http://i.imgur.com/k4DDpGR.jpg',
 	'mumu2': 'http://i.imgur.com/uAmDCX6.jpg',
 	'mumu3': 'http://i.imgur.com/SXApvtW.jpg',
