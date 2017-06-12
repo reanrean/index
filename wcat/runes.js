@@ -12,7 +12,7 @@ function init(){
 function outputMain(){
 	var skipEvent = [];
 	var out = '<table>';
-	out += tr(td('期限')+td('活動', 'id="colEvent"')+td('符石', 'colspan="2"'),'class="title"');
+	out += tr(td('期限')+td('活動 <span id="reprint" class="today">[復刻]</span>', 'id="colEvent"')+td('符石', 'colspan="2"'),'class="title"');
 	
 	for (var i in eventList_reorg){
 		if (skipEvent.indexOf(i)>=0) continue;
@@ -42,14 +42,32 @@ function outputMain(){
 	el('table').innerHTML = out;
 	
 	initWidth = document.getElementsByTagName('table')[0].rows[0].cells[1].offsetWidth;
+	
+	//enable reprint clicking
+	el('reprint').onclick = function() {
+		if (el('reprint').className.indexOf('done')<0){
+			el('reprint').className += ' done';
+			var inputs = document.getElementsByTagName("input");
+			for (var i=0; i<inputs.length; i++){
+				if(inputs[i].type == "checkbox" && inputs[i].id.indexOf('(復刻)')>=0 && !el(inputs[i].id).checked) {
+					el(inputs[i].id).checked=true;
+					check(inputs[i].id);
+				}
+			}
+			saveSettings();
+		}
+	};
 }
 
 function check(id){
 	var checked = el(id).checked;
 	var arr = id.split('-');
 	
-	if(checked) el('tr'+id).className = "done";
-	else el('tr'+id).className = "";
+	if(checked) el('tr'+id).className = 'done';
+	else {
+		el('tr'+id).className = "";
+		if (id.indexOf('(復刻)')>=0) el('reprint').className = "today";
+	}
 	
 	if (arr[0] == "main"){
 		var alltr = document.getElementsByTagName("tr");
@@ -71,7 +89,11 @@ function check(id){
 }
 
 function reorgEvent(){
-	eventList.sort(function(a,b){return (a[1]==b[1] ? a[0]-b[0] : a[1]-b[1])});
+	tmpSrt = [];
+	for (var i in runeUrl) tmpSrt.push(i);
+	tmpSrt.sort();
+	
+	eventList.sort(function(a,b){return (a[1]==b[1] ? (a[0]==b[0] ? indexOfRunes(a[4])-indexOfRunes(b[4]) : a[0]-b[0]) : a[1]-b[1])});
 	
 	//'eventCate': [ [eventName,[runeName,runeAmount], month, date], [...] ]
 	eventList_reorg = {};
@@ -80,6 +102,12 @@ function reorgEvent(){
 		var arr = [eventList[i][3],eventList[i][4],eventList[i][1],eventList[i][0]];
 		eventList_reorg[eventList[i][2]].push(arr);
 	}
+}
+
+function indexOfRunes(obj){
+	var idx = tmpSrt.length;
+	for (var i in obj) if(tmpSrt.indexOf(i)<idx) idx = tmpSrt.indexOf(i);
+	return idx;
 }
 
 function sumRunes(eventCate){
@@ -142,6 +170,15 @@ function loadSettings(){
 			check(checkName[i]);
 		}
 	}
+	var inputs = document.getElementsByTagName("input");
+	var allReprint = true;
+	for (var i=0; i<inputs.length; i++){
+		if(inputs[i].type == "checkbox" && inputs[i].id.indexOf('(復刻)')>=0 && !el(inputs[i].id).checked) {
+			allReprint = false;
+			break;
+		}
+	}
+	if (allReprint) el('reprint').className += ' done';
 }
 
 function saveSettings(){
