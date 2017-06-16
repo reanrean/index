@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [10,7,'咒雙','(復刻)',{'noroi_doub':225}],
+  [10,7,'咒雙','再進化',{'noroi_doub2':225}],
   [14,7,'三色地下城','BGM',{'mumu1':30,'mumu2':30,'mumu3':30}],
   [14,7,'三色地下城','(復刻)',{'mumu1':135,'mumu2':135,'mumu3':135}],
   [3,7,'咒斧','(復刻)',{'noroi_axe':225}],
@@ -18,6 +20,7 @@ var eventList = [
   [30,6,'偶像','升級建築2',{'idol3':780}],
   [30,6,'偶像','建築合體',{'idol1':150,'idol3':150}],
   [30,6,'偶像','錘仔交換',{'idolx':600}],
+  [30,6,'偶像','石板',{'idol4':600}],
   [26,6,'咒槍','(復刻)',{'noroi_lancer':225}],
   [26,6,'咒槍','再進化',{'noroi_lancer2':225}],
   [19,6,'網球(復刻)','建築',{'tennis':310}],
@@ -51,6 +54,8 @@ var runeUrl = {
 	'noroi_lancer2': 'http://i.imgur.com/yAVWTvR.png',
 	'noroi_axe': 'http://i.imgur.com/NZHUEeS.jpg',
 	'noroi_axe2': 'http://i.imgur.com/auLQCCr.png',
+	'noroi_doub': 'http://i.imgur.com/QfS9rxV.jpg',
+	'noroi_doub2': 'http://i.imgur.com/CHHRwUU.png',
 	'ka1': 'https://gamewith.akamaized.net/img/922f02538d1af23b86bdc8fbb5bb8a71.jpg',
 	'ka2': 'https://gamewith.akamaized.net/img/7cb9aabcd01fcdfbf1fe83593f2be202.jpg',
 	'ka3': 'https://gamewith.akamaized.net/img/8e8cb2542a222298c3f0058a0a9911b9.jpg',
@@ -95,6 +100,7 @@ var runeUrl = {
 	'idol1': 'https://i.imgur.com/YcOc2lo.jpg',
 	'idolx': 'https://i.imgur.com/pImsHC8.jpg',
 	'idol3': 'https://i.imgur.com/UuKpwGz.jpg',
+	'idol4': 'http://i.imgur.com/mjlYID8.jpg',
 	'with1': 'https://gamewith.akamaized.net/img/349c08def608997cf33553938547ce81.jpg',
 	'with2': 'https://gamewith.akamaized.net/img/b120e6ab8e56b8fb39deb7f41a3e1b89.jpg',
 	'with3': 'https://gamewith.akamaized.net/img/097ba24e89f2a2ebfb386f866a9c63fb.jpg',
