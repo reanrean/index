@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [21,7,'白龍','(復刻)',{'dragon':1432}],
+  [21,7,'白龍','再升級建築',{'dragon':3200}],
   [10,7,'咒雙','(復刻)',{'noroi_doub':225}],
   [10,7,'咒雙','再進化',{'noroi_doub2':225}],
   [14,7,'三色地下城','BGM',{'mumu1':30,'mumu2':30,'mumu3':30}],
@@ -111,6 +113,7 @@ var runeUrl = {
 	'mumu2': 'http://i.imgur.com/uAmDCX6.jpg',
 	'mumu3': 'http://i.imgur.com/SXApvtW.jpg',
 	'points': 'http://i.imgur.com/SBhKxMB.jpg',
+	'dragon': 'https://gamewith.akamaized.net/img/2b1b58f9a17ce251dc4b0d4a3512743b.jpg',
 };
 
 var runeExtraText = {
