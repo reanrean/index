@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [21,7,'SoulofKnights','(復刻)',{'sok2':60,'sok3':300}],
+  [21,7,'SoulofKnights','積分',{'points':350}],
   [21,7,'Kings Crown','積分',{'points':50}],
   [18,7,'魔王勇者(復刻)','升級建築',{'maou1':735}],
   [18,7,'魔王勇者(復刻)','BGM',{'maou1':30}],
@@ -96,6 +98,8 @@ var runeUrl = {
 	'dragon': 'http://i.imgur.com/wTG0Xjj.jpg',
 	'maou1': 'http://i.imgur.com/J1jdCkz.jpg',
 	'maou2': 'http://i.imgur.com/CRm0JHh.jpg',
+	'sok2': 'https://gamewith.akamaized.net/img/2699d31cfb697e16cd6ec9e88d8e72c7.jpg',
+	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
 };
 
 var runeExtraText = {
