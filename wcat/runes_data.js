@@ -2,8 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [21,7,'SoulofKnights','(復刻)',{'sok2':60,'sok3':300}],
-  [21,7,'SoulofKnights','積分',{'points':350}],
+  [7,8,'SoulofKnights','(復刻)',{'sok2':60,'sok3':300}],
+  [7,8,'SoulofKnights','積分',{'points':350}],
   [21,7,'Kings Crown','積分',{'points':50}],
   [18,7,'魔王勇者(復刻)','升級建築',{'maou1':735}],
   [18,7,'魔王勇者(復刻)','BGM',{'maou1':30}],
