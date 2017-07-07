@@ -6,6 +6,7 @@ var eventList = [
   [7,8,'SoulofKnights','(復刻)',{'sok2':60,'sok3':240}],
   [7,8,'SoulofKnights','BGM',{'sok3':60}],
   [7,8,'SoulofKnights','積分',{'points':350}],
+  [21,7,'Kings Crown','素材劍',{'kc1':600}],
   [21,7,'Kings Crown','積分',{'points':50}],
   [18,7,'魔王勇者(復刻)','升級建築',{'maou1':735}],
   [18,7,'魔王勇者(復刻)','BGM',{'maou1':30}],
@@ -102,6 +103,7 @@ var runeUrl = {
 	'maou2': 'http://i.imgur.com/CRm0JHh.jpg',
 	'sok2': 'https://gamewith.akamaized.net/img/2699d31cfb697e16cd6ec9e88d8e72c7.jpg',
 	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
+	'kc1': 'https://i.imgur.com/VvSZ40h.jpg',
 	'hyoumetsu': 'https://gamewith.akamaized.net/img/a9a493b4ac50c88f0d8720e45398c2e0.jpg',
 };
 
