@@ -2,6 +2,10 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [23,8,'光闇協力','交換-素材劍',{'lightdark_d':600}],
+  [23,8,'光闇協力','交換-其他',{'lightdark_d':200,'lightdark_l':1480}],
+  [23,8,'光闇協力','石板',{'lightdark_d':600}],
+  [23,8,'光闇協力','升級建築',{'lightdark_l':570}],
   [18,7,'冰滅(復刻)','升級建築',{'hyoumetsu':5145}],
   [7,8,'SoulofKnights','(復刻)',{'sok2':60,'sok3':240}],
   [7,8,'SoulofKnights','BGM',{'sok3':60}],
@@ -105,6 +109,8 @@ var runeUrl = {
 	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
 	'kc1': 'https://i.imgur.com/VvSZ40h.jpg',
 	'hyoumetsu': 'https://gamewith.akamaized.net/img/a9a493b4ac50c88f0d8720e45398c2e0.jpg',
+	'lightdark_l': 'https://gamewith.akamaized.net/img/ed400c0624dc546449330cb517067fbc.jpg',
+	'lightdark_d': 'https://gamewith.akamaized.net/img/1c61e69e341c09f249f4a9b30a7f38c1.jpg',
 };
 
 var runeExtraText = {
