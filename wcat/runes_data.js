@@ -2,6 +2,11 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [15,8,'共同生活(復刻)','石板',{'shareburger':600}],
+  [15,8,'共同生活(復刻)','提升能力(外出)',{'sharenwei':1050,'shareact':900}],
+  [15,8,'共同生活(復刻)','升級建築',{'sharenwei':586}],
+  [15,8,'共同生活(復刻)','交換',{'sharenwei':850}],
+  [15,8,'共同生活(復刻)','升級弓角(打工)',{'sharenyan':200}],
   [23,8,'光闇協力','交換-素材劍',{'lightdark_d':600}],
   [23,8,'光闇協力','交換-其他',{'lightdark_d':200,'lightdark_l':1480}],
   [23,8,'光闇協力','石板',{'lightdark_d':600}],
