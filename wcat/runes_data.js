@@ -2,15 +2,22 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [21,8,'共同生活2','升級弓武',{'sharenyan2':300}],
+  [21,8,'共同生活2','神解弓角',{'sharenyan2':300}],
+  [21,8,'共同生活2','升級建築',{'sharenyan2':300}],
+  [21,8,'共同生活2','呼叫角色',{'sharenwei':1750}],
+  [21,8,'共同生活2','擺設傢俱',{'sharenwei':93}],
+  [21,8,'共同生活2','交換',{'sharenwei':800}],
   [15,8,'共同生活(復刻)','石板',{'shareburger':600}],
   [15,8,'共同生活(復刻)','提升能力(外出)',{'sharenwei':1050,'shareact':900}],
   [15,8,'共同生活(復刻)','升級建築',{'sharenwei':586}],
   [15,8,'共同生活(復刻)','交換',{'sharenwei':850}],
   [15,8,'共同生活(復刻)','升級弓角(打工)',{'sharenyan':200}],
-  [23,8,'光闇協力','交換-素材劍',{'lightdark_d':600}],
-  [23,8,'光闇協力','交換-其他',{'lightdark_d':200,'lightdark_l':1480}],
-  [23,8,'光闇協力','石板',{'lightdark_d':600}],
-  [23,8,'光闇協力','升級建築',{'lightdark_l':570}],
+  [23,8,'三周年','BGM',{'lightdark_solo':165}],
+  [23,8,'三周年','交換·素材劍',{'lightdark_d':600}],
+  [23,8,'三周年','交換·其他',{'lightdark_d':200,'lightdark_l':1480}],
+  [23,8,'三周年','石板',{'lightdark_d':600}],
+  [23,8,'三周年','升級建築',{'lightdark_l':570}],
   [18,7,'冰滅(復刻)','升級建築',{'hyoumetsu':5145}],
   [7,8,'SoulofKnights','(復刻)',{'sok2':60,'sok3':240}],
   [7,8,'SoulofKnights','BGM',{'sok3':60}],
@@ -116,12 +123,14 @@ var runeUrl = {
 	'hyoumetsu': 'https://gamewith.akamaized.net/img/a9a493b4ac50c88f0d8720e45398c2e0.jpg',
 	'lightdark_l': 'https://gamewith.akamaized.net/img/ed400c0624dc546449330cb517067fbc.jpg',
 	'lightdark_d': 'https://gamewith.akamaized.net/img/1c61e69e341c09f249f4a9b30a7f38c1.jpg',
+	'lightdark_solo': 'https://i.imgur.com/efDDNpL.jpg',
+	'sharenyan2': 'https://i.imgur.com/wEsL4sx.jpg',
 };
 
 var runeExtraText = {
 	'sharenyan': '(4種)',
 	'shareact': '(5種)',
-	'sharenwei': '(千)',
+	'sharenwei': '(k)',
 	'points': '(萬)',
 }
 
