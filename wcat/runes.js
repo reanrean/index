@@ -80,8 +80,8 @@ function check(id){
 			var subAmt = eventList_reorg[arr[1]][i][1];
 			for (var j in subAmt){
 				var parentAmt = el('main-'+arr[1]+'-'+j);
-				if(checked) parentAmt.innerHTML = Number(parentAmt.innerHTML) - subAmt[j];
-				else parentAmt.innerHTML = Number(parentAmt.innerHTML) + subAmt[j];
+				if(checked) parentAmt.innerHTML = roundNum(Number(parentAmt.innerHTML) - subAmt[j]);
+				else parentAmt.innerHTML = roundNum(Number(parentAmt.innerHTML) + subAmt[j]);
 			}
 		}
 	}
@@ -193,6 +193,11 @@ function saveSettings(){
 		localStorage.setItem("wcatchk_rinne", saveString);
 	}
 	document.getElementById('storage').innerHTML=saveString;
+}
+
+function roundNum(i){
+	if (i === parseInt(i)) return i;
+	else return Math.round(i*10000)/10000;
 }
 
 function el(text){
