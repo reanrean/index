@@ -8,6 +8,9 @@ var eventList = [
   [21,8,'共同生活2','呼叫角色',{'sharenwei':175}],
   [21,8,'共同生活2','擺設傢俱',{'sharenwei':9.3}],
   [21,8,'共同生活2','交換',{'sharenwei':80}],
+  [21,8,'共同生活2','交換·EX',{'sharenyan3':600}],
+  [21,8,'共同生活2','交換·鎚',{'sharenyan3':850}],
+  [21,8,'共同生活2','石板',{'shareceo':600}],
   [15,8,'共同生活(復刻)','石板',{'shareburger':600}],
   [15,8,'共同生活(復刻)','提升能力(外出)',{'sharenwei':105,'shareact':90}],
   [15,8,'共同生活(復刻)','升級建築',{'sharenwei':58.6}],
@@ -104,6 +107,8 @@ var runeUrl = {
 	'lightdark_d': 'https://gamewith.akamaized.net/img/1c61e69e341c09f249f4a9b30a7f38c1.jpg',
 	'lightdark_solo': 'https://i.imgur.com/efDDNpL.jpg',
 	'sharenyan2': 'https://i.imgur.com/wEsL4sx.jpg',
+	'sharenyan3': 'https://gamewith.akamaized.net/img/c32fb05a67ae3d716018d6ed8a44dd0f.jpg',
+	'shareceo': 'https://gamewith.akamaized.net/img/c103e12cb6cd8e3005e82a90d7b0c1ba.jpg',
 };
 
 var runeExtraText = {
