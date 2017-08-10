@@ -2,6 +2,8 @@
 //one line for each eventName
 //if different date/monthn in same eventCate, use the earliest
 var eventList = [
+  [31,8,'妖精尾巴','升級建築',{'fairytale':245}],
+  [31,8,'妖精尾巴','積分',{'points':200}],
   [21,8,'共同生活2','升級弓武',{'sharenyan2':300}],
   [21,8,'共同生活2','神解弓角',{'sharenyan2':300}],
   [21,8,'共同生活2','升級建築',{'sharenyan2':300}],
@@ -109,6 +111,7 @@ var runeUrl = {
 	'sharenyan2': 'https://i.imgur.com/wEsL4sx.jpg',
 	'sharenyan3': 'https://gamewith.akamaized.net/img/c32fb05a67ae3d716018d6ed8a44dd0f.jpg',
 	'shareceo': 'https://gamewith.akamaized.net/img/c103e12cb6cd8e3005e82a90d7b0c1ba.jpg',
+	'fairytale': 'https://i.imgur.com/9a5VvG9.jpg',
 };
 
 var runeExtraText = {
