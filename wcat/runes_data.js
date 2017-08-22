@@ -1,31 +1,14 @@
-//date,month,eventCate,eventName,{runeName: runeAmount},reprint
+//'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
-//if different date/monthn in same eventCate, use the earliest
 var eventList = [
-  [31,8,'妖精尾巴','升級建築',{'fairytale':245}],
-  [31,8,'妖精尾巴','積分',{'points':200}],
-  [21,8,'共同生活2','升級弓武',{'sharenyan2':300}],
-  [21,8,'共同生活2','神解弓角',{'sharenyan2':300}],
-  [21,8,'共同生活2','升級建築',{'sharenyan2':300}],
-  [21,8,'共同生活2','呼叫角色',{'sharenwei':175}],
-  [21,8,'共同生活2','擺設傢俱',{'sharenwei':9.3}],
-  [21,8,'共同生活2','交換',{'sharenwei':80}],
-  [21,8,'共同生活2','交換·EX',{'sharenyan3':600}],
-  [21,8,'共同生活2','交換·鎚',{'sharenyan3':850}],
-  [21,8,'共同生活2','石板',{'shareceo':600}],
-  [15,8,'共同生活(復刻)','石板',{'shareburger':600}],
-  [15,8,'共同生活(復刻)','提升能力(外出)',{'sharenwei':105,'shareact':90}],
-  [15,8,'共同生活(復刻)','升級建築',{'sharenwei':58.6}],
-  [15,8,'共同生活(復刻)','交換',{'sharenwei':85}],
-  [15,8,'共同生活(復刻)','升級弓角(打工)',{'sharenyan':200}],
-  [23,8,'三周年','BGM',{'lightdark_solo':165}],
-  [23,8,'三周年','交換·素材劍',{'lightdark_d':600}],
-  [23,8,'三周年','交換·其他',{'lightdark_d':200,'lightdark_l':1480}],
-  [23,8,'三周年','石板',{'lightdark_d':600}],
-  [23,8,'三周年','升級建築',{'lightdark_l':570}],
-  [7,8,'SoulofKnights','(復刻)',{'sok2':60,'sok3':240}],
-  [7,8,'SoulofKnights','BGM',{'sok3':60}],
-  [7,8,'SoulofKnights','積分',{'points':350}],
+['8/30/2017 15:00','妖精尾巴','升級建築',{'fairytale':245}],
+['8/30/2017 15:00','妖精尾巴','積分',{'points':200}],
+['8/30/2017 15:00','妖精尾巴','石板',{'fairytale2':450}],
+['8/28/2017 15:00','三周年','BGM',{'lightdark_solo':165}],
+['8/23/2017 15:00','三周年','交換·素材劍',{'lightdark_d':600}],
+['8/23/2017 15:00','三周年','交換·其他',{'lightdark_d':200,'lightdark_l':1480}],
+['8/23/2017 15:00','三周年','石板',{'lightdark_d':600}],
+['8/23/2017 15:00','三周年','升級建築',{'lightdark_l':570}],
 ];
 
 var runeUrl = {
@@ -112,6 +95,7 @@ var runeUrl = {
 	'sharenyan3': 'https://gamewith.akamaized.net/img/c32fb05a67ae3d716018d6ed8a44dd0f.jpg',
 	'shareceo': 'https://gamewith.akamaized.net/img/c103e12cb6cd8e3005e82a90d7b0c1ba.jpg',
 	'fairytale': 'https://i.imgur.com/9a5VvG9.jpg',
+	'fairytale2': 'https://gamewith.akamaized.net/img/e6fd0ae60181918e75bed87c99890b1f.jpg',
 };
 
 var runeExtraText = {

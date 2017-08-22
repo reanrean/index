@@ -14,24 +14,25 @@ function outputMain(){
 	var out = '<table>';
 	out += tr(td('期限')+td('活動 <span id="reprint" class="today">[復刻]</span>', 'id="colEvent"')+td('符石', 'colspan="2"'),'class="title"');
 	
-	for (var i in eventList_reorg){
+	for (var i in eventObj){
 		if (skipEvent.indexOf(i)>=0) continue;
-		var cnt = eventList_reorg[i].length;
-		var eventEnds = new Date(todayYear,eventList_reorg[i][0][2]-1,eventList_reorg[i][0][3],0,0,0,0);//red the dates in 7 days
-		if (eventEnds<today0) {skipEvent.push(i); continue;}
+		var cnt = eventObj[i].length;
+		var endTime = eventObj[i][0][2];
+		var endDate = new Date(endTime).getDate();
+		var endMonth = new Date(endTime).getMonth()+1;
 		var checkid = 'main-'+i;
-		var line  = td(labelfor(eventList_reorg[i][0][3]+'/'+eventList_reorg[i][0][2],checkid),(eventEnds<future?'class="expiring"':''));
+		var line  = td(labelfor(endDate+'/'+endMonth,checkid),(endTime<future?'class="expiring"':''));
 		line += td(labelfor(i,checkid));
 		var sum = sumRunes(i);
 		line += td(labelfor(sumRunesOutput(sum,i),checkid));
 		line += td('<input type="checkbox" id="'+checkid+'" onclick="check(this.id);saveSettings();" >');
 		out += tr(line,'id="tr'+checkid+'"');
 		if (cnt>1) {
-			for (var j in eventList_reorg[i]) {
-				var checkid_sub = 'sub-'+i+'-'+eventList_reorg[i][j][0];
+			for (var j in eventObj[i]) {
+				var checkid_sub = 'sub-'+i+'-'+eventObj[i][j][0];
 				line = td('');
-				line += td(labelfor('- '+eventList_reorg[i][j][0],checkid_sub));
-				line += td(labelfor(singleRunesOutput(eventList_reorg[i][j][1],sum),checkid_sub));
+				line += td(labelfor('- '+eventObj[i][j][0],checkid_sub));
+				line += td(labelfor(singleRunesOutput(eventObj[i][j][1],sum),checkid_sub));
 				line += td('<input type="checkbox" id="'+checkid_sub+'" onclick="check(this.id);saveSettings();" >');
 				out += tr(line,'id="tr'+checkid_sub+'"');
 			}
@@ -76,8 +77,8 @@ function check(id){
 			else alltr[i].style.display = "table-row";
 		}
 	}else{//sub
-		for (var i in eventList_reorg[arr[1]]) if(eventList_reorg[arr[1]][i][0]==arr[2]){
-			var subAmt = eventList_reorg[arr[1]][i][1];
+		for (var i in eventObj[arr[1]]) if(eventObj[arr[1]][i][0]==arr[2]){
+			var subAmt = eventObj[arr[1]][i][1];
 			for (var j in subAmt){
 				var parentAmt = el('main-'+arr[1]+'-'+j);
 				if(checked) parentAmt.innerHTML = roundNum(Number(parentAmt.innerHTML) - subAmt[j]);
@@ -89,18 +90,26 @@ function check(id){
 }
 
 function reorgEvent(){
+	//sort by runeName
 	tmpSrt = [];
 	for (var i in runeUrl) tmpSrt.push(i);
 	tmpSrt.sort();
 	
-	eventList.sort(function(a,b){return (a[1]==b[1] ? (a[0]==b[0] ? indexOfRunes(a[4])-indexOfRunes(b[4]) : a[0]-b[0]) : a[1]-b[1])});
+	//sort by endTime
+	eventList.sort( function(a,b){
+		var aTime = new Date(a[0]+":00 GMT+0800").getTime();
+		var bTime = new Date(b[0]+":00 GMT+0800").getTime();
+		return (aTime==bTime ? indexOfRunes(a[3])-indexOfRunes(b[3]) : aTime-bTime) 
+	});
 	
-	//'eventCate': [ [eventName,[runeName,runeAmount], month, date], [...] ]
-	eventList_reorg = {};
+	//'eventCate': [ [eventName,[runeName,runeAmount], endTime], [...] ]
+	eventObj = {};
 	for (var i in eventList){
-		if (!eventList_reorg[eventList[i][2]]) eventList_reorg[eventList[i][2]] = [];
-		var arr = [eventList[i][3],eventList[i][4],eventList[i][1],eventList[i][0]];
-		eventList_reorg[eventList[i][2]].push(arr);
+		var iTime = new Date(eventList[i][0]+":00 GMT+0800").getTime();
+		if (today.getTime() > iTime) continue;
+		if (!eventObj[eventList[i][1]]) eventObj[eventList[i][1]] = [];
+		var arr = [eventList[i][2], eventList[i][3], iTime];
+		eventObj[eventList[i][1]].push(arr);
 	}
 }
 
@@ -112,10 +121,10 @@ function indexOfRunes(obj){
 
 function sumRunes(eventCate){
 	var out = {};
-	for (var i in eventList_reorg[eventCate]){
-		for (var j in eventList_reorg[eventCate][i][1]){
+	for (var i in eventObj[eventCate]){
+		for (var j in eventObj[eventCate][i][1]){
 			var runeName = j;
-			var runeAmount = eventList_reorg[eventCate][i][1][j];
+			var runeAmount = eventObj[eventCate][i][1][j];
 			if (!out[runeName]) out[runeName] = 0;
 			out[runeName] += runeAmount;
 		}
@@ -146,17 +155,16 @@ function sumRunesOutput(sum,eventCate){
 }
 
 function showDate(){
-	var today = new Date();
+	today = new Date();
 	var todayDate = today.getDate();
-	var todayMonth = today.getMonth();
-	todayYear = today.getFullYear();
-	el('today').innerHTML = '<span class="today">Today: ' + todayDate+'/'+(todayMonth+1)+'/'+todayYear+'</span>';
+	var todayMonth = today.getMonth()+1;
+	var todayYear = today.getFullYear();
+	el('today').innerHTML = '<span class="today">Today: ' + todayDate+'/'+todayMonth+'/'+todayYear+'</span>';
 	
-	today0 = new Date(todayYear,todayMonth,todayDate,0,0,0,0);
-	future = new Date(today.getTime() + (alertDays * 24 * 60 * 60 * 1000));
+	future = new Date(today.getTime() + (alertDays * 24 * 60 * 60 * 1000)).getTime();
 	
 	//check month_end
-	var month_end = new Date(todayYear,todayMonth+1,0,0,0,0,0);
+	var month_end = new Date(todayYear,todayMonth,0,0,0,0,0).getTime();
 	if (future>month_end)
 		el('today').innerHTML += '<span class="expiring">　※記得檢查突破石！</span>';
 }
