@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['8/31/2017 15:00','拳斧BURST!','積分',{'points_burst':11}],
 ['8/30/2017 15:00','妖精尾巴','升級建築',{'fairytale':245}],
 ['8/30/2017 15:00','妖精尾巴','升格SS',{'points':100}],
 ['8/30/2017 15:00','妖精尾巴','積分',{'points2':200}],
@@ -83,6 +84,7 @@ var runeUrl = {
 	'mumu3': 'http://i.imgur.com/SXApvtW.jpg',
 	'points': 'http://i.imgur.com/SBhKxMB.jpg',
 	'points2': 'http://i.imgur.com/SBhKxMB.jpg',
+	'points_burst': 'http://i.imgur.com/xzQS3lk.png',
 	'dragon': 'http://i.imgur.com/wTG0Xjj.jpg',
 	'maou1': 'http://i.imgur.com/J1jdCkz.jpg',
 	'maou2': 'http://i.imgur.com/CRm0JHh.jpg',
@@ -106,6 +108,7 @@ var runeExtraText = {
 	'sharenwei': '(萬)',
 	'points': '(萬)',
 	'points2': '(萬)',
+	'points_burst': '(萬)',
 }
 
 var alertDays = 7;
