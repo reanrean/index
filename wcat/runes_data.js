@@ -1,6 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/29/2017 15:00','初音合作','升級劍士',{'miku':117}],
+['9/29/2017 15:00','初音合作','升級建築',{'miku':741}],
+['9/29/2017 15:00','初音合作','收集音符',{'miku2':7}],
 ['9/29/2017 15:00','夏日2016','(復刻)',{'summer2016_2':7,'summer2016_3':1355,'summer2016_4':20}],
 ['9/29/2017 15:00','夏日2016','建築lv30~40',{'summer2016_1':10}],
 ['9/19/2017 15:00','夏日2015','建築',{'summer2015':10}],
@@ -108,6 +111,8 @@ var runeUrl = {
 	'summer2016_3': 'https://gamewith.akamaized.net/img/f96466118645ca7458747066313a2458.jpg',
 	'summer2016_4': 'https://gamewith.akamaized.net/img/4bc3052269f17bec0a24d2fd38bb1c04.jpg',
 	'summer2015': 'https://gamewith.akamaized.net/img/2925476951f3bdf9ea36316119e7c822.jpg',
+	'miku': 'https://gamewith.akamaized.net/img/24025aee8aaedb7652469d99d44a7bd7.jpg',
+	'miku2': 'https://gamewith.akamaized.net/img/b20bf984965ca5bf3527d3328cb6efc7.jpg',
 };
 
 var runeExtraText = {
@@ -117,6 +122,7 @@ var runeExtraText = {
 	'points': '(萬)',
 	'points2': '(萬)',
 	'points_burst': '(萬)',
+	'miku2': '(萬)',
 }
 
 var alertDays = 7;
