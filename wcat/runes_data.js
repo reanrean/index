@@ -1,6 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/29/2017 15:00','夏日2016','(復刻)',{'summer2016_2':7,'summer2016_3':1355,'summer2016_4':20}],
+['9/29/2017 15:00','夏日2016','建築lv30~40',{'summer2016_1':10}],
+['9/19/2017 15:00','夏日2015','建築',{'summer2015':10}],
 ['8/31/2017 15:00','拳斧BURST!','積分',{'points_burst':11}],
 ['8/30/2017 15:00','妖精尾巴','升級建築',{'fairytale':245}],
 ['8/30/2017 15:00','妖精尾巴','升格SS',{'points':100}],
@@ -100,6 +103,11 @@ var runeUrl = {
 	'shareceo': 'https://gamewith.akamaized.net/img/c103e12cb6cd8e3005e82a90d7b0c1ba.jpg',
 	'fairytale': 'https://i.imgur.com/9a5VvG9.jpg',
 	'fairytale2': 'https://gamewith.akamaized.net/img/e6fd0ae60181918e75bed87c99890b1f.jpg',
+	'summer2016_1': 'https://gamewith.akamaized.net/img/0a7f2662385d42f450a9aea7c833d624.jpg',
+	'summer2016_2': 'https://gamewith.akamaized.net/img/234e009e1fcff6b324f0ff5c60aa4f22.jpg',
+	'summer2016_3': 'https://gamewith.akamaized.net/img/f96466118645ca7458747066313a2458.jpg',
+	'summer2016_4': 'https://gamewith.akamaized.net/img/4bc3052269f17bec0a24d2fd38bb1c04.jpg',
+	'summer2015': 'https://gamewith.akamaized.net/img/2925476951f3bdf9ea36316119e7c822.jpg',
 };
 
 var runeExtraText = {
