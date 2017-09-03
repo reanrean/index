@@ -1,8 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['9/29/2017 15:00','初音合作','升級劍士',{'miku':117}],
-['9/29/2017 15:00','初音合作','升級建築',{'miku':741}],
+['9/29/2017 15:00','初音合作','石板',{'miku3':300}],
+['9/29/2017 15:00','初音合作','交換·突破石',{'miku3':150}],
+['9/29/2017 15:00','初音合作','升免費角',{'miku':117}],
+['9/29/2017 15:00','初音合作','建築',{'miku':741}],
 ['9/29/2017 15:00','初音合作','收集音符',{'miku2':7}],
 ['9/29/2017 15:00','夏日2016','(復刻)',{'summer2016_2':7,'summer2016_3':1355,'summer2016_4':20}],
 ['9/29/2017 15:00','夏日2016','建築lv30~40',{'summer2016_1':10}],
@@ -113,6 +115,7 @@ var runeUrl = {
 	'summer2015': 'https://gamewith.akamaized.net/img/2925476951f3bdf9ea36316119e7c822.jpg',
 	'miku': 'https://gamewith.akamaized.net/img/24025aee8aaedb7652469d99d44a7bd7.jpg',
 	'miku2': 'https://gamewith.akamaized.net/img/b20bf984965ca5bf3527d3328cb6efc7.jpg',
+	'miku3': 'https://gamewith.akamaized.net/img/34e7ecc6f2954f4d56043b00e8214838.jpg',
 };
 
 var runeExtraText = {
