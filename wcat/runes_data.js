@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/29/2017 15:00','Re:0','建築',{'re0':14}],
 ['9/29/2017 15:00','初音合作','石板',{'miku3':300}],
 ['9/29/2017 15:00','初音合作','交換·突破石',{'miku3':150}],
 ['9/29/2017 15:00','初音合作','升免費角',{'miku':117}],
@@ -117,6 +118,7 @@ var runeUrl = {
 	'miku1': 'https://gamewith.akamaized.net/img/0e655c6fbd5c7d37318ce89429c365d6.jpg',
 	'miku2': 'https://gamewith.akamaized.net/img/b20bf984965ca5bf3527d3328cb6efc7.jpg',
 	'miku3': 'https://gamewith.akamaized.net/img/34e7ecc6f2954f4d56043b00e8214838.jpg',
+	're0': 'https://gamewith.akamaized.net/img/9de95676362c510219cc7a6c1c48e1fa.jpg',
 };
 
 var runeExtraText = {
