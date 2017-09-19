@@ -1,9 +1,11 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['10/10/2017 15:00','大工雕像','升級',{'riamu':5}],
 ['9/20/2017 15:00','Re:0協力1','pt',{'points':20}],
 ['9/25/2017 15:00','Re:0協力2','pt',{'points':20}],
 ['9/29/2017 15:00','Re:0協力3','pt',{'points':20}],
+['9/29/2017 15:00','Re:0','BGM',{'re03':6}],
 ['9/29/2017 15:00','Re:0','石板',{'re02':600}],
 ['9/29/2017 15:00','Re:0','建築',{'re0':28}],
 ['9/29/2017 15:00','初音合作','石板',{'miku3':300}],
@@ -124,6 +126,8 @@ var runeUrl = {
 	'miku3': 'https://gamewith.akamaized.net/img/34e7ecc6f2954f4d56043b00e8214838.jpg',
 	're0': 'https://gamewith.akamaized.net/img/9de95676362c510219cc7a6c1c48e1fa.jpg',
 	're02': 'https://gamewith.akamaized.net/img/7e2c8d891a6ce40d3277aac49060d771.jpg',
+	're03': 'https://gamewith.akamaized.net/img/d3a80e123c07a33ea24a139fa15175d4.jpg',
+	'riamu': 'https://gamewith.akamaized.net/img/393e5c98dc601874012b79fb254f4fa5.jpg',
 };
 
 var runeExtraText = {
