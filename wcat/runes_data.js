@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['10/16/2017 15:00','選拔協力','選拔協力',{'fourstar':600}],
 ['10/12/2017 15:00','雕像','時間',{'ozwald':5}],
 ['10/11/2017 15:00','雕像','黑翼',{'levin':9}],
 ['10/10/2017 15:00','雕像','大工',{'riamu':5}],
@@ -132,6 +133,7 @@ var runeUrl = {
 	'riamu': 'https://gamewith.akamaized.net/img/393e5c98dc601874012b79fb254f4fa5.jpg',
 	'levin': 'https://gamewith.akamaized.net/img/2853b0280966619ddbe9d31f2426cee5.jpg',
 	'ozwald': 'https://gamewith.akamaized.net/img/0f27d78b4e2a429dcb4d1c5a0882aa22.jpg',
+	'fourstar': 'https://gamewith.akamaized.net/img/5d5beeb5aee74ec91bd87895988cef59.jpg',
 };
 
 var runeExtraText = {
