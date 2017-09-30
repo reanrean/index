@@ -1,6 +1,15 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['10/25/2017 15:00','勇者轉職(復刻)','交換EX',{'maou3':3.5}],
+['10/25/2017 15:00','勇者轉職(復刻)','交換突破石',{'maou3':10.5}],
+['10/25/2017 15:00','勇者轉職(復刻)','交換貼紙',{'maou3':3}],
+['10/25/2017 15:00','勇者轉職(復刻)','轉職',{'maou3':1.51}],
+['10/25/2017 15:00','求人勇者(復刻)','升級建築',{'maou1':735}],
+['10/25/2017 15:00','求人勇者(復刻)','BGM',{'maou1':30}],
+['10/25/2017 15:00','求人勇者(復刻)','進化雙刀',{'maou1':45}],
+['10/25/2017 15:00','求人勇者(復刻)','進化弓',{'maou2':140}],
+['10/25/2017 15:00','求人勇者(復刻)','石板',{'maou2':600}],
 ['10/16/2017 15:00','選拔協力','選拔協力',{'fourstar':600}],
 ['10/12/2017 15:00','雕像','時間',{'ozwald':5}],
 ['10/11/2017 15:00','雕像','黑翼',{'levin':9}],
@@ -106,6 +115,7 @@ var runeUrl = {
 	'dragon': 'http://i.imgur.com/wTG0Xjj.jpg',
 	'maou1': 'http://i.imgur.com/J1jdCkz.jpg',
 	'maou2': 'http://i.imgur.com/CRm0JHh.jpg',
+	'maou3': 'https://cdn.wiki.famitsu.com/theme/famitsu/shironeko/icon/medal_wink.jpg',
 	'sok2': 'https://gamewith.akamaized.net/img/2699d31cfb697e16cd6ec9e88d8e72c7.jpg',
 	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
 	'kc1': 'https://i.imgur.com/VvSZ40h.jpg',
@@ -144,6 +154,7 @@ var runeExtraText = {
 	'points2': '(萬)',
 	'points_burst': '(萬)',
 	'miku2': '(萬)',
+	'maou3': '(萬)',
 }
 
 var alertDays = 7;

@@ -148,7 +148,7 @@ function sumRunesOutput(sum,eventCate){
 	var sumOutput2 = '';
 	for (var s in sum){
 		sumOutput1 += td(icon(s));
-		sumOutput2 += td(sum[s],'id="main-'+eventCate+'-'+s+'"');
+		sumOutput2 += td(roundNum(sum[s]),'id="main-'+eventCate+'-'+s+'"');
 	}
 	sumOutput += tr(sumOutput1)+tr(sumOutput2)+'</table>';
 	return sumOutput;
@@ -164,8 +164,9 @@ function showDate(){
 	future = new Date(today.getTime() + (alertDays * 24 * 60 * 60 * 1000)).getTime();
 	
 	//check month_end
-	var month_end = new Date(todayYear,todayMonth,0,0,0,0,0).getTime();
-	if (future>month_end)
+	var month_end = new Date(todayYear,todayMonth,0,15,0,0,0).getTime();
+	console.log(new Date(month_end));
+	if (future>month_end && today<month_end)
 		el('today').innerHTML += '<span class="expiring">　※記得檢查突破石！</span>';
 }
 
