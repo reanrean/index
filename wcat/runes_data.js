@@ -1,9 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['11/1/2017 15:00','花園','(復刻)',{'fog4':1815,'fog3':4100,'fog2':605,'fog1':3020,'fog5':1800}],
+['11/1/2017 15:00','花園','建築lv30~35',{'fog6':6}],
+['10/25/2017 15:00','勇者轉職(復刻)','石板',{'maou4':210}],
 ['10/25/2017 15:00','勇者轉職(復刻)','交換素材劍',{'maou3':10}],
-['10/25/2017 15:00','勇者轉職(復刻)','交換EX',{'maou3':8.5}],
-['10/25/2017 15:00','勇者轉職(復刻)','交換突破石',{'maou3':10.5}],
+['10/25/2017 15:00','勇者轉職(復刻)','交換EX·錘·突破石',{'maou3':28}],
+['10/25/2017 15:00','勇者轉職(復刻)','交換飾物',{'maou3':30}],
 ['10/25/2017 15:00','勇者轉職(復刻)','交換貼紙',{'maou3':6}],
 ['10/25/2017 15:00','勇者轉職(復刻)','轉職',{'maou3':1.51}],
 ['10/25/2017 15:00','求人勇者(復刻)','升級建築',{'maou1':735}],
@@ -117,6 +120,7 @@ var runeUrl = {
 	'maou1': 'http://i.imgur.com/J1jdCkz.jpg',
 	'maou2': 'http://i.imgur.com/CRm0JHh.jpg',
 	'maou3': 'https://cdn.wiki.famitsu.com/theme/famitsu/shironeko/icon/medal_wink.jpg',
+	'maou4': 'https://gamewith.akamaized.net/img/d89404f9595c6f4420ec96aaf7deb76b.jpg',
 	'sok2': 'https://gamewith.akamaized.net/img/2699d31cfb697e16cd6ec9e88d8e72c7.jpg',
 	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
 	'kc1': 'https://i.imgur.com/VvSZ40h.jpg',
@@ -145,6 +149,12 @@ var runeUrl = {
 	'levin': 'https://gamewith.akamaized.net/img/2853b0280966619ddbe9d31f2426cee5.jpg',
 	'ozwald': 'https://gamewith.akamaized.net/img/0f27d78b4e2a429dcb4d1c5a0882aa22.jpg',
 	'fourstar': 'https://gamewith.akamaized.net/img/5d5beeb5aee74ec91bd87895988cef59.jpg',
+	'fog1': 'https://gamewith.akamaized.net/img/c781f714a263ab8209212db8a2ba4051.jpg',
+	'fog2': 'https://gamewith.akamaized.net/img/b774ae11bc0db70ac10bfd306c6e62c6.jpg',
+	'fog3': 'https://gamewith.akamaized.net/img/fa0cdd6c22d724040b6bf4bf678dc73a.jpg',
+	'fog4': 'https://gamewith.akamaized.net/img/d99b950464f7353418bd91ae4f89e5a0.jpg',
+	'fog5': 'https://gamewith.akamaized.net/img/3c2db3a8ed4f56711a8f46ff3c6140a7.jpg',
+	'fog6': 'https://gamewith.akamaized.net/img/7c33778fa2084b983946973acfc6a5c1.jpg',
 };
 
 var runeExtraText = {
