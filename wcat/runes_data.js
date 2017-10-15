@@ -1,6 +1,8 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['11/6/2017 15:00','帝国','建築',{'empire1':600}],
+['11/6/2017 15:00','帝国','交換',{'empire2':15}],
 ['11/1/2017 15:00','花園','(復刻)',{'fog1':3020,'fog2':605,'fog3':4100,'fog4':1815,'fog5':1800}],
 ['11/1/2017 15:00','花園','建築lv30~35',{'fog6':6}],
 ['10/25/2017 15:00','勇者轉職','BGM',{'maou6':12}],
@@ -10,7 +12,7 @@ var eventList = [
 ['10/25/2017 15:00','勇者轉職','交換素材劍',{'maou3':10}],
 ['10/25/2017 15:00','勇者轉職','交換EX·錘·突破石',{'maou3':28}],
 ['10/25/2017 15:00','勇者轉職','交換飾物',{'maou3':30}],
-['10/25/2017 15:00','勇者轉職','交換貼紙',{'maou3':6}],
+['10/25/2017 15:00','勇者轉職','交換貼紙',{'maou3':9}],
 ['10/25/2017 15:00','勇者轉職','轉職',{'maou3':1.51}],
 ['10/25/2017 15:00','求人勇者(復刻)','升級建築',{'maou1':735}],
 ['10/25/2017 15:00','求人勇者(復刻)','BGM',{'maou1':30}],
@@ -160,6 +162,8 @@ var runeUrl = {
 	'fog4': 'https://gamewith.akamaized.net/img/d99b950464f7353418bd91ae4f89e5a0.jpg',
 	'fog5': 'https://gamewith.akamaized.net/img/3c2db3a8ed4f56711a8f46ff3c6140a7.jpg',
 	'fog6': 'https://gamewith.akamaized.net/img/7c33778fa2084b983946973acfc6a5c1.jpg',
+	'empire1': 'https://gamewith.akamaized.net/img/f3afe41b5635495dd06f71868067a8a6.jpg',
+	'empire2': 'https://gamewith.akamaized.net/img/068b47f34f213b7c0ea3b81be8f7b1c9.jpg',
 };
 
 var runeExtraText = {
