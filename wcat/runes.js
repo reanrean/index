@@ -43,7 +43,6 @@ function outputMain(){
 	el('table').innerHTML = out;
 	
 	initWidth = document.getElementsByTagName('table')[0].rows[0].cells[1].offsetWidth;
-	console.log(initWidth);
 	
 	//enable reprint clicking
 	el('reprint').onclick = function() {
