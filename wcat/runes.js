@@ -12,7 +12,7 @@ function init(){
 function outputMain(){
 	var skipEvent = [];
 	var out = '<table>';
-	out += tr(td('期限')+td('活動 <span id="reprint" class="today">[復刻]</span>', 'id="colEvent"')+td('符石', 'colspan="2"'),'class="title"');
+	out += tr(td('期限')+td('活動 <span id="reprint" class="today">[復刻]</span>', 'id="colEvent"')+td('符石'),'class="title"');
 	
 	for (var i in eventObj){
 		if (skipEvent.indexOf(i)>=0) continue;
@@ -25,7 +25,7 @@ function outputMain(){
 		line += td(labelfor(i,checkid));
 		var sum = sumRunes(i);
 		line += td(labelfor(sumRunesOutput(sum,i),checkid));
-		line += td('<input type="checkbox" id="'+checkid+'" onclick="check(this.id);saveSettings();" >');
+		line += td('<input type="checkbox" id="'+checkid+'" onclick="check(this.id);saveSettings();" >', 'style="display:none"');
 		out += tr(line,'id="tr'+checkid+'"');
 		if (cnt>1) {
 			for (var j in eventObj[i]) {
@@ -33,7 +33,7 @@ function outputMain(){
 				line = td('');
 				line += td(labelfor('- '+eventObj[i][j][0],checkid_sub));
 				line += td(labelfor(singleRunesOutput(eventObj[i][j][1],sum),checkid_sub));
-				line += td('<input type="checkbox" id="'+checkid_sub+'" onclick="check(this.id);saveSettings();" >');
+				line += td('<input type="checkbox" id="'+checkid_sub+'" onclick="check(this.id);saveSettings();" >', 'style="display:none"');
 				out += tr(line,'id="tr'+checkid_sub+'"');
 			}
 		}
