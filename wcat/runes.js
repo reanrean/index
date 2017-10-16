@@ -43,6 +43,7 @@ function outputMain(){
 	el('table').innerHTML = out;
 	
 	initWidth = document.getElementsByTagName('table')[0].rows[0].cells[1].offsetWidth;
+	console.log(initWidth);
 	
 	//enable reprint clicking
 	el('reprint').onclick = function() {
@@ -165,7 +166,6 @@ function showDate(){
 	
 	//check month_end
 	var month_end = new Date(todayYear,todayMonth,0,15,0,0,0).getTime();
-	console.log(new Date(month_end));
 	if (future>month_end && today<month_end)
 		el('today').innerHTML += '<span class="expiring">　※記得檢查突破石！</span>';
 }
@@ -219,7 +219,7 @@ function tr(text,attr){
 	return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>';
 }
 function icon(runeName){
-	return runeUrl[runeName] ? '<img src="'+runeUrl[runeName]+'" width="100%">' + (runeExtraText[runeName]?'<br>'+runeExtraText[runeName]:'') : '?';
+	return runeUrl[runeName] ? '<img src="'+runeUrl[runeName]+'" class="pic">' + (runeExtraText[runeName]?'<br>'+runeExtraText[runeName]:'') : '?';
 }
 function labelfor(txt,id){
 	return '<label for="'+id+'">'+txt+'</label>'
