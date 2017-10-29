@@ -1,6 +1,8 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['11/7/2017 15:00','交換素材劍','交換',{'guild_okashi':720}],
+['11/8/2017 15:00','守女神像協力','積分',{'points':100}],
 ['11/15/2017 15:00','冰火塔','石板',{'adtower4':240}],
 ['11/15/2017 15:00','冰火塔(復刻)','武器石板',{'adtower1':120,'adtower2':120}],
 ['11/6/2017 15:00','帝国','石板',{'empire3':400}],
@@ -168,6 +170,7 @@ var runeUrl = {
 	'adtower1': 'https://gamewith.akamaized.net/img/5d85af1de5295e8bded86e109ce82c58.jpg',
 	'adtower2': 'https://gamewith.akamaized.net/img/eeba9a6f873b0e1077b21fa12707a257.jpg',
 	'adtower4': 'https://gamewith.akamaized.net/img/2738bf3a13703448c040c891ed54bd4f.jpg',
+	'guild_okashi': 'https://gamewith.akamaized.net/img/e5ae685106e51ecd6c63586aac7278d6.jpg',
 };
 
 var runeExtraText = {
