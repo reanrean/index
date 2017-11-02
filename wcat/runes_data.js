@@ -1,6 +1,11 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['12/15/2017 15:00','固力果(復刻)','復刻',{'glico1':1660,'glico2':1230,'glico3':930}],
+['12/15/2017 15:00','固力果','グリコキャッスル',{'glico4':25}],
+['12/15/2017 15:00','固力果','交換',{'glico5':21}],
+['11/24/2017 15:00','萬聖節','怪談パーティ会場',{'halloween1':12}],
+['11/24/2017 15:00','萬聖節','解放劇情',{'halloween2':8}],
 ['11/7/2017 15:00','交換素材劍','交換',{'guild_okashi':720}],
 ['11/8/2017 15:00','守女神像協力','積分',{'points':100}],
 ['11/15/2017 15:00','冰火塔','石板',{'adtower4':240}],
@@ -117,6 +122,8 @@ var runeUrl = {
 	'glico1': 'http://i.imgur.com/tyMOprE.jpg',
 	'glico2': 'http://i.imgur.com/xYNLD2g.jpg',
 	'glico3': 'http://i.imgur.com/MOUOwR9.jpg',
+	'glico4': 'https://gamewith.akamaized.net/img/2ef3e8b86b229c138ca822d7bfe508fc.jpg',
+	'glico5': 'https://gamewith.akamaized.net/img/1a091aadd707f026ae2fb6b1a24ddc67.jpg',
 	'mumu1': 'http://i.imgur.com/k4DDpGR.jpg',
 	'mumu2': 'http://i.imgur.com/uAmDCX6.jpg',
 	'mumu3': 'http://i.imgur.com/SXApvtW.jpg',
@@ -171,6 +178,8 @@ var runeUrl = {
 	'adtower2': 'https://gamewith.akamaized.net/img/eeba9a6f873b0e1077b21fa12707a257.jpg',
 	'adtower4': 'https://gamewith.akamaized.net/img/2738bf3a13703448c040c891ed54bd4f.jpg',
 	'guild_okashi': 'https://gamewith.akamaized.net/img/e5ae685106e51ecd6c63586aac7278d6.jpg',
+	'halloween1': 'https://gamewith.akamaized.net/img/56799fc07c49383cbca76f9ad29e5e13.jpg',
+	'halloween2': 'https://gamewith.akamaized.net/img/ff3c3f4adcc2bf0ac4420526519cf93e.jpg',
 };
 
 var runeExtraText = {
