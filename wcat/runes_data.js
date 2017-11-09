@@ -4,6 +4,9 @@ var eventList = [
 ['12/15/2017 15:00','固力果(復刻)','復刻',{'glico1':1660,'glico2':1230,'glico3':930}],
 ['12/15/2017 15:00','固力果','グリコキャッスル',{'glico4':25}],
 ['12/15/2017 15:00','固力果','交換',{'glico5':21}],
+['11/24/2017 15:00','萬聖節','石板1',{'halloween3':260}],
+['11/24/2017 15:00','萬聖節','石板2',{'halloween4':460}],
+['11/24/2017 15:00','萬聖節','飾物·突破石',{'halloween4':1190}],
 ['11/24/2017 15:00','萬聖節','怪談パーティ会場',{'halloween1':12}],
 ['11/24/2017 15:00','萬聖節','解放劇情',{'halloween2':8}],
 ['11/7/2017 15:00','交換素材劍','交換',{'guild_okashi':720}],
@@ -180,6 +183,8 @@ var runeUrl = {
 	'guild_okashi': 'https://gamewith.akamaized.net/img/e5ae685106e51ecd6c63586aac7278d6.jpg',
 	'halloween1': 'https://gamewith.akamaized.net/img/56799fc07c49383cbca76f9ad29e5e13.jpg',
 	'halloween2': 'https://gamewith.akamaized.net/img/ff3c3f4adcc2bf0ac4420526519cf93e.jpg',
+	'halloween3': 'https://gamewith.akamaized.net/img/b99ba1bb8598e96dc2003ff92994c187.jpg',
+	'halloween4': 'https://gamewith.akamaized.net/img/9b6902bfb178273a69d03adaeb586ace.jpg',
 };
 
 var runeExtraText = {
