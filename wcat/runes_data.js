@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['12/11/2017 15:00','探偵事務所','探偵事務所',{'mist_d':5}],
 ['12/15/2017 15:00','固力果(復刻)','復刻',{'glico1':1660,'glico2':1230,'glico3':930}],
 ['12/15/2017 15:00','固力果','グリコキャッスル',{'glico4':25}],
 ['12/15/2017 15:00','固力果','交換',{'glico5':21}],
@@ -11,8 +12,7 @@ var eventList = [
 ['11/24/2017 15:00','萬聖節','解放劇情',{'halloween2':8}],
 ['11/7/2017 15:00','交換素材劍','交換',{'guild_okashi':720}],
 ['11/8/2017 15:00','守女神像協力','積分',{'points':100}],
-['11/15/2017 15:00','冰火塔','石板',{'adtower4':240}],
-['11/15/2017 15:00','冰火塔(復刻)','武器石板',{'adtower1':120,'adtower2':120}],
+['11/15/2017 15:00','冰火塔石板','石板',{'adtower4_1':120,'adtower4_2':120',adtower4_3':240}],
 ['11/6/2017 15:00','帝国','石板',{'empire3':400}],
 ['11/6/2017 15:00','帝国','帝国オペラ座',{'empire1':600}],
 ['11/6/2017 15:00','帝国','交換',{'empire2':10}],
@@ -177,14 +177,15 @@ var runeUrl = {
 	'empire1': 'https://gamewith.akamaized.net/img/f3afe41b5635495dd06f71868067a8a6.jpg',
 	'empire2': 'https://gamewith.akamaized.net/img/068b47f34f213b7c0ea3b81be8f7b1c9.jpg',
 	'empire3': 'https://gamewith.akamaized.net/img/cef25d02f88b3c84d52d4b956a86e502.jpg',
-	'adtower1': 'https://gamewith.akamaized.net/img/5d85af1de5295e8bded86e109ce82c58.jpg',
-	'adtower2': 'https://gamewith.akamaized.net/img/eeba9a6f873b0e1077b21fa12707a257.jpg',
-	'adtower4': 'https://gamewith.akamaized.net/img/2738bf3a13703448c040c891ed54bd4f.jpg',
+	'adtower4_1': 'https://gamewith.akamaized.net/img/5d85af1de5295e8bded86e109ce82c58.jpg',
+	'adtower4_2': 'https://gamewith.akamaized.net/img/eeba9a6f873b0e1077b21fa12707a257.jpg',
+	'adtower4_3': 'https://gamewith.akamaized.net/img/2738bf3a13703448c040c891ed54bd4f.jpg',
 	'guild_okashi': 'https://gamewith.akamaized.net/img/e5ae685106e51ecd6c63586aac7278d6.jpg',
 	'halloween1': 'https://gamewith.akamaized.net/img/56799fc07c49383cbca76f9ad29e5e13.jpg',
 	'halloween2': 'https://gamewith.akamaized.net/img/ff3c3f4adcc2bf0ac4420526519cf93e.jpg',
 	'halloween3': 'https://gamewith.akamaized.net/img/b99ba1bb8598e96dc2003ff92994c187.jpg',
 	'halloween4': 'https://gamewith.akamaized.net/img/9b6902bfb178273a69d03adaeb586ace.jpg',
+	'mist_d': 'https://gamewith.akamaized.net/img/1337c0fefb128904dc99156aaf6b2a41.jpg',
 };
 
 var runeExtraText = {
