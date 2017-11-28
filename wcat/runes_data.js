@@ -1,9 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['12/6/2017 15:00','紅蓮2','あやしい露店',{'od2_1':405}],
+['12/15/2017 15:00','大小島','石板',{'bigmini':5}],
+['12/6/2017 15:00','紅蓮2','あやしい露店',{'od2_1':405,'od2_2':300}],
 ['12/6/2017 15:00','紅蓮2','交換貼紙',{'od2_1':100}],
 ['12/6/2017 15:00','紅蓮2','交換突破石',{'od2_1':300}],
+['12/6/2017 15:00','紅蓮2','BGM',{'od2_2':300}],
+['12/6/2017 15:00','紅蓮2','石板',{'od2_3':25}],
 ['12/11/2017 15:00','探偵事務所','探偵事務所',{'mist_d':5}],
 ['12/15/2017 15:00','固力果(復刻)','復刻',{'glico1':1660,'glico2':1230,'glico3':930}],
 ['12/15/2017 15:00','固力果','グリコキャッスル',{'glico4':25}],
@@ -192,6 +195,9 @@ var runeUrl = {
 	'halloween5': 'https://gamewith.akamaized.net/img/7ca25b9c7ad43ac9d467061a825b8b44.jpg',
 	'mist_d': 'https://gamewith.akamaized.net/img/1337c0fefb128904dc99156aaf6b2a41.jpg',
 	'od2_1': 'https://gamewith.akamaized.net/img/5682ffd615fe0c7eefc222255c7a829b.jpg',
+	'od2_2': 'https://gamewith.akamaized.net/img/41ca3d33ea654d61775d5cf4b7210b7e.jpg',
+	'od2_3': 'https://gamewith.akamaized.net/img/23dd35c480534acf62abbff7b62c9395.jpg',
+	'bigmini': 'https://gamewith.akamaized.net/img/bc0e0cf7eaf5268fb8e5842afd9ff284.jpg',
 };
 
 var runeExtraText = {
