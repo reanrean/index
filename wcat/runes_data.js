@@ -1,6 +1,8 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['1/31/2018 15:00','茶熊','学生寮',{'chaguma3_boy':3,'chaguma3_girl':5}],
+['1/31/2018 15:00','茶熊','各桌椅',{'chaguma3_table':9}],
 ['12/22/2017 15:00','神將降臨','BGM',{'fightg1':39}],
 ['12/22/2017 15:00','神將降臨','交換飾物',{'fightg1':400}],
 ['12/22/2017 15:00','神將降臨','交換貼紙',{'fightg2':180}],
@@ -204,6 +206,9 @@ var runeUrl = {
 	'bigmini': 'https://gamewith.akamaized.net/img/bc0e0cf7eaf5268fb8e5842afd9ff284.jpg',
 	'fightg1': 'https://gamewith.akamaized.net/img/914804840b937fd386b9a5bedfbf23fe.jpg',
 	'fightg2': 'https://gamewith.akamaized.net/img/25ec9727386775c5a6de2d803e80a5fe.jpg',
+	'chaguma3_boy': 'https://i.imgur.com/YCUls9v.png',
+	'chaguma3_girl': 'https://i.imgur.com/9d6cwjk.png',
+	'chaguma3_table': 'https://i.imgur.com/YAk4ja4.png',
 };
 
 var runeExtraText = {
