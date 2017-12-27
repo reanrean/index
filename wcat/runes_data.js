@@ -1,9 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['1/31/2018 15:00','茶熊聖誕','石板',{'chaguma3_xmas4':50}],
-['1/31/2018 15:00','茶熊聖誕','クリスマスツリー',{'chaguma3_xmas1':3,'chaguma3_xmas2':5,'chaguma3_xmas3':5}],
-['1/31/2018 15:00','茶熊免費角色','茶熊免費角色',{'chaguma3_seiya1':99,'chaguma3_seiya2':18}],
+['1/31/2018 15:00','茶熊聖誕','石板',{'chaguma3_xmas5':50}],
+['1/31/2018 15:00','茶熊聖誕','交換',{'chaguma3_xmas4':6}],
+['1/31/2018 15:00','茶熊聖誕','聖誕樹',{'chaguma3_xmas1':60,'chaguma3_xmas2':60,'chaguma3_xmas3':60}],
+['1/31/2018 15:00','茶熊英雄角','茶熊免費角色',{'chaguma3_seiya1':99,'chaguma3_seiya2':18}],
 ['1/31/2018 15:00','茶熊3','石板',{'chaguma3_battle':500}],
 ['1/31/2018 15:00','茶熊3','学生寮',{'chaguma3_boy':3,'chaguma3_girl':5}],
 ['1/31/2018 15:00','茶熊3','各桌椅',{'chaguma3_table':9}],
@@ -218,6 +219,7 @@ var runeUrl = {
 	'chaguma3_xmas2': 'https://gamewith.akamaized.net/img/7247d780c674b2bbb33811eb345d5991.jpg',
 	'chaguma3_xmas3': 'https://gamewith.akamaized.net/img/805dd8d5724b12187c1d2c4a62e1c16f.jpg',
 	'chaguma3_xmas4': 'https://gamewith.akamaized.net/img/77d972902de28930369ff282d126a5d9.jpg',
+	'chaguma3_xmas5': 'https://gamewith.akamaized.net/img/77eda691848507cd8628932725b390ad.jpg',
 	'chaguma3_seiya1': 'https://gamewith.akamaized.net/img/1bd6c43ef3509f78fb32b9efefd10d5d.jpg',
 	'chaguma3_seiya2': 'https://gamewith.akamaized.net/img/6d0807ca5e7082344c7ecd774d9b6618.jpg',
 };
