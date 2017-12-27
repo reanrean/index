@@ -1,8 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['1/31/2018 15:00','茶熊','学生寮',{'chaguma3_boy':3,'chaguma3_girl':5}],
-['1/31/2018 15:00','茶熊','各桌椅',{'chaguma3_table':9}],
+['1/31/2018 15:00','茶熊聖誕','石板',{'chaguma3_xmas4':50}],
+['1/31/2018 15:00','茶熊聖誕','クリスマスツリー',{'chaguma3_xmas1':3,'chaguma3_xmas2':5,'chaguma3_xmas3':5}],
+['1/31/2018 15:00','茶熊免費角色','茶熊免費角色',{'chaguma3_seiya1':99,'chaguma3_seiya2':18}],
+['1/31/2018 15:00','茶熊3','石板',{'chaguma3_battle':500}],
+['1/31/2018 15:00','茶熊3','学生寮',{'chaguma3_boy':3,'chaguma3_girl':5}],
+['1/31/2018 15:00','茶熊3','各桌椅',{'chaguma3_table':9}],
 ['12/22/2017 15:00','神將降臨','BGM',{'fightg1':39}],
 ['12/22/2017 15:00','神將降臨','交換飾物',{'fightg1':400}],
 ['12/22/2017 15:00','神將降臨','交換貼紙',{'fightg2':180}],
@@ -209,6 +213,13 @@ var runeUrl = {
 	'chaguma3_boy': 'https://i.imgur.com/YCUls9v.png',
 	'chaguma3_girl': 'https://i.imgur.com/9d6cwjk.png',
 	'chaguma3_table': 'https://i.imgur.com/YAk4ja4.png',
+	'chaguma3_battle': 'https://gamewith.akamaized.net/img/c03e07ab53d1c75ee2f15e62ecbdfaca.jpg',
+	'chaguma3_xmas1': 'https://gamewith.akamaized.net/img/5660843bbe1b939b1ea63a6b8d19e46a.jpg',
+	'chaguma3_xmas2': 'https://gamewith.akamaized.net/img/7247d780c674b2bbb33811eb345d5991.jpg',
+	'chaguma3_xmas3': 'https://gamewith.akamaized.net/img/805dd8d5724b12187c1d2c4a62e1c16f.jpg',
+	'chaguma3_xmas4': 'https://gamewith.akamaized.net/img/77d972902de28930369ff282d126a5d9.jpg',
+	'chaguma3_seiya1': 'https://gamewith.akamaized.net/img/1bd6c43ef3509f78fb32b9efefd10d5d.jpg',
+	'chaguma3_seiya2': 'https://gamewith.akamaized.net/img/6d0807ca5e7082344c7ecd774d9b6618.jpg',
 };
 
 var runeExtraText = {
