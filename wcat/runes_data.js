@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['2/13/2018 15:00','新年2018','ワンダフル・ホネデトウ',{'newyear2018_1':20,'newyear2018_2':10}],
 ['1/31/2018 15:00','茶熊聖誕','石板',{'chaguma3_xmas5':50}],
 ['1/31/2018 15:00','茶熊聖誕','交換',{'chaguma3_xmas4':6}],
 ['1/31/2018 15:00','茶熊聖誕','聖誕樹',{'chaguma3_xmas1':60,'chaguma3_xmas2':60,'chaguma3_xmas3':60}],
@@ -222,6 +223,8 @@ var runeUrl = {
 	'chaguma3_xmas5': 'https://gamewith.akamaized.net/img/77eda691848507cd8628932725b390ad.jpg',
 	'chaguma3_seiya1': 'https://gamewith.akamaized.net/img/1bd6c43ef3509f78fb32b9efefd10d5d.jpg',
 	'chaguma3_seiya2': 'https://gamewith.akamaized.net/img/6d0807ca5e7082344c7ecd774d9b6618.jpg',
+	'newyear2018_1': 'https://gamewith.akamaized.net/img/a9e40da8ca40b6f2c40be2e865597774.jpg',
+	'newyear2018_2': 'https://gamewith.akamaized.net/img/7287919570290451faedc77505cd1e8f.jpg',
 };
 
 var runeExtraText = {
