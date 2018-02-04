@@ -1,8 +1,16 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['4/2/2018 15:00','猩猩協力','戰分',{'pointsn':9999,'gorilla':4000}],
+['2/28/2018 15:00','龍騎強化','石板',{'dragon3':600}],
+['2/28/2018 15:00','龍騎強化','交換突破石',{'dragon2':100}],
+['2/28/2018 15:00','龍騎強化','交換貼紙',{'dragon2':100}],
+['2/28/2018 15:00','龍騎強化','伝承の壁画',{'dragon1':300}],
+['2/26/2018 15:00','名星会','名星会殿堂·黒',{'meisei':285}],
+['2/26/2018 15:00','名星会','BGM',{'meisei':225}],
 ['1/25/2018 15:00','雕像','男',{'wilfrid':300}],
 ['1/24/2018 15:00','雕像','女',{'mila':300}],
+['2/13/2018 15:00','新年2018','積分',{'points':40}],
 ['2/13/2018 15:00','新年2018','突破石',{'newyear2018_3':240}],
 ['2/13/2018 15:00','新年2018','石板',{'newyear2018_3':400}],
 ['2/13/2018 15:00','新年2018','恐龍建築',{'newyear2018_1':20,'newyear2018_2':10}],
@@ -89,6 +97,7 @@ var runeUrl = {
 	'mumu3': 'http://i.imgur.com/SXApvtW.jpg',
 	'points': 'http://i.imgur.com/SBhKxMB.jpg',
 	'points2': 'http://i.imgur.com/SBhKxMB.jpg',
+	'pointsn': 'http://i.imgur.com/SBhKxMB.jpg',
 	'points_burst': 'http://i.imgur.com/xzQS3lk.png',
 	'dragon': 'http://i.imgur.com/wTG0Xjj.jpg',
 	'maou1': 'http://i.imgur.com/J1jdCkz.jpg',
@@ -167,6 +176,11 @@ var runeUrl = {
 	'newyear2018_3': 'https://gamewith.akamaized.net/img/23d1d4838d73be350bfaff5c3afc8176.jpg',
 	'mila': 'https://gamewith.akamaized.net/img/01fd6b8f2804bd8248d4b3f97dd029f8.jpg',
 	'wilfrid': 'https://gamewith.akamaized.net/img/a28ab7403b2eb07852bc530b2c3138e8.jpg',
+	'meisei': 'https://gamewith.akamaized.net/img/a3ab2d8c3b1232392bea645eab7ea05f.jpg',
+	'dragon1': 'https://gamewith.akamaized.net/img/79316a4844debf3ac971e4447a2b763b.jpg',
+	'dragon2': 'https://gamewith.akamaized.net/img/7b2c329ff96436ca1c71d32501efd8f8.jpg',
+	'dragon3': 'https://gamewith.akamaized.net/img/0c97d0253e0d0616f3a359d23055b226.jpg',
+	'gorilla': 'https://i.imgur.com/bXyJzmO.png',
 };
 
 var runeExtraText = {
