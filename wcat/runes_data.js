@@ -2,6 +2,8 @@
 //one line for each eventName
 var eventList = [
 ['4/2/2018 15:00','猩猩協力','戰分',{'pointsn':9999,'gorilla':4000}],
+['3/12/2018 15:00','情人節','交換開箱',{'valen2':400,'valen3':2750}],
+['3/12/2018 15:00','情人節','衣櫃(建築)',{'valen1':24}],
 ['2/28/2018 15:00','龍騎強化','石板2',{'dragon4':500}],
 ['2/28/2018 15:00','龍騎強化','石板1',{'dragon3':600}],
 ['2/28/2018 15:00','龍騎強化','交換突破石2',{'dragon4':160}],
@@ -184,6 +186,9 @@ var runeUrl = {
 	'dragon3': 'https://gamewith.akamaized.net/img/0c97d0253e0d0616f3a359d23055b226.jpg',
 	'dragon4': 'https://gamewith.akamaized.net/img/bc240dfccd1b19e245ab10643e13928a.jpg',
 	'gorilla': 'https://i.imgur.com/bXyJzmO.png',
+	'valen1': 'https://gamewith.akamaized.net/img/115764cc3d25ff6cd43a609ff600f30f.jpg',
+	'valen2': 'https://gamewith.akamaized.net/img/f28831ebbeb88e4a3d79c89e9cbcc404.jpg',
+	'valen3': 'https://gamewith.akamaized.net/img/5dc5628eaefc48e3f4e5301cb2495008.jpg',
 };
 
 var runeExtraText = {
