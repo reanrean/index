@@ -2,7 +2,8 @@
 //one line for each eventName
 var eventList = [
 ['4/2/2018 15:00','猩猩協力','戰分',{'pointsn':9999,'gorilla':4000}],
-['3/5/2018 15:00','冰火塔石板','石板',{'adtower5_1':750,'adtower5_2':360}],
+['3/16/2018 15:00','進擊巨人','壁工事',{'titan1':591,'titan2':340,'titan3':120,'titan4':319}],
+['3/5/2018 15:00','牛塔石板','石板',{'adtower5_1':750,'adtower5_2':360}],
 ['3/12/2018 15:00','情人節','交換開箱',{'valen2':1150,'valen3':1750}],
 ['3/12/2018 15:00','情人節','石板',{'valen3':1000}],
 ['3/12/2018 15:00','情人節','衣櫃(建築)',{'valen1':48}],
@@ -193,6 +194,10 @@ var runeUrl = {
 	'valen3': 'https://gamewith.akamaized.net/img/5dc5628eaefc48e3f4e5301cb2495008.jpg',
 	'adtower5_1': 'https://gamewith.akamaized.net/img/8c6118cf79a26eecc3549a1f69a64be1.jpg',
 	'adtower5_2': 'https://gamewith.akamaized.net/img/bb76ef5f45ca1c4a3ddbc22a6dc57d75.jpg',
+	'titan1': 'https://i.imgur.com/itChNR5.jpg',
+	'titan2': 'https://i.imgur.com/9v27hSh.jpg',
+	'titan3': 'https://i.imgur.com/UoWMyUU.jpg',
+	'titan4': 'https://gamewith.akamaized.net/img/4df9b7e7887306361fa90018f77a5330.jpg',
 };
 
 var runeExtraText = {
@@ -204,6 +209,9 @@ var runeExtraText = {
 	'points_burst': '(萬)',
 	'miku2': '(萬)',
 	'maou3': '(萬)',
+	'titan1': '(各)',
+	'titan2': '(各)',
+	'titan3': '(各)',
 }
 
 var alertDays = 7;
