@@ -2,6 +2,11 @@
 //one line for each eventName
 var eventList = [
 ['4/2/2018 15:00','猩猩協力','戰分',{'pointsn':9999,'gorilla':4000}],
+//['3/12/2018 15:00','巨人協力2','石板',{'titan_b2':210}],
+//['3/20/2018 15:00','巨人協力3','石板',{'titan_b3':210}],
+['3/7/2018 15:00','巨人協力1','女型の巨人の像',{'titan_b1':210}],
+['3/7/2018 15:00','巨人協力1','石板',{'titan_b1':210}],
+['3/7/2018 15:00','巨人協力1','積分',{'points':20}],
 ['3/16/2018 15:00','進擊巨人','壁工事',{'titan1':591,'titan2':340,'titan3':120}],
 ['3/16/2018 15:00','進擊巨人','角色升級',{'titan4':99}],
 ['3/16/2018 15:00','進擊巨人','武器進化',{'titan4':220}],
@@ -200,6 +205,7 @@ var runeUrl = {
 	'titan2': 'https://i.imgur.com/9v27hSh.jpg',
 	'titan3': 'https://i.imgur.com/UoWMyUU.jpg',
 	'titan4': 'https://gamewith.akamaized.net/img/4df9b7e7887306361fa90018f77a5330.jpg',
+	'titan_b1': 'https://gamewith.akamaized.net/img/d1a8580f7cffa93516a6359caf4622af.jpg',
 };
 
 var runeExtraText = {
