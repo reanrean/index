@@ -1,11 +1,17 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['11/6/2017 15:00','帝国(復刻)','石板',{'empire3':400}],
+['11/6/2017 15:00','帝国(復刻)','帝国オペラ座',{'empire1':600,'empire4':800}],
+['11/6/2017 15:00','帝国(復刻)','交換',{'empire2':10}],
+['11/6/2017 15:00','帝国(復刻)','BGM',{'empire2':5}],
 ['4/2/2018 15:00','猩猩協力','戰分',{'pointsn':9999,'gorilla':4000}],
 ['3/12/2018 15:00','巨人協力2','石板',{'titan_b2':210}],
 ['3/12/2018 15:00','巨人協力2','鎧の巨人の像',{'titan_b2':210}],
 ['3/12/2018 15:00','巨人協力2','積分',{'points':20}],
-//['3/20/2018 15:00','巨人協力3','石板',{'titan_b3':210}],
+['3/20/2018 15:00','巨人協力3','石板',{'titan_b3':210}],
+['3/20/2018 15:00','巨人協力3','超大型巨人の像',{'titan_b3':210}],
+['3/20/2018 15:00','巨人協力3','積分',{'points':20}],
 ['3/7/2018 15:00','巨人協力1','女型の巨人の像',{'titan_b1':210}],
 ['3/7/2018 15:00','巨人協力1','石板',{'titan_b1':210}],
 ['3/7/2018 15:00','巨人協力1','積分',{'points':20}],
@@ -159,6 +165,7 @@ var runeUrl = {
 	'empire1': 'https://gamewith.akamaized.net/img/f3afe41b5635495dd06f71868067a8a6.jpg',
 	'empire2': 'https://gamewith.akamaized.net/img/068b47f34f213b7c0ea3b81be8f7b1c9.jpg',
 	'empire3': 'https://gamewith.akamaized.net/img/cef25d02f88b3c84d52d4b956a86e502.jpg',
+	'empire4': 'https://gamewith.akamaized.net/img/24160ad916125fe21ffd481ba19fcf87.jpg',
 	'adtower4_1': 'https://gamewith.akamaized.net/img/5d85af1de5295e8bded86e109ce82c58.jpg',
 	'adtower4_2': 'https://gamewith.akamaized.net/img/eeba9a6f873b0e1077b21fa12707a257.jpg',
 	'adtower4_3': 'https://gamewith.akamaized.net/img/2738bf3a13703448c040c891ed54bd4f.jpg',
@@ -209,6 +216,7 @@ var runeUrl = {
 	'titan4': 'https://gamewith.akamaized.net/img/4df9b7e7887306361fa90018f77a5330.jpg',
 	'titan_b1': 'https://gamewith.akamaized.net/img/d1a8580f7cffa93516a6359caf4622af.jpg',
 	'titan_b2': 'https://gamewith.akamaized.net/img/1b9505b4a45ae74371d1b28dc0ad627c.jpg',
+	'titan_b3': 'https://gamewith.akamaized.net/img/352de13c4318bc3c421a9ba5f26af7e4.jpg',
 };
 
 var runeExtraText = {
