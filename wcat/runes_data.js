@@ -1,7 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['4/9/2018 15:00','帝国2','石板',{'empirev2_1':50}],
+['4/9/2018 15:00','帝国2','突破石/EX',{'empirev2_2':500}],
+['4/9/2018 15:00','帝国2','石板2',{'empirev2_2':1000}],
+['4/9/2018 15:00','帝国2','石板1',{'empirev2_1':50}],
 ['4/9/2018 15:00','帝国2','連邦議会議事堂',{'empirev2_1':38}],
 ['3/20/2018 15:00','帝国(復刻)','石板',{'empire3':400}],
 ['3/20/2018 15:00','帝国(復刻)','帝国オペラ座',{'empire1':600,'empire4':800}],
@@ -220,6 +222,7 @@ var runeUrl = {
 	'titan_b2': 'https://gamewith.akamaized.net/img/1b9505b4a45ae74371d1b28dc0ad627c.jpg',
 	'titan_b3': 'https://gamewith.akamaized.net/img/352de13c4318bc3c421a9ba5f26af7e4.jpg',
 	'empirev2_1': 'https://gamewith.akamaized.net/img/13fee21634fa14a858de2ad17290ef44.jpg',
+	'empirev2_2': 'https://gamewith.akamaized.net/img/7c322dbc8730456934b618875a7be5c7.jpg',
 };
 
 var runeExtraText = {
