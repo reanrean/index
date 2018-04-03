@@ -1,6 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['5/1/2018 15:00','蒼炎','石板',{'bluefire3':1000}],
+['5/1/2018 15:00','蒼炎','飾物',{'bluefire3':500}],
+['5/1/2018 15:00','蒼炎','積分',{'points':100}],
 ['5/1/2018 15:00','蒼炎','飛行艇建築',{'bluefire1':200,'bluefire2':200}],
 ['4/9/2018 15:00','帝国2','突破石/EX',{'empirev2_2':500}],
 ['4/9/2018 15:00','帝国2','石板2',{'empirev2_2':1000}],
@@ -184,6 +187,7 @@ var runeUrl = {
 	'empirev2_2': 'https://gamewith.akamaized.net/img/7c322dbc8730456934b618875a7be5c7.jpg',
 	'bluefire1': 'https://gamewith.akamaized.net/img/5d3dd8fc57a8b77a1b99bedd79beed65.jpg',
 	'bluefire2': 'https://gamewith.akamaized.net/img/4f97394bd14ec4d2a9a6b9fa510c8ac1.jpg',
+	'bluefire3': 'https://gamewith.akamaized.net/img/5f5e0384853fe84fde7d2cc7855eb183.jpg',
 };
 
 var runeExtraText = {
