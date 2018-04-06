@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['6/4/2018 15:00','蜈蚣協力','戰分',{'pointsn':9999,'mugade':4000}],
 ['5/1/2018 15:00','蒼炎','石板',{'bluefire3':1000}],
 ['5/1/2018 15:00','蒼炎','飾物',{'bluefire3':500}],
 ['5/1/2018 15:00','蒼炎','積分',{'points':100}],
@@ -171,6 +172,7 @@ var runeUrl = {
 	'dragon3': 'https://gamewith.akamaized.net/img/0c97d0253e0d0616f3a359d23055b226.jpg',
 	'dragon4': 'https://gamewith.akamaized.net/img/bc240dfccd1b19e245ab10643e13928a.jpg',
 	'gorilla': 'https://i.imgur.com/bXyJzmO.png',
+	'mugade': 'https://gamewith.akamaized.net/img/46bd7be2881b2a9e2317d260e4fff83d.jpg',
 	'valen1': 'https://gamewith.akamaized.net/img/115764cc3d25ff6cd43a609ff600f30f.jpg',
 	'valen2': 'https://gamewith.akamaized.net/img/f28831ebbeb88e4a3d79c89e9cbcc404.jpg',
 	'valen3': 'https://gamewith.akamaized.net/img/5dc5628eaefc48e3f4e5301cb2495008.jpg',
