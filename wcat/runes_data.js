@@ -1,6 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['5/14/2018 15:00','遺跡探險','建築',{'trouble1':14}],
+['5/14/2018 15:00','遺跡探險','BGM',{'trouble2':150}],
+['5/14/2018 15:00','遺跡探險','石板',{'trouble3':1000}],
+['5/14/2018 15:00','遺跡探險','飾物',{'trouble3':450}],
 ['6/4/2018 15:00','蜈蚣協力','戰分',{'pointsn':9999,'mugade':4000}],
 ['5/1/2018 15:00','蒼炎','石板',{'bluefire3':1000}],
 ['5/1/2018 15:00','蒼炎','飾物',{'bluefire3':500}],
@@ -190,6 +194,9 @@ var runeUrl = {
 	'bluefire1': 'https://gamewith.akamaized.net/img/5d3dd8fc57a8b77a1b99bedd79beed65.jpg',
 	'bluefire2': 'https://gamewith.akamaized.net/img/4f97394bd14ec4d2a9a6b9fa510c8ac1.jpg',
 	'bluefire3': 'https://gamewith.akamaized.net/img/5f5e0384853fe84fde7d2cc7855eb183.jpg',
+	'trouble1': 'https://gamewith.akamaized.net/img/95390b0d729ce56c5c8791f2a5b4dd42.jpg',
+	'trouble2': 'https://gamewith.akamaized.net/img/9a6888182f26b10e69463d62d042b7c7.jpg',
+	'trouble3': 'https://gamewith.akamaized.net/img/3b5f047700984a4443a188d369a594e4.jpg',
 };
 
 var runeExtraText = {
