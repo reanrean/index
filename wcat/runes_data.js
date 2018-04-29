@@ -1,11 +1,14 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['6/15/2018 15:00','溫泉2','交換開箱',{'onsen2_1':300}],
+['6/15/2018 15:00','溫泉2','進化武器',{'onsen2_1':380}],
+['5/14/2018 15:00','祝福弓','祝福弓',{'bless_yumi':519}],
 ['5/14/2018 15:00','遺跡探險','建築',{'trouble1':14}],
 ['5/14/2018 15:00','遺跡探險','BGM',{'trouble2':150}],
 ['5/14/2018 15:00','遺跡探險','石板',{'trouble3':1000}],
 ['5/14/2018 15:00','遺跡探險','飾物',{'trouble3':450}],
-['6/4/2018 15:00','蜈蚣協力','戰分',{'pointsn':9999,'mugade':4000}],
+['6/4/2018 15:00','蜈蚣協力','戰分',{'pointsn':12000,'mugade':4000}],
 ['5/1/2018 15:00','蒼炎','石板',{'bluefire3':1000}],
 ['5/1/2018 15:00','蒼炎','飾物',{'bluefire3':500}],
 ['5/1/2018 15:00','蒼炎','積分',{'points':100}],
@@ -32,6 +35,7 @@ var runeUrl = {
 	'noroi_axe2': 'http://i.imgur.com/auLQCCr.png',
 	'noroi_doub': 'http://i.imgur.com/QfS9rxV.jpg',
 	'noroi_doub2': 'http://i.imgur.com/CHHRwUU.png',
+	'bless_yumi': 'https://gamewith.akamaized.net/img/76f0537eae2008583c50e4312b3c879b.jpg',
 	'ka1': 'https://gamewith.akamaized.net/img/922f02538d1af23b86bdc8fbb5bb8a71.jpg',
 	'ka2': 'https://gamewith.akamaized.net/img/7cb9aabcd01fcdfbf1fe83593f2be202.jpg',
 	'ka3': 'https://gamewith.akamaized.net/img/8e8cb2542a222298c3f0058a0a9911b9.jpg',
@@ -197,6 +201,7 @@ var runeUrl = {
 	'trouble1': 'https://gamewith.akamaized.net/img/95390b0d729ce56c5c8791f2a5b4dd42.jpg',
 	'trouble2': 'https://gamewith.akamaized.net/img/9a6888182f26b10e69463d62d042b7c7.jpg',
 	'trouble3': 'https://gamewith.akamaized.net/img/3b5f047700984a4443a188d369a594e4.jpg',
+	'onsen2_1': 'https://gamewith.akamaized.net/img/2c7fb57aaff6e6431c51c5351f4857cd.jpg',
 };
 
 var runeExtraText = {
