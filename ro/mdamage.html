@@ -11,22 +11,62 @@ a {color:DodgerBlue; text-decoration: none;}
 </style>
 <script type='text/javascript' charset="UTF-8">
 //https://forum.gamer.com.tw/C.php?bsn=28924&snA=17536
-//傷害加成=魔傷加成*火傷加成*範圍傷加成*最終傷害加成*種族傷加成
 //((INT*2+INT*INT/100+裝備MATK+(INT+裝備MATK)*魔攻加成)*(1000+MDEF*(1-忽視魔防))/(1000+10*MDEF*(1-忽視魔防))*(1+魔法穿刺)+精煉MATK)*屬性修正*技能倍率*傷害加成
+//傷害加成=魔傷加成*火傷加成*範圍傷加成*最終傷害加成*種族傷加成
 window.onload = function(){
-	init0 = ['nInt','nMatk','nNakeMatk','nFullMatk','nMatk2','pMatk','pMdam','pFire','pRange','pFinal','nMdef','pRace','pBreak','pPene'];
-	init100 = ['pAttr'];
-	for (var i in init0) setVal(init0[i],0);
-	for (var i in init100) setVal(init100[i],100);
-}
-function calc(){
-	var arrInput = init0.concat(init100);
-	for (var i in arrInput) {
-		if (arrInput[i].substring(0,1)=='p') eval("var " + arrInput[i] + " = getVal('" + arrInput[i] + "')/100;");
-		else eval("var " + arrInput[i] + " = getVal('" + arrInput[i] + "');");
+	init = {
+		'0': ['nInt','nMatk','nFullMatk','nMatk2','pMatk','pMdam','pFire','pRange','pFinal','nMdef','pRace','pBreak','pPene'],
+		'100': ['pAttr'],
+		'1000': ['nMaxMdef'],
+		'25': ['nPerMdef'],
+	};
+	for (var i in init){
+		for (var j in init[i]) setVal(init[i][j],i);
 	}
-	var result = ((nInt*2+nInt*nInt/100+nMatk+(nInt+nMatk)*pMatk)*(1000+nMdef*(1-Math.max(0,pBreak)))/(1000+10*nMdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*6.8*pAttr*(1+pMdam)*(1+pFire)*(1+pRange)*(1+pFinal)*(1+pRace);
-	document.getElementById('output').innerHTML = result;
+}
+function calc(mode){
+	var arrInput = [];
+	for (var i in init) arrInput = arrInput.concat(init[i]);
+	
+	for (var i in arrInput) {
+		if (arrInput[i].substring(0,1)=='p') eval(arrInput[i] + " = getVal('" + arrInput[i] + "')/100;");
+		else eval(arrInput[i] + " = getVal('" + arrInput[i] + "');");
+	}
+	
+	if (document.getElementsByClassName('mode1')[0].style.display=='none'){
+		nMatk = Math.round(nFullMatk/(1+pMatk) - (nInt*2+nInt*nInt/100));
+		setVal('nMatk', nMatk);
+	}else {
+		nFullMatk = Math.round((nMatk + (nInt*2+nInt*nInt/100)) * (1+pMatk));
+		setVal('nFullMatk', nFullMatk);
+	}
+	
+	switch(mode){
+		case 1: 
+			var result = getDPS(nMdef);
+			document.getElementById('output').innerHTML = '隕石每下' + Math.round(result[0]) + ' / 火柱每下' + Math.round(result[1]) + ' / DPS' + Math.round(result[2]);
+			break;
+		case 3:
+			var output = '<table border="1" style="border-collapse:collapse;">';
+			output += '<tr><td>魔防</td><td>隕石每下</td><td>火柱每下</td><td>DPS</td></tr>';
+			for (var i=0; i<=1000; i=i+25){
+				var result = getDPS(i);
+				output += '<tr><td>'+i+'</td><td>'+Math.round(result[0])+'</td><td>'+Math.round(result[1])+'</td><td>'+Math.round(result[2])+'</td></tr>';
+			}
+			output += '</table>';
+			document.getElementById('output').innerHTML = output;
+			break;
+		default:
+			document.getElementById('output').innerHTML = 'ERROR';
+	}
+}
+function getDPS(mdef){
+	//var pureAtk = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+nMdef*(1-Math.max(0,pBreak)))/(1000+10*nMdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
+	var pureAtk = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+mdef*(1-Math.max(0,pBreak)))/(1000+10*mdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
+	var meteorite = pureAtk * (1+pRange) * 6.8;
+	var pillar = pureAtk * 2.5;
+	var total = meteorite*10/11 + pillar*2;
+	return [meteorite, pillar, total];
 }
 function display(id){
 	var arr = document.getElementsByClassName(id);
@@ -37,7 +77,7 @@ function hide(id){
 	for (var i = 0; i<arr.length; i++) arr[i].style.display = "none";
 }
 function getVal(id){
-	return noNaN(parseInt(document.getElementById(id).value));
+	return noNaN(parseFloat(document.getElementById(id).value));
 }
 function setVal(id,val){
 	document.getElementById(id).value=val;
@@ -50,8 +90,9 @@ function noNaN(n) {
 <body>
 <table>
 <tr><td>智力總和</td><td><input type="text" id="nInt" class="cal"></td></tr>
-<tr class="mode1"><td>裝備魔攻</td><td><input type="text" id="nMatk" class="cal"> <a href="#" onclick="display('mode2');hide('mode1');return false;">&lt;用面板魔攻計算&gt;</a></td></tr>
-<tr class="mode2"><td>裸裝魔攻</td><td><input type="text" id="nNakeMatk" class="cal"> <a href="#" onclick="display('mode1');hide('mode2');return false;">&lt;用裝備魔攻計算&gt;</a></td></tr>
+<tr class="mode1"><td>裝備魔攻</td><td><input type="text" id="nMatk" class="cal"><br></td></tr>
+<tr class="mode1"><td></td><td><a href="#" onclick="display('mode2');hide('mode1');return false;">&lt;用面板魔攻計算&gt;</a></td>
+<tr class="mode2"><td></td><td><a href="#" onclick="display('mode1');hide('mode2');return false;">&lt;用裝備魔攻計算&gt;</a></td>
 <tr class="mode2"><td>面板魔攻</td><td><input type="text" id="nFullMatk" class="cal"></td></tr>
 <tr><td>精煉魔攻</td><td><input type="text" id="nMatk2" class="cal"></td></tr>
 <tr><td>魔攻加成%</td><td><input type="text" id="pMatk" class="cal"></td></tr>
@@ -62,10 +103,16 @@ function noNaN(n) {
 <tr><td>無視魔防%</td><td><input type="text" id="pBreak" class="cal"></td></tr>
 <tr><td>魔法穿刺%</td><td><input type="text" id="pPene" class="cal"></td></tr>
 <tr><td colspan="2">-</td>
-<tr><td>怪物MDEF</td><td><input type="text" id="nMdef" class="cal"></td></tr>
-<tr><td>屬性修正%</td><td><input type="text" id="pAttr" class="cal"></td></tr>
 <tr><td>種族傷害加成%</td><td><input type="text" id="pRace" class="cal"></td></tr>
-<tr><td colspan="2"><button onclick="calc()">計算</button></td>
+<tr><td>屬性修正%</td><td><input type="text" id="pAttr" class="cal"></td></tr>
+<tr><td>怪物魔防</td><td><input type="text" id="nMdef" class="cal"></td></tr>
+<tr><td colspan="2"><button onclick="calc(1)">以特定怪物計算</button></td></tr>
+<tr><td colspan="2">-</td>
+<tr><td colspan="2"><button onclick="calc(2)">以現有MVP計算</button></td></tr>
+<tr><td colspan="2">-</td>
+<tr><td>魔防最大</td><td><input type="text" id="nMaxMdef" class="cal"></td></tr>
+<tr><td>數值間隔</td><td><input type="text" id="nPerMdef" class="cal"></td></tr>
+<tr><td colspan="2"><button onclick="calc(3)">以魔防計算</button></td></tr>
 </table>
 <p id="output"></p>
 </body>
