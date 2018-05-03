@@ -13,13 +13,14 @@ a {color:DodgerBlue; text-decoration: none;}
 //https://forum.gamer.com.tw/C.php?bsn=28924&snA=17536
 //((INT*2+INT*INT/100+裝備MATK+(INT+裝備MATK)*魔攻加成)*(1000+MDEF*(1-忽視魔防))/(1000+10*MDEF*(1-忽視魔防))*(1+魔法穿刺)+精煉MATK)*屬性修正*技能倍率*傷害加成
 //傷害加成=魔傷加成*火傷加成*範圍傷加成*最終傷害加成*種族傷加成
+
+var init = {
+	'0': ['nInt','nMatk','nFullMatk','nMatk2','pMatk','pMdam','pFire','pRange','pFinal','nMdef','pRace','pBreak','pPene'],
+	'100': ['pAttr'],
+	'1000': ['nMaxMdef'],
+	'25': ['nPerMdef'],
+};
 window.onload = function(){
-	init = {
-		'0': ['nInt','nMatk','nFullMatk','nMatk2','pMatk','pMdam','pFire','pRange','pFinal','nMdef','pRace','pBreak','pPene'],
-		'100': ['pAttr'],
-		'1000': ['nMaxMdef'],
-		'25': ['nPerMdef'],
-	};
 	for (var i in init){
 		for (var j in init[i]) setVal(init[i][j],i);
 	}
@@ -46,6 +47,20 @@ function calc(mode){
 		case 1: 
 			var result = getDPS(nMdef);
 			document.getElementById('output').innerHTML = '隕石每下' + Math.round(result[0]) + ' / 火柱每下' + Math.round(result[1]) + ' / DPS' + Math.round(result[2]);
+			break;
+		case 2:
+			var output = '<table border="1" style="border-collapse:collapse;">';
+			output += '<tr><td>名稱</td><td>魔防/種族/屬性</td><td>隕石每下</td><td>火柱每下</td><td>DPS</td></tr>';
+			var resultLine = [];
+			for (var i in MVPInfo){
+				var result = getDPS(MVPInfo[i][3]);
+				if (attrFire[MVPInfo[i][2]]) for (var j in result) result[j] = result[j] * attrFire[MVPInfo[i][2]];
+				resultLine.push([MVPInfo[i][0], MVPInfo[i][3]+'/'+MVPInfo[i][1]+'/'+MVPInfo[i][2], Math.round(result[0]), Math.round(result[1]), Math.round(result[2])]);
+			}
+			resultLine.sort(function(a,b){return  b[4] - a[4];});
+			for (var i in resultLine) output += '<tr><td>'+resultLine[i][0]+'</td><td>'+resultLine[i][1]+'</td><td>'+resultLine[i][2]+'</td><td>'+resultLine[i][3]+'</td><td>'+resultLine[i][4]+'</td></tr>';
+			output += '</table>';
+			document.getElementById('output').innerHTML = output;
 			break;
 		case 3:
 			var output = '<table border="1" style="border-collapse:collapse;">';
@@ -86,6 +101,73 @@ function setVal(id,val){
 function noNaN(n) {
 	return isNaN(n) ? 0 : n;
 }
+
+//https://ro.fws.tw/db/monsters/alist?type=MINI
+var MVPInfo = [
+['狸貓','動物','地',13],
+['藍瘋兔','動物','無',80],
+['波利之王','植物','水',13],
+['搖滾蝗蟲','昆蟲','地',50],
+['幽靈波利','惡魔','念',200],
+['蛙王','魚貝','水',0],
+['直升機哥布靈','無形 ','風',61],
+['龍蠅','昆蟲','風',0],
+['流浪之狼','動物','地',0],
+['枯樹精','植物','地',3],
+['獅鷲獸','動物','風',64],
+['安畢斯','人形','不死',53],
+['妖君','不死','不死',13],
+['獸人嬰兒','人形','地',13],
+['南瓜先生','無形','火',50],
+['半龍人','龍','火',29],
+['草精','植物','地',101],
+['鶚梟首領','惡魔','無',450],
+['愛麗絲女僕','人形','無',6],
+['艾斯恩魔女','人形','無',20],
+['弑神者','無形','暗',50],
+['迷幻之王','惡魔','不死',20],
+['虛弱的傀儡','惡魔','暗',100],
+['大本鐘','無形','地',226],
+['鐘塔守護者','無形','無',568],
+['魔靈娃娃','人形','火',624],
+['天使波利&#x1F451;','天使','聖',350],
+['黃金蟲&#x1F451;','昆蟲','火',100],
+['惡魔波利&#x1F451;','惡魔','暗',350],
+['海盜之王&#x1F451;','不死','不死',64],
+['海神&#x1F451;','魚貝','水',450],
+['哥布靈首領&#x1F451;','人形','風',22],
+['蜂后&#x1F451;','昆蟲','風',200],
+['蟻后&#x1F451;','昆蟲','地',250],
+['皮里恩&#x1F451;','動物','無',29],
+['虎王&#x1F451;','動物','火',250],
+['俄塞里斯&#x1F451;','不死','不死',446],
+['月夜貓&#x1F451;','惡魔','火',600],
+['獸人英雄&#x1F451;','人形','地',100],
+['犬妖首領&#x1F451;','人形','風',70],
+['死靈&#x1F451;','惡魔','暗',350],
+['阿特羅斯&#x1F451;','動物','暗',38],
+['獸人酋長&#x1F451;','人形','地',6],
+['迪塔勒泰晤勒&#x1F451;','龍','暗',190],
+['鶚梟男爵&#x1F451;','惡魔','無',120],
+['凱美拉&#x1F451;','動物','火',13],
+['血腥騎士&#x1F451;','無形','暗',125],
+['巴風特&#x1F451;','惡魔','暗',100],
+['黑暗之王&#x1F451;','惡魔','不死',125],
+['巨大的惡魔波利&#x1F451;','惡魔','暗',350],
+['時間管理人&#x1F451;','惡魔','無',742],
+['斯佩夏爾&#x1F451;','人形','水',783],
+['冰暴騎士&#x1F451;','無形','風',806],
+['卡倫&#x1F451;','動物','水',848],
+];
+
+var attrFire = {
+	'火': 0.25,
+	'地': 2,
+	'水': 0.5,
+	'毒': 0.75,
+	'不死': 2,
+	'聖': 0.75,
+};
 </script>
 </head>
 <body>
