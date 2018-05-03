@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="initial-scale=1">
 <meta charset="UTF-8">
-<link rel="icon" href="img/favicon.jpg" type="image/x-icon" />
+<link rel="icon" href="../img/favicon.jpg" type="image/x-icon" />
 <title>RO守護永恆的愛 - 隕石傷害计算</title>
 <style>
 .mode2 {display:none;}
@@ -34,10 +34,11 @@ function calc(mode){
 	}
 	
 	if (document.getElementsByClassName('mode1')[0].style.display=='none'){
-		nMatk = Math.round(nFullMatk/(1+pMatk) - (nInt*2+nInt*nInt/100));
+		nMatk = Math.ceil(nFullMatk/(1+pMatk) - Math.floor(nInt*2+nInt*nInt/100));
 		setVal('nMatk', nMatk);
 	}else {
-		nFullMatk = Math.round((nMatk + (nInt*2+nInt*nInt/100)) * (1+pMatk));
+		nMatk = Math.floor(nMatk);
+		nFullMatk = Math.floor((nMatk + Math.floor(nInt*2+nInt*nInt/100)) * (1+pMatk));
 		setVal('nFullMatk', nFullMatk);
 	}
 	
@@ -61,10 +62,10 @@ function calc(mode){
 	}
 }
 function getDPS(mdef){
-	//var pureAtk = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+nMdef*(1-Math.max(0,pBreak)))/(1000+10*nMdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
-	var pureAtk = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+mdef*(1-Math.max(0,pBreak)))/(1000+10*mdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
-	var meteorite = pureAtk * (1+pRange) * 6.8;
-	var pillar = pureAtk * 2.5;
+	//var noskill = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+nMdef*(1-Math.max(0,pBreak)))/(1000+10*nMdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
+	var noskill = Math.round(((Math.floor(nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+mdef*(1-Math.max(0,pBreak)))/(1000+10*mdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace));
+	var meteorite = noskill * (1+pRange) * 6.8;
+	var pillar = noskill * 2.5;
 	var total = meteorite*10/11 + pillar*2;
 	return [meteorite, pillar, total];
 }
