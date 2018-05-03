@@ -3,6 +3,10 @@
 var eventList = [
 ['6/15/2018 15:00','溫泉2','交換開箱',{'onsen2_1':300}],
 ['6/15/2018 15:00','溫泉2','進化武器',{'onsen2_1':380}],
+['6/15/2018 15:00','溫泉2','石板',{'onsen2_2':1000}],
+['6/15/2018 15:00','溫泉2','アオイの支城',{'onsen2_2':1500}],
+['6/15/2018 15:00','溫泉2','ワビサビ温泉',{'onsen2_3':240}],
+['6/15/2018 15:00','溫泉2','交換開箱',{'onsen2_3':300}],
 ['5/14/2018 15:00','祝福弓','祝福弓',{'bless_yumi':519}],
 ['5/14/2018 15:00','遺跡探險','建築',{'trouble1':14}],
 ['5/14/2018 15:00','遺跡探險','BGM',{'trouble2':150}],
@@ -202,6 +206,8 @@ var runeUrl = {
 	'trouble2': 'https://gamewith.akamaized.net/img/9a6888182f26b10e69463d62d042b7c7.jpg',
 	'trouble3': 'https://gamewith.akamaized.net/img/3b5f047700984a4443a188d369a594e4.jpg',
 	'onsen2_1': 'https://gamewith.akamaized.net/img/2c7fb57aaff6e6431c51c5351f4857cd.jpg',
+	'onsen2_2': 'https://gamewith.akamaized.net/img/40cd186ee998bd0ca6965d537e0f36a4.jpg',
+	'onsen2_3': 'https://gamewith.akamaized.net/img/9ed66ba766289dc2dfe9b6dfc23b65f9.jpg',
 };
 
 var runeExtraText = {
