@@ -46,7 +46,7 @@ function calc(mode){
 	switch(mode){
 		case 1: 
 			var result = getDPS(nMdef);
-			document.getElementById('output').innerHTML = '隕石每下' + Math.round(result[0]) + ' / 火柱每下' + Math.round(result[1]) + ' / DPS' + Math.round(result[2]);
+			document.getElementById('output').innerHTML = '隕石每下' + result[0] + ' / 火柱每下' + result[1] + ' / DPS' + result[2];
 			break;
 		case 2:
 			var output = '<table border="1" style="border-collapse:collapse;">';
@@ -55,7 +55,7 @@ function calc(mode){
 			for (var i in MVPInfo){
 				var result = getDPS(MVPInfo[i][3]);
 				if (attrFire[MVPInfo[i][2]]) for (var j in result) result[j] = result[j] * attrFire[MVPInfo[i][2]];
-				resultLine.push([MVPInfo[i][0], MVPInfo[i][3]+'/'+MVPInfo[i][1]+'/'+MVPInfo[i][2], Math.round(result[0]), Math.round(result[1]), Math.round(result[2])]);
+				resultLine.push([MVPInfo[i][0], MVPInfo[i][3]+'/'+MVPInfo[i][1]+'/'+MVPInfo[i][2], result[0], result[1], result[2]]);
 			}
 			resultLine.sort(function(a,b){return  b[4] - a[4];});
 			for (var i in resultLine) output += '<tr><td>'+resultLine[i][0]+'</td><td>'+resultLine[i][1]+'</td><td>'+resultLine[i][2]+'</td><td>'+resultLine[i][3]+'</td><td>'+resultLine[i][4]+'</td></tr>';
@@ -67,7 +67,7 @@ function calc(mode){
 			output += '<tr><td>魔防</td><td>隕石每下</td><td>火柱每下</td><td>DPS</td></tr>';
 			for (var i=0; i<=1000; i=i+25){
 				var result = getDPS(i);
-				output += '<tr><td>'+i+'</td><td>'+Math.round(result[0])+'</td><td>'+Math.round(result[1])+'</td><td>'+Math.round(result[2])+'</td></tr>';
+				output += '<tr><td>'+i+'</td><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td></tr>';
 			}
 			output += '</table>';
 			document.getElementById('output').innerHTML = output;
@@ -78,10 +78,10 @@ function calc(mode){
 }
 function getDPS(mdef){
 	//var noskill = (((nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+nMdef*(1-Math.max(0,pBreak)))/(1000+10*nMdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
-	var noskill = Math.round(((Math.floor(nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+mdef*(1-Math.max(0,pBreak)))/(1000+10*mdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace));
-	var meteorite = noskill * (1+pRange) * 6.8;
-	var pillar = noskill * 2.5;
-	var total = meteorite*10/11 + pillar*2;
+	var noskill = ((Math.floor(nInt*2+nInt*nInt/100)+nMatk+(nInt+nMatk)*pMatk)*(1000+mdef*(1-Math.max(0,pBreak)))/(1000+10*mdef*(1-Math.max(0,pBreak)))*(1+pPene)+nMatk2)*pAttr*(1+pMdam)*(1+pFire)*(1+pFinal)*(1+pRace);
+	var meteorite = Math.floor(noskill * (1+pRange) * 6.8);
+	var pillar = Math.floor(noskill * 2.5);
+	var total = Math.round(meteorite*10/11 + pillar*2);
 	return [meteorite, pillar, total];
 }
 function display(id){
