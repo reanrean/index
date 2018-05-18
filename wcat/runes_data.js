@@ -1,6 +1,11 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['5/31/2018 15:00','七大罪2','石板',{'7sin2_b':25,}],
+['5/31/2018 15:00','七大罪2','進化武器',{'7sin2_1':250,}],
+['5/31/2018 15:00','七大罪2','升級角色',{'7sin2_1':99,}],
+['5/31/2018 15:00','七大罪2','飛行島の修練窟',{'7sin2_2':500,}],
+['5/31/2018 15:00','七大罪1(復刻)','建築',{'7sin1_1':635,'7sin1_2':553,}],
 ['6/15/2018 15:00','溫泉2','交換開箱',{'onsen2_1':300}],
 ['6/15/2018 15:00','溫泉2','進化武器',{'onsen2_1':380}],
 ['6/15/2018 15:00','溫泉2','石板',{'onsen2_2':1000}],
@@ -208,6 +213,11 @@ var runeUrl = {
 	'onsen2_1': 'https://gamewith.akamaized.net/img/2c7fb57aaff6e6431c51c5351f4857cd.jpg',
 	'onsen2_2': 'https://gamewith.akamaized.net/img/40cd186ee998bd0ca6965d537e0f36a4.jpg',
 	'onsen2_3': 'https://gamewith.akamaized.net/img/9ed66ba766289dc2dfe9b6dfc23b65f9.jpg',
+	'7sin1_1': 'https://gamewith.akamaized.net/img/886d3445b8f33816f60529c205b88377.jpg',
+	'7sin1_2': 'https://gamewith.akamaized.net/img/ed45de2626447b7ef464a4e2098c780b.jpg',
+	'7sin2_1': 'https://gamewith.akamaized.net/img/b25410352135a9c68c582e5edd49d6fe.jpg',
+	'7sin2_2': 'https://gamewith.akamaized.net/img/a33b46b53b631ea5190f0462b4a1e5f2.jpg',
+	'7sin2_b': 'https://gamewith.akamaized.net/img/721375a7d3111df9ba1fa36dead7eafa.jpg',
 };
 
 var runeExtraText = {
