@@ -1,6 +1,8 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['5/31/2018 15:00','七大罪2','BGM',{'7sin2_3':480,}],
+['5/31/2018 15:00','七大罪2','石板2',{'7sin2_b2':500,}],
 ['5/31/2018 15:00','七大罪2','石板',{'7sin2_b':25,}],
 ['5/31/2018 15:00','七大罪2','進化武器',{'7sin2_1':250,}],
 ['5/31/2018 15:00','七大罪2','升級角色',{'7sin2_1':99,}],
@@ -217,7 +219,9 @@ var runeUrl = {
 	'7sin1_2': 'https://gamewith.akamaized.net/img/ed45de2626447b7ef464a4e2098c780b.jpg',
 	'7sin2_1': 'https://gamewith.akamaized.net/img/b25410352135a9c68c582e5edd49d6fe.jpg',
 	'7sin2_2': 'https://gamewith.akamaized.net/img/a33b46b53b631ea5190f0462b4a1e5f2.jpg',
+	'7sin2_3': 'https://gamewith.akamaized.net/img/2d8250c31a4a7316c0bf73dafed2a3c0.jpg',
 	'7sin2_b': 'https://gamewith.akamaized.net/img/721375a7d3111df9ba1fa36dead7eafa.jpg',
+	'7sin2_b2': 'https://gamewith.akamaized.net/img/062c8600a1b7ae7f812692b01f594284.jpg',
 };
 
 var runeExtraText = {
