@@ -1,6 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['6/11/2018 15:00','音樂1(復刻)','BGM',{'music1':150}],
+['6/11/2018 15:00','音樂1(復刻)','石板',{'music1':250}],
+['6/11/2018 15:00','音樂1(復刻)','飾物',{'music1':100}],
+['6/11/2018 15:00','音樂2','BGM',{'music2':1625}],
+['6/11/2018 15:00','音樂2','石板',{'music2_2':1200,}],
+['6/25/2018 15:00','祝福斧','祝福斧',{'bless_axe':519}],
 ['5/31/2018 15:00','七大罪2','BGM',{'7sin2_3':480,}],
 ['5/31/2018 15:00','七大罪2','石板2',{'7sin2_b2':500,}],
 ['5/31/2018 15:00','七大罪2','石板',{'7sin2_b':25,}],
@@ -47,6 +53,10 @@ var runeUrl = {
 	'noroi_doub': 'http://i.imgur.com/QfS9rxV.jpg',
 	'noroi_doub2': 'http://i.imgur.com/CHHRwUU.png',
 	'bless_yumi': 'https://gamewith.akamaized.net/img/76f0537eae2008583c50e4312b3c879b.jpg',
+	'bless_axe': 'https://gamewith.akamaized.net/img/b97bacb1163818f65780bc8eb1af20ba.jpg',
+	'music1': 'https://gamewith.akamaized.net/img/8e8050ffde8bdc1e7ad6d2773dbe7262.jpg',
+	'music2': 'https://gamewith.akamaized.net/img/ac5365ff594b727dad3f8da5de4254a6.jpg',
+	'music2_2': 'https://gamewith.akamaized.net/img/8f64b1c32d832184a7880e66265ec26b.jpg',
 	'ka1': 'https://gamewith.akamaized.net/img/922f02538d1af23b86bdc8fbb5bb8a71.jpg',
 	'ka2': 'https://gamewith.akamaized.net/img/7cb9aabcd01fcdfbf1fe83593f2be202.jpg',
 	'ka3': 'https://gamewith.akamaized.net/img/8e8cb2542a222298c3f0058a0a9911b9.jpg',
