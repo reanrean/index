@@ -1,6 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['6/29/2018 15:00','亡國','積分',{'points':100}],
+['6/29/2018 15:00','亡國','石板',{'tsubasa2':1000}],
+['6/29/2018 15:00','亡國','飾物',{'tsubasa1':360}],
+['6/29/2018 15:00','亡國','アレスの御旗',{'tsubasa1':500}],
 ['6/11/2018 15:00','音樂1(復刻)','BGM',{'music1':150}],
 ['6/11/2018 15:00','音樂1(復刻)','石板',{'music1':250}],
 ['6/11/2018 15:00','音樂1(復刻)','飾物',{'music1':100}],
@@ -232,6 +236,8 @@ var runeUrl = {
 	'7sin2_3': 'https://gamewith.akamaized.net/img/2d8250c31a4a7316c0bf73dafed2a3c0.jpg',
 	'7sin2_b': 'https://gamewith.akamaized.net/img/721375a7d3111df9ba1fa36dead7eafa.jpg',
 	'7sin2_b2': 'https://gamewith.akamaized.net/img/062c8600a1b7ae7f812692b01f594284.jpg',
+	'tsubasa1': 'https://gamewith.akamaized.net/img/c2813f18d57eedd4275636b4e6fbddbd.jpg',
+	'tsubasa2': 'https://gamewith.akamaized.net/img/52ca3a3663603a6f4f75b4e3353753a7.jpg',
 };
 
 var runeExtraText = {
