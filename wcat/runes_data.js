@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['7/13/2018 15:00','王者の塔','積分',{'points':100}],
 ['6/18/2018 15:00','混沌X建築','建築',{'zekkai3_2':590}],
 ['6/29/2018 15:00','亡國','積分',{'points':100}],
 ['6/29/2018 15:00','亡國','石板',{'tsubasa2':1000}],
