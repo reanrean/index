@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['7/23/2018 15:00','冰滅61~75','積分',{'hyoumetsu':3100,'hyoumetsu2':2520,'hyoumetsu3':6}],
 ['7/13/2018 15:00','王者の塔','積分',{'points':100}],
 ['6/26/2018 15:00','KC2協力','積分',{'points':100}],
 ['6/18/2018 15:00','混沌X建築','建築',{'zekkai3_2':590}],
@@ -135,6 +136,8 @@ var runeUrl = {
 	'sok3': 'https://gamewith.akamaized.net/img/bcb7ddba537746e39b0972cd06c1035a.jpg',
 	'kc1': 'https://i.imgur.com/VvSZ40h.jpg',
 	'hyoumetsu': 'https://gamewith.akamaized.net/img/a9a493b4ac50c88f0d8720e45398c2e0.jpg',
+	'hyoumetsu2': 'https://gamewith.akamaized.net/img/9b51d0f716b49cc4a58a68c868303c70.jpg',
+	'hyoumetsu3': 'https://gamewith.akamaized.net/img/f31fc065c95b84f55a2e18d5a522631f.jpg',
 	'lightdark_l': 'https://gamewith.akamaized.net/img/ed400c0624dc546449330cb517067fbc.jpg',
 	'lightdark_d': 'https://gamewith.akamaized.net/img/1c61e69e341c09f249f4a9b30a7f38c1.jpg',
 	'lightdark_solo': 'https://i.imgur.com/efDDNpL.jpg',
