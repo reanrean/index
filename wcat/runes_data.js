@@ -1,6 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['7/31/2018 15:00','變CC活動','積分',{'points':100}],
+['7/31/2018 15:00','變CC活動','建築',{'varcc1':300}],
+['7/31/2018 15:00','變CC活動','飾物',{'varcc1':500}],
+['7/31/2018 15:00','變CC活動','石板',{'varcc2':1000}],
 ['7/23/2018 15:00','冰滅61~75','積分',{'hyoumetsu':3100,'hyoumetsu2':2520,'hyoumetsu3':6}],
 ['7/13/2018 15:00','王者の塔','積分',{'points':100}],
 ['6/26/2018 15:00','KC2協力','積分',{'points':100}],
@@ -244,6 +248,8 @@ var runeUrl = {
 	'7sin2_b2': 'https://gamewith.akamaized.net/img/062c8600a1b7ae7f812692b01f594284.jpg',
 	'tsubasa1': 'https://gamewith.akamaized.net/img/c2813f18d57eedd4275636b4e6fbddbd.jpg',
 	'tsubasa2': 'https://gamewith.akamaized.net/img/52ca3a3663603a6f4f75b4e3353753a7.jpg',
+	'varcc1': 'https://gamewith.akamaized.net/img/5434120d16bef3f8489d34471248a30c.jpg',
+	'varcc2': 'https://gamewith.akamaized.net/img/889ecbf1f011f21e3e48acc41fff6e3e.jpg',
 };
 
 var runeExtraText = {
