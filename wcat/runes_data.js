@@ -1,7 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['8/6/2018 15:00','雀協力','戰分',{'pointsn':9999,'mugade':4000}],
+['7/23/2018 15:00','四週年協力S1','積分',{'points':40}],
+//['7/26/2018 15:00','四週年協力S2','積分',{'points':40}],
+//['7/30/2018 15:00','四週年協力S3','積分',{'points':40}],
+['8/31/2018 15:00','四週年島','積分',{'points':70}],
+['8/31/2018 15:00','四週年島','進行狀況',{'chkall':1}],
+['8/6/2018 15:00','鳥協力','戰分',{'pointsn':9999,'mugade':4000}],
 ['7/31/2018 15:00','變CC活動','討伐分',{'pointsn':2200}],
 ['7/31/2018 15:00','變CC活動','積分',{'points':100}],
 ['7/31/2018 15:00','變CC活動','建築',{'varcc1':300}],
@@ -52,6 +57,7 @@ var eventList = [
 ];
 
 var runeUrl = {
+	'chkall': 'http://i.imgur.com/lzsspIY.jpg',
 	'noroi_yumi': 'http://i.imgur.com/pkgeguT.jpg',
 	'noroi_yumi2': 'http://i.imgur.com/HD0KGNu.jpg',
 	'noroi_mag': 'http://i.imgur.com/BWMb6NH.jpg',
