@@ -1,9 +1,10 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['8/20/2018 15:00','一百億酒店','建築',{'hotel':150}],
 ['7/23/2018 15:00','四週年協力S1','積分',{'points':40}],
 ['7/26/2018 15:00','四週年協力S2','積分',{'points':40,'chkall':1}],
-//['7/30/2018 15:00','四週年協力S3','積分',{'points':40}],
+['7/30/2018 15:00','四週年協力S3','積分',{'points':40,'chkall':1}],
 ['8/31/2018 15:00','四週年島','積分',{'points':70}],
 ['8/31/2018 15:00','四週年島','進行狀況',{'chkall':1}],
 ['8/6/2018 15:00','鳥協力','戰分',{'pointsn':9999,'mugade':4000}],
@@ -258,6 +259,7 @@ var runeUrl = {
 	'tsubasa2': 'https://gamewith.akamaized.net/img/52ca3a3663603a6f4f75b4e3353753a7.jpg',
 	'varcc1': 'https://gamewith.akamaized.net/img/5434120d16bef3f8489d34471248a30c.jpg',
 	'varcc2': 'https://gamewith.akamaized.net/img/889ecbf1f011f21e3e48acc41fff6e3e.jpg',
+	'hotel': 'https://gamewith.akamaized.net/img/657a79ea8ea11dea81413cbc77a908f1.jpg',
 };
 
 var runeExtraText = {
