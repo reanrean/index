@@ -1,6 +1,8 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['8/31/2018 15:00','一百億','島',{'chkall':1}],
+['8/31/2018 15:00','一百億','協力',{'chkall':1}],
 ['8/20/2018 15:00','一百億酒店','建築',{'hotel':150}],
 ['7/23/2018 15:00','四週年協力S1','積分',{'points':40}],
 ['7/26/2018 15:00','四週年協力S2','積分',{'points':40,'chkall':1}],
