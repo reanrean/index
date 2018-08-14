@@ -1,6 +1,15 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/14/2018 15:00','怪盜','怪盜Lv',{'pointsn':12000}],
+['9/14/2018 15:00','怪盜','建築',{'kaito1':600}],
+['9/14/2018 15:00','怪盜','飾物',{'kaito1':640}],
+['8/31/2018 15:00','夏日','突破石',{'summer18_5':1800}],
+['8/31/2018 15:00','夏日','BGM',{'summer18_4':17}],
+['8/31/2018 15:00','夏日','收集',{'summer18_3':13}],
+['8/31/2018 15:00','夏日','石版',{'summer18_2':1250}],
+['8/31/2018 15:00','夏日','飾物',{'summer18_1':720}],
+['8/31/2018 15:00','夏日','建築',{'summer18_1':500}],
 ['8/31/2018 15:00','一百億','島',{'chkall':1}],
 ['8/31/2018 15:00','一百億','協力',{'chkall':1}],
 ['8/20/2018 15:00','一百億酒店','建築',{'hotel':150}],
@@ -262,6 +271,12 @@ var runeUrl = {
 	'varcc1': 'https://gamewith.akamaized.net/img/5434120d16bef3f8489d34471248a30c.jpg',
 	'varcc2': 'https://gamewith.akamaized.net/img/889ecbf1f011f21e3e48acc41fff6e3e.jpg',
 	'hotel': 'https://gamewith.akamaized.net/img/657a79ea8ea11dea81413cbc77a908f1.jpg',
+	'summer18_1': 'https://gamewith.akamaized.net/img/8ff6a0e158e2c7e0273d53ec74ef7fd4.jpg',
+	'summer18_2': 'https://gamewith.akamaized.net/img/004781826cb5c6ba655b81d125fd6b12.jpg',
+	'summer18_3': 'https://gamewith.akamaized.net/img/13871c60ee5bdfed0382882b0358709b.jpg',
+	'summer18_4': 'https://gamewith.akamaized.net/img/be10ad8923a24a0e6441c11d2b1fe783.jpg',
+	'summer18_5': 'https://i.imgur.com/TWTvkLA.png',
+	'kaito1': 'https://gamewith.akamaized.net/img/b97986dac5de2ac8b540975e1dbf9240.jpg',
 };
 
 var runeExtraText = {
@@ -276,6 +291,7 @@ var runeExtraText = {
 	'titan1': '(各)',
 	'titan2': '(各)',
 	'titan3': '(各)',
+	'summer18_5': '(萬)',
 }
 
 var alertDays = 7;
