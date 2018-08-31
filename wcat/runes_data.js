@@ -1,7 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/28/2018 15:00','WOH2','建築',{'woh2_1':300}],
+['9/28/2018 15:00','WOH2','贴纸',{'woh2_1':300}],
+['9/14/2018 15:00','怪盜','石版',{'kaitob':1000}],
+['9/14/2018 15:00','怪盜','突破石',{'kaitob':1120}],
 ['9/14/2018 15:00','怪盜','怪盜Lv',{'pointsn':12000}],
+['9/14/2018 15:00','怪盜','BGM',{'kaito2':1000}],
 ['9/14/2018 15:00','怪盜','建築',{'kaito1':600}],
 ['9/14/2018 15:00','怪盜','飾物',{'kaito1':640}],
 ['8/31/2018 15:00','夏日','突破石',{'summer18_5':1800}],
@@ -277,6 +282,9 @@ var runeUrl = {
 	'summer18_4': 'https://gamewith.akamaized.net/img/be10ad8923a24a0e6441c11d2b1fe783.jpg',
 	'summer18_5': 'https://i.imgur.com/TWTvkLA.png',
 	'kaito1': 'https://gamewith.akamaized.net/img/b97986dac5de2ac8b540975e1dbf9240.jpg',
+	'kaito2': 'https://gamewith.akamaized.net/img/36f877e725ae28c6e53ff50eee95a94e.jpg',
+	'kaitob': 'https://gamewith.akamaized.net/img/e01a728e969499ffc750accfbebe8a73.jpg',
+	'woh2_1': 'https://gamewith.akamaized.net/img/9eb51bd2c4f216fca4c9e49b062e6660.jpg',
 };
 
 var runeExtraText = {
