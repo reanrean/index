@@ -1,6 +1,7 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['9/28/2018 15:00','光焔御子','建築',{'kouen4':10,'kouen5':750}],
 ['9/28/2018 15:00','天使惡魔2','NM分數',{'points':48.5}],
 ['9/28/2018 15:00','天使惡魔2','飾物',{'woh2_b':900}],
 ['9/28/2018 15:00','天使惡魔2','石版',{'woh2_b':500}],
@@ -121,6 +122,8 @@ var runeUrl = {
 	'kouen1': 'https://gamewith.akamaized.net/img/30ab2b01107a3f66fd113c5b74ca16c9.jpg',
 	'kouen2': 'https://gamewith.akamaized.net/img/cfc7e85115712a3ecf87f366aedb17e1.jpg',
 	'kouen3': 'https://gamewith.akamaized.net/img/fd6c3eb2349a00b7deefa04eb7a193dd.jpg',
+	'kouen4': 'https://gamewith.akamaized.net/img/2076e615094e49313837abb5ce12d460.jpg',
+	'kouen5': 'https://gamewith.akamaized.net/img/a0b787738e65ea0fd0188b00d9ec0b24.jpg',
 	'variant1': 'https://gamewith.akamaized.net/img/0ead1faa7944a14fb14cb6adeafbdb46.jpg',
 	'variant2': 'https://gamewith.akamaized.net/img/639ca00f9275adbffe49bba2a2bb5d5a.jpg',
 	'variant3': 'https://gamewith.akamaized.net/img/9e33bd0cf7096ef25d76e8fdf9611ddd.jpg',
