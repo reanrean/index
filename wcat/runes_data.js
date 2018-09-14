@@ -1,6 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['10/16/2018 15:00','光焔2','積分',{'points':200}],
+['10/16/2018 15:00','光焔2','建築',{'kouen2_1':500}],
+['10/9/2018 15:00','鬼武協力','戰分',{'pointsn':9999,'busha':4000}],
 ['9/28/2018 15:00','光焔御子','建築',{'kouen4':10,'kouen5':750}],
 ['9/28/2018 15:00','天使惡魔2','NM分數',{'points':48.5}],
 ['9/28/2018 15:00','天使惡魔2','飾物',{'woh2_b':900}],
@@ -292,6 +295,8 @@ var runeUrl = {
 	'kaitob': 'https://gamewith.akamaized.net/img/e01a728e969499ffc750accfbebe8a73.jpg',
 	'woh2_1': 'https://gamewith.akamaized.net/img/9eb51bd2c4f216fca4c9e49b062e6660.jpg',
 	'woh2_b': 'https://gamewith.akamaized.net/img/d41c526578fa857682013c89b2ff135e.jpg',
+	'kouen2_1': 'https://gamewith.akamaized.net/img/335550671fc9540e43afcd27ccce4a47.jpg',
+	'busha': 'https://gamewith.akamaized.net/img/d0744c4fc81c29da56c343c446752be1.jpg',
 };
 
 var runeExtraText = {
