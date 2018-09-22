@@ -1,8 +1,15 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['10/16/2018 15:00','光焔2','積分',{'points':200}],
+['10/15/2018 15:00','祝福武器','斧',{'bless_axe':519}],
+['10/15/2018 15:00','祝福武器','弓',{'bless_yumi':519}],
+['10/15/2018 15:00','祝福武器','杖',{'bless_mag':519}],
+['10/15/2018 15:00','猫枪','角色',{'neko2018':250}],
+['10/15/2018 15:00','猫枪','武器',{'neko2018':150}],
+['10/15/2018 15:00','猫枪','飾物',{'neko2018_2':600}],
+['10/16/2018 15:00','光焔2','積分',{'points':500}],
 ['10/16/2018 15:00','光焔2','建築',{'kouen2_1':500}],
+['10/16/2018 15:00','光焔2','石版',{'kouen2_2':1250}],
 ['10/9/2018 15:00','鬼武協力','戰分',{'pointsn':9999,'busha':4000}],
 ['9/28/2018 15:00','光焔御子','建築',{'kouen4':10,'kouen5':750}],
 ['9/28/2018 15:00','天使惡魔2','BGM',{'woh2_2':300}],
@@ -97,6 +104,7 @@ var runeUrl = {
 	'noroi_axe2': 'http://i.imgur.com/auLQCCr.png',
 	'noroi_doub': 'http://i.imgur.com/QfS9rxV.jpg',
 	'noroi_doub2': 'http://i.imgur.com/CHHRwUU.png',
+	'bless_mag': 'https://gamewith.akamaized.net/img/714ca7205a8542e0b1ccba6a82edb1fd.jpg',
 	'bless_yumi': 'https://gamewith.akamaized.net/img/76f0537eae2008583c50e4312b3c879b.jpg',
 	'bless_axe': 'https://gamewith.akamaized.net/img/b97bacb1163818f65780bc8eb1af20ba.jpg',
 	'music1': 'https://gamewith.akamaized.net/img/8e8050ffde8bdc1e7ad6d2773dbe7262.jpg',
@@ -298,7 +306,10 @@ var runeUrl = {
 	'woh2_2': 'https://gamewith.akamaized.net/img/96965b5291bfcd58a2a1ff2937115360.jpg',
 	'woh2_b': 'https://gamewith.akamaized.net/img/d41c526578fa857682013c89b2ff135e.jpg',
 	'kouen2_1': 'https://gamewith.akamaized.net/img/335550671fc9540e43afcd27ccce4a47.jpg',
+	'kouen2_2': 'https://gamewith.akamaized.net/img/97c71034e141f5d96879a5ba874778b7.jpg',
 	'busha': 'https://gamewith.akamaized.net/img/d0744c4fc81c29da56c343c446752be1.jpg',
+	'neko2018': 'https://gamewith.akamaized.net/img/3f2ea62a54a26d1cb452cfbfa4529bb9.jpg',
+	'neko2018_2': 'https://gamewith.akamaized.net/img/c35b5a3bf4f437b37ef1243cf75800c6.jpg',
 };
 
 var runeExtraText = {
