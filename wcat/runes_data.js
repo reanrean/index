@@ -1,8 +1,12 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['11/22/2018 15:00','13島','建築',{'ch13':26}],
+['11/22/2018 15:00','13島','石板',{'ch13_b':1000}],
+['11/22/2018 15:00','13島','積分',{'points':200}],
 ['11/22/2018 15:00','1-12島','藍劍',{'ch1-12':1000}],
 ['11/22/2018 15:00','1-12島','突破石',{'ch1-12':3300}],
+['10/31/2018 15:00','紅蓮3','BINGO',{'pointsn':2}],
 ['10/31/2018 15:00','紅蓮3','石版',{'guren3_b':1000}],
 ['10/31/2018 15:00','紅蓮3','BGM',{'guren3_2':7}],
 ['10/31/2018 15:00','紅蓮3','建築',{'guren3_1':200}],
@@ -244,6 +248,8 @@ var runeUrl = {
 	'guren3_2': 'https://gamewith.akamaized.net/img/7bcd726f714d7f2d83fb3e279bdeb34e.jpg',
 	'guren3_b': 'https://gamewith.akamaized.net/img/7b0a005fd14cd50a530b2e26c0db8325.jpg',
 	'ch1-12': 'https://gamewith.akamaized.net/img/e20c8f124b1a2ec4285871d96cf54199.jpg',
+	'ch13': 'https://gamewith.akamaized.net/img/7ddfef328868f1ac36c28da42a00fd60.jpg',
+	'ch13_b': 'https://gamewith.akamaized.net/img/0d088750d175af1a95810916e8e544cc.jpg',
 };
 
 var runeExtraText = {
