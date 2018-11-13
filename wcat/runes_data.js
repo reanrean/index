@@ -1,9 +1,19 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
-['11/22/2018 15:00','13島','建築',{'ch13':26}],
+['12/3/2018 15:00','狗協力','戰分',{'pointsn':9999,'busha':4000}],
+['11/19/2018 15:00','茶熊任務抽券','茶熊任務抽券',{'chkall':1}],
+['12/10/2018 15:00','茶熊前半','建築',{'chaguma4_1':700}],
+['12/10/2018 15:00','茶熊前半','BGM',{'chaguma4_m':22}],
+['12/10/2018 15:00','茶熊前半','石板',{'chaguma4_b':1250}],
+['12/10/2018 15:00','茶熊前半','机',{'chaguma3_table':7}],
+['12/10/2018 15:00','茶熊後半','自治会強化',{'chaguma4_2_1':120,'chaguma4_2_2':120,'chaguma4_2_3':4000}],
+['12/10/2018 15:00','茶熊後半','飾物',{'pointsn':7}],
+['11/22/2018 15:00','13島','建築',{'ch13':58}],
+['11/22/2018 15:00','13島','挑戰',{'ch13_c':26}],
+['11/22/2018 15:00','13島','BGM',{'ch13_m':6}],
 ['11/22/2018 15:00','13島','石板',{'ch13_b':1000}],
-['11/22/2018 15:00','13島','積分',{'points':200}],
+['11/22/2018 15:00','13島','積分',{'points':400}],
 ['11/22/2018 15:00','1-12島','藍劍',{'ch1-12':1000}],
 ['11/22/2018 15:00','1-12島','突破石',{'ch1-12':3300}],
 ['10/31/2018 15:00','紅蓮3','BINGO',{'pointsn':2}],
@@ -250,6 +260,15 @@ var runeUrl = {
 	'ch1-12': 'https://gamewith.akamaized.net/img/e20c8f124b1a2ec4285871d96cf54199.jpg',
 	'ch13': 'https://gamewith.akamaized.net/img/7ddfef328868f1ac36c28da42a00fd60.jpg',
 	'ch13_b': 'https://gamewith.akamaized.net/img/0d088750d175af1a95810916e8e544cc.jpg',
+	'ch13_c': 'https://gamewith.akamaized.net/img/3e719126a3504f83d402ac9d53f243fe.jpg',
+	'ch13_m': 'https://gamewith.akamaized.net/img/970ce3493e93ca788ee9faea73adf2f0.jpg',
+	'chaguma4_1': 'https://gamewith.akamaized.net/img/031f985e1acfd6151f73522d8c5d279e.jpg',
+	'chaguma4_b': 'https://gamewith.akamaized.net/img/fa42d9a58f5d14d009b4f76f343993b1.jpg',
+	'chaguma4_m': 'https://gamewith.akamaized.net/img/ab1e4fe3c5a143aa69093e62bce9aceb.jpg',
+	'chaguma4_2_1': 'https://gamewith.akamaized.net/img/6fbd4dd4626a4ac5177bcb325a8ca171.jpg',
+	'chaguma4_2_2': 'https://gamewith.akamaized.net/img/985e44bf19d8c5b954e87cd5fe6f9c96.jpg',
+	'chaguma4_2_3': 'https://gamewith.akamaized.net/img/c1e98f57e584fb24e7597b34ba703c37.jpg',
+	'dog': 'https://gamewith.akamaized.net/img/423cfe4c83301ff3b2b5aa7e26be86d9.jpg',
 };
 
 var runeExtraText = {
