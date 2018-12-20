@@ -1,6 +1,9 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['1/18/2019 15:00','合住屋3','建築',{'share3_1':240}],
+['1/18/2019 15:00','合住屋3','交換飾物',{'share3_1':300}],
+['1/18/2019 15:00','合住屋3','交換武器',{'share3_2':300}],
 ['12/14/2018 15:00','怪彈單人','BGM',{'monstbgm':30}],
 ['12/14/2018 15:00','怪彈單人','建築',{'monst2':150}],
 ['12/14/2018 15:00','怪彈單人','英雄角',{'monst1':100}],
@@ -266,6 +269,8 @@ var runeUrl = {
 	'monstbgm': 'https://gamewith.akamaized.net/img/ced07dad2ce6562077c948332866c1ce.jpg',
 	'monst_b1': 'https://gamewith.akamaized.net/img/6d5aa56b0f196a04d864a277ad605133.jpg',
 	'monst_b2': 'https://gamewith.akamaized.net/img/de9c52940511fdbb6b3d151c28d07cbd.jpg',
+	'share3_1': 'https://gamewith.akamaized.net/img/e0449bdb43be0cf121d92db862e3af21.jpg',
+	'share3_2': 'https://gamewith.akamaized.net/img/efa7fbc181514ae3a013c2c272184cdb.jpg',
 };
 
 var runeExtraText = {
