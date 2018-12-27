@@ -1,9 +1,11 @@
 //'m/d/y h:m',eventCate,eventName,{runeName: runeAmount}
 //one line for each eventName
 var eventList = [
+['8/1/2019 15:00','祝福武器','祝福武器',{'bless_sword':519,'bless_axe':519,'bless_yumi':519,'bless_mag':519}],
 ['1/18/2019 15:00','合住屋3','建築',{'share3_1':240}],
-['1/18/2019 15:00','合住屋3','交換飾物',{'share3_1':300}],
-['1/18/2019 15:00','合住屋3','交換武器',{'share3_2':300}],
+['1/18/2019 15:00','合住屋3','交換',{'share3_1':300,'share3_2':300}],
+['1/18/2019 15:00','合住屋3','石板',{'share3_b':1000}],
+['1/18/2019 15:00','合住屋3','BGM',{'share3_bgm':1000}],
 ['12/14/2018 15:00','怪彈單人','BGM',{'monstbgm':30}],
 ['12/14/2018 15:00','怪彈單人','建築',{'monst2':150}],
 ['12/14/2018 15:00','怪彈單人','英雄角',{'monst1':100}],
@@ -271,6 +273,8 @@ var runeUrl = {
 	'monst_b2': 'https://gamewith.akamaized.net/img/de9c52940511fdbb6b3d151c28d07cbd.jpg',
 	'share3_1': 'https://gamewith.akamaized.net/img/e0449bdb43be0cf121d92db862e3af21.jpg',
 	'share3_2': 'https://gamewith.akamaized.net/img/efa7fbc181514ae3a013c2c272184cdb.jpg',
+	'share3_b': 'https://gamewith.akamaized.net/img/cbaeb43db26560c465942191ac329a5c.jpg',
+	'share3_bgm': 'https://gamewith.akamaized.net/img/17d3add402b03c7d9e9f8de8c89ea885.jpg',
 };
 
 var runeExtraText = {
