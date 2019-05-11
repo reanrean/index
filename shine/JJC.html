@@ -51,7 +51,7 @@ function init(){
 	table += tr(td('*勾选代表已有/不需要部件','colspan="4" class="remark"'));
 	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
 	for (i=0; i<cname.length; i++){
-		cell2 += cname[i] + (i==multi? '*' + inputBox('multi','calc()',1) + '个' : '') + '<br>';
+		cell2 += cname[i] + (i==multi? '*' + inputBox('multi','calc()',2) + '个' : '') + '<br>';
 		cell1 += type[i] + '<br>';
 		cell3 += (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '<br>';
 		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
@@ -61,7 +61,7 @@ function init(){
 	document.getElementById("table").innerHTML = table;
 	
 	var input = '<table border="0">' + tr(td(''),'style="display:none"');
-	input += tr(td('当前'+itemName+'：') + td(inputBox('current','calc()',3)+'次'));
+	input += tr(td('当前'+itemName+'：') + td(inputBox('current','calc()',5)+'个'));
 	input += tr(td('结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weekly)));
 	input += tr(td('今天剩余次数：') + td(inputBox('remain_today','calc()',3)+'次'));
 	input += tr(td('预计胜率：') + td(inputBox('pct_exp','calc()',3)+'%'));
