@@ -88,7 +88,7 @@ function default_setting(){
 	var timeNow = dateNow.getTime();
 	time_d = Math.max(0,Math.floor((timeEnd-timeNow)/1000/60/60/24));
 	time_w = Math.max(0,Math.floor((timeEnd-timeNow)/1000/60/60/24/7));
-	if(dateNow.getHours()<5&&timeEnd-timeNow>0&&dateNow.getDay()!=0) time_d += 1; //没到5点，非周日，日数+1
+	//if(dateNow.getHours()<5&&timeEnd-timeNow>0&&dateNow.getDay()!=0) time_d += 1; //没到5点，非周日，日数+1
 	if(dateNow.getHours()>=21&&dateNow.getDay()==6&&time_d>0) time_d -= 1; //周六21点过后，日数-1
 	var timeEndDate = new Date(timeEnd);
 	var y = timeEndDate.getYear() + 1900;
