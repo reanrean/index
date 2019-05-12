@@ -74,7 +74,7 @@ function init(){
 	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
 	for (i=0; i<cname.length; i++){
 		//cell2 += '<label for="own'+i+'">' + cname[i] + '</label>' + (i==multi? '*' + inputBox('multi','calc()',2) + '个' : '') + '<br>';
-		cell2 += '<label for="own'+i+'">' + (i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : cname[i]) + '</label><br>';
+		cell2 += (i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : '<label for="own'+i+'">' + cname[i] + '</label>') + '<br>';
 		cell1 += '<label for="own'+i+'">' + type[i] + '</label><br>';
 		cell3 += '<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label><br>';
 		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
