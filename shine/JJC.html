@@ -16,10 +16,12 @@ var cname = ['记忆残翼','温柔祷歌','蝴蝶之梦','缠绕爱恨','精灵
 //记忆回响位置
 var multPos = 7;
 //单价
-var need = [1188,792,528,528,1500,750,750,990,264,528,330,198,528,264,165,198,10,10,4];
+var need = [1188,792,528,528,1500,750,750,990,264,528,330,198,528,264,165,198];
 //礼包名字
 var pack = ['钥匙礼包','稀有钥匙','普通钥匙'];
-//礼包名字
+//礼包价格
+var packNeed = [10,10,4];
+//礼包最大购买数
 var packMax = [10,15,50];
 //道具名称
 var itemName = '礼赞之花';
@@ -76,34 +78,37 @@ function init(){
 	var table = '<table border="1">';
 	table += tr(td('部位')+td('名称')+td('所需')+td('已有'));
 	table += tr(td('*勾选代表已有/不需要部件','colspan="4" class="remark"'));
-	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
+	var cell1 = []; var cell2 = []; var cell3 = []; var cell4 = [];
 	for (i=0; i<cname.length; i++){
-		cell2 += (i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : '<label for="own'+i+'">' + cname[i] + '</label>') + '<br>';
-		cell1 += '<label for="own'+i+'">' + type[i] + '</label><br>';
-		cell3 += '<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label><br>';
-		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
+		cell1.push('<label for="own'+i+'">' + type[i] + '</label>');
+		cell2.push(i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : '<label for="own'+i+'">' + cname[i] + '</label>');
+		cell3.push('<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label>');
+		cell4.push('<input type="checkbox" id="own' + i + '" onclick=calc() >');
 	}
-	table += tr(td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0;border-right-width:0"')+td(cell3,'style="border-left-width:0;border-right-width:0"')+td(cell4,'style="border-left-width:0"'));
+	for (i=0; i<cell1.length; i++){
+		table += tr(td(cell1[i])+td(cell2[i])+td(cell3[i])+td(cell4[i]),'class="noinner' + (i==0?'':' notop') + (i==cell1.length-1?'':' nobottom') +'"');
+	}
 	table += tr(td('*每周购买礼包','colspan="4" class="remark"'));
-	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
+	var cell1 = []; var cell2 = []; var cell3 = [];
 	for (i=0; i<pack.length; i++){
-		var cum = i + cname.length;
-		cell1 += '<label for="own'+cum+'">' + pack[i] + '</label><br>';
-		cell2 += inputBox('pack'+i,'calc()',2) + '个<br>';
-		cell3 += '<label for="own'+cum+'"><span id="packNeed'+i+'">' + need[cum] + '</span></label><br>';
-		cell4 += '<input type="checkbox" id="own'+cum+'" onclick=calc() ><br>';
+		cell1.push(pack[i]);
+		cell2.push(inputBox('pack'+i,'calc()',2) + '个');
+		cell3.push('<span id="packNeed'+i+'">' + packNeed[i] + '</span>');
 	}
-	table += tr(td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0;border-right-width:0"')+td(cell3,'style="border-left-width:0;border-right-width:0"')+td(cell4,'style="border-left-width:0"'));
+	for (i=0; i<cell1.length; i++){
+		table += tr(td(cell1[i])+td(cell2[i])+td(cell3[i],'colspan="2"'),'class="noinner' + (i==0?'':' notop') + (i==cell1.length-1?'':' nobottom') +'"');
+	}
 	table += '</table>';
 	document.getElementById("table").innerHTML = table;
 	
-	var input = '<table border="0">' + tr(td(''),'style="display:none"');
+	var input = '<table border="0" class="noinner">' + tr(td(''),'style="display:none"');
 	input += tr(td('当前'+itemName+'：') + td(inputBox('current','calc()',5)+'个'));
-	input += tr(td('结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weekly)));
-	input += tr(td('今天剩余次数：') + td(inputBox('remain_today','calc()',3)+'次'));
+	input += tr(td('平均结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weekly)));
+	input += tr(td('今日剩余免费：') + td(inputBox('remain_today','calc()',3)+'次'));
+	input += tr(td('今日还可购买：') + td(inputBox('remain_buy_today','calc()',3)+'次'));
 	input += tr(td('预计胜率：') + td(inputBox('pct_exp','calc()',3)+'%'));
-	input += tr(td('目标段位：') + td(selectBox('topupPlan','calc()',topup_index,topup)));
-	input += tr(td('已达段位：') + td(selectBox('topupAlready','calc()',topup_index,topup)));
+	input += tr(td('计划最高段位：') + td(selectBox('topupPlan','calc()',topup_index,topup)));
+	input += tr(td('已达最高段位：') + td(selectBox('topupAlready','calc()',topup_index,topup)));
 	input += '</table>';
 	document.getElementById("input").innerHTML = input;
 	
@@ -135,6 +140,7 @@ function default_setting(){
 	for (var i=0; i<pack.length; i++) setVal("pack"+i, 0);
 	setVal('current', 0);
 	setVal("remain_today", 0);
+	setVal("remain_buy_today", 0);
 	setVal('pct_exp', 100);
 }
 
@@ -142,17 +148,15 @@ function calc(){
 	var multiDup = skillUp[getVal('skillLv')];
 	document.getElementById("multiNeed").innerHTML = need[multi] * multiDup;
 	for (var i=0; i<pack.length; i++) {
-		packNum[i] = Math.max(0,getVal('pack'+i));
-		if (packNum[i]>packMax[i]){
-			packNum[i] = packMax[i];
-			setVal("pack"+i, packMax[i]);
-		}
-		document.getElementById("packNeed"+i).innerHTML = need[i+cname.length] * packNum[i];
+		checkMax('pack'+i, packMax[i]);
+		packNum[i] = getVal('pack'+i);
+		document.getElementById("packNeed"+i).innerHTML = packNeed[i] * packNum[i] + (packNum[i]>0 ? '×' + time_w : '');
 	}
 	var current = Math.max(0,getVal('current'));
 	var weekly = getVal('weekly');
-	var remain_today = Math.max(0,getVal('remain_today'));
-	var pct_exp = Math.max(0,Math.min(100,getVal('pct_exp')));
+	var remain_today = checkMax('remain_today', 5);
+	var remain_buy_today = checkMax('remain_buy_today', 10);
+	var pct_exp = checkMax('pct_exp', 100);
 	var topupAlready=getVal('topupAlready');
 	var topupPlan=getVal('topupPlan');
 	
@@ -163,7 +167,10 @@ function calc(){
 	
 	var aim = 0;
 	for(i=0; i<need.length; i++) {
-		aim += need[i] * (1-own[i]) * (i==multi? multiDup : 1 ) * (i>=cname.length? packNum[i-cname.length] * time_w : 1);
+		aim += need[i] * (1-own[i]) * (i==multi? multiDup : 1 );
+	}
+	for(i=0; i<packNeed.length; i++) {
+		aim += packNeed[i] * packNum[i] * time_w;
 	}
 	
 	var future = 0;
@@ -184,7 +191,7 @@ function calc(){
 	var times = Math.ceil(rem/exp);
 	
 	var canAchieve = true;
-	var everyDay = Math.round(times/time_d*10)/10;
+	var everyDay = Math.round(Math.max(0,times-remain_buy_today)/time_d*10)/10;
 	if (everyDay>10) canAchieve = false;
 	
 	var to_pay = times*price;
@@ -195,11 +202,24 @@ function calc(){
 	calcres+=tr(td('（挑战奖励'+winLose+'，周结算'+weekSettle+'，段位提升'+future+'）'));
 	calcres+=tr(td('还差'+rem+'个'+itemName+'，需购买'+times+'次'));
 	calcres+=tr(td('赛季结束前<b>' + (canAchieve?'可以':'不能') + '</b>兑换完所有部件'+(canAchieve?'':'，请调整目标需求')));
-	if (canAchieve) calcres+=tr(td('平均每天需购买'+everyDay+'次'));
+	if (canAchieve) calcres+=tr(td((remain_buy_today>0&&times>0 ? '今日买'+(times>remain_buy_today?remain_buy_today:times)+'次后，' :'') + '平均每天需购买'+everyDay+'次'));
 	if (canAchieve) calcres+=tr(td('花钻'+to_pay+'个'));
 	calcres+='</table>';
 	document.getElementById("calcres").innerHTML = calcres;
 }
+
+function checkMax(boxName, maxVal){
+	var val = getVal(boxName);
+	if (val>maxVal){
+		setVal(boxName, maxVal);
+		return maxVal;
+	} else if (val<0){
+		setVal(boxName, 0);
+		return 0;
+	}
+	return val;
+}
+
 function loadSettings(){
 	if (typeof(Storage) !== "undefined" && localStorage.getItem("shineJJC_"+ymd)) {
 		var loadString = localStorage.getItem("shineJJC_"+ymd);
@@ -257,7 +277,7 @@ function inputBox(id,onchange,size){
 }
 function selectBox(id,onchange,valArr,textArr){
 	var ret='<select id="'+id+'" onchange='+onchange+'>';
-	if(!textArr){textArr=valArr;}
+	if(!textArr) textArr=valArr;
 	for (var i in valArr){
 		ret+='<option value="'+valArr[i]+'">'+textArr[i]+'</option>';
 	}
