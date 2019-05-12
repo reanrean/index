@@ -113,7 +113,7 @@ function default_setting(){
 	var ys = settleDate.getFullYear();
 	var ms = settleDate.getMonth() + 1;
 	var ds = settleDate.getDate();
-	var settleDate21 = new Date(ys + '-' + ms + '-' + ds + ' 21:00:00 GMT+0800'); //周六21点结算
+	var settleDate21 = new Date(ms + '/' + ds + '/' + ys + ' 21:00:00 GMT+0800'); //周六21点结算
 	if (settleDate21<timeEndDate && settleDate21>settleDate) time_w += 1;
 	document.getElementById("showTime").innerHTML = '赛季结束日期：' + y + '-' + m + '-' + d + '　还有' + time_d + '天，' + time_w + '次结算';
 	setVal("multi", 1);
