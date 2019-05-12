@@ -34,7 +34,7 @@ var weeklyNum = [600,580,560,520,480,440,400,360,320,280,240,200,150,140,130,120
 //段位提升名字
 var topup=['永恒的传奇','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星'];
 //段位提升奖励数(每档)
-var topup_gain=[980,780,680,580,480,400,320,240,190,140,90,60,30];
+var topup_gain=[200,100,100,100,80,80,80,50,50,50,30,30,30];
 
 //==========参数设置完毕==========//
 
@@ -42,6 +42,13 @@ var own=[];
 var multi = multPos - 1;
 var time_d;
 var time_w;
+var topup_index = function(){
+	var ret = [];
+	for (var i=0; i<topup_gain.length; i++){
+		ret.unshift(i);
+	}
+	return ret;
+}();
 
 window.onload = function(){
 	init();
@@ -70,8 +77,8 @@ function init(){
 	input += tr(td('今天剩余次数：') + td(inputBox('remain_today','calc()',3)+'次'));
 	input += tr(td('预计胜率：') + td(inputBox('pct_exp','calc()',3)+'%'));
 	//input += tr(td('段位提升奖励：') + td('未领'+inputBox('future','calc()',5)+'个'+itemName));
-	input += tr(td('目标段位：') + td(selectBox('topupPlan','calc()',topup_gain,topup)));
-	input += tr(td('已达段位：') + td(selectBox('topupAlready','calc()',topup_gain,topup)));
+	input += tr(td('目标段位：') + td(selectBox('topupPlan','calc()',topup_index,topup)));
+	input += tr(td('已达段位：') + td(selectBox('topupAlready','calc()',topup_index,topup)));
 	input += '</table>';
 	//input += '<hr>';
 	document.getElementById("input").innerHTML = input;
@@ -138,8 +145,8 @@ function calc(){
 	}
 	
 	var future = 0;
-	for (i=0; i<topup_gain.length; i++) {
-		if(topup_gain[i]>topupAlready&&topup_gain[i]<=topupPlan){
+	for (i=0; i<topup_index.length; i++) {
+		if(topup_index[i]>topupAlready&&topup_index[i]<=topupPlan){
 			future += topup_gain[i];
 		}
 	}
