@@ -84,6 +84,7 @@ function init(){
 		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
 	}
 	table += tr(td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0;border-right-width:0"')+td(cell3,'style="border-left-width:0;border-right-width:0"')+td(cell4,'style="border-left-width:0"'));
+	table += tr(td('*每周购买礼包','colspan="4" class="remark"'));
 	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
 	for (i=0; i<pack.length; i++){
 		var cum = i + cname.length;
@@ -162,7 +163,7 @@ function calc(){
 	
 	var aim = 0;
 	for(i=0; i<need.length; i++) {
-		aim += need[i] * (1-own[i]) * (i==multi? multiDup : 1 ) * (i>=cname.length? packNum[i-cname.length] : 1);
+		aim += need[i] * (1-own[i]) * (i==multi? multiDup : 1 ) * (i>=cname.length? packNum[i-cname.length] * time_w : 1);
 	}
 	
 	var future = 0;
