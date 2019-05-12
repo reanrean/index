@@ -202,7 +202,7 @@ function calc(){
 	calcres+=tr(td('（挑战奖励'+winLose+'，周结算'+weekSettle+'，段位提升'+future+'）'));
 	calcres+=tr(td('还差'+rem+'个'+itemName+'，需购买'+times+'次'));
 	calcres+=tr(td('赛季结束前<b>' + (canAchieve?'可以':'不能') + '</b>兑换完所有部件'+(canAchieve?'':'，请调整目标需求')));
-	if (canAchieve) calcres+=tr(td((remain_buy_today>0&&times>0 ? '今日买'+(times>remain_buy_today?remain_buy_today:times)+'次后，' :'') + '平均每天需购买'+everyDay+'次'));
+	if (canAchieve) calcres+=tr(td((remain_buy_today>0&&times>0 ? '今日买'+Math.min(remain_buy_today,times)+'次后，' :'') + '平均每天需购买'+everyDay+'次'));
 	if (canAchieve) calcres+=tr(td('花钻'+to_pay+'个'));
 	calcres+='</table>';
 	document.getElementById("calcres").innerHTML = calcres;
@@ -234,6 +234,7 @@ function loadSettings(){
 		setPlainTextStoredStr(loadString, 'current');
 		setPlainTextStoredStr(loadString, 'weekly');
 		setPlainTextStoredStr(loadString, 'remain_today');
+		setPlainTextStoredStr(loadString, 'remain_buy_today');
 		setPlainTextStoredStr(loadString, 'pct_exp');
 		setPlainTextStoredStr(loadString, 'topupPlan');
 		setPlainTextStoredStr(loadString, 'topupAlready');
@@ -250,7 +251,7 @@ function setPlainTextStoredStr(string, id){
 	setVal(id, tmp);
 }
 function saveSettings(){
-	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
+	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];remain_buy_today:['+getVal('remain_buy_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
 	//own:[1,1,0,0,0];
 	if (typeof(Storage) !== "undefined") {
 		localStorage.setItem("shineJJC_"+ymd, saveString);
