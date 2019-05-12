@@ -7,7 +7,7 @@
 <title>闪耀暖暖竞技场兑换计算</title>
 <script type="text/javascript" charset="UTF-8">
 //结束时间
-var timeEnd = new Date("2019-8-11 5:00:00 GMT+0800").getTime();
+var timeEnd = new Date("8/11/2019 5:00:00 GMT+0800").getTime();
 var ymd = '190811';
 //部件类别
 var type = ['特殊-翅膀','手持物','美瞳','手套','设计师之影','记忆回响','连衣裙','唇妆','鞋子','特殊-颈饰','底妆','发型','袜子','眉妆','耳饰'];
@@ -68,6 +68,7 @@ function init(){
 		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
 	}
 	table += tr(td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0;border-right-width:0"')+td(cell3,'style="border-left-width:0;border-right-width:0"')+td(cell4,'style="border-left-width:0"'));
+	//table += tr(td('礼包购买','colspan="4" class="remark"'));
 	table += '</table>';
 	document.getElementById("table").innerHTML = table;
 	
@@ -88,11 +89,11 @@ function init(){
 	remark += '<tr><td>赛季结束日的免费次数不计算在内</td></tr>';
 	remark += '<tr><td>记忆回响需求数量：</td></tr>';
 	remark += '<tr><td>&emsp;真我复苏-1个</td></tr>';
-	remark += '<tr><td>&emsp;技能2级-1个</td></tr>';
-	remark += '<tr><td>&emsp;技能3级-2个</td></tr>';
-	remark += '<tr><td>&emsp;技能4级-3个</td></tr>';
-	remark += '<tr><td>&emsp;技能5级-4个</td></tr>';
-	remark += '<tr><td>&emsp;最多总共11个</td></tr>';
+	remark += '<tr><td>&emsp;影之召唤2级-1个</td></tr>';
+	remark += '<tr><td>&emsp;影之召唤3级-2个</td></tr>';
+	remark += '<tr><td>&emsp;影之召唤4级-3个</td></tr>';
+	remark += '<tr><td>&emsp;影之召唤5级-5个</td></tr>';
+	remark += '<tr><td>&emsp;最多总共12个</td></tr>';
 	remark += '</table>';
 	document.getElementById("remark").innerHTML = remark;
 }
@@ -243,6 +244,7 @@ function selectBox(id,onchange,valArr,textArr){
 </head>
 <body>
 <p align="center" class="title1"><b>闪耀暖暖竞技场兑换计算</b></p>
+<p align="center" class="remark">Rean@<a href="https://www.weibo.com/u/6573931053">山药攻略组<img src="bg.jpg" width="40px"></a></p>
 <hr class="mhr">
 <p align="center"><span id="showTime"></span></p>
 <p align="center"><button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button></p>
