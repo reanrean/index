@@ -7,7 +7,7 @@
 <title>闪耀暖暖竞技场兑换计算</title>
 <script type="text/javascript" charset="UTF-8">
 //结束时间
-var timeEnd = new Date("8/11/2019 4:59:59 GMT+0800").getTime();
+var timeEnd = new Date("2019-8-11 5:00:00 GMT+0800").getTime();
 var ymd = '190811';
 //部件类别
 var type = ['特殊-翅膀','手持物','美瞳','手套','设计师之影','记忆回响','连衣裙','唇妆','鞋子','特殊-颈饰','底妆','发型','袜子','眉妆','耳饰'];
@@ -31,6 +31,10 @@ var lose = 3;
 var weekly = ['第1名','第2名','第3名','第4-50名','第51-100名','第101-200名','第201-500名','第501-1000名','第1001-2000名','第2001-3000名','第3001-5000名','第5001-10000名','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星','初心学徒'];
 //段位奖励
 var weeklyNum = [600,580,560,520,480,440,400,360,320,280,240,200,150,140,130,120,110,90,80,70,60,50,40,30,20];
+//段位提升名字
+var topup=['永恒的传奇','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星'];
+//段位提升奖励数(每档)
+var topup_gain=[980,780,680,580,480,400,320,240,190,140,90,60,30];
 
 //==========参数设置完毕==========//
 
@@ -51,9 +55,9 @@ function init(){
 	table += tr(td('*勾选代表已有/不需要部件','colspan="4" class="remark"'));
 	var cell1 = ''; var cell2 = ''; var cell3 = ''; var cell4 = '';
 	for (i=0; i<cname.length; i++){
-		cell2 += cname[i] + (i==multi? '*' + inputBox('multi','calc()',2) + '个' : '') + '<br>';
-		cell1 += type[i] + '<br>';
-		cell3 += (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '<br>';
+		cell2 += '<label for="own'+i+'">' + cname[i] + '</label>' + (i==multi? '*' + inputBox('multi','calc()',2) + '个' : '') + '<br>';
+		cell1 += '<label for="own'+i+'">' + type[i] + '</label><br>';
+		cell3 += '<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label><br>';
 		cell4 += '<input type="checkbox" id="own' + i + '" onclick=calc() ><br>';
 	}
 	table += tr(td(cell1,'style="border-right-width:0"')+td(cell2,'style="border-left-width:0;border-right-width:0"')+td(cell3,'style="border-left-width:0;border-right-width:0"')+td(cell4,'style="border-left-width:0"'));
@@ -65,20 +69,23 @@ function init(){
 	input += tr(td('结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weekly)));
 	input += tr(td('今天剩余次数：') + td(inputBox('remain_today','calc()',3)+'次'));
 	input += tr(td('预计胜率：') + td(inputBox('pct_exp','calc()',3)+'%'));
-	input += tr(td('段位提升奖励：') + td('未领'+inputBox('future','calc()',5)+'个'+itemName));
+	//input += tr(td('段位提升奖励：') + td('未领'+inputBox('future','calc()',5)+'个'+itemName));
+	input += tr(td('目标段位：') + td(selectBox('topupPlan','calc()',topup_gain,topup)));
+	input += tr(td('已达段位：') + td(selectBox('topupAlready','calc()',topup_gain,topup)));
 	input += '</table>';
 	//input += '<hr>';
 	document.getElementById("input").innerHTML = input;
 	
 	var remark = '<table border="1">';
 	remark += '<tr><td>注意事项</td></tr>';
+	remark += '<tr><td>赛季结束日的免费次数不计算在内</td></tr>';
 	remark += '<tr><td>记忆回响需求数量：</td></tr>';
-	remark += '<tr><td>真我复苏-1个</td></tr>';
-	remark += '<tr><td>技能2级-1个</td></tr>';
-	remark += '<tr><td>技能3级-2个</td></tr>';
-	remark += '<tr><td>技能4级-3个</td></tr>';
-	remark += '<tr><td>技能5级-4个</td></tr>';
-	remark += '<tr><td>最多总共11个</td></tr>';
+	remark += '<tr><td>&emsp;真我复苏-1个</td></tr>';
+	remark += '<tr><td>&emsp;技能2级-1个</td></tr>';
+	remark += '<tr><td>&emsp;技能3级-2个</td></tr>';
+	remark += '<tr><td>&emsp;技能4级-3个</td></tr>';
+	remark += '<tr><td>&emsp;技能5级-4个</td></tr>';
+	remark += '<tr><td>&emsp;最多总共11个</td></tr>';
 	remark += '</table>';
 	document.getElementById("remark").innerHTML = remark;
 }
@@ -88,32 +95,35 @@ function default_setting(){
 	var timeNow = dateNow.getTime();
 	time_d = Math.max(0,Math.floor((timeEnd-timeNow)/1000/60/60/24));
 	time_w = Math.max(0,Math.floor((timeEnd-timeNow)/1000/60/60/24/7));
-	//if(dateNow.getHours()<5&&timeEnd-timeNow>0&&dateNow.getDay()!=0) time_d += 1; //没到5点，非周日，日数+1
-	if(dateNow.getHours()>=21&&dateNow.getDay()==6&&time_d>0) time_d -= 1; //周六21点过后，日数-1
 	var timeEndDate = new Date(timeEnd);
-	var y = timeEndDate.getYear() + 1900;
+	var y = timeEndDate.getFullYear();
 	var m = timeEndDate.getMonth() + 1;
 	var d = timeEndDate.getDate();
-	var endDay = timeEndDate.getDay();
 	var todayDay = dateNow.getDay();
-	if (endDay<todayDay) endDay += 7;
-	if (endDay>=7) time_w +=1;
-	if (todayDay==6&&dateNow.getHours()>=21&&time_w>=0) time_w -=1;
-	document.getElementById("showTime").innerHTML = '赛季结束日期：' + y + '/' + m + '/' + d + '　还有' + time_d + '天，' + time_w + '次结算';
+	var adjustedDay = 6 - todayDay;
+	var settleDate = new Date(timeNow + (time_w*7 + adjustedDay) *24*60*60*1000);
+	var ys = settleDate.getFullYear();
+	var ms = settleDate.getMonth() + 1;
+	var ds = settleDate.getDate();
+	var settleDate21 = new Date(ys + '-' + ms + '-' + ds + ' 21:00:00 GMT+0800'); //周六21点结算
+	if (settleDate21<timeEndDate && settleDate21>settleDate) time_w += 1;
+	document.getElementById("showTime").innerHTML = '赛季结束日期：' + y + '-' + m + '-' + d + '　还有' + time_d + '天，' + time_w + '次结算';
 	setVal("multi", 1);
 	setVal('current', 0);
 	setVal("remain_today", 0);
 	setVal('pct_exp', 100);
-	setVal('future', 0);
+	//setVal('future', 0);
 }
 
 function calc(){
 	var multiDup = Math.max(0,getVal('multi'));
 	var current = Math.max(0,getVal('current'));
-	var weekly = Math.max(0,getVal('weekly'));
+	var weekly = getVal('weekly');
 	var remain_today = Math.max(0,getVal('remain_today'));
 	var pct_exp = Math.max(0,Math.min(100,getVal('pct_exp')));
-	var future = Math.max(0,getVal('future'));
+	//var future = Math.max(0,getVal('future'));
+	var topupAlready=getVal('topupAlready');
+	var topupPlan=getVal('topupPlan');
 	
 	document.getElementById("multiNeed").innerHTML = need[multi] * multiDup;
 	
@@ -127,9 +137,18 @@ function calc(){
 		aim += need[i] * (1-own[i]) * ((i==multi? multiDup : 1 ));
 	}
 	
+	var future = 0;
+	for (i=0; i<topup_gain.length; i++) {
+		if(topup_gain[i]>topupAlready&&topup_gain[i]<=topupPlan){
+			future += topup_gain[i];
+		}
+	}
+	
 	var free_times = time_d * free1Day + remain_today;
 	var win_times = Math.floor(free_times*pct_exp/100);
-	var free = win * win_times + lose * (free_times-win_times) + weekly*time_w + future;
+	var winLose = win * win_times + lose * (free_times-win_times);
+	var weekSettle = weekly*time_w;
+	var free = winLose + weekSettle + future;
 	
 	var rem = Math.max(0,aim - free - current);
 	var exp = win*pct_exp/100 + lose*(1-pct_exp/100);
@@ -144,6 +163,7 @@ function calc(){
 	var calcres='<table>'+tr(td('计算结果'));
 	calcres+=tr(td('共需'+aim+'个'+itemName));
 	calcres+=tr(td('免费'+free+'个'+itemName));
+	calcres+=tr(td('（挑战奖励'+winLose+'，周结算'+weekSettle+'，段位提升'+future+'）'));
 	calcres+=tr(td('还差'+rem+'个'+itemName+'，需购买'+times+'次'));
 	calcres+=tr(td('赛季结束前<b>' + (canAchieve?'可以':'不能') + '</b>兑换完所有部件'+(canAchieve?'':'，请调整目标需求')));
 	if (canAchieve) calcres+=tr(td('平均每天需购买'+everyDay+'次'));
@@ -158,18 +178,13 @@ function loadSettings(){
 		var own_str = getStoredStr(loadString, 'own').split(',');
 		for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
 		
-		var multi_str = getStoredStr(loadString, 'multi');
-		setVal('multi',multi_str);
-		var current_str = getStoredStr(loadString, 'current');
-		setVal('current',current_str);
-		var weekly_str = getStoredStr(loadString, 'weekly');
-		setVal('weekly',weekly_str);
-		var remain_today_str = getStoredStr(loadString, 'remain_today');
-		setVal('remain_today',remain_today_str);
-		var pct_exp_str = getStoredStr(loadString, 'pct_exp');
-		setVal('pct_exp',pct_exp_str);
-		var future_str = getStoredStr(loadString, 'future');
-		setVal('future',future_str);
+		setPlainTextStoredStr(loadString, 'multi');
+		setPlainTextStoredStr(loadString, 'current');
+		setPlainTextStoredStr(loadString, 'weekly');
+		setPlainTextStoredStr(loadString, 'remain_today');
+		setPlainTextStoredStr(loadString, 'pct_exp');
+		setPlainTextStoredStr(loadString, 'topupPlan');
+		setPlainTextStoredStr(loadString, 'topupAlready');
 		
 		calc();
 	}
@@ -178,8 +193,12 @@ function getStoredStr(string, id){
 	var start = string.indexOf(id+':[')+(id+':[').length;
 	return string.substr(start,string.substr(start).indexOf('];'));
 }
+function setPlainTextStoredStr(string, id){
+	var tmp = getStoredStr(string, id);
+	setVal(id, tmp);
+}
 function saveSettings(){
-	var saveString = 'own:['+own.join(',')+'];multi:['+getVal('multi')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];pct_exp:['+getVal('pct_exp')+'];future:['+getVal('future')+'];';
+	var saveString = 'own:['+own.join(',')+'];multi:['+getVal('multi')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
 	//own:[1,1,0,0,0];
 	if (typeof(Storage) !== "undefined") {
 		localStorage.setItem("shineJJC_"+ymd, saveString);
@@ -200,9 +219,6 @@ function td(text,attr){
 }
 function tr(text,attr){
 	return '<tr'+(attr?' '+attr:'')+'>'+text+'</tr>';
-}
-function remark(text){
-	return '<span class="remark">'+text+'</span>';
 }
 function inputBox(id,onchange,size){
 	return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>';
