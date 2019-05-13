@@ -10,9 +10,11 @@
 var timeEnd = new Date("8/11/2019 5:00:00 GMT+0800").getTime();
 var ymd = '190811';
 //部件类别
-var type = ['特殊-翅膀','手持物','美瞳','手套','设计师之影','真我复苏','影之召唤','连衣裙','唇妆','鞋子','特殊-颈饰','底妆','发型','袜子','眉妆','耳饰'];
+var ctype = ['特殊-翅膀','手持物','美瞳','手套','设计师之影','真我复苏','影之召唤','连衣裙','唇妆','鞋子','特殊-颈饰','底妆','发型','袜子','眉妆','耳饰'];
 //部件名称
 var cname = ['记忆残翼','温柔祷歌','蝴蝶之梦','缠绕爱恨','精灵哀歌','精灵哀歌','精灵哀歌','梦与蝶之吻','轻吟悲歌','精灵枷锁','月光束缚','残翼','沉默的记忆','岁月纠缠','清浅伤痕','精灵之泪'];
+//需要段位
+var creq = ['第5001-10000名','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','颠覆未来之王1星','颠覆未来之王1星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星'];
 //记忆回响位置
 var multPos = 7;
 //单价
@@ -34,7 +36,7 @@ var win = 5;
 //输奖励
 var lose = 3;
 //段位名字
-var weekly = ['第1名','第2名','第3名','第4-50名','第51-100名','第101-200名','第201-500名','第501-1000名','第1001-2000名','第2001-3000名','第3001-5000名','第5001-10000名','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星','初心学徒'];
+var weeklyName = ['第1名','第2名','第3名','第4-50名','第51-100名','第101-200名','第201-500名','第501-1000名','第1001-2000名','第2001-3000名','第3001-5000名','第5001-10000名','颠覆未来之王3星','颠覆未来之王2星','颠覆未来之王1星','灵感重构大师3星','灵感重构大师2星','灵感重构大师1星','记忆创造者3星','记忆创造者2星','记忆创造者1星','自由搭配师3星','自由搭配师2星','自由搭配师1星','初心学徒'];
 //段位奖励
 var weeklyNum = [600,580,560,520,480,440,400,360,320,280,240,200,150,140,130,120,110,90,80,70,60,50,40,30,20];
 //段位提升名字
@@ -80,7 +82,7 @@ function init(){
 	table += tr(td('*勾选代表已有/不需要部件','colspan="4" class="remark"'));
 	var cell1 = []; var cell2 = []; var cell3 = []; var cell4 = [];
 	for (i=0; i<cname.length; i++){
-		cell1.push('<label for="own'+i+'">' + type[i] + '</label>');
+		cell1.push('<label for="own'+i+'">' + ctype[i] + '</label>');
 		cell2.push(i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : '<label for="own'+i+'">' + cname[i] + '</label>');
 		cell3.push('<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label>');
 		cell4.push('<input type="checkbox" id="own' + i + '" onclick=calc() >');
@@ -103,7 +105,7 @@ function init(){
 	
 	var input = '<table border="0" class="noinner">' + tr(td(''),'style="display:none"');
 	input += tr(td('当前'+itemName+'：') + td(inputBox('current','calc()',5)+'个'));
-	input += tr(td('平均结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weekly)));
+	input += tr(td('平均结算段位：') + td(selectBox('weekly','calc()',weeklyNum,weeklyName)));
 	input += tr(td('今日剩余免费：') + td(inputBox('remain_today','calc()',3)+'次'));
 	input += tr(td('今日还可购买：') + td(inputBox('remain_buy_today','calc()',3)+'次'));
 	input += tr(td('预计胜率：') + td(inputBox('pct_exp','calc()',3)+'%'));
@@ -115,6 +117,7 @@ function init(){
 	var remark = '<table border="1">';
 	remark += '<tr><td>注意事项</td></tr>';
 	remark += '<tr><td>赛季结束日的免费次数不计算在内</td></tr>';
+	remark += '<tr id="creq" style="display:none"><td></td></tr>';
 	remark += '</table>';
 	document.getElementById("remark").innerHTML = remark;
 }
@@ -206,6 +209,22 @@ function calc(){
 	if (canAchieve) calcres+=tr(td('花钻'+to_pay+'个'));
 	calcres+='</table>';
 	document.getElementById("calcres").innerHTML = calcres;
+	
+	//compare weekly vs creq
+	var weeklyInd = weeklyNum.indexOf(weekly);
+	var creqOut = '';
+	for(var i=0; i<creq.length; i++){
+		if(weeklyName.indexOf(creq[i])<weeklyInd&&!own[i]){
+			creqOut += cname[i] + '(' + ctype[i] + ')需结算达到' + creq[i] + '<br>';
+		}
+	}
+	if (creqOut){
+		document.getElementById("creq").innerHTML = td(creqOut);
+		document.getElementById("creq").style.display = "table-row";
+	} else {
+		document.getElementById("creq").innerHTML = td('');
+		document.getElementById("creq").style.display = "none";
+	}
 }
 
 function checkMax(boxName, maxVal){
