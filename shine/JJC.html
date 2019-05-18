@@ -44,9 +44,9 @@ var topup=['永恒的传奇','颠覆未来之王3星','颠覆未来之王2星','
 //段位提升奖励数(每档)
 var topup_gain=[200,100,100,100,80,80,80,50,50,50,30,30,30,0];
 //影之召唤升级
-var skillLv = ['2级(1个)','3级(3个)','4级(6个)','5级(11个)'];
+var skillLv = ['2级(1个)','3级(3个)','4级(6个)','5级(11个)','自定'];
 //影之召唤升级需求(累计)
-var skillUp = [1,3,6,11];
+var skillUp = [1,3,6,11,0];
 
 //==========参数设置完毕==========//
 
@@ -83,7 +83,7 @@ function init(){
 	var cell1 = []; var cell2 = []; var cell3 = []; var cell4 = [];
 	for (i=0; i<cname.length; i++){
 		cell1.push('<label for="own'+i+'">' + ctype[i] + '</label>');
-		cell2.push(i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) : '<label for="own'+i+'">' + cname[i] + '</label>');
+		cell2.push(i==multi? selectBox('skillLv', 'calc()', skill_index, skillLv) + '<span id="multiCustSpan" style="display:none">'+inputBox('multiCustInput','calc()',2)+'</span>' : '<label for="own'+i+'">' + cname[i] + '</label>');
 		cell3.push('<label for="own'+i+'">' + (i==multi? '<span id="multiNeed">': '') + need[i] + (i==multi? '</span>': '') + '</label>');
 		cell4.push('<input type="checkbox" id="own' + i + '" onclick=calc() >');
 	}
@@ -142,6 +142,7 @@ function default_setting(){
 	if (settleDate21<timeEndDate && settleDate21>adjustedDate) time_w += 1;
 	document.getElementById("showTime").innerHTML = '赛季结束日期：' + y + '-' + m + '-' + d + '　还有' + time_d + '天，' + time_w + '次结算';
 	for (var i=0; i<pack.length; i++) setVal("pack"+i, 0);
+	setVal('multiCustInput', 0);
 	setVal('current', 0);
 	setVal("remain_today", 0);
 	setVal("remain_buy_today", 0);
@@ -149,7 +150,14 @@ function default_setting(){
 }
 
 function calc(){
-	var multiDup = skillUp[getVal('skillLv')];
+	var multiSelect = getVal('skillLv');
+	if(multiSelect==skillLv.length-1){
+		document.getElementById("multiCustSpan").style.display = "inline";
+		var multiDup = getVal('multiCustInput');
+	}else{
+		document.getElementById("multiCustSpan").style.display = "none";
+		var multiDup = skillUp[multiSelect];
+	}
 	document.getElementById("multiNeed").innerHTML = need[multi] * multiDup;
 	for (var i=0; i<pack.length; i++) {
 		checkMax('pack'+i, packMax[i]);
@@ -251,6 +259,7 @@ function loadSettings(){
 		for (i=0;i<pack.length;i++) {setVal("pack"+i, packNum_str[i]);}
 		
 		setPlainTextStoredStr(loadString, 'skillLv');
+		setPlainTextStoredStr(loadString, 'multiCustInput');
 		setPlainTextStoredStr(loadString, 'current');
 		setPlainTextStoredStr(loadString, 'weekly');
 		setPlainTextStoredStr(loadString, 'remain_today');
@@ -263,7 +272,9 @@ function loadSettings(){
 	}
 }
 function getStoredStr(string, id){
-	var start = string.indexOf(id+':[')+(id+':[').length;
+	var exist = string.indexOf(id+':[');
+	if (exist==-1) return '';
+	var start = exist + (id+':[').length;
 	return string.substr(start,string.substr(start).indexOf('];'));
 }
 function setPlainTextStoredStr(string, id){
@@ -271,7 +282,7 @@ function setPlainTextStoredStr(string, id){
 	setVal(id, tmp);
 }
 function saveSettings(){
-	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];remain_buy_today:['+getVal('remain_buy_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
+	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];multiCustInput:['+getVal('multiCustInput')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];remain_buy_today:['+getVal('remain_buy_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
 	//own:[1,1,0,0,0];
 	if (typeof(Storage) !== "undefined") {
 		localStorage.setItem("shineJJC_"+ymd, saveString);
