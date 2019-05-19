@@ -61,11 +61,11 @@ table.selector tr:nth-child(1) td{
 	padding-bottom: 1em;
 }
 
-td.own, table.selector tr td:nth-child(1):hover {
+td.own, table.selector tr td[id^=own]:hover {
 	background-color: rgba(210, 210, 210, 1);
 }
 
-td.aim, table.selector tr td:nth-child(2):hover {
+td.aim, table.selector tr td[id^=aim]:hover {
 	background-color: rgba(255, 178, 183, 1);
 }
 

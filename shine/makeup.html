@@ -259,7 +259,12 @@ window.onload = function(){
 };
 
 function init(){
-	document.getElementById("selector").innerHTML = '<table class="selector"><tr><td id="own1">选择已有</td><td id="aim1">选择目标</td></tr><tr><td id="own2">选择已有<br>(以上全部)</td><td id="aim2">选择目标<br>(以上全部)</td></tr></table>';
+	var selector = '<table class="selector">';
+	selector += tr(td('选择已有','own1')+td('选择目标','aim1'),'','class="selector"');
+	selector += tr(td('选择已有<br>(以上全部)','own2')+td('选择目标<br>(以上全部)','aim2'),'','class="selector"');
+	selector += tr(td('目标-辞凤阙','aimQinyi','colspan="2" onclick="aimQinyi()"'));
+	selector += '</table>';
+	document.getElementById("selector").innerHTML = selector;
 
 	document.getElementById("tree").innerHTML = '';
 
@@ -317,12 +322,12 @@ function toggleClick(){
 		};
 	}
 	
-	var sels = document.querySelectorAll('#selector tr td');
+	var sels = document.querySelectorAll('tr.selector td');
 	for(var i=0; i<sels.length; i++){
 		sels[i].onclick = function(){
 			if (!this.className){
 				mode = this.id;
-				var sels2 = document.querySelectorAll('#selector tr td');
+				var sels2 = document.querySelectorAll('tr.selector td');
 				for(var s=0; s<sels2.length; s++){
 					sels2[s].className = '';
 				}
@@ -422,6 +427,14 @@ function calc(){
 	document.getElementById('result').innerHTML = table;
 }
 
+function aimQinyi(){
+	var qinyi = [1031, 1082, 1163, 1112, 1193];
+	for (var i=0; i<qinyi.length; i++){
+		setAimId(qinyi[i]);
+	}
+	calc();
+}
+
 function hideTree(tid){
 	document.querySelector('#tree'+tid+' thead').click();
 	//document.location.hash = "#anchor"+tid;
@@ -473,14 +486,21 @@ function handleClick(domId){
 	}
 }
 
+function clearAllSelection(){
+	setNotOwn('td1-11');
+	setNotAim('td1-11');
+}
+
 function setFromMemory(ownArr, aimArr){
 	/*var own_tmp = []; 
 	var aim_tmp = [];
 	for (var i=0; i<own.length; i++) own_tmp.push(own[i]);
 	for (var i=0; i<aim.length; i++) aim_tmp.push(aim[i]);
 	*/
+	clearAllSelection();
 	for (var i=0; i<ownArr.length; i++) setOwnId(ownArr[i]);
 	for (var i=0; i<aimArr.length; i++) setAimId(aimArr[i]);
+	calc();
 }
 
 function checkAim(){
