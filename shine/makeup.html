@@ -444,7 +444,7 @@ function handleClick(domId){
 			checkAim();
 		}
 	}else if (mode=='own2'){
-		if (data[id][1]){//only effective on it==group
+		//if (data[id][1]){//only effective on it==group
 			var upper = findUpper(domId, 'own');
 			if (upper.length>0) {
 				for (var i=0; i<upper.length; i++) setOwn(upper[i], 1);
@@ -452,7 +452,7 @@ function handleClick(domId){
 				setNotOwn(domId);
 				checkAim();
 			}
-		}
+		//}
 	}else if (mode=='aim1'){
 		if (classNm.indexOf('own')<0) {
 			if (classNm.indexOf('aim')<0) {
@@ -462,15 +462,25 @@ function handleClick(domId){
 			}
 		}
 	}else if (mode=='aim2'){
-		if (data[id][1]){//only effective on it==group
+		//if (data[id][1]){//only effective on it==group
 			var upper = findUpper(domId, 'aim own');
 			if (upper.length>0) {
 				for (var i=0; i<upper.length; i++) setAim(upper[i], 1);
 			} else {
 				setNotAim(domId);
 			}
-		}
+		//}
 	}
+}
+
+function setFromMemory(ownArr, aimArr){
+	/*var own_tmp = []; 
+	var aim_tmp = [];
+	for (var i=0; i<own.length; i++) own_tmp.push(own[i]);
+	for (var i=0; i<aim.length; i++) aim_tmp.push(aim[i]);
+	*/
+	for (var i=0; i<ownArr.length; i++) setOwnId(ownArr[i]);
+	for (var i=0; i<aimArr.length; i++) setAimId(aimArr[i]);
 }
 
 function checkAim(){
@@ -643,16 +653,28 @@ function addColor(txt){
 }
 
 function loadSettings(){
-	if (typeof(Storage) !== "undefined" && localStorage.getItem("shineJJC_"+ymd)) {
-		var loadString = localStorage.getItem("shineJJC_"+ymd);
+	if (typeof(Storage) !== "undefined" && localStorage.getItem("shinemakeup")) {
+		var loadString = localStorage.getItem("shinemakeup");
+		
+		//console.log(loadString);
 		
 		var own_str = getStoredStr(loadString, 'own').split(',');
-		for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
+		//own = [];
+		//for (var i=0; i<own_str.length; i++) //own.push(parseInt(own_str[i]));
 		
-		var packNum_str = getStoredStr(loadString, 'packNum').split(',');
-		for (i=0;i<pack.length;i++) {setVal("pack"+i, packNum_str[i]);}
+		var aim_str = getStoredStr(loadString, 'aim').split(',');
+		//aim = [];
+		//for (var i=0; i<aim_str.length; i++) //aim.push(parseInt(own_str[i]));
 		
-		setPlainTextStoredStr(loadString, 'skillLv');
+		//console.log(own);
+		//console.log(aim);
+		
+		//for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
+		
+		/*var packNum_str = getStoredStr(loadString, 'packNum').split(',');
+		for (i=0;i<pack.length;i++) {setVal("pack"+i, packNum_str[i]);}*/
+		
+		/*setPlainTextStoredStr(loadString, 'skillLv');
 		setPlainTextStoredStr(loadString, 'multiCustInput');
 		setPlainTextStoredStr(loadString, 'current');
 		setPlainTextStoredStr(loadString, 'weekly');
@@ -660,9 +682,10 @@ function loadSettings(){
 		setPlainTextStoredStr(loadString, 'remain_buy_today');
 		setPlainTextStoredStr(loadString, 'pct_exp');
 		setPlainTextStoredStr(loadString, 'topupPlan');
-		setPlainTextStoredStr(loadString, 'topupAlready');
+		setPlainTextStoredStr(loadString, 'topupAlready');*/
 		
-		calc();
+		setFromMemory(own_str, aim_str);
+		//calc();
 	}
 }
 function getStoredStr(string, id){
@@ -676,10 +699,10 @@ function setPlainTextStoredStr(string, id){
 	setVal(id, tmp);
 }
 function saveSettings(){
-	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];multiCustInput:['+getVal('multiCustInput')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];remain_buy_today:['+getVal('remain_buy_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
+	var saveString = 'own:['+own.join(',')+'];aim:['+aim.join(',')+'];';
 	//own:[1,1,0,0,0];
 	if (typeof(Storage) !== "undefined") {
-		localStorage.setItem("shineJJC_"+ymd, saveString);
+		localStorage.setItem("shinemakeup", saveString);
 	}
 	document.getElementById('storage').innerHTML = saveString;
 }
