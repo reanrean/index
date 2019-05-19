@@ -1,0 +1,728 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="makeup.css">
+<title>闪耀暖暖·联盟·妆容研习</title>
+<script type="text/javascript" charset="UTF-8">
+var data = {
+//"id":["name",group,preskill,price,tree,position,"desc"],
+"1001":["元气逛街妆",101,,60,1,11,""],
+"1002":["基础护理",,1001,32,1,22,"甜美+10"],
+"1003":["基础护理",,1002,32,1,32,"甜美+10"],
+"1004":["修色隔离",,1003,32,1,42,"甜美+10"],
+"1005":["修色隔离",,1004,32,1,52,"甜美+10"],
+"1006":["修色隔离",,1005,32,1,62,"甜美+10"],
+"1007":["卧蚕练习·一",,1002,32,1,31,"清新+10"],
+"1008":["卧蚕练习·二",,1007,64,1,41,"清新+20"],
+"1009":["立体饱满唇·一",,1003,32,1,43,"典雅+10"],
+"1010":["立体饱满唇·二",,1009,64,1,53,"典雅+20"],
+"1011":["彩妆入门手册",102,1006,120,1,71,""],
+"1012":["亮眼美瞳使用",,1011,50,1,82,"甜美+15"],
+"1013":["亮眼美瞳使用",,1012,50,1,92,"甜美+15"],
+"1014":["口红混色技法",,1013,50,1,102,"甜美+15"],
+"1015":["口红混色技法",,1014,50,1,112,"甜美+15"],
+"1016":["口红混色技法",,1015,50,1,122,"甜美+15"],
+"1017":["哑光的使用·一",,1012,50,1,91,"帅气+15"],
+"1018":["哑光的使用·二",,1017,100,1,101,"帅气+30"],
+"1019":["柔化眼线描摹·一",,1013,50,1,103,"性感+15"],
+"1020":["柔化眼线描摹·二",,1019,100,1,113,"性感+30"],
+"1021":["开学季·校园妆",103,1016,220,1,131,""],
+"1022":["白里透红",,1021,110,1,142,"甜美+18"],
+"1023":["白里透红",,1022,110,1,152,"甜美+18"],
+"1024":["清透裸妆",,1023,110,1,162,"甜美+18"],
+"1025":["清透裸妆",,1024,110,1,172,"甜美+18"],
+"1026":["清透裸妆",,1025,110,1,182,"甜美+18"],
+"1027":["炫色美瞳选用·一",,1022,110,1,151,"清新+18"],
+"1028":["炫色美瞳选用·二",,1027,220,1,161,"清新+36"],
+"1029":["冷色的使用·一",,1023,110,1,163,"典雅+18"],
+"1030":["冷色的使用·二",,1029,220,1,173,"典雅+36"],
+"1031":["童话系妆容",104,1026,240,1,191,""],
+"1032":["暖系眼影色",,1031,120,1,202,"甜美+20"],
+"1033":["暖系眼影色",,1032,120,1,212,"甜美+20"],
+"1034":["纤长睫毛使用",,1033,120,1,222,"甜美+20"],
+"1035":["纤长睫毛使用",,1034,120,1,232,"甜美+20"],
+"1036":["纤长睫毛使用",,1035,120,1,242,"甜美+20"],
+"1037":["精致修容·一",,1032,120,1,211,"帅气+20"],
+"1038":["精致修容·二",,1037,240,1,221,"帅气+40"],
+"1039":["晕染技法·一",,1033,120,1,223,"性感+20"],
+"1040":["晕染技法·二",,1039,240,1,233,"性感+40"],
+"1041":["约会纪念日",105,1036,260,1,251,""],
+"1042":["嘟嘟唇",,1041,150,1,262,"甜美+22"],
+"1043":["嘟嘟唇",,1042,150,1,272,"甜美+22"],
+"1044":["嘟嘟唇",,1043,150,1,282,"甜美+22"],
+"1045":["甜美系底妆",,1044,150,1,292,"甜美+22"],
+"1046":["甜美系底妆",,1045,150,1,302,"甜美+22"],
+"1047":["脸部线条打造·一",,1042,150,1,271,"清新+22"],
+"1048":["脸部线条打造·二",,1047,300,1,281,"清新+44"],
+"1049":["修眉练习·一",,1043,150,1,283,"典雅+22"],
+"1050":["修眉练习·二",,1049,300,1,293,"典雅+44"],
+"1051":["盐系妆感",106,1046,320,1,311,""],
+"1052":["口红混色学习",,1051,170,1,322,"甜美+24"],
+"1053":["口红混色学习",,1052,170,1,332,"甜美+24"],
+"1054":["纤长睫毛使用",,1053,170,1,342,"甜美+24"],
+"1055":["纤长睫毛使用",,1054,170,1,352,"甜美+24"],
+"1056":["纤长睫毛使用",,1055,170,1,362,"甜美+24"],
+"1057":["多色眉粉·一",,1052,170,1,331,"帅气+24"],
+"1058":["多色眉粉·二",,1057,340,1,341,"帅气+48"],
+"1059":["时尚前沿讲座·一",,1053,170,1,343,"性感+24"],
+"1060":["时尚前沿讲座·二",,1059,340,1,353,"性感+48"],
+"1061":["花火大会",107,1056,360,1,371,""],
+"1062":["经典桃花妆",201,1011,180,2,11,""],
+"1063":["唇妆水灵质感",,1062,80,2,22,"清新+16"],
+"1064":["唇妆水灵质感",,1063,80,2,32,"典雅+16"],
+"1065":["唇妆水灵质感",,1064,80,2,42,"清新+16"],
+"1066":["唇妆水灵质感",,1065,80,2,52,"典雅+16"],
+"1067":["唇妆水灵质感",,1066,80,2,62,"清新+16"],
+"1068":["古典咬唇妆·一",,1063,80,2,31,"帅气+16"],
+"1069":["古典咬唇妆·二",,1068,160,2,41,"帅气+32"],
+"1070":["芙蓉粉·一",,1064,80,2,43,"性感+16"],
+"1071":["芙蓉粉·二",,1070,160,2,53,"性感+32"],
+"1072":["云端妆品入门",202,1067,260,2,71,""],
+"1073":["古典唇色选择",,1072,110,2,82,"典雅+22"],
+"1074":["古典唇色选择",,1073,110,2,92,"清新+22"],
+"1075":["古典唇色选择",,1074,110,2,102,"典雅+22"],
+"1076":["古典唇色选择",,1075,110,2,112,"清新+22"],
+"1077":["古典唇色选择",,1076,110,2,122,"典雅+22"],
+"1078":["花钿设计·一",,1073,110,2,91,"甜美+22"],
+"1079":["花钿设计·二",,1078,220,2,101,"甜美+44"],
+"1080":["青色的应用·一",,1074,110,2,103,"帅气+22"],
+"1081":["青色的应用·二",,1080,220,2,113,"帅气+44"],
+"1082":["东方浪漫谭",203,1077,350,2,131,""],
+"1083":["古典眉形描摹",,1082,160,2,142,"清新+27"],
+"1084":["古典眉形描摹",,1083,160,2,152,"典雅+27"],
+"1085":["古典眉形描摹",,1084,160,2,162,"清新+27"],
+"1086":["古典眉形描摹",,1085,160,2,172,"典雅+27"],
+"1087":["古典眉形描摹",,1086,160,2,182,"清新+27"],
+"1088":["古典裸妆·一",,1083,160,2,151,"性感+27"],
+"1089":["古典裸妆·二",,1088,320,2,161,"性感+54"],
+"1090":["云端花瓣唇·一",,1084,160,2,163,"甜美+27"],
+"1091":["云端花瓣唇·二",,1090,320,2,173,"甜美+54"],
+"1092":["粉墨戏台",204,1087,350,2,191,""],
+"1093":["宣纸妆容质感",,1092,160,2,202,"典雅+27"],
+"1094":["宣纸妆容质感",,1093,160,2,212,"清新+27"],
+"1095":["宣纸妆容质感",,1094,160,2,222,"典雅+27"],
+"1096":["宣纸妆容质感",,1095,160,2,232,"清新+27"],
+"1097":["宣纸妆容质感",,1096,160,2,242,"典雅+27"],
+"1098":["美人点痣·一",,1093,160,2,211,"帅气+27"],
+"1099":["美人点痣·二",,1098,320,2,221,"帅气+54"],
+"1100":["浅唇色设计·一",,1094,160,2,223,"性感+27"],
+"1101":["浅唇色设计·二",,1100,320,2,233,"性感+54"],
+"1102":["风仪堂大师课",205,1097,350,2,251,""],
+"1103":["传统卧蚕画法",,1102,175,2,262,"清新+30"],
+"1104":["传统卧蚕画法",,1103,175,2,272,"典雅+30"],
+"1105":["传统卧蚕画法",,1104,175,2,282,"清新+30"],
+"1106":["传统卧蚕画法",,1105,175,2,292,"典雅+30"],
+"1107":["传统卧蚕画法",,1106,175,2,302,"清新+30"],
+"1108":["清新卧蚕画法·一",,1103,175,2,271,"甜美+30"],
+"1109":["清新卧蚕画法·二",,1108,350,2,281,"甜美+60"],
+"1110":["气色滋养·一",,1104,175,2,283,"帅气+30"],
+"1111":["气色滋养·二",,1110,350,2,293,"帅气+60"],
+"1112":["巾帼游侠诗",206,1107,390,2,311,""],
+"1113":["古典唇色选择",,1112,175,2,322,"典雅+30"],
+"1114":["古典唇色选择",,1113,175,2,332,"清新+30"],
+"1115":["古典唇色选择",,1114,175,2,342,"典雅+30"],
+"1116":["古典唇色选择",,1115,175,2,352,"清新+30"],
+"1117":["古典唇色选择",,1116,175,2,362,"典雅+30"],
+"1118":["另类云端色彩·一",,1113,175,2,331,"性感+30"],
+"1119":["另类云端色彩·二",,1118,350,2,341,"性感+60"],
+"1120":["英气眉形设计·一",,1114,175,2,343,"甜美+30"],
+"1121":["英气眉形设计·二",,1120,350,2,353,"甜美+60"],
+"1122":["风·雅·颂",207,1117,390,2,371,""],
+"1123":["古典眉形描摹",,1122,210,2,382,"清新+33"],
+"1124":["古典眉形描摹",,1123,210,2,392,"典雅+33"],
+"1125":["古典眉形描摹",,1124,210,2,402,"清新+33"],
+"1126":["古典眉形描摹",,1125,210,2,412,"典雅+33"],
+"1127":["古典眉形描摹",,1126,210,2,422,"清新+33"],
+"1128":["药妆评测·一",,1123,210,2,391,"帅气+33"],
+"1129":["药妆评测·二",,1128,420,2,401,"帅气+66"],
+"1130":["粉靥晕染·一",,1124,210,2,403,"性感+33"],
+"1131":["粉靥晕染·二",,1130,420,2,413,"性感+66"],
+"1132":["女为悦己容",208,1127,460,2,431,""],
+"1133":["宣纸妆容质感",,1132,210,2,442,"典雅+33"],
+"1134":["宣纸妆容质感",,1133,210,2,452,"清新+33"],
+"1135":["宣纸妆容质感",,1134,210,2,462,"典雅+33"],
+"1136":["宣纸妆容质感",,1135,210,2,472,"清新+33"],
+"1137":["宣纸妆容质感",,1136,210,2,482,"典雅+33"],
+"1138":["媚眼”画法·一",,1133,210,2,451,"帅气+33"],
+"1139":["媚眼”画法·二",,1138,420,2,461,"帅气+66"],
+"1140":["时尚前沿讲座·一",,1134,210,2,463,"性感+33"],
+"1141":["时尚前沿讲座·二",,1140,420,2,473,"性感+66"],
+"1142":["花朝倾城",209,1137,460,2,491,""],
+"1143":["女神进化论",301,1021,180,3,11,""],
+"1144":["经典烟熏技法",,1143,80,3,22,"性感+16"],
+"1145":["经典烟熏技法",,1144,80,3,32,"帅气+16"],
+"1146":["经典烟熏技法",,1145,80,3,42,"性感+16"],
+"1147":["经典烟熏技法",,1146,80,3,52,"帅气+16"],
+"1148":["经典烟熏技法",,1147,80,3,62,"性感+16"],
+"1149":["眼部整体设计·一",,1144,80,3,31,"甜美+16"],
+"1150":["眼部整体设计·二",,1149,160,3,41,"甜美+32"],
+"1151":["时尚裸妆·一",,1145,80,3,43,"清新+16"],
+"1152":["时尚裸妆·二",,1151,160,3,53,"清新+32"],
+"1153":["跨越性别印象",302,1148,260,3,71,""],
+"1154":["脸部轮廓雕琢",,1153,110,3,82,"帅气+22"],
+"1155":["脸部轮廓雕琢",,1154,110,3,92,"性感+22"],
+"1156":["脸部轮廓雕琢",,1155,110,3,102,"帅气+22"],
+"1157":["脸部轮廓雕琢",,1156,110,3,112,"性感+22"],
+"1158":["脸部轮廓雕琢",,1157,110,3,122,"性感+22"],
+"1159":["水润唇部打造·一",,1154,110,3,91,"典雅+22"],
+"1160":["水润唇部打造·二",,1159,220,3,101,"典雅+44"],
+"1161":["下眼线设计·一",,1155,110,3,103,"甜美+22"],
+"1162":["下眼线设计·二",,1161,220,3,113,"甜美+44"],
+"1163":["不夜城女王",303,1158,350,3,131,""],
+"1164":["朋克系眼妆",,1163,160,3,142,"性感+27"],
+"1165":["朋克系眼妆",,1164,160,3,152,"帅气+27"],
+"1166":["朋克系眼妆",,1165,160,3,162,"性感+27"],
+"1167":["朋克系眼妆",,1166,160,3,172,"帅气+27"],
+"1168":["朋克系眼妆",,1167,160,3,182,"性感+27"],
+"1169":["咬唇妆设计·一",,1164,160,3,151,"清新+27"],
+"1170":["咬唇妆设计·二",,1169,320,3,161,"清新+54"],
+"1171":["荧光的应用·一",,1165,160,3,163,"典雅+27"],
+"1172":["荧光的应用·二",,1171,320,3,173,"典雅+54"],
+"1173":["MQ设计院讲座",304,1168,350,3,191,""],
+"1174":["冷色的应用",,1173,160,3,202,"帅气+27"],
+"1175":["冷色的应用",,1174,160,3,212,"性感+27"],
+"1176":["冷色的应用",,1175,160,3,222,"帅气+27"],
+"1177":["冷色的应用",,1176,160,3,232,"性感+27"],
+"1178":["冷色的应用",,1177,160,3,242,"性感+27"],
+"1179":["闪粉的妙用·一",,1174,160,3,211,"甜美+27"],
+"1180":["闪粉的妙用·二",,1179,320,3,221,"甜美+54"],
+"1181":["渐变染眉法·一",,1175,160,3,223,"清新+27"],
+"1182":["渐变染眉法·二",,1181,320,3,233,"清新+54"],
+"1183":["黑色的高级感",305,1178,350,3,251,""],
+"1184":["打光的选择",,1183,175,3,262,"性感+30"],
+"1185":["打光的选择",,1184,175,3,272,"帅气+30"],
+"1186":["打光的选择",,1185,175,3,282,"性感+30"],
+"1187":["打光的选择",,1186,175,3,292,"帅气+30"],
+"1188":["打光的选择",,1187,175,3,302,"性感+30"],
+"1189":["基础护理·一",,1184,175,3,271,"典雅+30"],
+"1190":["基础护理·二",,1189,350,3,281,"典雅+60"],
+"1191":["美瞳色彩选择·一",,1185,175,3,283,"甜美+30"],
+"1192":["美瞳色彩选择·二",,1191,350,3,293,"甜美+60"],
+"1193":["电影特效化妆",306,1188,390,3,311,""],
+"1194":["睫毛雕刻",,1193,175,3,322,"帅气+30"],
+"1195":["睫毛雕刻",,1194,175,3,332,"性感+30"],
+"1196":["睫毛雕刻",,1195,175,3,342,"帅气+30"],
+"1197":["睫毛雕刻",,1196,175,3,352,"性感+30"],
+"1198":["睫毛雕刻",,1197,175,3,362,"性感+30"],
+"1199":["创新英伦风·一",,1194,175,3,331,"清新+30"],
+"1200":["创新英伦风·二",,1199,350,3,341,"清新+60"],
+"1201":["无妆感设计·一",,1195,175,3,343,"典雅+30"],
+"1202":["无妆感设计·二",,1201,350,3,353,"典雅+60"],
+"1203":["美与科技革新",307,1198,390,3,371,""],
+"1204":["立体饱满唇",,1203,210,3,382,"性感+33"],
+"1205":["立体饱满唇",,1204,210,3,392,"帅气+33"],
+"1206":["立体饱满唇",,1205,210,3,402,"性感+33"],
+"1207":["立体饱满唇",,1206,210,3,412,"帅气+33"],
+"1208":["立体饱满唇",,1207,210,3,422,"性感+33"],
+"1209":["荧光的应用·一",,1204,210,3,391,"清新+33"],
+"1210":["荧光的应用·二",,1209,420,3,401,"清新+66"],
+"1211":["卧蚕画法·一",,1205,210,3,403,"典雅+33"],
+"1212":["卧蚕画法·二",,1211,420,3,413,"典雅+66"],
+"1213":["硬照表现力",308,1208,460,3,431,""],
+"1214":["眉形突破",,1213,210,3,442,"帅气+33"],
+"1215":["眉形突破",,1214,210,3,452,"性感+33"],
+"1216":["眉形突破",,1215,210,3,462,"帅气+33"],
+"1217":["眉形突破",,1216,210,3,472,"性感+33"],
+"1218":["眉形突破",,1217,210,3,482,"性感+33"],
+"1219":["无妆感设计·一",,1214,210,3,451,"清新+33"],
+"1220":["无妆感设计·二",,1219,420,3,461,"清新+66"],
+"1221":["闪粉的妙用·一",,1215,210,3,463,"典雅+33"],
+"1222":["闪粉的妙用·二",,1221,420,3,473,"典雅+66"],
+"1223":["洛登时装周研究",309,1218,460,3,491,""],
+};
+
+var brandName = ['APRIL','风仪堂','MasQuerade'];
+
+var maxPos = function(){
+	var ret = [];
+	for (var i=0; i<brandName.length; i++){
+		ret.push(0);
+	}
+	for (var mu in data){
+		var tree = data[mu][4];
+		var position = data[mu][5];
+		var reti = tree-1;
+		var cnt = row(position);
+		if (cnt>ret[reti]) ret[reti] = cnt;
+	}
+	return ret;
+}();
+
+var own = [];
+var aim = [];
+var mode = '';
+
+window.onload = function(){
+	init();
+};
+
+function init(){
+	document.getElementById("selector").innerHTML = '<table class="selector"><tr><td id="own1">选择已有</td><td id="aim1">选择目标</td></tr><tr><td id="own2">选择已有<br>(以上全部)</td><td id="aim2">选择目标<br>(以上全部)</td></tr></table>';
+
+	document.getElementById("tree").innerHTML = '';
+
+	for (var ti=0; ti<brandName.length; ti++){
+		var tid = ti+1;
+
+		var table = '<a id="anchor'+tid+'"><table id="tree'+ tid + '" border="0">';
+		table += thead(tr(td(brandName[ti] + '（<span id="display'+tid+'">收起</span>）',"",'colspan="3"'),""),'thead'+tid);
+		for (var i=1; i<=maxPos[ti]; i++){
+			table += tr(td('','td'+tid+'-'+i+"1")+td('','td'+tid+'-'+i+"2")+td('','td'+tid+'-'+i+"3"),'tr'+tid+'-'+i);
+		}
+		table += tr(td('（收起）','','colspan="3" onclick=hideTree('+tid+')'));
+		table += '</table><br>';
+		document.getElementById("tree").innerHTML += table;
+		
+		for (var mu in data){
+			var name = data[mu][0];
+			var group = data[mu][1];
+			var preskill = data[mu][2];
+			var price = data[mu][3];
+			var tree = data[mu][4];
+			var position = data[mu][5];
+			var desc = data[mu][6];
+			
+			if(tree!=tid) continue;
+			
+			var pre = data[preskill];
+			var arrow = '';
+			if (pre) {
+				var colpre = col(pre[5]);
+				if (row(position)==1) arrow = '';
+				else if (colpre==col(position) || pre[1] || group) arrow = '↓'; //or pre==gruop or i==group
+				else if (colpre<col(position)) arrow = '↘';
+				else if (colpre>col(position)) arrow = '↙';
+			}
+			
+			var content = (arrow? arrow+'<br>' : '') + '<span class="name">' + name + '</span><br>' + price + '<br>' + addColor(desc);
+			document.getElementById('td'+tid+'-'+position).innerHTML = content;
+			document.getElementById('td'+tid+'-'+position).className += 'id'+mu;
+			if(group){
+				document.getElementById('tr'+tid+'-'+row(position)).innerHTML = td(content,'td'+tid+'-'+position,'colspan="3" class="id'+mu+'"');
+			}
+		}
+	}
+	
+	toggleClick();
+}
+
+function toggleClick(){
+	for (var i=1; i<=brandName.length; i++){
+		document.querySelector('#tree'+i+' thead').onclick = function(){
+			var thisId = this.id.replace('thead','');
+			var status = toggleDisplay(document.querySelector('#tree'+thisId+' tbody'), 'table-row-group');
+			document.getElementById('display'+thisId).innerHTML = status? '收起' : '展开';
+		};
+	}
+	
+	var sels = document.querySelectorAll('#selector tr td');
+	for(var i=0; i<sels.length; i++){
+		sels[i].onclick = function(){
+			if (!this.className){
+				mode = this.id;
+				var sels2 = document.querySelectorAll('#selector tr td');
+				for(var s=0; s<sels2.length; s++){
+					sels2[s].className = '';
+				}
+				this.className += this.id.replace('1','').replace('2','');
+			}else{
+				mode = '';
+				this.className = ''
+			}
+		}
+	}
+	
+	var tds = document.querySelectorAll('td[class^="id"]');
+	for(var i=0; i<tds.length; i++){
+		tds[i].onclick = function(){
+			handleClick(this.id);
+			//console.log('own:(' + own.length+')' + own);
+			//console.log('aim:(' + aim.length+')' + aim);
+			calc();
+			/*var thisId = this.id;
+			var classNm = this.className;
+			var thisRealId = getIdFromClass(classNm);
+			if (classNm.indexOf('own')<0) {
+				this.className += " own";
+			} else {
+				this.className = classNm.replace('own','');
+			}
+			setOwn(thisRealId);*/
+		}
+	}
+}
+
+function calc(){
+	var currentCost = 0;
+	var currentAbl = [0,0,0,0,0]; //甜美,典雅,清新,帅气,性感
+	for (var i=0; i<own.length; i++){
+		currentCost += data[own[i]][3];
+		var descSp = data[own[i]][6].split('+');
+		switch(descSp[0]){
+			case '甜美' :
+				currentAbl[0] += parseInt(descSp[1]);
+			break;
+			case '典雅' :
+				currentAbl[1] += parseInt(descSp[1]);
+			break;
+			case '清新' :
+				currentAbl[2] += parseInt(descSp[1]);
+			break;
+			case '帅气' :
+				currentAbl[3] += parseInt(descSp[1]);
+			break;
+			case '性感' :
+				currentAbl[4] += parseInt(descSp[1]);
+			break;
+		}
+	}
+	var currentAblTxt = addColor('甜美+'+currentAbl[0])+'&emsp;'+addColor('典雅+'+currentAbl[1])+'&emsp;'+addColor('清新+'+currentAbl[2])+'&emsp;'+addColor('帅气+'+currentAbl[3])+'&emsp;'+addColor('性感+'+currentAbl[4]);
+	
+	var futureCost = 0;
+	var futureAbl = [0,0,0,0,0]; 
+	for (var i=0; i<aim.length; i++){
+		futureCost += data[aim[i]][3];
+		var descSp = data[aim[i]][6].split('+');
+		switch(descSp[0]){
+			case '甜美' :
+				futureAbl[0] += parseInt(descSp[1]);
+			break;
+			case '典雅' :
+				futureAbl[1] += parseInt(descSp[1]);
+			break;
+			case '清新' :
+				futureAbl[2] += parseInt(descSp[1]);
+			break;
+			case '帅气' :
+				futureAbl[3] += parseInt(descSp[1]);
+			break;
+			case '性感' :
+				futureAbl[4] += parseInt(descSp[1]);
+			break;
+		}
+	}
+	var futureAblTxt = addColor('甜美+'+futureAbl[0])+'&emsp;'+addColor('典雅+'+futureAbl[1])+'&emsp;'+addColor('清新+'+futureAbl[2])+'&emsp;'+addColor('帅气+'+futureAbl[3])+'&emsp;'+addColor('性感+'+futureAbl[4]);
+	
+	var table = '<table>';
+	table += thead(tr(td('距离目标')));
+	table += tr(td('达到目标还需'+futureCost+'个联盟币！'));
+	table += tr(td(futureAblTxt));
+	table += '</table>';
+	
+	table += '<br>';
+	
+	table += '<table>';
+	table += thead(tr(td('当前数值')));
+	table += tr(td('你已经用了'+currentCost+'个联盟币！'));
+	table += tr(td(currentAblTxt));
+	table += '</table>';
+	
+	document.getElementById('result').innerHTML = table;
+}
+
+function hideTree(tid){
+	document.querySelector('#tree'+tid+' thead').click();
+	//document.location.hash = "#anchor"+tid;
+	//document.body.scrollTop = 0; // For Safari
+	//document.documentElement.scrolTop = 0; // For Chrome, Firefox, IE and Opera
+	document.getElementById('anchor'+tid).scrollIntoView(true);
+}
+
+function handleClick(domId){
+	if (!mode) return 0;
+	var thisTd = document.getElementById(domId);
+	var classNm = thisTd.className;
+	var id = getIdFromClass(classNm);
+	if(mode=='own1'){
+		if (classNm.indexOf('own')<0) {
+			setOwn(domId);
+			//setOwnId(id);
+		} else {
+			setNotOwn(domId);
+			checkAim();
+		}
+	}else if (mode=='own2'){
+		if (data[id][1]){//only effective on it==group
+			var upper = findUpper(domId, 'own');
+			if (upper.length>0) {
+				for (var i=0; i<upper.length; i++) setOwn(upper[i], 1);
+			} else {
+				setNotOwn(domId);
+				checkAim();
+			}
+		}
+	}else if (mode=='aim1'){
+		if (classNm.indexOf('own')<0) {
+			if (classNm.indexOf('aim')<0) {
+				setAim(domId);
+			} else {
+				setNotAim(domId);
+			}
+		}
+	}else if (mode=='aim2'){
+		if (data[id][1]){//only effective on it==group
+			var upper = findUpper(domId, 'aim own');
+			if (upper.length>0) {
+				for (var i=0; i<upper.length; i++) setAim(upper[i], 1);
+			} else {
+				setNotAim(domId);
+			}
+		}
+	}
+}
+
+function checkAim(){
+	for (var i=0; i<aim.length; i++){
+		setAimPrev(aim[i]);
+	}
+}
+
+function findUpper(domId, excludeStr){
+	var ret = [];
+	var id = getIdFromClass(document.getElementById(domId).className);
+	var thisRow = row(data[id][5]);
+	var thisTree = domId.split('-')[0];
+	var tds = document.querySelectorAll('td[class^="id"]');
+	var upper = [];
+	for(var i=0; i<tds.length; i++){
+		var iid = tds[i].id;
+		var iclass = tds[i].className;
+		var isp = iid.split('-');
+		var itree = isp[0];
+		var irow = row(isp[1]);
+		if (itree==thisTree&&irow<=thisRow){
+			if (!excludeStr) ret.push(iid);
+			else {
+				var pushit = true;
+				var strs = excludeStr.split(' ');
+				for (var j=0; j<strs.length; j++){
+					if(iclass.indexOf(strs[j])>=0) pushit = false;
+				}
+				if (pushit) ret.push(iid);
+			}
+		} //ret.push([iid, iclass]); //setOwn(iid, 1);
+		//&&iclass.indexOf('own')<0&&iclass.indexOf('aim')<0
+	}
+	return ret;
+}
+
+function toggleDisplay(obj, displayStyle){
+	if(obj.style.display=="none") {
+		obj.style.display = displayStyle;
+		return 1; //displaying
+	}else {
+		obj.style.display = "none";
+		return 0; //hiding
+	}
+}
+
+function setOwnPrev(id){
+	var preskill = data[id][2];
+	if (preskill) setOwnId(preskill);
+}
+
+function setAimPrev(id){
+	var preskill = data[id][2];
+	if (preskill) setAimId(preskill);
+}
+
+function setNotOwnAfter(id){
+	for (var mu in data){
+		if (data[mu][2]==id) setNotOwnId(mu);
+	}
+}
+
+function setNotAimAfter(id){
+	for (var mu in data){
+		if (data[mu][2]==id) setNotAimId(mu);
+	}
+}
+
+function setOwn(domId, excludePrev){
+	var thisTd = document.getElementById(domId);
+	var classNm = thisTd.className;
+	var id = getIdFromClass(classNm);
+	if (id){
+		if (classNm.indexOf('own')<0) thisTd.className += " own";
+		addToArray(id,own);
+		if (classNm.indexOf('aim')>=0) {
+			thisTd.className = thisTd.className.replace('aim','');
+			aim = rmFromArray(id, aim);
+		}
+		if(!excludePrev) setOwnPrev(id);
+	}
+}
+
+function setAim(domId, excludePrev){
+	var thisTd = document.getElementById(domId);
+	var classNm = thisTd.className;
+	var id = getIdFromClass(classNm);
+	if (id){
+		if (classNm.indexOf('own')>=0) return 0;
+		if (classNm.indexOf('aim')<0) thisTd.className += " aim";
+		addToArray(id,aim);
+		if(!excludePrev) setAimPrev(id);
+	}
+}
+
+function setOwnId(id){
+	setOwn(document.querySelectorAll('.id'+id)[0].id);
+}
+
+function setAimId(id){
+	setAim(document.querySelectorAll('.id'+id)[0].id);
+}
+
+function setNotOwn(domId){
+	var thisTd = document.getElementById(domId);
+	var classNm = thisTd.className;
+	var id = getIdFromClass(classNm);
+	thisTd.className = classNm.replace('own','');
+	own = rmFromArray(id, own);
+	setNotOwnAfter(id);
+}
+
+function setNotAim(domId){
+	var thisTd = document.getElementById(domId);
+	var classNm = thisTd.className;
+	var id = getIdFromClass(classNm);
+	thisTd.className = classNm.replace('aim','');
+	aim = rmFromArray(id, aim);
+	setNotAimAfter(id);
+}
+
+function setNotOwnId(id){
+	setNotOwn(document.querySelectorAll('.id'+id)[0].id);
+}
+
+function setNotAimId(id){
+	setNotAim(document.querySelectorAll('.id'+id)[0].id);
+}
+
+function getIdFromClass(txt){
+	if (txt.indexOf('id')<0) return 0;
+	var sp = txt.split(' ');
+	for (var i=0; i<sp.length; i++){
+		if(sp[i].indexOf('id')>=0){
+			var id = parseInt(sp[i].replace('id',''));
+			return id;
+		}
+	}
+}
+
+function addToArray(element, arrName){
+	if (arrName.indexOf(element)<0) arrName.push(element);
+	return arrName;
+}
+
+function rmFromArray(element, arrName){
+	var ret = [];
+	for(var i=0; i<arrName.length; i++){
+		if (arrName[i]!=element) ret.push(arrName[i]);
+	}
+	return ret;
+}
+
+function row(pos){
+	return parseInt(Math.floor(pos/10));
+}
+
+function col(pos){
+	return parseInt(pos%10);
+}
+
+function addColor(txt){
+	if (txt.indexOf('甜美')>=0) return '<font color="hotpink">' + txt + '</font>';
+	else if (txt.indexOf('清新')>=0) return '<font color="mediumseagreen">' + txt + '</font>';
+	else if (txt.indexOf('典雅')>=0) return '<font color="coral">' + txt + '</font>';
+	else if (txt.indexOf('帅气')>=0) return '<font color="dodgerblue">' + txt + '</font>';
+	else if (txt.indexOf('性感')>=0) return '<font color="darkorchid">' + txt + '</font>';
+	else return txt;
+}
+
+function loadSettings(){
+	if (typeof(Storage) !== "undefined" && localStorage.getItem("shineJJC_"+ymd)) {
+		var loadString = localStorage.getItem("shineJJC_"+ymd);
+		
+		var own_str = getStoredStr(loadString, 'own').split(',');
+		for (i=0;i<need.length;i++) {if(own_str[i]>0) {document.getElementById("own"+i).checked=true;}}
+		
+		var packNum_str = getStoredStr(loadString, 'packNum').split(',');
+		for (i=0;i<pack.length;i++) {setVal("pack"+i, packNum_str[i]);}
+		
+		setPlainTextStoredStr(loadString, 'skillLv');
+		setPlainTextStoredStr(loadString, 'multiCustInput');
+		setPlainTextStoredStr(loadString, 'current');
+		setPlainTextStoredStr(loadString, 'weekly');
+		setPlainTextStoredStr(loadString, 'remain_today');
+		setPlainTextStoredStr(loadString, 'remain_buy_today');
+		setPlainTextStoredStr(loadString, 'pct_exp');
+		setPlainTextStoredStr(loadString, 'topupPlan');
+		setPlainTextStoredStr(loadString, 'topupAlready');
+		
+		calc();
+	}
+}
+function getStoredStr(string, id){
+	var exist = string.indexOf(id+':[');
+	if (exist==-1) return '';
+	var start = exist + (id+':[').length;
+	return string.substr(start,string.substr(start).indexOf('];'));
+}
+function setPlainTextStoredStr(string, id){
+	var tmp = getStoredStr(string, id);
+	setVal(id, tmp);
+}
+function saveSettings(){
+	var saveString = 'own:['+own.join(',')+'];skillLv:['+getVal('skillLv')+'];multiCustInput:['+getVal('multiCustInput')+'];packNum:['+packNum.join(',')+'];current:['+getVal('current')+'];weekly:['+getVal('weekly')+'];remain_today:['+getVal('remain_today')+'];remain_buy_today:['+getVal('remain_buy_today')+'];pct_exp:['+getVal('pct_exp')+'];topupPlan:['+getVal('topupPlan')+'];topupAlready:['+getVal('topupAlready')+'];';
+	//own:[1,1,0,0,0];
+	if (typeof(Storage) !== "undefined") {
+		localStorage.setItem("shineJJC_"+ymd, saveString);
+	}
+	document.getElementById('storage').innerHTML = saveString;
+}
+function getVal(id){
+	return noNaN(parseInt(document.getElementById(id).value));
+}
+function setVal(id,val){
+	document.getElementById(id).value=val;
+}
+function noNaN( n ) {
+	return isNaN( n ) ? 0 : n;
+}
+function td(text,id,attr){
+	return '<td id="'+id+'"'+(attr?' '+attr:'')+'>'+text+'</td>';
+}
+function tr(text,id,attr){
+	return '<tr id="'+id+'"'+(attr?' '+attr:'')+'>'+text+'</tr>';
+}
+function thead(text,id){
+	return '<thead id="'+id+'">'+text+'</thead>';
+}
+function inputBox(id,onchange,size){
+	return '<input type="text" id="'+id+'" onkeyup='+onchange+(size?' size="'+size+'"':'')+'>';
+}
+function selectBox(id,onchange,valArr,textArr){
+	var ret='<select id="'+id+'" onchange='+onchange+'>';
+	if(!textArr) textArr=valArr;
+	for (var i in valArr){
+		ret+='<option value="'+valArr[i]+'">'+textArr[i]+'</option>';
+	}
+	ret+='</select>';;
+	return ret;
+}
+</script>
+</head>
+<body>
+<p align="center" class="title1"><b>闪耀暖暖·联盟·妆容研习</b></p>
+<p align="center" class="remark">Rean@<a href="https://www.weibo.com/u/6573931053">山药攻略组<img src="bg.jpg" width="40px"></a></p>
+<hr class="mhr">
+<p align="center"><button onclick="saveSettings()">保存设置</button><button onclick="loadSettings()">读取设置</button></p>
+<p align="center" id="selector"></p>
+<p align="center" id="tree"></p>
+<p align="center" id="result"></p>
+<p id="storage" style="display:none"></p>
+</body>
+</html>

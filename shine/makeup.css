@@ -1,0 +1,75 @@
+.remark {
+	font-size:80%;
+}
+
+.name {
+	color: rgba(120, 120, 120, 1);
+}
+
+p.title1 {
+	font-size: 140%;
+	font-weight : 800;
+	color: #1F4499;
+	text-align: center;
+}
+
+hr.mhr {
+	border: 1px dashed #2E9FCC;
+}
+
+table {
+	border:solid #999;
+	border-width:1px 0px 0px 1px;
+	border-spacing:0;
+	color: #111111;
+	line-height: 1.5em;
+}
+
+td {
+	text-align: center;
+	border:solid #999;
+	border-width:0px 1px 1px 0px;
+	border-spacing:0;
+}
+
+tr {
+	background: rgba(234, 242, 250, 0.5);
+	font-size: 90%;
+}
+
+thead tr:nth-child(1), table[id^=tree] tr:last-child {
+	font-size: 100%;
+	font-weight : 700;
+	background-color: rgba(191, 219, 255, 0.9);
+}
+
+table.selector{
+	line-height: 1em;
+}
+
+table.selector tr td{
+	padding: 0.5em;
+}
+
+table.selector tr td{
+	padding: 0.5em;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+table.selector tr:nth-child(1) td{
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+td.own, table.selector tr td:nth-child(1):hover {
+	background-color: rgba(210, 210, 210, 1);
+}
+
+td.aim, table.selector tr td:nth-child(2):hover {
+	background-color: rgba(255, 178, 183, 1);
+}
+
+a {
+	text-decoration:none;
+	color:#3377ff;
+}
