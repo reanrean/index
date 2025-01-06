@@ -228,8 +228,8 @@ function calculate() {
 
     // Validate input
     if (levelA < 1 || levelB > 200 || isNaN(levelA) || isNaN(levelB) || levelA >= levelB) {
-        document.getElementById('apple').value = '';
-        document.getElementById('gapple').value = '';
+        document.getElementById('apple').innerHTML = '';
+        document.getElementById('gapple').innerHTML = '';
         return; // Exit the function if the levels are invalid
     }
 
@@ -242,8 +242,8 @@ function calculate() {
     }
 
     // Update the output fields
-    document.getElementById('apple').value = totalApples;
-    document.getElementById('gapple').value = totalGapples;
+    document.getElementById('apple').innerHTML = totalApples;
+    document.getElementById('gapple').innerHTML = totalGapples;
 }
 
 </script>
@@ -252,17 +252,13 @@ function calculate() {
   <div class="container mt-5">
     <h2>東京謎影者 SSR蘋果需求數目計算</h2>
     <table class="table table-bordered">
-      <thead class="thead-light">
+      <tbody class="thead-light">
         <tr>
-          <th scope="col">原等級A</th>
-          <th scope="col">升到B級</th>
-          <th scope="col">需要紅蘋果數量</th>
-          <th scope="col">需要彩色蘋果數量</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
+          <th scope="row" class="align-top">原等級A</th>
           <td><input type="number" class="form-control" value="1" id="a"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">升到B級</th>
           <td>
             <div class="d-flex flex-column align-items-start">
               <input type="number" class="form-control mb-2" value="200" id="b"> <!-- mb-2 adds a small margin below the input -->
@@ -272,14 +268,20 @@ function calculate() {
               </div>
             </div>
           </td>
-          <td><input type="number" class="form-control" id="apple"></td>
-          <td><input type="number" class="form-control" id="gapple"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">需要紅蘋果數量</th>
+          <td><span id="apple"></span></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">需要彩色蘋果數量</th>
+          <td><span id="gapple"></span></td>
         </tr>
       </tbody>
     </table>
     <div class="text-center mt-4">
       <p>計算機：<a href="https://docs.google.com/spreadsheets/d/1l1lEFtAlc6mJXM1aPS7VkYzSuoulm1SI8RQXG0N7BHE/edit?usp=sharing">石奚</a> &amp; Rinne</p>
-      <p>數據來源參考：<a href="https://x.com/judan004/status/1789149361219543117">https://x.com/judan004/status/1789149361219543117</a></p>
+      <p>數據來源參考：<a href="https://x.com/judan004/status/1789149361219543117">@judan004 on X</a></p>
     </div>
   </div>
 </body>
