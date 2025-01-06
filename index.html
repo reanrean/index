@@ -9,9 +9,8 @@
 <style>
 a {color:inherit;text-decoration:none}
 a:hover{text-decoration:underline}
-.past {color:#CCCCCC;}
+.past {opacity:0.33;}
 .title {color:crimson;}
-.title-past {color:#FFCCCC;}
 </style>
 <script type="text/javascript">
 /*var duoshuoQuery = {short_name:"reanrean"};
@@ -66,11 +65,12 @@ function showNikkiPast(it){
 <a href="nikki/stamina_daily.html">每日获取体力</a></br>
 <a href="nikki/days.html">攒钻计算器</a></br>
 <a href="nikki/pay.html">通用充值计算</a></br>
-<span class="past"><a href="../nikkis_choice/choice.html">UNDER CONSTRUCTION</a></span></br>
-<span class="past"><a href="../nikkis_choice/top_ajglz.html">顶配页面生成器 for 傲娇攻略组(≥o≤)</a></span></br>
-<span class="past"><a href="#" onclick="showNikkiPast(this);return false;">往期活动</a></br></span>
-<span class="past" id="NikkiPast" style="display:none">
-<a href="http://aojiaogongluezu.github.io/nikkiup2u3/index.html?event.html">后续活动</a></br>
+<span class="past">
+<a href="../nikkis_choice/choice.html">UNDER CONSTRUCTION</a></br>
+<a href="../nikkis_choice/top_ajglz.html">顶配页面生成器 for 傲娇攻略组(≥o≤)</a></br>
+<a href="#" onclick="showNikkiPast(this);return false;">往期活动</a></br>
+<span id="NikkiPast" style="display:none">
+<a href="http://aojiaogongluezu.github.io/nikkiup2u3/index.html?event.html">后续活动 &#x27F9; 傲娇攻略组网页</a></br>
 <a href="nikki/interstella_20161019.html">星际二选一</a></br>
 <a href="nikki/wedding_20160929.html">梦恋奇迹3</a></br>
 <a href="nikki/midautumn_20160914.html">中秋活动2016</a></br>
@@ -88,43 +88,34 @@ function showNikkiPast(it){
 <a href="nikki/lunar_20160204.html">新春梦幻抉择</a></br>
 <a href="nikki/snow_20160117.html">冰雪女王的舞会</a></br>
 </span>
-</p>
-
-<p>
-<img src="img/shine.jpg" height="25" width="25"><span class='title-past'>Shining Nikki</span></br>
-<span class="past">
-<a href="shine/JJC.html">竞技场兑换计算</a></br>
 </span>
 </p>
 
-<p>
-<img src="img/wcat.jpg" height="25" width="25"><span class='title-past'>Shironeko Project</span></br>
-<span class="past">
+<p class="past">
+<img src="img/shine.jpg" height="25" width="25"><span class='title'>Shining Nikki</span></br>
+<a href="shine/JJC.html">竞技场兑换计算</a></br>
+</p>
+
+<p class="past">
+<img src="img/wcat.jpg" height="25" width="25"><span class='title'>Shironeko Project</span></br>
 <a href="wcat/runes.html">周回必须符石</a></br>
 <a href="wcat/kr.html">四人協力報酬</a></br>
-</span>
 </p>
 
-<p>
-<img src="img/cc.png" height="25" width="25"><span class='title-past'>Chain Chronicle</span></br>
-<span class="past">
+<p class="past">
+<img src="img/cc.png" height="25" width="25"><span class='title'>Chain Chronicle</span></br>
 <a href="cc_fuwa_20160502.html">不和魔神踏破</a></br>
 <a href="cc_yuriana.html">王都綻放的白百合</a></br>
-</span>
 </p>
 
-<p>
-<img src="img/tokires.jpg" height="25" width="25"><span class='title-past'>Tokimeki Restaurant</span></br>
-<span class="past">
+<p class="past">
+<img src="img/tokires.jpg" height="25" width="25"><span class='title'>Tokimeki Restaurant</span></br>
 <a href="tokires_bonus_tweets.html">ボーナスタイム@Twitter</a></br>
-</span>
 </p>
 
-<p>
-<img src="img/tmgs4.jpg" height="25" width="25"><span class='title-past'>Tmgs4</span></br>
-<span class="past">
+<p class="past">
+<img src="img/tmgs4.jpg" height="25" width="25"><span class='title'>Tmgs4</span></br>
 <a href="tmgs4.html">tmgs4 quick-search</a></br>
-</span>
 </p>
 
 <!--p>
