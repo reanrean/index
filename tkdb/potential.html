@@ -39,6 +39,7 @@ var c_rev_numbers = [
 [270,15],
 [310,16],
 [350,17],
+[1000,0],
 ];
 
 var b_rev_numbers = [
@@ -76,11 +77,11 @@ var b_rev_numbers = [
 [456,17],
 [462,16],
 [475,15],
-[490,14],
-[500,13],
-[530,12],
-[560,11],
-[600,10],
+[500,14],
+[525,13],
+[550,12],
+[600,11],
+[1000,10],
 ];
 
 var a_rev_numbers = [
@@ -133,8 +134,8 @@ var a_rev_numbers = [
 [692,34],
 [694,33],
 [696,32],
-[698,31],
-[700,30],
+[700,31],
+[1000,30],
 ];
 
 window.onload = function() {
@@ -156,14 +157,15 @@ window.onload = function() {
 };
 
 function getRev(pct, potion) {
+    if (pct < 0 || pct > 1000) return 0;
     switch (potion) {
         case 'c':
+            if (pct >= 350) return 0;
             for (var i = 0; i < c_rev_numbers.length; i++) {
                 if (pct < c_rev_numbers[i][0]) {
                     return c_rev_numbers[i][1];
                 }
             }
-            return c_rev_numbers[c_rev_numbers.length - 1][1];
             break;
         case 'b':
             for (var i = 0; i < b_rev_numbers.length; i++) {
@@ -171,7 +173,6 @@ function getRev(pct, potion) {
                     return b_rev_numbers[i][1];
                 }
             }
-            return b_rev_numbers[b_rev_numbers.length - 1][1];
             break;
         case 'a':
             for (var i = 0; i < a_rev_numbers.length; i++) {
@@ -179,7 +180,6 @@ function getRev(pct, potion) {
                     return a_rev_numbers[i][1];
                 }
             }
-            return a_rev_numbers[a_rev_numbers.length - 1][1];
             break;
     }
 }
