@@ -222,7 +222,7 @@ function calculate() {
     document.getElementById('pct').innerHTML = pct / 10; // current validated
     
     // Validate tgt-pct
-    if (!isUseall && (isNaN(tgtPct) || !isFinite(tgtPct) || tgtPct < 0 || tgtPct >= 1000 || tgtPct <= pct)) {
+    if (!isUseall && (isNaN(tgtPct) || !isFinite(tgtPct) || tgtPct < 0 || tgtPct > 1000 || tgtPct <= pct)) {
         document.getElementById('error').innerHTML = '目標%數不正確';
         return;
     }
