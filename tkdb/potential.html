@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>SSR潛能計算</title>
+<script type="text/javascript" charset="UTF-8">
+var c_rev_numbers = [
+//below this pct, revenue
+[150,30],
+[152,29],
+[154,28],
+[156,27],
+[158,26],
+[160,25],
+[162,24],
+[164,23],
+[166,22],
+[168,21],
+[170,20],
+[172,19],
+[174,18],
+[176,17],
+[178,16],
+[180,15],
+[186,14],
+[192,13],
+[198,12],
+[204,11],
+[210,10],
+[216,9],
+[222,8],
+[228,7],
+[234,6],
+[240,5],
+[246,4],
+[260,3],
+[270,15],
+[310,16],
+[350,17],
+];
+
+var b_rev_numbers = [
+[250,48],
+[260,47],
+[270,46],
+[280,45],
+[290,44],
+[300,43],
+[306,42],
+[312,41],
+[318,40],
+[324,39],
+[330,38],
+[336,37],
+[342,36],
+[348,35],
+[354,34],
+[360,33],
+[366,32],
+[372,31],
+[378,30],
+[384,29],
+[390,28],
+[396,27],
+[402,26],
+[408,25],
+[414,24],
+[420,23],
+[426,22],
+[432,21],
+[438,20],
+[444,19],
+[450,18],
+[456,17],
+[462,16],
+[475,15],
+[490,14],
+[500,13],
+[530,12],
+[560,11],
+[600,10],
+];
+
+var a_rev_numbers = [
+[600,80],
+[602,79],
+[604,78],
+[606,77],
+[608,76],
+[610,75],
+[612,74],
+[614,73],
+[616,72],
+[618,71],
+[620,70],
+[622,69],
+[624,68],
+[626,67],
+[628,66],
+[630,65],
+[632,64],
+[634,63],
+[636,62],
+[638,61],
+[640,60],
+[642,59],
+[644,58],
+[646,57],
+[648,56],
+[650,55],
+[652,54],
+[654,53],
+[656,52],
+[658,51],
+[660,50],
+[662,49],
+[664,48],
+[666,47],
+[668,46],
+[670,45],
+[672,44],
+[674,43],
+[676,42],
+[678,41],
+[680,40],
+[682,39],
+[684,38],
+[686,37],
+[688,36],
+[690,35],
+[692,34],
+[694,33],
+[696,32],
+[698,31],
+[700,30],
+];
+
+window.onload = function() {
+    // Attach onchange listeners
+    document.getElementById('lv').addEventListener('change', calculate);
+    document.getElementById('current').addEventListener('change', calculate);
+    document.getElementById('radio1').addEventListener('change', calculate);
+    document.getElementById('radio2').addEventListener('change', calculate);
+    document.getElementById('tgt-pct').addEventListener('change', calculate);
+    document.getElementById('c').addEventListener('change', calculate);
+    document.getElementById('b').addEventListener('change', calculate);
+    document.getElementById('a').addEventListener('change', calculate);
+    document.getElementById('cmin').addEventListener('change', calculate);
+    document.getElementById('bmin').addEventListener('change', calculate);
+    document.getElementById('amin').addEventListener('change', calculate);
+    
+    // Call the function to calculate initial values
+    calculate();
+};
+
+function getRev(pct, potion) {
+    switch (potion) {
+        case 'c':
+            for (var i = 0; i < c_rev_numbers.length; i++) {
+                if (pct < c_rev_numbers[i][0]) {
+                    return c_rev_numbers[i][1];
+                }
+            }
+            return c_rev_numbers[c_rev_numbers.length - 1][1];
+            break;
+        case 'b':
+            for (var i = 0; i < b_rev_numbers.length; i++) {
+                if (pct < b_rev_numbers[i][0]) {
+                    return b_rev_numbers[i][1];
+                }
+            }
+            return b_rev_numbers[b_rev_numbers.length - 1][1];
+            break;
+        case 'a':
+            for (var i = 0; i < a_rev_numbers.length; i++) {
+                if (pct < a_rev_numbers[i][0]) {
+                    return a_rev_numbers[i][1];
+                }
+            }
+            return a_rev_numbers[a_rev_numbers.length - 1][1];
+            break;
+    }
+}
+
+function calculate() {
+    var lv = parseInt(document.getElementById('lv').value);
+    var current = parseInt(document.getElementById('current').value);
+    var upper = (Math.max(lv, 60) - 60) * 3640 + 84000;
+    var pct = Math.floor(current * 1000 / upper);
+    var isUseall = document.getElementById('radio1').checked;
+    var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
+    var c = parseInt(document.getElementById('c').value);
+    var b = parseInt(document.getElementById('b').value);
+    var a = parseInt(document.getElementById('a').value);
+    var cmin = parseInt(document.getElementById('cmin').value);
+    var bmin = parseInt(document.getElementById('bmin').value);
+    var amin = parseInt(document.getElementById('amin').value);
+
+    // Default output if input invalid
+    document.getElementById('upper').innerHTML = '';
+    document.getElementById('pct').innerHTML = '';
+    document.getElementById('result').innerHTML = '';
+    
+    // Validate lv
+    if (isNaN(lv) || lv < 1 || lv > 200) {
+        document.getElementById('error').innerHTML = '學園等級不正確';
+        return; // Exit the function if the levels are invalid
+    }
+    document.getElementById('upper').innerHTML = upper; // lv validated
+
+    // Validate current
+    if (isNaN(current) || current < 0) {
+        document.getElementById('error').innerHTML = '潛能數值不正確';
+        return;
+    } else if (current >= upper) {
+        document.getElementById('error').innerHTML = '潛能數值超過上限';
+        document.getElementById('pct').innerHTML = '100.0';
+        return;
+    }
+    document.getElementById('pct').innerHTML = pct / 10; // current validated
+    
+    // Validate tgt-pct
+    if (!isUseall && (isNaN(tgtPct) || !isFinite(tgtPct) || tgtPct < 0 || tgtPct >= 1000 || tgtPct <= pct)) {
+        document.getElementById('error').innerHTML = '目標%數不正確';
+        return;
+    }
+    
+    // Validate a,b,c
+    if (isNaN(a) || isNaN(b) || isNaN(c) || a < 0 || b < 0 || c < 0 || (a == 0 && b == 0 && c == 0)) {
+        document.getElementById('error').innerHTML = '藥水數量不正確';
+        return;
+    }
+    
+    // Validate amin,bmin,cmin
+    if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < 3 || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
+        document.getElementById('error').innerHTML = '藥水效益超過區間';
+        return;
+    }
+    
+    // All Input validated
+    document.getElementById('error').innerHTML = '&ensp;';
+    
+    // Start loop
+    var condition = true;
+    var resultArr = [];
+    while (condition) {
+        var crev = getRev(pct, 'c');
+        var brev = getRev(pct, 'b');
+        var arev = getRev(pct, 'a');
+        var lastUsed = (resultArr.length > 0 ? resultArr[resultArr.length - 1][0] : '');
+        if (pct < 350 && crev >= cmin && c > 0) {
+            current += crev;
+            c--;
+            pct = Math.floor(current * 1000 / upper);
+            if (lastUsed != 'C') {
+                resultArr.push(['C', 1, current, pct]);
+            } else {
+                resultArr[resultArr.length - 1][1]++;
+                resultArr[resultArr.length - 1][2] = current;
+                resultArr[resultArr.length - 1][3] = pct;
+            }
+        } else if (brev >= bmin && b > 0) {
+            current += brev;
+            b--;
+            pct = Math.floor(current * 1000 / upper);
+            if (lastUsed != 'B') {
+                resultArr.push(['B', 1, current, pct]);
+            } else {
+                resultArr[resultArr.length - 1][1]++;
+                resultArr[resultArr.length - 1][2] = current;
+                resultArr[resultArr.length - 1][3] = pct;
+            }
+        } else if (arev >= amin && a > 0) {
+            current += arev;
+            a--;
+            pct = Math.floor(current * 1000 / upper);
+            if (lastUsed != 'A') {
+                resultArr.push(['A', 1, current, pct]);
+            } else {
+                resultArr[resultArr.length - 1][1]++;
+                resultArr[resultArr.length - 1][2] = current;
+                resultArr[resultArr.length - 1][3] = pct;
+            }
+        }
+        
+        // check condition
+        var crev = getRev(pct, 'c');
+        var brev = getRev(pct, 'b');
+        var arev = getRev(pct, 'a');
+        if ((c == 0 || pct >= 350 || crev < cmin ) && (b == 0 || brev < bmin) && (a == 0 || arev < amin)) {
+            condition = false;
+        }
+        if (current >= upper) {
+            condition = false;
+        }
+        if (!isUseall && pct >= tgtPct) {
+            condition = false;
+        }
+    }
+
+    // convert array to text
+    var result = '';
+    resultArr.forEach(function(item) {
+        result += '使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+    });
+    result += '剩餘' + c + '瓶藥水C，' + b + '瓶藥水B，' + a + '瓶藥水A';
+    document.getElementById('result').innerHTML = result;
+}
+
+</script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>東京謎影者 SSR潛能計算（試作）</h2>
+    <h5>數據都是亂填的！還不能用！</h5>
+    <h6 id="error" style="color:red;"></h6>
+    <table class="table table-bordered">
+      <tbody class="thead-light">
+        <tr>
+          <th scope="row" class="align-top">學園等級<br>（1~200）</th>
+          <td><input type="number" class="form-control" value="60" id="lv"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">目前潛能數值</th>
+          <td>
+            <input type="number" class="form-control" value="0" id="current">
+            <span>/ <span id="upper"></span>（<span id="pct"></span>%）</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">我想…</th>
+          <td>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="radio1" checked>
+              <label class="form-check-label" for="radio1">
+                用完所有藥水
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="radio2">
+              <label class="form-check-label" for="radio2">
+                升到以下%
+              </label>
+              <input type="number" class="form-control" value="60" id="tgt-pct">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水C數量</th>
+          <td><input type="number" class="form-control" value="1" id="c"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水B數量</th>
+          <td><input type="number" class="form-control" value="1" id="b"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水A數量</th>
+          <td><input type="number" class="form-control" value="1" id="a"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水C至少效益<br>（3~30）</th>
+          <td>
+            <input type="number" class="form-control" value="15" id="cmin">
+            推薦值：15
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水B至少效益<br>（10~48）</th>
+          <td>
+            <input type="number" class="form-control" value="15" id="bmin">
+            推薦值：15
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水A至少效益<br>（30~80）</th>
+          <td>
+            <input type="number" class="form-control" value="31" id="amin">
+            推薦值：31
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">結果</th>
+          <td>
+            <span id="result"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center mt-4">
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?usp=sharing">石奚</a><br>計算機：Rinne</p>
+    </div>
+  </div>
+</body>
+</html>
