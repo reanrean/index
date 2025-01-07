@@ -139,6 +139,10 @@ var a_rev_numbers = [
 [1000,30],
 ];
 
+var dia_rev_numbers = [
+[1000,140],
+];
+
 window.onload = function() {
     // Attach onchange listeners
     document.getElementById('lv').addEventListener('change', calculate);
@@ -182,6 +186,8 @@ function getRev(pct, potion) {
                 }
             }
             break;
+        case 'd':
+            return 140;
     }
 }
 
@@ -250,6 +256,7 @@ function calculate() {
         var crev = getRev(pct, 'c');
         var brev = getRev(pct, 'b');
         var arev = getRev(pct, 'a');
+        var drev = getRev(pct, 'd');
         var lastUsed = (resultArr.length > 0 ? resultArr[resultArr.length - 1][0] : '');
         if (pct < 350 && crev >= cmin && c > 0) {
             current += crev;
@@ -284,13 +291,23 @@ function calculate() {
                 resultArr[resultArr.length - 1][2] = current;
                 resultArr[resultArr.length - 1][3] = pct;
             }
+        } else if (!isUseall) {
+            current += drev;
+            pct = Math.floor(current * 1000 / upper);
+            if (lastUsed != 'D') {
+                resultArr.push(['D', 1, current, pct]);
+            } else {
+                resultArr[resultArr.length - 1][1]++;
+                resultArr[resultArr.length - 1][2] = current;
+                resultArr[resultArr.length - 1][3] = pct;
+            }
         }
         
         // check condition
         var crev = getRev(pct, 'c');
         var brev = getRev(pct, 'b');
         var arev = getRev(pct, 'a');
-        if ((c == 0 || pct >= 350 || crev < cmin ) && (b == 0 || brev < bmin) && (a == 0 || arev < amin)) {
+        if (isUseall && (c == 0 || pct >= 350 || crev < cmin ) && (b == 0 || brev < bmin) && (a == 0 || arev < amin)) {
             condition = false;
         }
         if (current >= upper) {
@@ -304,7 +321,11 @@ function calculate() {
     // convert array to text
     var result = '';
     resultArr.forEach(function(item) {
-        result += '使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+        if (item[0] == 'D') {
+            result += '（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+        } else {
+            result += '使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+        }
     });
     result += '剩餘' + c + '瓶藥水C，' + b + '瓶藥水B，' + a + '瓶藥水A';
     document.getElementById('result').innerHTML = result;
@@ -376,8 +397,8 @@ function calculate() {
         <tr>
           <th scope="row" class="align-top">藥水A至少效益<br>（30~80）</th>
           <td>
-            <input type="number" class="form-control" value="31" id="amin">
-            推薦值：31
+            <input type="number" class="form-control" value="32" id="amin">
+            推薦值：32
           </td>
         </tr>
         <tr>
