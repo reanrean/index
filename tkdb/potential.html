@@ -181,12 +181,12 @@ window.onload = function() {
 };
 
 function changeradio() {
-    if (document.getElementById('radio1').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) <= 60)) {
+    if (document.getElementById('radio1').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) <= 600)) {
         document.getElementById('70b').checked = false;
         change70b();
         document.getElementById('70a').checked = false;
         change70a();
-    } else if (document.getElementById('radio2').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) > 60)) {
+    } else if (document.getElementById('radio2').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) > 600)) {
         document.getElementById('70b').checked = true;
         change70b();
         document.getElementById('70a').checked = true;
@@ -197,8 +197,9 @@ function changeradio() {
 
 function changetgtpct() {
     if (document.getElementById('radio3').checked) {
-        changeradio12();
+        changeradio();
     }
+    calculate();
 }
 
 function changebmin() {
