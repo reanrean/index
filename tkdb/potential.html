@@ -10,6 +10,7 @@
 <title>SSR潛能計算</title>
 <style>
 .tooltip-trigger {opacity:0.5;}
+.advanced-options {display:none;}
 </style>
 <script type="text/javascript" charset="UTF-8">
 var MAX_C = 350;
@@ -167,6 +168,7 @@ window.onload = function() {
     document.getElementById('amin').addEventListener('change', changeamin);
     document.getElementById('70b').addEventListener('change', change70b);
     document.getElementById('70a').addEventListener('change', change70a);
+    document.getElementById('stop60').addEventListener('change', calculate);
     
     // Initialize Bootstrap tooltips
     $(function () {
@@ -255,6 +257,7 @@ function calculate() {
     var bmin = parseInt(document.getElementById('bmin').value);
     var amin = parseInt(document.getElementById('amin').value);
     var b70 = document.getElementById('70b').checked;
+    var stop60 = document.getElementById('stop60').checked;
 
     // Default output if input invalid
     document.getElementById('upper').innerHTML = '';
@@ -376,6 +379,9 @@ function calculate() {
         if (isUseall && (c == 0 || pct >= MAX_C || crev < cmin ) && (b == 0 || (brev < bmin && !b70)) && (a == 0 || arev < amin)) {
             condition = false;
         }
+        if (isUseall && stop60 && pct >= 600) {
+            condition = false;
+        }
         if (current >= upper) {
             condition = false;
         }
@@ -423,6 +429,14 @@ function calculate() {
     document.getElementById('result').innerHTML = result;
 }
 
+function toggleAdvanced() {
+    $('.advanced-options').toggle();
+    if ($('.advanced-options').is(':visible')) {
+        $('#toggle-advanced').html('&#x25B2; 收起 &#x25B2;');
+    } else {
+        $('#toggle-advanced').html('&#x25BC; 展開 &#x25BC;');
+    }
+}
 </script>
 </head>
 <body>
@@ -450,6 +464,10 @@ function calculate() {
               <label class="form-check-label" for="radio1">
                 用完所有藥水
               </label>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="stop60" checked>
+                <label for="stop60" class="form-check-label">停在60%</label></span>
+              </div>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="radio" id="radio2">
@@ -458,6 +476,7 @@ function calculate() {
               </label>
               <input type="number" class="form-control" value="60" id="tgt-pct">
             </div>
+            ※ 超過60%暫時只適合重課或學園等級200後
           </td>
         </tr>
         <tr>
@@ -473,27 +492,31 @@ function calculate() {
           <td><input type="number" class="form-control" value="1" id="a"></td>
         </tr>
         <tr>
+          <th scope="row" class="align-top">進階選項</th>
+          <td><button type="button" class="btn btn-light" onclick="toggleAdvanced()" id="toggle-advanced">&#x25BC; 展開 &#x25BC;</button></td>
+        </tr>
+        <tr class="advanced-options">
           <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C，留給其他需練角色">[?]</span><br>（3~30）</th>
           <td>
             <input type="number" class="form-control" value="15" id="cmin">
             推薦值：15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span>
           </td>
         </tr>
-        <tr>
+        <tr class="advanced-options">
           <th scope="row" class="align-top">藥水B至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水B，留給其他需練角色；若同時勾選效益降到最低後使用藥水B，則低於此值將優先使用藥水A，但藥水A用完後會繼續使用藥水B">[?]</span><br>（10~48）</th>
           <td>
             <input type="number" class="form-control" value="13" id="bmin">
             推薦值：12~13 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="由於藥水A在60%開始衰減，推薦在約50%或55%時開始使用藥水A，可通過微調此值控制藥水A的用量，多餘的藥水B可留給其他需練角色">[?]</span>
           </td>
         </tr>
-        <tr>
+        <tr class="advanced-options">
           <th scope="row" class="align-top">藥水A至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水A，留給其他需練角色；此值等於30時會自動勾選效益降到最低後使用藥水A，高於30則自動取消勾選">[?]</span><br>（30~80）</th>
           <td>
             <input type="number" class="form-control" value="32" id="amin">
             推薦值：無課80/重課32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="60%後藥水A效益銳減，無課推薦停在60%（即+80），等學園等級提升潛能上限，再繼續補回去60%；重課則推薦藥水A降到+31時改用鑽石方案比購買高級商店4500鑽藥水A CP值更高">[?]</span>
           </td>
         </tr>
-        <tr>
+        <tr class="advanced-options">
           <th scope="row" class="align-top">效益降到最低後 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="由於存在免費獲取的藥水，可以在藥水效益低於以上設定值時繼續使用藥水A或B提升，也可以把藥水留給其他需練角色">[?]</span></th>
           <td>
             <div class="form-check">
@@ -515,7 +538,7 @@ function calculate() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?usp=sharing">石奚</a><br>計算機：Rinne &amp; 石奚</p>
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚</p>
     </div>
   </div>
 </body>
