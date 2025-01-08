@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 <title>SSR潛能計算</title>
 <script type="text/javascript" charset="UTF-8">
+var MAX_C = 350;
+var LOWCP_A = 696;
+var LOWEST = 698;
 var c_rev_numbers = [
 //below this pct, revenue
 [150,30],
@@ -154,18 +160,59 @@ window.onload = function() {
     document.getElementById('b').addEventListener('change', calculate);
     document.getElementById('a').addEventListener('change', calculate);
     document.getElementById('cmin').addEventListener('change', calculate);
-    document.getElementById('bmin').addEventListener('change', calculate);
-    document.getElementById('amin').addEventListener('change', calculate);
+    document.getElementById('bmin').addEventListener('change', changebmin);
+    document.getElementById('amin').addEventListener('change', changeamin);
+    document.getElementById('70b').addEventListener('change', change70b);
+    document.getElementById('70a').addEventListener('change', change70a);
+    
+    // Initialize Bootstrap tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     
     // Call the function to calculate initial values
     calculate();
 };
 
+function changebmin() {
+    if (parseInt(document.getElementById('bmin').value) == 10) {
+        document.getElementById('70b').checked = true;
+    }
+    calculate();
+}
+
+function changeamin() {
+    if (parseInt(document.getElementById('amin').value) == 30) {
+        document.getElementById('70a').checked = true;
+    } else {
+        document.getElementById('70a').checked = false;
+    }
+    calculate();
+}
+
+function change70a() {
+    if (document.getElementById('70a').checked) {
+        document.getElementById('amin').value = 30;
+    } else if (parseInt(document.getElementById('amin').value) == 30) {
+        document.getElementById('amin').value = 32;
+    }
+    calculate();
+}
+
+function change70b() {
+    if (document.getElementById('70b').checked) {
+        // do nothing
+    } else if (parseInt(document.getElementById('bmin').value) == 10) {
+        document.getElementById('bmin').value = 11;
+    }
+    calculate();
+}
+
 function getRev(pct, potion) {
     if (pct < 0 || pct > 1000) return 0;
     switch (potion) {
         case 'c':
-            if (pct >= 350) return 0;
+            if (pct >= MAX_C) return 0;
             for (var i = 0; i < c_rev_numbers.length; i++) {
                 if (pct < c_rev_numbers[i][0]) {
                     return c_rev_numbers[i][1];
@@ -204,6 +251,7 @@ function calculate() {
     var cmin = parseInt(document.getElementById('cmin').value);
     var bmin = parseInt(document.getElementById('bmin').value);
     var amin = parseInt(document.getElementById('amin').value);
+    var b70 = document.getElementById('70b').checked;
 
     // Default output if input invalid
     document.getElementById('upper').innerHTML = '';
@@ -235,8 +283,12 @@ function calculate() {
     }
     
     // Validate a,b,c
-    if (isNaN(a) || isNaN(b) || isNaN(c) || a < 0 || b < 0 || c < 0 || (a == 0 && b == 0 && c == 0)) {
+    if (isNaN(a) || isNaN(b) || isNaN(c) || a < 0 || b < 0 || c < 0) {
         document.getElementById('error').innerHTML = '藥水數量不正確';
+        return;
+    }
+    if (isUseall && a == 0 && b == 0 && c == 0) {
+        document.getElementById('error').innerHTML = '藥水數量不能為0';
         return;
     }
     
@@ -258,7 +310,7 @@ function calculate() {
         var arev = getRev(pct, 'a');
         var drev = getRev(pct, 'd');
         var lastUsed = (resultArr.length > 0 ? resultArr[resultArr.length - 1][0] : '');
-        if (pct < 350 && crev >= cmin && c > 0) {
+        if (pct < MAX_C && crev >= cmin && c > 0) {
             current += crev;
             c--;
             pct = Math.floor(current * 1000 / upper);
@@ -291,6 +343,17 @@ function calculate() {
                 resultArr[resultArr.length - 1][2] = current;
                 resultArr[resultArr.length - 1][3] = pct;
             }
+        } else if (b70 && b > 0) {
+            current += brev;
+            b--;
+            pct = Math.floor(current * 1000 / upper);
+            if (lastUsed != 'B') {
+                resultArr.push(['B', 1, current, pct]);
+            } else {
+                resultArr[resultArr.length - 1][1]++;
+                resultArr[resultArr.length - 1][2] = current;
+                resultArr[resultArr.length - 1][3] = pct;
+            }
         } else if (!isUseall) {
             current += drev;
             pct = Math.floor(current * 1000 / upper);
@@ -307,7 +370,7 @@ function calculate() {
         var crev = getRev(pct, 'c');
         var brev = getRev(pct, 'b');
         var arev = getRev(pct, 'a');
-        if (isUseall && (c == 0 || pct >= 350 || crev < cmin ) && (b == 0 || brev < bmin) && (a == 0 || arev < amin)) {
+        if (isUseall && (c == 0 || pct >= MAX_C || crev < cmin ) && (b == 0 || (brev < bmin && !b70)) && (a == 0 || arev < amin)) {
             condition = false;
         }
         if (current >= upper) {
@@ -320,13 +383,25 @@ function calculate() {
 
     // convert array to text
     var result = '';
-    resultArr.forEach(function(item) {
+    var rcnt = 0;
+    for (var i = 0; i < resultArr.length; i++) {
+        item = resultArr[i];
         if (item[0] == 'D') {
-            result += '（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+            var addNote = 0; // check whether potion A has higher CP
+            if (i > 0) { // D is not the first row
+                if (resultArr[i-1][3] < LOWCP_A) {
+                    addNote = 1;
+                }
+            } else { // D is the first row
+                if (parseInt(document.getElementById('current').value) < LOWCP_A) {
+                    addNote = 1;
+                }
+            }
+            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + item[3] / 10 + '%）；<br>' + (addNote ? '<span style="color:red;">*此區間鑽石CP值低，更推薦高級商店購買4500鑽藥水A</span><br>' : '');
         } else {
-            result += '使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
+            result += (i+1) + '. 使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
         }
-    });
+    }
     result += '剩餘' + c + '瓶藥水C，' + b + '瓶藥水B，' + a + '瓶藥水A';
     document.getElementById('result').innerHTML = result;
 }
@@ -381,28 +456,41 @@ function calculate() {
           <td><input type="number" class="form-control" value="1" id="a"></td>
         </tr>
         <tr>
-          <th scope="row" class="align-top">藥水C至少效益<br>（3~30）</th>
+          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C，留給其他需練角色">[?]</span><br>（3~30）</th>
           <td>
             <input type="number" class="form-control" value="15" id="cmin">
-            推薦值：15
+            推薦值：15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span>
           </td>
         </tr>
         <tr>
-          <th scope="row" class="align-top">藥水B至少效益<br>（10~48）</th>
+          <th scope="row" class="align-top">藥水B至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水B，留給其他需練角色；若同時勾選效益降到最低後使用藥水B，則低於此值將優先使用藥水A，但藥水A用完後會繼續使用藥水B">[?]</span><br>（10~48）</th>
           <td>
-            <input type="number" class="form-control" value="15" id="bmin">
-            推薦值：15
+            <input type="number" class="form-control" value="13" id="bmin">
+            推薦值：12~13 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="由於藥水A在60%開始衰減，推薦在約50%或55%時開始使用藥水A，可通過微調此值控制藥水A的用量，多餘的藥水B可留給其他需練角色">[?]</span>
           </td>
         </tr>
         <tr>
-          <th scope="row" class="align-top">藥水A至少效益<br>（30~80）</th>
+          <th scope="row" class="align-top">藥水A至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水A，留給其他需練角色；此值等於30時會自動勾選效益降到最低後使用藥水A，高於30則自動取消勾選">[?]</span><br>（30~80）</th>
           <td>
             <input type="number" class="form-control" value="32" id="amin">
-            推薦值：32
+            推薦值：無課80/重課32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="60%後藥水A效益銳減，無課推薦停在60%（即+80），等學園等級提升潛能上限，再繼續補回去60%；重課則推薦藥水A降到+31時改用鑽石方案比購買高級商店4500鑽藥水A CP值更高">[?]</span>
           </td>
         </tr>
         <tr>
-          <th scope="row" class="align-top">結果</th>
+          <th scope="row" class="align-top">效益降到最低後 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="由於存在免費獲取的藥水，可以在藥水效益低於以上設定值時繼續使用藥水A或B提升，也可以把藥水留給其他需練角色">[?]</span></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="70b">
+              <label for="70b" class="form-check-label">使用藥水B <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水B效益設為10會自動勾選此項；勾選/取消勾選此項不會改變藥水B效益設定值">[?]</span></label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="70a">
+              <label for="70a" class="form-check-label">使用藥水A <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="此選項和藥水A效益設定值強聯動：藥水A效益設為30會自動勾選此項，設為30以上會自動取消勾選；勾選此項會自動設藥水A效益為30；取消勾選會設為32">[?]</span></label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">藥水使用步驟</th>
           <td>
             <span id="result"></span>
           </td>
@@ -410,7 +498,7 @@ function calculate() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?usp=sharing">石奚</a><br>計算機：Rinne</p>
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?usp=sharing">石奚</a><br>計算機：石奚 &amp; Rinne</p>
     </div>
   </div>
 </body>
