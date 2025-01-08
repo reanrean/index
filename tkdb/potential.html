@@ -8,6 +8,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 <title>SSR潛能計算</title>
+<style>
+.tooltip-trigger {opacity:0.5;}
+</style>
 <script type="text/javascript" charset="UTF-8">
 var MAX_C = 350;
 var LOWCP_A = 696;
@@ -386,18 +389,32 @@ function calculate() {
     var rcnt = 0;
     for (var i = 0; i < resultArr.length; i++) {
         item = resultArr[i];
-        if (item[0] == 'D') {
-            var addNote = 0; // check whether potion A has higher CP
+        if (item[0] == 'D') { // check whether potion A has higher CP
+            var p_current = 0;
+            var p_pct = 0;
             if (i > 0) { // D is not the first row
-                if (resultArr[i-1][3] < LOWCP_A) {
-                    addNote = 1;
-                }
+                p_current = resultArr[i-1][2];
+                p_pct = resultArr[i-1][3];
             } else { // D is the first row
-                if (parseInt(document.getElementById('current').value) < LOWCP_A) {
-                    addNote = 1;
-                }
+                p_current = parseInt(document.getElementById('current').value);
+                p_pct = Math.floor(p_current * 1000 / upper);
             }
-            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + item[3] / 10 + '%）；<br>' + (addNote ? '<span style="color:red;">*此區間鑽石CP值低，更推薦高級商店購買4500鑽藥水A</span><br>' : '');
+            var a_current = p_current;
+            var a_pct = p_pct;
+            var a_cnt = 0;
+            while (a_pct < LOWCP_A) {
+                for (var j = 0; j < 100; j++) { // loop 100 potion A 
+                    var a_arev = getRev(a_pct, 'a');
+                    a_current += a_arev;
+                    a_pct = Math.floor(a_current * 1000 / upper);
+                }
+                if (a_current - p_current > 3150) { // 4500 dia = 3150 potential
+                    a_cnt++;
+                }
+                p_current = a_current;
+                p_pct = a_pct;
+            }
+            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + item[3] / 10 + '%）；<br>' + (a_cnt > 0 ? '<span style="color:red;">*鑽石CP值較低，更推薦先在高級商店購買4500鑽藥水A（每日重置）×' + a_cnt + '次</span><br>' : '');
         } else {
             result += (i+1) + '. 使用' + item[1] + '瓶藥水' + item[0] + '直到' + item[2] + '（' + item[3] / 10 + '%）；<br>';
         }
@@ -481,11 +498,11 @@ function calculate() {
           <td>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="70b">
-              <label for="70b" class="form-check-label">使用藥水B <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水B效益設為10會自動勾選此項；勾選/取消勾選此項不會改變藥水B效益設定值">[?]</span></label>
+              <label for="70b" class="form-check-label">使用藥水B</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水B效益設為10會自動勾選此項；勾選/取消勾選此項不會改變藥水B效益設定值">[?]</span>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="70a">
-              <label for="70a" class="form-check-label">使用藥水A <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="此選項和藥水A效益設定值強聯動：藥水A效益設為30會自動勾選此項，設為30以上會自動取消勾選；勾選此項會自動設藥水A效益為30；取消勾選會設為32">[?]</span></label>
+              <label for="70a" class="form-check-label">使用藥水A</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="此選項和藥水A效益設定值強聯動：藥水A效益設為30會自動勾選此項，設為30以上會自動取消勾選；勾選此項會自動設藥水A效益為30；取消勾選會設為32">[?]</span>
             </div>
           </td>
         </tr>
