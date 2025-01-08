@@ -157,10 +157,10 @@ window.onload = function() {
     // Attach onchange listeners
     document.getElementById('lv').addEventListener('change', calculate);
     document.getElementById('current').addEventListener('change', calculate);
-    document.getElementById('radio1').addEventListener('change', changeradio);
-    document.getElementById('radio2').addEventListener('change', changeradio);
-    document.getElementById('radio3').addEventListener('change', changeradio);
-    document.getElementById('tgt-pct').addEventListener('change', changetgtpct);
+    document.getElementById('radio1').addEventListener('change', calculate);
+    document.getElementById('radio2').addEventListener('change', calculate);
+    document.getElementById('tgt-pct').addEventListener('change', calculate);
+    document.getElementById('save').addEventListener('change', changesave);
     document.getElementById('c').addEventListener('change', calculate);
     document.getElementById('b').addEventListener('change', calculate);
     document.getElementById('a').addEventListener('change', calculate);
@@ -180,24 +180,17 @@ window.onload = function() {
     calculate();
 };
 
-function changeradio() {
-    if (document.getElementById('radio1').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) <= 600)) {
+function changesave() {
+    if (document.getElementById('save').checked) {
         document.getElementById('70b').checked = false;
         change70b();
         document.getElementById('70a').checked = false;
         change70a();
-    } else if (document.getElementById('radio2').checked || (document.getElementById('radio3').checked && Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10) > 600)) {
+    } else {
         document.getElementById('70b').checked = true;
         change70b();
         document.getElementById('70a').checked = true;
         change70a();
-    }
-    calculate();
-}
-
-function changetgtpct() {
-    if (document.getElementById('radio3').checked) {
-        changeradio();
     }
     calculate();
 }
@@ -271,7 +264,7 @@ function calculate() {
     var current = parseInt(document.getElementById('current').value);
     var upper = (Math.max(lv, 60) - 60) * 3640 + 84000;
     var pct = Math.floor(current * 1000 / upper);
-    var isUseall = document.getElementById('radio1').checked || document.getElementById('radio2').checked;
+    var isUseall = document.getElementById('radio1').checked;
     var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
     var c = parseInt(document.getElementById('c').value);
     var b = parseInt(document.getElementById('b').value);
@@ -280,7 +273,7 @@ function calculate() {
     var bmin = parseInt(document.getElementById('bmin').value);
     var amin = parseInt(document.getElementById('amin').value);
     var b70 = document.getElementById('70b').checked;
-    var stop60 = document.getElementById('radio1').checked && document.getElementById('stop60').checked;
+    var stop60 = document.getElementById('stop60').checked;
 
     // Default output if input invalid
     document.getElementById('upper').innerHTML = '';
@@ -485,7 +478,7 @@ function toggleAdvanced() {
             <div class="form-check">
               <input class="form-check-input" type="radio" name="radio" id="radio1" checked>
               <label class="form-check-label" for="radio1">
-                按效益最大化使用藥水
+                盡量用完身上藥水
               </label>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="stop60" checked>
@@ -495,17 +488,20 @@ function toggleAdvanced() {
             <div class="form-check">
               <input class="form-check-input" type="radio" name="radio" id="radio2">
               <label class="form-check-label" for="radio2">
-                總之用完所有藥水
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="radio" id="radio3">
-              <label class="form-check-label" for="radio3">
                 升到以下%
               </label>
               <input type="number" class="form-control" value="60" id="tgt-pct">
             </div>
             ※ 超過60%暫時只適合重課或學園等級200後
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">是否有其他需練角 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="更合理化使用藥水，把效益太低的藥水留給其他需練角">[?]</span></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="save" checked>
+              <label for="save" class="form-check-label">是</label></span>
+            </div>
           </td>
         </tr>
         <tr>
