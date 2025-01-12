@@ -319,7 +319,7 @@ function calculate() {
     }
     
     // Validate amin,bmin,cmin
-    if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < 3 || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
+    if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < 2 || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
         document.getElementById('error').innerHTML = '藥水效益超過區間';
         return;
     }
@@ -530,7 +530,7 @@ function toggleAdvanced() {
           <td><button type="button" class="btn btn-light" onclick="toggleAdvanced()" id="toggle-advanced">&#x25BC; 展開 &#x25BC;</button></td>
         </tr>
         <tr class="advanced-options">
-          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C，留給其他需練角色">[?]</span><br>（3~30）</th>
+          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C，留給其他需練角色">[?]</span><br>（2~30）</th>
           <td>
             <input type="number" class="form-control" value="15" id="cmin">
             推薦值：15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span>
@@ -572,7 +572,7 @@ function toggleAdvanced() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250111.23</p>
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.5</p>
     </div>
   </div>
 </body>
