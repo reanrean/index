@@ -13,7 +13,6 @@
 .advanced-options {display:none;}
 </style>
 <script type="text/javascript" charset="UTF-8">
-var MAX_C = 350;
 var LOWCP_A = 696;
 var LOWEST = 698;
 var c_rev_numbers = [
@@ -156,6 +155,9 @@ var dia_rev_numbers = [
 window.onload = function() {
     // Attach onchange listeners
     document.getElementById('lv').addEventListener('change', calculate);
+    document.getElementById('rare-ssr').addEventListener('change', calculate);
+    document.getElementById('rare-sr').addEventListener('change', calculate);
+    document.getElementById('rare-r').addEventListener('change', calculate);
     document.getElementById('current').addEventListener('change', calculate);
     document.getElementById('radio1').addEventListener('change', calculate);
     document.getElementById('radio2').addEventListener('change', calculate);
@@ -233,7 +235,6 @@ function getRev(pct, potion) {
     if (pct < 0 || pct > 1000) return 0;
     switch (potion) {
         case 'c':
-            if (pct >= MAX_C) return 0;
             for (var i = 0; i < c_rev_numbers.length; i++) {
                 if (pct <= c_rev_numbers[i][0]) {
                     return c_rev_numbers[i][1];
@@ -270,7 +271,9 @@ function showPct(pct) {
 function calculate() {
     var lv = parseInt(document.getElementById('lv').value);
     var current = parseInt(document.getElementById('current').value);
-    var upper = (Math.max(lv, 60) - 60) * 3640 + 84000;
+    var upper = document.getElementById('rare-ssr').checked ? (Math.max(lv, 60) - 60) * 3640 + 84000 : 
+                document.getElementById('rare-sr').checked ? Math.floor((Math.max(lv, 60) - 60) * 2693.6) + 62160 :
+                Math.floor((Math.max(lv, 60) - 60) * 1734.2) + 40020;
     var pct = getPct(current, upper);
     var isUseall = document.getElementById('radio1').checked;
     var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
@@ -336,7 +339,7 @@ function calculate() {
         var arev = getRev(pct, 'a');
         var drev = getRev(pct, 'd');
         var lastUsed = (resultArr.length > 0 ? resultArr[resultArr.length - 1][0] : '');
-        if (pct < MAX_C && crev >= cmin && c > 0) {
+        if (crev >= cmin && c > 0) {
             current += crev;
             c--;
             pct = getPct(current, upper);
@@ -401,7 +404,7 @@ function calculate() {
         var crev = getRev(pct, 'c');
         var brev = getRev(pct, 'b');
         var arev = getRev(pct, 'a');
-        if (isUseall && (c == 0 || pct >= MAX_C || crev < cmin ) && (b == 0 || (brev < bmin && !b70)) && (a == 0 || arev < amin)) {
+        if (isUseall && (c == 0 || crev < cmin ) && (b == 0 || (brev < bmin && !b70)) && (a == 0 || arev < amin)) {
             condition = false;
         }
         if (isUseall && stop60 && pct >= 600) {
@@ -466,13 +469,23 @@ function toggleAdvanced() {
 </head>
 <body>
   <div class="container mt-5">
-    <h2>東京謎影者 SSR潛能計算（試作）</h2>
+    <h2>東京謎影者 潛能計算（試作）</h2>
     <h6 id="error" style="color:red;"></h6>
     <table class="table table-bordered">
       <tbody class="thead-light">
         <tr>
           <th scope="row" class="align-top">學園等級<br>（1~200）</th>
           <td><input type="number" class="form-control" value="60" id="lv"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">角色卡品級</th>
+          <td>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rare" id="rare-ssr" checked><label class="form-check-label mr-2" for="rare-ssr">SSR</label>
+            <input class="form-check-input" type="radio" name="rare" id="rare-sr"><label class="form-check-label mr-2" for="rare-sr">SR</label>
+            <input class="form-check-input" type="radio" name="rare" id="rare-r"><label class="form-check-label mr-2" for="rare-r">R</label>
+            </div>
+          </td>
         </tr>
         <tr>
           <th scope="row" class="align-top">目前潛能數值</th>
@@ -572,7 +585,7 @@ function toggleAdvanced() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.5</p>
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.6</p>
     </div>
   </div>
 </body>
