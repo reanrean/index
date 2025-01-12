@@ -344,7 +344,7 @@ function calculate() {
             c--;
             pct = getPct(current, upper);
             if (lastUsed != 'C') {
-                resultArr.push(['C', 1, current, pct, c]);
+                resultArr.push(['C', 1, current, pct, c, 0]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -356,7 +356,7 @@ function calculate() {
             b--;
             pct = getPct(current, upper);
             if (lastUsed != 'B') {
-                resultArr.push(['B', 1, current, pct, b]);
+                resultArr.push(['B', 1, current, pct, b, (crev >= cmin && c == 0 ? 1 : 0)]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -368,7 +368,7 @@ function calculate() {
             a--;
             pct = getPct(current, upper);
             if (lastUsed != 'A') {
-                resultArr.push(['A', 1, current, pct, a]);
+                resultArr.push(['A', 1, current, pct, a, ((crev >= cmin && !c) || (brev >= bmin && !b) ? 1 : 0)]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -380,7 +380,7 @@ function calculate() {
             b--;
             pct = getPct(current, upper);
             if (lastUsed != 'B') {
-                resultArr.push(['B', 1, current, pct, b]);
+                resultArr.push(['B', 1, current, pct, b, 0]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -391,7 +391,7 @@ function calculate() {
             current += drev;
             pct = getPct(current, upper);
             if (lastUsed != 'D') {
-                resultArr.push(['D', 1, current, pct, 0]);
+                resultArr.push(['D', 1, current, pct, 0, ((crev >= cmin && !c) || (brev >= bmin && !b) ? 1 : 0)]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -421,8 +421,13 @@ function calculate() {
     // convert array to text
     var result = '';
     var rcnt = 0;
+    var warned = 0;
     for (var i = 0; i < resultArr.length; i++) {
         item = resultArr[i];
+        if (!warned && item[5]) {
+            result += '<span style="color:red;">~~以下步驟CP值較低，建議停在此處等待獲取更多藥水B/C~~<br></span>';
+            warned = 1;
+        }
         if (item[0] == 'D') { // check whether potion A has higher CP
             var p_current = 0;
             var p_pct = 0;
@@ -448,7 +453,7 @@ function calculate() {
                 p_current = a_current;
                 p_pct = a_pct;
             }
-            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>' + (a_cnt > 0 ? '<span style="color:red;">*鑽石CP值較低，更推薦先在高級商店購買4500鑽藥水A（每日重置）×' + a_cnt + '次</span><br>' : '');
+            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>' + (a_cnt > 0 ? '<span style="color:#007bff;">*鑽石CP值較低，更推薦先在高級商店購買4500鑽藥水A（每日重置）×' + a_cnt + '次</span><br>' : '');
         } else {
             result += (i+1) + '. 使用' + item[1] + '瓶藥水' + item[0] + (item[4] > 0 ? '<span style="color:red;font-weight:bold;">[餘' + item[4] + '瓶]</span>' : '') + '直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>';
         }
@@ -585,7 +590,7 @@ function toggleAdvanced() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.7</p>
+      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.10</p>
     </div>
   </div>
 </body>
