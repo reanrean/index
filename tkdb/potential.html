@@ -272,8 +272,8 @@ function calculate() {
     var lv = parseInt(document.getElementById('lv').value);
     var current = parseInt(document.getElementById('current').value);
     var upper = document.getElementById('rare-ssr').checked ? (Math.max(lv, 60) - 60) * 3640 + 84000 : 
-                document.getElementById('rare-sr').checked ? Math.floor((Math.max(lv, 60) - 60) * 2693.6) + 62160 :
-                Math.floor((Math.max(lv, 60) - 60) * 1734.2) + 40020;
+                document.getElementById('rare-sr').checked ? (Math.max(lv, 60) - 60) * 2693.6 + 62160 :
+                (Math.max(lv, 60) - 60) * 1734.2 + 40020;
     var pct = getPct(current, upper);
     var isUseall = document.getElementById('radio1').checked;
     var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
@@ -296,7 +296,7 @@ function calculate() {
         document.getElementById('error').innerHTML = '學園等級不正確';
         return; // Exit the function if the levels are invalid
     }
-    document.getElementById('upper').innerHTML = upper; // lv validated
+    document.getElementById('upper').innerHTML = Math.floor(upper); // lv validated
 
     // Validate current
     if (isNaN(current) || current < 0) {
