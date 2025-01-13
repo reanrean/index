@@ -356,7 +356,7 @@ function calculate() {
             b--;
             pct = getPct(current, upper);
             if (lastUsed != 'B') {
-                resultArr.push(['B', 1, current, pct, b, (crev >= cmin && c == 0 ? 1 : 0)]);
+                resultArr.push(['B', 1, current, pct, b, 0]);
             } else {
                 resultArr[resultArr.length - 1][1]++;
                 resultArr[resultArr.length - 1][2] = current;
@@ -474,7 +474,7 @@ function toggleAdvanced() {
 </head>
 <body>
   <div class="container mt-5">
-    <h2>東京謎影者 潛能計算（試作）</h2>
+    <h2>東京謎影者 SSR潛能計算（試作）</h2>
     <h6 id="error" style="color:red;"></h6>
     <table class="table table-bordered">
       <tbody class="thead-light">
@@ -523,7 +523,7 @@ function toggleAdvanced() {
           </td>
         </tr>
         <tr>
-          <th scope="row" class="align-top">是否有其他需練角 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="更合理化使用藥水，把效益太低的藥水留給其他需練角">[?]</span></th>
+          <th scope="row" class="align-top">是否有其他需練角 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="更合理化使用藥水，把效益太低的藥水A/B留給其他需練角">[?]</span></th>
           <td>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="save" checked>
@@ -590,7 +590,7 @@ function toggleAdvanced() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.10</p>
+      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">錯誤回報/建議</a><br>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3" target="_blank">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.23</p>
     </div>
   </div>
 </body>
