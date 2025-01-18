@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-<title>SSR潛能計算</title>
+<title>潛能計算</title>
 <style>
 .tooltip-trigger {opacity:0.5;}
 .advanced-options {display:none;}
@@ -31,7 +31,7 @@ var c_rev_numbers = [
 [2430/14,19],
 [2460/14,18],
 [2490/14,17],
-[180,16],
+[179.999,16],
 [184,15],
 [188,14],
 [192,13],
@@ -156,8 +156,10 @@ window.onload = function() {
     // Attach onchange listeners
     document.getElementById('lv').addEventListener('change', calculate);
     document.getElementById('rare-ssr').addEventListener('change', calculate);
-    document.getElementById('rare-sr').addEventListener('change', calculate);
-    document.getElementById('rare-r').addEventListener('change', calculate);
+    document.getElementById('rare-sr').addEventListener('change', () => { $('#confirmModal').modal('show'); });
+    document.getElementById('rare-r').addEventListener('change', () => { $('#confirmModal').modal('show'); });
+    document.getElementById('modal-confirm').addEventListener('click', calculate);
+    document.getElementById('modal-cancel').addEventListener('click', () => { document.getElementById('rare-ssr').checked = true; });
     document.getElementById('current').addEventListener('change', calculate);
     document.getElementById('radio1').addEventListener('change', calculate);
     document.getElementById('radio2').addEventListener('change', calculate);
@@ -474,7 +476,7 @@ function toggleAdvanced() {
 </head>
 <body>
   <div class="container mt-5">
-    <h2>東京謎影者 SSR潛能計算（試作）</h2>
+    <h2>東京謎影者 潛能計算（試作）</h2>
     <h6 id="error" style="color:red;"></h6>
     <table class="table table-bordered">
       <tbody class="thead-light">
@@ -548,21 +550,21 @@ function toggleAdvanced() {
           <td><button type="button" class="btn btn-light" onclick="toggleAdvanced()" id="toggle-advanced">&#x25BC; 展開 &#x25BC;</button></td>
         </tr>
         <tr class="advanced-options">
-          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C，留給其他需練角色">[?]</span><br>（2~30）</th>
+          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C">[?]</span><br>（2~30）</th>
           <td>
             <input type="number" class="form-control" value="15" id="cmin">
             推薦值：15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span>
           </td>
         </tr>
         <tr class="advanced-options">
-          <th scope="row" class="align-top">藥水B至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水B，留給其他需練角色；若同時勾選效益降到最低後使用藥水B，則低於此值將優先使用藥水A，但藥水A用完後會繼續使用藥水B">[?]</span><br>（10~48）</th>
+          <th scope="row" class="align-top">藥水B至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水B；若同時勾選效益降到最低後使用藥水B，則低於此值將優先使用藥水A，但藥水A用完後會繼續使用藥水B">[?]</span><br>（10~48）</th>
           <td>
             <input type="number" class="form-control" value="13" id="bmin">
             推薦值：12~13 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="由於藥水A在60%開始衰減，推薦在約50%或55%時開始使用藥水A，可通過微調此值控制藥水A的用量，多餘的藥水B可留給其他需練角色">[?]</span>
           </td>
         </tr>
         <tr class="advanced-options">
-          <th scope="row" class="align-top">藥水A至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水A，留給其他需練角色；此值等於30時會自動勾選效益降到最低後使用藥水A，高於30則自動取消勾選">[?]</span><br>（30~80）</th>
+          <th scope="row" class="align-top">藥水A至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水A；此值等於30時會自動勾選效益降到最低後使用藥水A，高於30則自動取消勾選">[?]</span><br>（30~80）</th>
           <td>
             <input type="number" class="form-control" value="32" id="amin">
             推薦值：無課80/重課32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="60%後藥水A效益銳減，無課推薦停在60%（即+80），等學園等級提升潛能上限，再繼續補回去60%；重課則推薦藥水A降到+31時改用鑽石方案比購買高級商店4500鑽藥水A CP值更高">[?]</span>
@@ -573,11 +575,11 @@ function toggleAdvanced() {
           <td>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="70b">
-              <label for="70b" class="form-check-label">使用藥水B</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水B效益設為10會自動勾選此項；勾選/取消勾選此項不會改變藥水B效益設定值">[?]</span>
+              <label for="70b" class="form-check-label">使用藥水B</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="勾選/取消勾選此項不會改變藥水B效益設定值">[?]</span>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="70a">
-              <label for="70a" class="form-check-label">使用藥水A</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="此選項和藥水A效益設定值強聯動：藥水A效益設為30會自動勾選此項，設為30以上會自動取消勾選；勾選此項會自動設藥水A效益為30；取消勾選會設為32">[?]</span>
+              <label for="70a" class="form-check-label">使用藥水A</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="勾選此項會自動設藥水A效益為30；取消勾選會設為32">[?]</span>
             </div>
           </td>
         </tr>
@@ -587,10 +589,28 @@ function toggleAdvanced() {
             <span id="result"></span>
           </td>
         </tr>
+        <tr>
+          <th scope="row" class="align-top">聲明</th>
+          <td>建議僅供參考！可在進階選項裡客製化藥水使用量；有任何不妥很需要大家提出。</td>
+        </tr>
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">錯誤回報/建議</a><br>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3" target="_blank">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250112.23</p>
+      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">錯誤回報/建議</a><br>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3" target="_blank">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250118.7</p>
+    </div>
+  </div>
+  <div class="modal fade" id="confirmModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">提示</h5>
+        </div>
+        <div class="modal-body">不建議提升SR/R的潛能，是否繼續？</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-cancel">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-confirm">繼續</button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
