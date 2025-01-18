@@ -152,6 +152,8 @@ var dia_rev_numbers = [
 [1000,140],
 ];
 
+var rareCheck = 'rare-ssr';
+
 window.onload = function() {
     // Attach onchange listeners
     document.getElementById('lv').addEventListener('change', calculate);
@@ -159,7 +161,7 @@ window.onload = function() {
     document.getElementById('rare-sr').addEventListener('change', () => { $('#confirmModal').modal('show'); });
     document.getElementById('rare-r').addEventListener('change', () => { $('#confirmModal').modal('show'); });
     document.getElementById('modal-confirm').addEventListener('click', calculate);
-    document.getElementById('modal-cancel').addEventListener('click', () => { document.getElementById('rare-ssr').checked = true; });
+    document.getElementById('modal-cancel').addEventListener('click', () => { document.getElementById(rareCheck).checked = true; });
     document.getElementById('current').addEventListener('change', calculate);
     document.getElementById('radio1').addEventListener('change', calculate);
     document.getElementById('radio2').addEventListener('change', calculate);
@@ -276,6 +278,9 @@ function calculate() {
     var upper = document.getElementById('rare-ssr').checked ? (Math.max(lv, 60) - 60) * 3640 + 84000 : 
                 document.getElementById('rare-sr').checked ? (Math.max(lv, 60) - 60) * 2693.6 + 62160 :
                 (Math.max(lv, 60) - 60) * 1734.2 + 40020;
+    rareCheck = document.getElementById('rare-ssr').checked ? 'rare-ssr' : 
+                document.getElementById('rare-sr').checked ? 'rare-sr' :
+                'rare-r';
     var pct = getPct(current, upper);
     var isUseall = document.getElementById('radio1').checked;
     var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
@@ -440,13 +445,16 @@ function calculate() {
                 p_current = parseInt(document.getElementById('current').value);
                 p_pct = getPct(p_current, upper);
             }
+            var l_current = p_current;
+            var l_pct = p_pct;
+            
+            // check A cp with Dia
             var a_current = p_current;
             var a_pct = p_pct;
             var a_cnt = 0;
-            while (a_pct < LOWCP_A) {
+            while (a_pct < LOWCP_A && a_pct < tgtPct) {
                 for (var j = 0; j < 100; j++) { // loop 100 potion A 
-                    var a_arev = getRev(a_pct, 'a');
-                    a_current += a_arev;
+                    a_current += getRev(a_pct, 'a');
                     a_pct = getPct(a_current, upper);
                 }
                 if (a_current - p_current > 3150) { // 4500 dia = 3150 potential
@@ -455,7 +463,30 @@ function calculate() {
                 p_current = a_current;
                 p_pct = a_pct;
             }
-            result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>' + (a_cnt > 0 ? '<span style="color:#007bff;">*鑽石CP值較低，更推薦先在高級商店購買4500鑽藥水A（每日重置）×' + a_cnt + '次</span><br>' : '');
+            
+            // alternative suggestion
+            var a_used = 0;
+            var d_used = 0;
+            if (a_cnt > 0) {
+                while (l_pct < tgtPct) {
+                    if (a_used < a_cnt * 100 && l_pct < LOWCP_A) {
+                        l_current += getRev(l_pct, 'a');
+                        l_pct = getPct(l_current, upper);
+                        a_used++;
+                    } else {
+                        l_current += getRev(l_pct, 'd');
+                        l_pct = getPct(l_current, upper);
+                        d_used++;
+                    }
+                }
+            }
+            var buy_cnt = Math.ceil((a_used - a) / 100);
+            var a_rest = a + buy_cnt * 100 - a_used;
+            if (buy_cnt > 0) {
+                result += (i+1) + '.（可選）高級商店購買藥水A（每日重置）×'+ buy_cnt + '次（' + buy_cnt*4500 + '鑽），使用' + a_used + '瓶' + (a_used < buy_cnt*100 ? '<span style="color:red;font-weight:bold;">[餘' + a_rest + '瓶]</span>' : '') + (d_used > 0 ? '後，再使用' + d_used + '次鑽石（' + d_used*200 + '鑽）' : '') + '直到' + l_current + '（' + showPct(l_pct) + '%）<span style="color:grey;">*共' + (buy_cnt*4500+d_used*200) + '鑽，若直接使用鑽石則需' + item[1] + '次共' + (item[1]*200) + '鑽</span>；<br>';
+            } else {
+                result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>';
+            }
         } else {
             result += (i+1) + '. 使用' + item[1] + '瓶藥水' + item[0] + (item[4] > 0 ? '<span style="color:red;font-weight:bold;">[餘' + item[4] + '瓶]</span>' : '') + '直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>';
         }
@@ -596,10 +627,10 @@ function toggleAdvanced() {
       </tbody>
     </table>
     <div class="text-center mt-4">
-      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">錯誤回報/建議</a><br>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3" target="_blank">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250118.7</p>
+      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">錯誤回報/建議</a><br>數據：<a href="https://docs.google.com/document/d/1n5zRNaEh5bwRBYQJcsAhQLgDiaL1VyXq9MOnnKCpzbI/edit?tab=t.0#heading=h.f0oj257t10r3" target="_blank">石奚</a><br>計算機：Rinne &amp; 石奚<br>V250118.10</p>
     </div>
   </div>
-  <div class="modal fade" id="confirmModal" tabindex="-1">
+  <div class="modal fade" id="confirmModal" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
