@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<title>TKDB Potential</title>
+<!-- For general favicon in browsers -->
+<link rel="shortcut icon" href="../img/tkdb_jesse.png" type="image/png">
+<!-- For Apple devices when adding to the home screen -->
+<link rel="apple-touch-icon" href="../img/tkdb_jesse.png">
+<!-- If using for social sharing previews (though typically you'd use Open Graph tags for this) -->
+<link rel="image_src" href="../img/tkdb_jesse.png">
+<style>
+.tooltip-trigger {opacity:0.5;}
+.advanced-options {display:none;}
+</style>
+<script type="text/javascript" charset="UTF-8">
+var t_expand = 'Expand';
+var t_collapse = 'Collapse';
+
+var t_e_lv = 'Invalid player rank';
+var t_e_current = 'Invalid current potential value';
+var t_e_current_upper = 'Current potential value exceeds the limit';
+var t_e_tgtpct = 'Invalid target %';
+var t_e_abc = 'Invalid potion quantity';
+var t_e_abcmin = 'Potion efficiency out of range';
+
+var t_lowcp = 'The following steps have a lower CP value. It is recommended to stop here and wait to obtain more Potion B/C';
+
+function step_normal(step, item0, item1, item2, item3, item4) {
+    return step + '. Use ' + item1 + ' Potion ' + item0 + 
+           (item4 > 0 ? '<span style="color:red;font-weight:bold;"> [Remaining: ' + item4 + ']</span>' : '') + 
+           ' until ' + item2 + ' (' + showPct(item3) + '%);<br>';
+}
+
+function step_dia(step, item0, item1, item2, item3, item4) {
+    return step + '. (Optional) Use ' + item1 + ' diamond plan (total ' + (item1 * 200) + ' dias) until ' + 
+           item2 + ' (' + showPct(item3) + '%);<br>';
+}
+
+function step_buya(step, buy_cnt, a_used, a_rest, d_used, l_current, l_pct, item1){
+    return step + '. (Optional) ' + 
+           (buy_cnt > 0 ? 'Purchase Potion A from the Premium Shop (daily reset) ×' + buy_cnt + 
+           ' times (' + buy_cnt * 4500 + ' dias), ' : '') + 
+           'use ' + a_used + ' ' + (buy_cnt > 0 ? '' : 'Potion A') + 
+           (a_rest > 0 ? '<span style="color:red;font-weight:bold;">[Remaining: ' + a_rest + '] </span>' : '') + 
+           (d_used > 0 ? ', then use ' + d_used + ' diamond purchases (' + d_used * 200 + ' diamonds) ' : '') + 
+           'until ' + l_current + ' (' + showPct(l_pct) + '%) <span style="color:grey;">*Total ' + 
+           (buy_cnt * 4500 + d_used * 200) + ' dias. If using diamond plan directly, ' + 
+           item1 + ' times are needed, totaling ' + (item1 * 200) + ' dias</span>;<br>';
+}
+
+function remaining_a_alt(step, a_rest){
+    return ' (' + a_rest + ' Potion A after step ' + step + ')';
+}
+
+function remaining_potions(a, b, c) {
+    return '<br>Remaining: ' + c + ' Potion C, ' + b + ' Potion B, ' + a + ' Potion A';
+}
+</script>
+<script src="potential.js"></script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Tokyo Debunker Potential Calculator (Prototype)</h2>
+    <h6 id="error" style="color:red;"></h6>
+    <table class="table table-bordered">
+      <tbody class="thead-light">
+        <tr>
+          <th scope="row" class="align-top">Player Rank<br>(1-200)</th>
+          <td><input type="number" class="form-control" value="60" id="lv"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Character Card Rarity</th>
+          <td>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rare" id="rare-ssr" checked><label class="form-check-label mr-2" for="rare-ssr">SSR</label>
+            <input class="form-check-input" type="radio" name="rare" id="rare-sr"><label class="form-check-label mr-2" for="rare-sr">SR</label>
+            <input class="form-check-input" type="radio" name="rare" id="rare-r"><label class="form-check-label mr-2" for="rare-r">R</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Current Potential Value</th>
+          <td>
+            <input type="number" class="form-control" value="0" id="current">
+            <span>/ <span id="upper"></span> (<span id="pct"></span>%)</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">I want to...</th>
+          <td>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="radio1" checked>
+              <label class="form-check-label" for="radio1">
+                Use up all potions as much as possible
+              </label>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="stop60" checked>
+                <label for="stop60" class="form-check-label">Stop at 60%</label></span>
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="radio2">
+              <label class="form-check-label" for="radio2">
+                Increase to the following %
+              </label>
+              <input type="number" class="form-control" value="60" id="tgt-pct">
+            </div>
+            (*) Exceeding 60% is currently only recommended for heavy spenders or rank 200+
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Any other cards need training? <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Optimize potion usage by reserving low-efficiency Potions A/B for other cards">[?]</span></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="save" checked>
+              <label for="save" class="form-check-label">Yes</label></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Potion C Quantity</th>
+          <td><input type="number" class="form-control" value="0" id="c"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Potion B Quantity</th>
+          <td><input type="number" class="form-control" value="0" id="b"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Potion A Quantity</th>
+          <td><input type="number" class="form-control" value="0" id="a"></td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Advanced Options</th>
+          <td><button type="button" class="btn btn-light" onclick="toggleAdvanced()" id="toggle-advanced">&#x25BC; Expand &#x25BC;</button></td>
+        </tr>
+        <tr class="advanced-options">
+          <th scope="row" class="align-top">Minimum Potion C Efficiency <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion C will not be used if efficiency falls below this value">[?]</span><br>(2-30)</th>
+          <td>
+            <input type="number" class="form-control" value="15" id="cmin">
+            Recommended value: 15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion C's efficiency drops to +14 at 18.4%, then reaches a minimum of +3, and recovers to +15 at 27%. Recommend using Potion B between 18-26% and Potion C only at +15 efficiency or higher.">[?]</span>
+          </td>
+        </tr>
+        <tr class="advanced-options">
+          <th scope="row" class="align-top">Minimum Potion B Efficiency <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion B will not be used if efficiency falls below this value. If the option to use Potion B after efficiency drops to the minimum is selected, Potion A will be prioritized when below this value. When Potion A runs out, Potion B will be used.">[?]</span><br>(10-48)</th>
+          <td>
+            <input type="number" class="form-control" value="13" id="bmin">
+            Recommended value: 12-13 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A's efficiency starts decreasing at 60%, recommend start using Potion A at around 50% or 55%. Adjusting this value helps control the amount of Potion A used, while any excess Potion B can be saved for other cards.">[?]</span>
+          </td>
+        </tr>
+        <tr class="advanced-options">
+          <th scope="row" class="align-top">Minimum Potion A Efficiency <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A will not be used if efficiency falls below this value. If set to 30, the option to use Potion A after efficiency drops to the minimum will be automatically selected, and vice versa.">[?]</span><br>(30-80)</th>
+          <td>
+            <input type="number" class="form-control" value="32" id="amin">
+            Recommended value: F2P 80 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A's efficiency drops sharply after 60%. Recommended stopping at 60% (+80) and continue when ranking up increases the upper limit.">[?]</span> / Heavy Spenders 32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="When Potion A efficiency drops to +31, the diamond plan has a better CP than buying a 4500-diamond Potion A from Premium Shop.">[?]</span>
+          </td>
+        </tr>
+        <tr class="advanced-options">
+          <th scope="row" class="align-top">After Efficiency Drops to the Minimum <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Freely obtained Potion A or B can still be used when efficiency drops below the set value, or saved for other cards.">[?]</span></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="70b">
+              <label for="70b" class="form-check-label">Use Potion B</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Toggling this option will not change Potion B's minimum efficiency setting.">[?]</span>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="70a">
+              <label for="70a" class="form-check-label">Use Potion A</label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Selecting this option will automatically set Potion A's minimum efficiency to 30; deselecting will set it to 32.">[?]</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Potion Usage Steps</th>
+          <td>
+            <span id="result"></span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="align-top">Disclaimer</th>
+          <td>Recommendations are for reference only! Potion usage can be customized in advanced options. If anything is inappropriate, feedback is highly appreciated.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center mt-4">
+      <p><a href="https://xoyondo.com/mb/ye2utwc0gbhmx0g" target="_blank">Report Issues / Feedback</a><br>Data: [CT-1] 磎伊卡哇</a><br>Calculator: [CT-1, EA-12] Rinne<br>V<span id="version"></span></p>
+    </div>
+  </div>
+  <div class="modal fade" id="confirmModal" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning</h5>
+        </div>
+        <div class="modal-body">It is not recommended to increase the potential of SR/R. Do you wish to continue?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-cancel">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-confirm">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
