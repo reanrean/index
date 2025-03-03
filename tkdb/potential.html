@@ -18,6 +18,35 @@
 .tooltip-trigger {opacity:0.5;}
 .advanced-options {display:none;}
 </style>
+<script type="text/javascript" charset="UTF-8">
+var t_expand = '展開';
+var t_collapse = '收起';
+
+var t_e_lv = '學園等級不正確';
+var t_e_current = '潛能數值不正確';
+var t_e_current_upper = '潛能數值超過上限';
+var t_e_tgtpct = '目標%數不正確';
+var t_e_abc = '藥水數量不正確';
+var t_e_abcmin = '藥水效益超過區間';
+
+var t_lowcp = '以下步驟CP值較低，建議停在此處等待獲取更多藥水B/C';
+
+function step_normal(step, item0, item1, item2, item3, item4) {
+    return step + '. 使用' + item1 + '瓶藥水' + item0 + (item4 > 0 ? '<span style="color:red;font-weight:bold;">[餘' + item4 + '瓶]</span>' : '') + '直到' + item2 + '（' + showPct(item3) + '%）；<br>';
+}
+function step_dia(step, item0, item1, item2, item3, item4) {
+    return step + '.（可選）使用' + item1 + '次鑽石（共' + (item1*200) + '鑽）直到' + item2 + '（' + showPct(item3) + '%）；<br>';
+}
+function step_buya(step, buy_cnt, a_used, a_rest, d_used, l_current, l_pct, item1){
+    return step + '.（可選）' + (buy_cnt > 0 ? '高級商店購買藥水A（每日重置）×'+ buy_cnt + '次（' + buy_cnt*4500 + '鑽），':'') + '使用' + a_used + '瓶' + (buy_cnt > 0 ? '' : '藥水A') + (a_rest > 0 ? '<span style="color:red;font-weight:bold;">[餘' + a_rest + '瓶]</span>' : '') + (d_used > 0 ? '後，再使用' + d_used + '次鑽石（' + d_used*200 + '鑽）' : '') + '直到' + l_current + '（' + showPct(l_pct) + '%）<span style="color:grey;">*共' + (buy_cnt*4500+d_used*200) + '鑽，若直接使用鑽石則需' + item[1] + '次共' + (item[1]*200) + '鑽</span>；<br>';
+}
+function remaining_a_alt(step, a_rest){
+    return '（步驟' + step +'後' + a_rest + '瓶）';
+}
+function remaining_potions(a, b, c) {
+    return '剩餘' + c + '瓶藥水C，' + b + '瓶藥水B，' + a + '瓶藥水A';
+}
+</script>
 <script src="potential.js"></script>
 </head>
 <body>
@@ -113,7 +142,7 @@
           <th scope="row" class="align-top">藥水A至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水A；此值等於30時會自動勾選效益降到最低後使用藥水A，高於30則自動取消勾選">[?]</span><br>（30~80）</th>
           <td>
             <input type="number" class="form-control" value="32" id="amin">
-            推薦值：無課80/重課32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="60%後藥水A效益銳減，無課推薦停在60%（即+80），等學園等級提升潛能上限，再繼續補回去60%；重課則推薦藥水A降到+31時改用鑽石方案比購買高級商店4500鑽藥水A CP值更高">[?]</span>
+            推薦值：無課80 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="60%後藥水A效益銳減，推薦停在60%（即+80），等學園等級提升潛能上限，再繼續補回去60%">[?]</span> / 重課32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水A降到+31時改用鑽石方案比購買高級商店4500鑽藥水A CP值更高">[?]</span>
           </td>
         </tr>
         <tr class="advanced-options">

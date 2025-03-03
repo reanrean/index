@@ -289,17 +289,17 @@ function calculate() {
     
     // Validate lv
     if (isNaN(lv) || lv < 1 || lv > 200) {
-        document.getElementById('error').innerHTML = '學園等級不正確';
+        document.getElementById('error').innerHTML = t_e_lv;
         return; // Exit the function if the levels are invalid
     }
     document.getElementById('upper').innerHTML = Math.floor(upper); // lv validated
 
     // Validate current
     if (isNaN(current) || current < 0) {
-        document.getElementById('error').innerHTML = '潛能數值不正確';
+        document.getElementById('error').innerHTML = t_e_current;
         return;
     } else if (current >= upper) {
-        document.getElementById('error').innerHTML = '潛能數值超過上限';
+        document.getElementById('error').innerHTML = t_e_current_upper;
         document.getElementById('pct').innerHTML = '100.0';
         return;
     }
@@ -307,19 +307,19 @@ function calculate() {
     
     // Validate tgt-pct
     if (!isUseall && (isNaN(tgtPct) || !isFinite(tgtPct) || tgtPct < 0 || tgtPct > 1000 || tgtPct <= pct)) {
-        document.getElementById('error').innerHTML = '目標%數不正確';
+        document.getElementById('error').innerHTML = t_e_tgtpct;
         return;
     }
     
     // Validate a,b,c
     if (isNaN(a) || isNaN(b) || isNaN(c) || a < 0 || b < 0 || c < 0) {
-        document.getElementById('error').innerHTML = '藥水數量不正確';
+        document.getElementById('error').innerHTML = t_e_abc;
         return;
     }
     
     // Validate amin,bmin,cmin
     if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < 2 || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
-        document.getElementById('error').innerHTML = '藥水效益超過區間';
+        document.getElementById('error').innerHTML = t_e_abcmin;
         return;
     }
     
@@ -422,7 +422,7 @@ function calculate() {
     for (var i = 0; i < resultArr.length; i++) {
         item = resultArr[i];
         if (!warned && item[5]) {
-            result += '<span style="color:red;">~~以下步驟CP值較低，建議停在此處等待獲取更多藥水B/C~~<br></span>';
+            result += '<span style="color:red;">~~' + t_lowcp + '~~<br></span>';
             warned = 1;
         }
         if (item[0] == 'D') { // check whether potion A has higher CP
@@ -486,24 +486,24 @@ function calculate() {
             var buy_cnt = Math.ceil(Math.max(a_used - a, 0) / 100);
             var a_rest = a + buy_cnt * 100 - a_used;
             if (a_used > 0 && buy_cnt*4500+d_used*200 < item[1]*200) {
-                result += (i+1) + '.（可選）' + (buy_cnt > 0 ? '高級商店購買藥水A（每日重置）×'+ buy_cnt + '次（' + buy_cnt*4500 + '鑽），':'') + '使用' + a_used + '瓶' + (buy_cnt > 0 ? '' : '藥水A') + (a_rest > 0 ? '<span style="color:red;font-weight:bold;">[餘' + a_rest + '瓶]</span>' : '') + (d_used > 0 ? '後，再使用' + d_used + '次鑽石（' + d_used*200 + '鑽）' : '') + '直到' + l_current + '（' + showPct(l_pct) + '%）<span style="color:grey;">*共' + (buy_cnt*4500+d_used*200) + '鑽，若直接使用鑽石則需' + item[1] + '次共' + (item[1]*200) + '鑽</span>；<br>';
-                a_alt = '（步驟' + (i+1) +'後' + a_rest + '瓶）';
+                result += step_buya(i+1, buy_cnt, a_used, a_rest, d_used, l_current, l_pct, item[1]);
+                a_alt = remaining_a_alt(i+1, a_rest);
             } else {
-                result += (i+1) + '.（可選）使用' + item[1] + '次鑽石（共' + (item[1]*200) + '鑽）直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>';
+                result += step_dia(i+1, item[0], item[1], item[2], item[3], item[4]);
             }
         } else {
-            result += (i+1) + '. 使用' + item[1] + '瓶藥水' + item[0] + (item[4] > 0 ? '<span style="color:red;font-weight:bold;">[餘' + item[4] + '瓶]</span>' : '') + '直到' + item[2] + '（' + showPct(item[3]) + '%）；<br>';
+            result += step_normal(i+1, item[0], item[1], item[2], item[3], item[4]);
         }
     }
-    result += '剩餘' + c + '瓶藥水C，' + b + '瓶藥水B，' + a + '瓶藥水A' + a_alt;
+    result += remaining_potions(a, b, c) + a_alt;
     document.getElementById('result').innerHTML = result;
 }
 
 function toggleAdvanced() {
     $('.advanced-options').toggle();
     if ($('.advanced-options').is(':visible')) {
-        $('#toggle-advanced').html('&#x25B2; 收起 &#x25B2;');
+        $('#toggle-advanced').html('&#x25B2; ' + t_collapse + ' &#x25B2;');
     } else {
-        $('#toggle-advanced').html('&#x25BC; 展開 &#x25BC;');
+        $('#toggle-advanced').html('&#x25BC; ' + t_expand + ' &#x25BC;');
     }
 }
