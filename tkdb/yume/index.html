@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #673AB7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #9C27B0;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .page-info {
+            font-size: 18px;
+            margin: 0 15px;
+        }
+        .jump-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input {
+            padding: 8px;
+            width: 60px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--h1>Image Viewer</h1-->
+        <div class="image-container">
+            <img id="current-image" src="" alt="Image">
+        </div>
+        <div class="controls">
+            <button id="prev-btn">&lt;</button>
+            <span class="page-info"><span id="current-page">1</span> / <span id="total-pages">0</span></span>
+            <button id="next-btn">&gt;</button>
+        </div>
+        <div class="jump-container">
+            <span>Go to</span>
+            <input type="number" id="page-input" min="1" value="1">
+            <button id="jump-btn">Go</button>
+        </div>
+    </div>
+
+    <script>
+        // Image sources array - replace these with your actual image URLs
+        const imageSources = [
+            "https://images.plurk.com/79pkul1ev9nJoXxP1lJLFo.jpg",
+            "https://images.plurk.com/5hNWMKQXHgtRclHegsMQrN.jpg",
+            "https://images.plurk.com/6KxRue7jz51M9GDSvG433x.jpg",
+            "https://images.plurk.com/63Hd5nxDFE2jXCKZUh1kcC.jpg"
+        ];
+
+        // Get DOM elements
+        const currentImage = document.getElementById('current-image');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentPageSpan = document.getElementById('current-page');
+        const totalPagesSpan = document.getElementById('total-pages');
+        const pageInput = document.getElementById('page-input');
+        const jumpBtn = document.getElementById('jump-btn');
+
+        // Initialize variables
+        let currentPage = 1;
+        const totalPages = imageSources.length;
+
+        // Update UI based on current state
+        function updateUI() {
+            // Update image source
+            currentImage.src = imageSources[currentPage - 1];
+            
+            // Update page info
+            currentPageSpan.textContent = currentPage;
+            totalPagesSpan.textContent = totalPages;
+            
+            // Update button states
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            // Update page input
+            pageInput.max = totalPages;
+            pageInput.value = currentPage;
+        }
+
+        // Function to scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Event handlers
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateUI();
+                scrollToTop();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateUI();
+                scrollToTop();
+            }
+        });
+
+        jumpBtn.addEventListener('click', () => {
+            const pageNumber = parseInt(pageInput.value, 10);
+            if (pageNumber >= 1 && pageNumber <= totalPages) {
+                currentPage = pageNumber;
+                updateUI();
+                scrollToTop();
+            } else {
+                alert(`Please enter a page number between 1 and ${totalPages}`);
+                pageInput.value = currentPage;
+            }
+        });
+
+        // Handle keyboard navigation
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft' && currentPage > 1) {
+                currentPage--;
+                updateUI();
+                scrollToTop();
+            } else if (event.key === 'ArrowRight' && currentPage < totalPages) {
+                currentPage++;
+                updateUI();
+                scrollToTop();
+            }
+        });
+
+        // Initialize the UI
+        window.onload = () => {
+            updateUI();
+        };
+    </script>
+</body>
+</html>
