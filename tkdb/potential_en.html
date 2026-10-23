@@ -30,6 +30,7 @@ var t_e_abc = 'Invalid potion quantity';
 var t_e_abcmin = 'Potion efficiency out of range';
 
 var t_lowcp = 'The following steps have a lower CP value. It is recommended to stop here and wait to obtain more Potion B/C';
+var t_use_remaining_b = 'You still have Potion B left. In Advanced Options, select “After Efficiency Drops to the Minimum: Use Potion B” to continue using potions.';
 
 function step_normal(step, item0, item1, item2, item3, item4) {
     return step + '. Use ' + item1 + ' Potion ' + item0 + 
@@ -97,30 +98,23 @@ function remaining_potions(a, b, c) {
             <div class="form-check">
               <input class="form-check-input" type="radio" name="radio" id="radio1" checked>
               <label class="form-check-label" for="radio1">
-                Use up all potions as much as possible
-              </label>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="stop60" checked>
-                <label for="stop60" class="form-check-label">Stop at 60%</label></span>
-              </div>
+                Stop at 60% (Recommended)
+              </label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A's efficiency drops sharply after 60%. Recommend stopping at 60% (+80) and continue when ranking up increases the upper limit.">[?]</span>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="radio" id="radio2">
               <label class="form-check-label" for="radio2">
+                Go as high as possible with my potions
+              </label> <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Recommended when aiming above 60% with plenty of Potion B. Potion A meeting its minimum efficiency is prioritized; when it runs out or falls below that minimum, Potion B will be used, even before 60%.">[?]</span>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="radio3">
+              <label class="form-check-label" for="radio3">
                 Increase to the following %
               </label>
               <input type="number" class="form-control" value="60" id="tgt-pct">
             </div>
-            (*) Exceeding 60% is currently only recommended for heavy spenders or rank 200+
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="align-top">Any other cards need training? <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Optimize potion usage by reserving low-efficiency Potions A/B for other cards">[?]</span></th>
-          <td>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="save" checked>
-              <label for="save" class="form-check-label">Yes</label></span>
-            </div>
+            (*) Over 60%: Recommended for heavy spenders or those with plenty of Potion B.
           </td>
         </tr>
         <tr>
@@ -156,8 +150,8 @@ function remaining_potions(a, b, c) {
         <tr class="advanced-options">
           <th scope="row" class="align-top">Minimum Potion A Efficiency <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A will not be used if efficiency falls below this value. If set to 30, the option to use Potion A after efficiency drops to the minimum will be automatically selected, and vice versa.">[?]</span><br>(30-80)</th>
           <td>
-            <input type="number" class="form-control" value="32" id="amin">
-            Recommended value: F2P 80 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="Potion A's efficiency drops sharply after 60%. Recommend stopping at 60% (+80) and continue when ranking up increases the upper limit.">[?]</span> / Heavy Spenders 32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="When Potion A efficiency drops to +31, the diamond plan has a better CP than buying a 4500-diamond Potion A from Premium Shop.">[?]</span>
+            <input type="number" class="form-control" value="70" id="amin">
+            Recommended value: F2P 70–80 / Moderate/Heavy Spenders 50–60 / Extreme 32 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="When Potion A efficiency drops to +31, the diamond plan has a better CP than buying a 4500-diamond Potion A from Premium Shop.">[?]</span>
           </td>
         </tr>
         <tr class="advanced-options">

@@ -1,4 +1,4 @@
-var version = '250303.01';
+var version = '261023.06';
 
 var LOWCP_A = 696;
 var LOWEST = 698;
@@ -152,10 +152,10 @@ window.onload = function() {
     document.getElementById('modal-confirm').addEventListener('click', calculate);
     document.getElementById('modal-cancel').addEventListener('click', () => { document.getElementById(rareCheck).checked = true; });
     document.getElementById('current').addEventListener('change', calculate);
-    document.getElementById('radio1').addEventListener('change', calculate);
-    document.getElementById('radio2').addEventListener('change', calculate);
+    document.getElementById('radio1').addEventListener('change', changeGoal);
+    document.getElementById('radio2').addEventListener('change', changeGoal);
+    document.getElementById('radio3').addEventListener('change', changeGoal);
     document.getElementById('tgt-pct').addEventListener('change', calculate);
-    document.getElementById('save').addEventListener('change', changesave);
     document.getElementById('c').addEventListener('change', calculate);
     document.getElementById('b').addEventListener('change', calculate);
     document.getElementById('a').addEventListener('change', calculate);
@@ -164,7 +164,6 @@ window.onload = function() {
     document.getElementById('amin').addEventListener('change', changeamin);
     document.getElementById('70b').addEventListener('change', change70b);
     document.getElementById('70a').addEventListener('change', change70a);
-    document.getElementById('stop60').addEventListener('change', calculate);
     
     // Initialize Bootstrap tooltips
     $(function () {
@@ -175,19 +174,17 @@ window.onload = function() {
     calculate();
 };
 
-function changesave() {
-    if (document.getElementById('save').checked) {
+function changeGoal() {
+    if (document.getElementById('radio1').checked) {
         document.getElementById('70b').checked = false;
         change70b();
-        document.getElementById('70a').checked = false;
-        change70a();
-    } else {
+    } else if (document.getElementById('radio2').checked) {
         document.getElementById('70b').checked = true;
         change70b();
-        document.getElementById('70a').checked = true;
-        change70a();
+    } else {
+        // A custom target keeps the current advanced potion settings.
+        calculate();
     }
-    calculate();
 }
 
 function changebmin() {
@@ -271,7 +268,7 @@ function calculate() {
                 document.getElementById('rare-sr').checked ? 'rare-sr' :
                 'rare-r';
     var pct = getPct(current, upper);
-    var isUseall = document.getElementById('radio1').checked;
+    var isUseall = !document.getElementById('radio3').checked;
     var tgtPct = Math.floor(parseFloat(document.getElementById('tgt-pct').value) * 10);
     var c = parseInt(document.getElementById('c').value);
     var b = parseInt(document.getElementById('b').value);
@@ -280,7 +277,7 @@ function calculate() {
     var bmin = parseInt(document.getElementById('bmin').value);
     var amin = parseInt(document.getElementById('amin').value);
     var b70 = document.getElementById('70b').checked;
-    var stop60 = document.getElementById('stop60').checked;
+    var stop60 = document.getElementById('radio1').checked;
 
     // Default output if input invalid
     document.getElementById('upper').innerHTML = '';
@@ -327,7 +324,7 @@ function calculate() {
     document.getElementById('error').innerHTML = '&ensp;';
     
     // Start loop
-    var condition = true;
+    var condition = !stop60 || pct < 600;
     var resultArr = [];
     while (condition) {
         var crev = getRev(pct, 'c');
@@ -418,6 +415,7 @@ function calculate() {
     var result = '';
     var rcnt = 0;
     var warned = 0;
+    var bHintShown = false;
     var a_alt = '';
     for (var i = 0; i < resultArr.length; i++) {
         item = resultArr[i];
@@ -485,7 +483,12 @@ function calculate() {
             }
             var buy_cnt = Math.ceil(Math.max(a_used - a, 0) / 100);
             var a_rest = a + buy_cnt * 100 - a_used;
-            if (a_used > 0 && buy_cnt*4500+d_used*200 < item[1]*200) {
+            var usePotionAPlan = a_used > 0 && buy_cnt*4500+d_used*200 < item[1]*200;
+            if (!bHintShown && !b70 && b > 0 && (!usePotionAPlan || buy_cnt > 0 || d_used > 0)) {
+                result += '<span style="color:red;">' + t_use_remaining_b + '</span><br>';
+                bHintShown = true;
+            }
+            if (usePotionAPlan) {
                 result += step_buya(i+1, buy_cnt, a_used, a_rest, d_used, l_current, l_pct, item[1]);
                 a_alt = remaining_a_alt(i+1, a_rest);
             } else {
