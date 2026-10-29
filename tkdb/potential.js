@@ -1,4 +1,4 @@
-var version = '261028.23';
+var version = '261029.11';
 
 var LOWCP_A = 696;
 var LOWEST = 698;
@@ -223,9 +223,9 @@ function changeGame() {
     var cminFloor = getCMinFloor();
     var cmin = document.getElementById('cmin');
     cmin.min = cminFloor;
-    cmin.value = paranoize ? 7 : 15;
+    cmin.value = paranoize ? 5 : 15;
     document.getElementById('cmin-floor').innerHTML = cminFloor;
-    document.getElementById('cmin-recommended').innerHTML = paranoize ? '5~7' : '15';
+    document.getElementById('cmin-recommended').innerHTML = paranoize ? '2~5' : '15';
     document.getElementById('cmin-tip-tkdb').style.display = paranoize ? 'none' : 'inline';
     document.getElementById('cmin-tip-paranoize').style.display = paranoize ? 'inline' : 'none';
     calculate();
