@@ -1,4 +1,4 @@
-var version = '261023.06';
+var version = '261028.23';
 
 var LOWCP_A = 696;
 var LOWEST = 698;
@@ -36,6 +36,40 @@ var c_rev_numbers = [
 [290,15],
 [330,16],
 [350,17],
+[1000,0],
+];
+
+var c_rev_numbers_paranoize = [
+[150,30],
+[2130/14,29],
+[2160/14,28],
+[2190/14,27],
+[2220/14,26],
+[2250/14,25],
+[2280/14,24],
+[165,23],
+[2340/14,22],
+[2370/14,21],
+[2400/14,20],
+[2430/14,19],
+[2460/14,18],
+[2490/14,17],
+[179.999,16],
+[184,15],
+[188,14],
+[192,13],
+[196,12],
+[200,11],
+[1870/9,10],
+[1940/9,9],
+[2010/9,8],
+[2080/9,7],
+[2150/9,6],
+[2220/9,5],
+[2290/9,4],
+[2360/9,3],
+[270,2],
+[350,1],
 [1000,0],
 ];
 
@@ -145,6 +179,8 @@ window.onload = function() {
     document.getElementById('version').innerHTML = version;
     
     // Attach onchange listeners
+    document.getElementById('game-tkdb').addEventListener('change', changeGame);
+    document.getElementById('game-paranoize').addEventListener('change', changeGame);
     document.getElementById('lv').addEventListener('change', calculate);
     document.getElementById('rare-ssr').addEventListener('change', calculate);
     document.getElementById('rare-sr').addEventListener('change', () => { $('#confirmModal').modal('show'); });
@@ -170,9 +206,30 @@ window.onload = function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
     
-    // Call the function to calculate initial values
-    calculate();
+    // Set game-specific controls and calculate initial values
+    changeGame();
 };
+
+function isParanoize() {
+    return document.getElementById('game-paranoize').checked;
+}
+
+function getCMinFloor() {
+    return isParanoize() ? 1 : 2;
+}
+
+function changeGame() {
+    var paranoize = isParanoize();
+    var cminFloor = getCMinFloor();
+    var cmin = document.getElementById('cmin');
+    cmin.min = cminFloor;
+    cmin.value = paranoize ? 7 : 15;
+    document.getElementById('cmin-floor').innerHTML = cminFloor;
+    document.getElementById('cmin-recommended').innerHTML = paranoize ? '5~7' : '15';
+    document.getElementById('cmin-tip-tkdb').style.display = paranoize ? 'none' : 'inline';
+    document.getElementById('cmin-tip-paranoize').style.display = paranoize ? 'inline' : 'none';
+    calculate();
+}
 
 function changeGoal() {
     if (document.getElementById('radio1').checked) {
@@ -225,9 +282,10 @@ function getRev(pct, potion) {
     if (pct < 0 || pct > 1000) return 0;
     switch (potion) {
         case 'c':
-            for (var i = 0; i < c_rev_numbers.length; i++) {
-                if (pct <= c_rev_numbers[i][0]) {
-                    return c_rev_numbers[i][1];
+            var cRevNumbers = isParanoize() ? c_rev_numbers_paranoize : c_rev_numbers;
+            for (var i = 0; i < cRevNumbers.length; i++) {
+                if (pct <= cRevNumbers[i][0]) {
+                    return cRevNumbers[i][1];
                 }
             }
             break;
@@ -315,7 +373,7 @@ function calculate() {
     }
     
     // Validate amin,bmin,cmin
-    if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < 2 || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
+    if (isNaN(amin) || isNaN(bmin) || isNaN(cmin) || cmin < getCMinFloor() || cmin > 30 || bmin < 10 || bmin > 48 || amin < 30 || amin > 80 ) {
         document.getElementById('error').innerHTML = t_e_abcmin;
         return;
     }

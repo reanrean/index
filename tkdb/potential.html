@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-<title>東謎-潛能計算</title>
+<title>東謎/寄生-潛能計算</title>
 <!-- For general favicon in browsers -->
 <link rel="shortcut icon" href="../img/tkdb_jesse.png" type="image/png">
 <!-- For Apple devices when adding to the home screen -->
@@ -17,6 +17,10 @@
 <style>
 .tooltip-trigger {opacity:0.5;}
 .advanced-options {display:none;}
+.game-options {display:flex; flex-wrap:wrap; gap:1rem;}
+.game-option {display:flex; align-items:center; gap:0.5rem; margin:0; cursor:pointer;}
+.game-option img {width:64px; height:64px; object-fit:cover; border:3px solid transparent; border-radius:12px; opacity:0.65; transition:0.15s ease;}
+.game-option input:checked + img {border-color:#007bff; box-shadow:0 0 0 2px rgba(0,123,255,0.2); opacity:1;}
 </style>
 <script type="text/javascript" charset="UTF-8">
 var t_expand = '展開';
@@ -52,10 +56,25 @@ function remaining_potions(a, b, c) {
 </head>
 <body>
   <div class="container mt-5">
-    <h2>東京謎影者 潛能計算（試作）</h2>
+    <h2>東謎/寄生 潛能計算（試作）</h2>
     <h6 id="error" style="color:red;"></h6>
     <table class="table table-bordered">
       <tbody class="thead-light">
+        <tr>
+          <th scope="row" class="align-top">遊戲 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="非常重要！兩個遊戲的藥水曲線不一樣">[?]</span></th>
+          <td>
+            <div class="game-options">
+              <label class="game-option" for="game-tkdb">
+                <input type="radio" name="game" id="game-tkdb" checked>
+                <img src="../img/tkdb.webp" alt="東京謎影者">
+              </label>
+              <label class="game-option" for="game-paranoize">
+                <input type="radio" name="game" id="game-paranoize">
+                <img src="../img/paranoize.webp" alt="寄生">
+              </label>
+            </div>
+          </td>
+        </tr>
         <tr>
           <th scope="row" class="align-top">學園等級<br>（1~200）</th>
           <td><input type="number" class="form-control" value="60" id="lv"></td>
@@ -119,10 +138,10 @@ function remaining_potions(a, b, c) {
           <td><button type="button" class="btn btn-light" onclick="toggleAdvanced()" id="toggle-advanced">&#x25BC; 展開 &#x25BC;</button></td>
         </tr>
         <tr class="advanced-options">
-          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C">[?]</span><br>（2~30）</th>
+          <th scope="row" class="align-top">藥水C至少效益 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="低於此值時，將不使用藥水C">[?]</span><br>（<span id="cmin-floor">2</span>~30）</th>
           <td>
-            <input type="number" class="form-control" value="15" id="cmin">
-            推薦值：15 <span tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span>
+            <input type="number" class="form-control" value="15" min="2" max="30" id="cmin">
+            推薦值：<span id="cmin-recommended">15</span> <span id="cmin-tip-tkdb" tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="藥水C在18.4%時效益降到+14，隨後最低降到+3，27%時會回升至+15，因此推薦約18~26%時使用藥水B，在效益+15或以上時才使用藥水C">[?]</span><span id="cmin-tip-paranoize" tabindex="0" class="tooltip-trigger" data-toggle="tooltip" data-placement="top" title="寄生的藥水C在27%後效益為+1，因此比東謎的推薦值要低" style="display:none;">[?]</span>
           </td>
         </tr>
         <tr class="advanced-options">
